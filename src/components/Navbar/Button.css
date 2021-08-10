@@ -10,16 +10,16 @@
     cursor: pointer;
 }
 
-.btn:hover{
+.btn-primary {
+    background-color: var(--primary);
+}
+
+.btn-primary:hover {
     padding: 8px 20px;
     transition: all 0.3s ease-out;
     background: white;
     color:#c28cf5;
     transition: 250ms
-}
-
-.btn-primary {
-    background-color: var(--primary);
 }
 
 .btn-outline {
@@ -44,3 +44,70 @@
     font-size: 20px;
     color: white;
 }
+
+.btn-mobile {
+    text-align: center;
+    border-radius: 4px;
+    width: 80%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: #fff;
+    padding: 14px 20px;
+    border: 1px solid #fff;
+    transition: all 0.3s ease-out;
+  }
+  
+  .btn-wide {
+    padding: 8px 20px;
+    font-size: 20px;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+  
+  .btn-large:hover,
+  .btn-medium:hover,
+  .btn-mobile:hover {
+    transition: all 0.3s ease-out;
+    background: #fff;
+    color: #242424;
+  }
+  
+  .btn-wide:hover {
+    color:lightblue;
+    background-color:white;
+    transition: all 0.2s ease-out;
+  }
+  
+  .btn-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 8px 16px;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .blue {
+    background-color:lightblue;
+    color: #fff;
+    border: none;
+  }
+  
+  .white {
+    background-color:white;
+    color: #fff;
+    border: none;
+  }
+  
+  .black {
+    background: black;
+    color: #fff;
+    border: none;
+  }
+  
+  .black:hover {
+    background-color: #484545;
+  }
