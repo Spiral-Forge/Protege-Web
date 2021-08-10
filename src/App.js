@@ -6,6 +6,7 @@ import Feedback from './components/Pages/Feedback';
 import SignIn from './components/Pages/SignIn';
 import Faqs from './components/Pages/Faqs';
 import AboutUs from './components/Pages/AboutUs';
+import Messenger from './components/Chat/Messenger';
 import { useHistory } from "react-router-dom";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/aboutus' component={AboutUs} />
         <Route path='/faqs' component={Faqs} />
         <Route path='/feedback' component={Feedback} />
+        <Route path='/chat' component={Messenger} />
         <Route path='/signin' component={SignIn} />
       </Switch>
     </Router>

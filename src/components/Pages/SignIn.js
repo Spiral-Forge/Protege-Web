@@ -2,7 +2,6 @@ import React from "react";
 import {
   Grid,
   Paper,
-  Avatar,
   TextField,
   Typography,
   Link,
@@ -34,8 +33,6 @@ const SignIn = () => {
     width: 480,
     margin: "60px auto",
   };
-  const avatarStyle = { backgroundColor: "#1bbd7e" };
-  const btnstyle = { margin: "8px 0" };
 
   return (
     <Grid>
