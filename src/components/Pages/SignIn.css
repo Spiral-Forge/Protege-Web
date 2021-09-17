@@ -1,7 +1,19 @@
 .btn-container {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-
+.login-btn {
+  width: 100%;
+}
+.signup-link-container {
+  margin: 2rem auto;
+  font-size: 1.2rem;
+}
+.signup-link-container a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #80b9e8;
+  
+}
