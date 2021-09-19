@@ -1,8 +1,17 @@
-import { TextField } from "@material-ui/core";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from "@material-ui/core";
 import { useState } from "react";
 
 import "./SignUp.css";
 function SignUp() {
+  const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
@@ -18,7 +27,12 @@ function SignUp() {
     github: "",
   });
   const handleButtonClick = () => {
-    console.log(formData);
+    // registration functionality here
+
+    setGuidelinesPopUp(true);
+  };
+  const handleGuidelinesClose = () => {
+    setGuidelinesPopUp(false);
   };
   const handleFormDataChange = (e) => {
     const { value, name } = e.target;
@@ -165,6 +179,39 @@ function SignUp() {
           SUBMIT
         </button>
       </div>
+      <Dialog
+        open={guidelinesPopUp}
+        onClose={handleGuidelinesClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Registration Guidelines"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus
+            sit amet luctus venenatis lectus magna fringilla urna. Ipsum dolor
+            sit amet consectetur adipiscing elit ut aliquam. Id cursus metus
+            aliquam eleifend. Quisque egestas diam in arcu. Bibendum neque
+            egestas congue quisque egestas. Aenean sed adipiscing diam donec
+            adipiscing tristique risus. Phasellus vestibulum lorem sed risus.
+            Fermentum dui faucibus in ornare quam viverra orci sagittis. Donec
+            et odio pellentesque diam volutpat commodo sed. Amet aliquam id diam
+            maecenas. Purus gravida quis blandit turpis cursus in. Dui ut ornare
+            lectus sit amet. At quis risus sed vulputate odio. Enim nunc
+            faucibus a pellentesque sit amet. At quis risus sed vulputate odio
+            ut enim blandit volutpat. Eros in cursus turpis massa tincidunt dui.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleGuidelinesClose}>Disagree</Button>
+          <Button onClick={handleGuidelinesClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
