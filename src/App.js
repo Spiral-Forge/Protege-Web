@@ -7,6 +7,8 @@ import SignIn from './components/Pages/SignIn';
 import Faqs from './components/Pages/Faqs';
 import AboutUs from './components/Pages/AboutUs';
 import Messenger from './components/Chat/Messenger';
+import Resource  from './components/Resources/resource';
+import ResourcePage  from './components/Resources/resourcepage';
 import { useHistory } from "react-router-dom";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Route path='/feedback' component={Feedback} />
         <Route path='/chat' component={Messenger} />
         <Route path='/signin' component={SignIn} />
+        <Route path='/resource' component ={Resource} />
+        <Route path="/:id"  component ={ResourcePage}/>
       </Switch>
     </Router>
     </div>
