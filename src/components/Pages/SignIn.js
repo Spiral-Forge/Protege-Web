@@ -1,80 +1,87 @@
-import React from "react";
-import {
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-  Link,
-} from "@material-ui/core";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { TextField } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
-import { makeStyles } from "@material-ui/core/styles";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import React, { useState } from "react";
 import { Button } from "../Navbar/Button";
-import './SignIn.css';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginTop: theme.spacing(2),
-    width: "35ch",
-  },
-}));
-
+import "./SignIn.css";
+import { Link } from "react-router-dom";
 const SignIn = () => {
-  const classes = useStyles();
-  const paperStyle = {
-    padding: 20,
-    height: "60vh",
-    width: 480,
-    margin: "60px auto",
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    keepLoggedIn: false,
+  });
+
+  const handleFormDataChange = (e) => {
+    const { value, name } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
+  const handleLogin = () => {
+    console.log(formData);
+  };
   return (
-    <Grid>
-      <Paper elevation={0} style={paperStyle}>
-        <Grid>
-          {/* <Avatar style={avatarStyle}></Avatar> */}
-          <h1>Login to start your journey</h1>
-        </Grid>
-        <div className={classes.root}>
-          <TextField
-            label="Username"
-            fullWidth
-            required
-            style={{ marginTop: 30, marginBottom: 10 }}
-          />
-          <TextField
-            label="Password"
-            type="password"
-            fullWidth
-            required
-            style={{ marginTop: 10, marginBottom: 30 }}
-          />
-        </div>
-
-        <FormControlLabel
-          control={<Checkbox name="checkedB" color="primary" />}
-          label="Remember me"
+    <div style={{ padding: "2rem 4rem" }}>
+      <h1 className="signup-heading">
+        Mentor,
+        <br />
+        Login and Start your Journey.
+      </h1>
+      <h3 className="signup-subheading">
+        Mentor and Uplift others through you Journey
+      </h3>
+      <div
+        style={{
+          width: "50%",
+          display: "flex",
+          flexDirection: "column",
+          margin: "0 auto",
+          marginTop: "4rem",
+        }}
+      >
+        <h3>Your e-mail</h3>
+        <TextField
+          name="email"
+          label="Type your email here"
+          onChange={handleFormDataChange}
+          required
+          style={{ marginBottom: 30, width: "35rem", marginLeft: "1rem" }}
         />
-        <div className='btn-container'>
-            <Button buttonSize='btn-wide' buttonColor='blue'>
-              Sign in
-            </Button>
+        <h3>Password</h3>
+        <TextField
+          name="password"
+          type="password"
+          label="At least 8 characters"
+          onChange={handleFormDataChange}
+          required
+          style={{ marginBottom: 30, width: "35rem", marginLeft: "1rem" }}
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="checkedB"
+              color="primary"
+              onChange={() => {
+                setFormData({
+                  ...formData,
+                  ["keepLoggedIn"]: !formData.keepLoggedIn,
+                });
+              }}
+            />
+          }
+          label="Keep me logged In"
+          style={{ marginLeft: "0.5rem" }}
+        />
+
+        <button className="login-btn submit-btn " onClick={handleLogin}>
+          Login
+        </button>
+
+        <div className='signup-link-container'>
+          Don't have an account? <Link to="/register">SIGN UP</Link>
         </div>
-        <Typography>
-          <Link href="#">Forgot password?</Link>
-        </Typography>
-        <Typography>
-          {" "}
-          Already have an account?<Link href="#"> Sign Up</Link>
-        </Typography>
-      </Paper>
-    </Grid>
+      </div>
+    </div>
   );
 };
 
