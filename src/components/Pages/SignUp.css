@@ -1,0 +1,53 @@
+.signup-heading {
+  font-size: 3rem;
+  color: #777777;
+}
+.signup-subheading {
+  color: #80b9e8;
+  font-size: 1.3rem;
+}
+.input-label{
+    color: #777777;
+}
+.form-container {
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.2);
+  padding: 2rem 0;
+  margin-top: 4rem;
+  border-radius: 35px;
+}
+.form-grid {
+  width: 90%;
+  margin: 1rem auto;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-items: center;
+  grid-gap: 3rem 0;
+}
+
+.gridItem {
+  margin: 0 auto;
+}
+
+.submit-btn {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
+  background-color: #80b9e8;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: white;
+  border-radius: 10px;
+  padding: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0px 10px 9px -3px rgba(0, 0, 0, 0.2);
+}
+.form-submit-btn {
+    margin-top: 6rem;
+    width: 30rem;
+}
