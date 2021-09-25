@@ -8,8 +8,8 @@ import SignUp from "./components/Pages/SignUp";
 import Faqs from './components/Pages/Faqs';
 import AboutUs from './components/Pages/AboutUs';
 import Messenger from './components/Chat/Messenger';
-import Resource  from './components/Resources/resource';
-import ResourcePage  from './components/Resources/resourcepage';
+import Resource  from './components/Resources/Resource';
+import ResourcePage  from './components/Resources/Resourcepage';
 import { useHistory } from "react-router-dom";
 
 function App() {

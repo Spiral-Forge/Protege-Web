@@ -7,7 +7,7 @@ import dev2img from "./dev2.png";
 import dev3img from "./dev3.png";
 import gitimg from "./git.png";
 import ResourceCard from "./ResourceCard";
-import ResourcePage from "./resourcepage";
+import ResourcePage from "./Resourcepage";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@mui/icons-material/Add";
 import AddResource from "./AddResource";
@@ -56,7 +56,11 @@ function Resource() {
         <ResourceCard className="col-sm" src={dev3img} heading="Developement" />
       </div>
       <div className="floating-btn-container">
-        <Fab color="secondary" aria-label="add" onClick={handleDialogOpen}>
+        <Fab
+          style={{ backgroundColor: "rgba(48, 48, 48, 1)", color: "white" }}
+          aria-label="add"
+          onClick={handleDialogOpen}
+        >
           <AddIcon />
         </Fab>
       </div>

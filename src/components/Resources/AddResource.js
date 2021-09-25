@@ -22,7 +22,7 @@ const AddResource = ({
   addResourceDialog: open,
   setAddResourceDialog: setOpen,
 }) => {
-  const handleClose = () => {
+  const HandleClose = () => {
     setOpen(false);
   };
   const [addResourceData, setAddResourceData] = useState({
@@ -30,12 +30,14 @@ const AddResource = ({
     link: "",
     category: "",
   });
-  const handleSubmit = () => {
+  const HandleSubmit = () => {
     console.log(addResourceData);
     db.collection(addResourceData.category)
       .add({
         Title: addResourceData.title,
         Link: addResourceData.link,
+        upvotes: 0,
+        downvotes: 0,
       })
       .then(() => {
         console.log("done");
@@ -43,34 +45,42 @@ const AddResource = ({
       .catch((err) => {
         console.log(err);
       });
-      handleClose();
+    HandleClose();
   };
-  const handleAddResourceChange = (e) => {
+  const HandleAddResourceChange = (e) => {
     const { name, value } = e.target;
     setAddResourceData({ ...addResourceData, [name]: value });
   };
   return (
     <>
-      <Dialog fullWidth maxWidth={"xs"} open={open} onClose={handleClose}>
-        <DialogTitle>Add Resource</DialogTitle>
+      <Dialog
+        fullWidth
+        maxWidth={"xs"}
+        open={open}
+        onClose={HandleClose}
+        sx={{ p: 2 }}
+      >
+        <DialogTitle className='dialog-title'>Add Resource</DialogTitle>
         <DialogContent>
           {/* <DialogContentText>Add Resources</DialogContentText> */}
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
             <TextFieldsIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
-              onChange={handleAddResourceChange}
+              onChange={HandleAddResourceChange}
               label="Title"
               variant="standard"
               name="title"
+              fullWidth
             />
           </Box>
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
             <LinkIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
-              onChange={handleAddResourceChange}
+              onChange={HandleAddResourceChange}
               label="Link"
               variant="standard"
               name="link"
+              fullWidth
             />
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", mt: 4 }}>
@@ -81,7 +91,7 @@ const AddResource = ({
                 labelId="resource-category"
                 value={addResourceData.category}
                 label="Resource Category"
-                onChange={handleAddResourceChange}
+                onChange={HandleAddResourceChange}
                 name="category"
               >
                 <MenuItem value={"Development"}>Development</MenuItem>
@@ -97,8 +107,8 @@ const AddResource = ({
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Submit</Button>
+          <Button onClick={HandleClose}>Cancel</Button>
+          <Button onClick={HandleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
     </>

@@ -9,7 +9,8 @@
 }
 .heading {
   height: 117px;
-  margin-left: 258px;
+  margin: 0 auto;
+  width: max-content;
   top: 179px;
   font-family: Quicksand;
   font-style: normal;
@@ -206,9 +207,13 @@
   transform: translateY(-50%);
 }
 
-
-.floating-btn-container{
+.floating-btn-container {
   position: fixed;
-  right:2rem;
+  right: 2rem;
   bottom: 2rem;
+}
+
+.dialog-title {
+  text-align: center;
+  color: rgba(48, 48, 48, 1);
 }
