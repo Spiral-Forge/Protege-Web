@@ -25,9 +25,9 @@ function App() {
           <Route path="/feedback" component={Feedback} />
           <Route path="/chat" component={Messenger} />
           <Route path='/resource' component ={Resource} />
-          <Route path="/:id"  component ={ResourcePage}/>
           <Route path="/signin" component={SignIn} />
           <Route path="/register" component={SignUp} />
+          <Route path="/:id"  component ={ResourcePage}/>
         </Switch>
       </Router>
     </div>
