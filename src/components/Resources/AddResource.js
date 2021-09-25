@@ -36,8 +36,8 @@ const AddResource = ({
       .add({
         Title: addResourceData.title,
         Link: addResourceData.link,
-        upvotes: 0,
-        downvotes: 0,
+        Upvotes: 0,
+        Downvotes: 0,
       })
       .then(() => {
         console.log("done");

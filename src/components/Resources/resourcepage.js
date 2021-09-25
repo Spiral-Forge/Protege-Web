@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Resource.css";
 import { db } from "../../firebase";
 import { useParams } from "react-router-dom";
-import Box from "./resourcebox";
+import Box from "./ResourceBox";
 function Resource() {
   let { id } = useParams();
 

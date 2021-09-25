@@ -7,7 +7,7 @@ import dev2img from "./dev2.png";
 import dev3img from "./dev3.png";
 import gitimg from "./git.png";
 import ResourceCard from "./ResourceCard";
-import ResourcePage from "./Resourcepage";
+import ResourcePage from "./ResourcePage";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@mui/icons-material/Add";
 import AddResource from "./AddResource";
