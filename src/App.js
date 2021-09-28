@@ -23,13 +23,13 @@ function App() {
         <Switch>
           <Route path="/home" exact component={Homepage} />
           <Route path="/aboutus" component={AboutUs} />
-          <LayoutWithVerticalNav>
             <Route path="/faqs" component={Faqs} />
+            <Route path="/signin" component={SignIn} />
+            <Route path="/register" component={SignUp} />
+          <LayoutWithVerticalNav>
             <Route path="/feedback" component={Feedback} />
             <Route path="/chat" component={Messenger} />
             <Route path="/resource" component={Resource} />
-            <Route path="/signin" component={SignIn} />
-            <Route path="/register" component={SignUp} />
             {/* <Route path="/:id" component={ResourcePage} />  Change the paths to exact and path for resource to '/resources/:id'  */}
           </LayoutWithVerticalNav>
         </Switch>
