@@ -1,10 +1,11 @@
 .NavbarItems {
-  background-color: lightblue;
   height: 80px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
+  padding: 0 1rem;
+  padding-right: 2rem;
 }
 
 .navbar-logo {
@@ -20,12 +21,13 @@
 
 .nav-menu {
   display: grid;
-  grid-template-columns: repeat(7, auto);
+  grid-template-columns: repeat(8, auto);
   grid-gap: 10px;
   list-style: none;
   text-align: center;
-  width: 75vw;
+  /* width: 80%  ; */
   justify-content: end;
+  align-items: center;
 }
 
 .nav-links {
@@ -41,7 +43,7 @@
 }
 
 .fa-bars {
-  color: white;
+  color: black;
 }
 
 .nav-links-mobile {
@@ -116,31 +118,30 @@
     cursor: pointer;
   }
 
-  .fa-times{
-      color: white;
-      font-size: 2rem;
+  .fa-times {
+    color: white;
+    font-size: 2rem;
   }
 
   .nav-links-mobile {
-      display: block;
-      text-align: center;
-      padding: 1rem;
-      margin: 1.5rem auto;
-      border-radius: 4px;
-      width: 60%;
-      background: #c28cf5;
-      text-decoration: none;
-      color: white;
-      font-size: 1.5rem;
+    display: block;
+    text-align: center;
+    padding: 1rem;
+    margin: 1.5rem auto;
+    border-radius: 4px;
+    width: 60%;
+    background: #c28cf5;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
   }
 
   .nav-links-mobile:hover {
-      background: white;
-      color: lightblue;
-      transition: 250ms;
+    background: white;
+    color: lightblue;
+    transition: 250ms;
   }
   .nav-btn {
-      display: none;
+    display: none;
   }
-
 }
