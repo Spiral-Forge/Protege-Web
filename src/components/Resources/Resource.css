@@ -49,10 +49,10 @@
   margin: 2%;
 }
 .App {
-  height: 100%;
+  /* height: 100%; */
 }
 #root {
-  height: 1200px;
+  /* height: 1200px; */
 }
 .SResourceHeading {
   height: 50px;
