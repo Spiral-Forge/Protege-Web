@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { MenuItems } from "./MenuItems";
 import "./Navbar.css";
 import { Button } from "./Button";
-import { withRouter } from "react-router-dom";
+import { withRouter,Link } from "react-router-dom";
 import logo from "./logo.jpg";
 class Navbar extends Component {
   constuctor() {
@@ -35,15 +35,12 @@ class Navbar extends Component {
           {MenuItems.map((item, index) => {
             return (
               <li key={index}>
-                <a className={item.cName} href={item.url}>
+                <Link className={item.cName} to={item.url}>
                   {item.title}
-                </a>
+                </Link>
               </li>
             );
           })}
-          <li className="nav-btn" onClick={this.routeChange}>
-            <a className={'nav-links'}> Sign In</a>
-          </li>
         </ul>
       </nav>
     );

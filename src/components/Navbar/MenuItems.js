@@ -4,11 +4,7 @@ export const MenuItems = [
     url: "/home",
     cName: "nav-links",
   },
-  {
-    title: "Register",
-    url: "/register",
-    cName: "nav-links",
-  },
+
   {
     title: "Vision",
     url: "/vision",
@@ -29,5 +25,15 @@ export const MenuItems = [
     title: "Login",
     url: "signin",
     cName: "nav-links-mobile",
+  },
+  {
+    title: "Sign In",
+    url: "/signin",
+    cName: "nav-links",
+  },
+  {
+    title: "Register",
+    url: "/register",
+    cName: "nav-links register-btn",
   },
 ];

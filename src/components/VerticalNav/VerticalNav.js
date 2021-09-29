@@ -16,7 +16,7 @@ const VerticalNav = () => {
           <img src={HomeIcon} className="vertical-nav-icon" />
         </Link>
         <Link to="/chat">
-          <img src={ChatIcon} className="vertical-nav-icon" />
+          <img src={ChatIcon} className="chat-icon vertical-nav-icon"  />
         </Link>
         <Link to="/">
           <img src={NotificationsIcon} className="vertical-nav-icon" />
