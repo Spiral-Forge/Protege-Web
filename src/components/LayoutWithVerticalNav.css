@@ -1,0 +1,10 @@
+.layout-with-vertical-nav {
+  display: flex;
+  height: calc(100vh - 5rem);
+  overflow: hidden;
+}
+
+.layout-with-vertical-nav-main {
+  overflow: auto;
+  width: 100%;
+}

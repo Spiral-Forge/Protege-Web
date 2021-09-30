@@ -4,35 +4,36 @@ export const MenuItems = [
     url: "/home",
     cName: "nav-links",
   },
+
   {
-    title: "About us",
-    url: "aboutus",
+    title: "Vision",
+    url: "/vision",
+    cName: "nav-links",
+  },
+  {
+    title: "FAQs",
+    url: "/faqs",
+    cName: "nav-links",
+  },
+  {
+    title: "Help Center",
+    url: "/help",
+    cName: "nav-links",
+  },
+
+  {
+    title: "Login",
+    url: "signin",
+    cName: "nav-links-mobile",
+  },
+  {
+    title: "Sign In",
+    url: "/signin",
     cName: "nav-links",
   },
   {
     title: "Register",
     url: "/register",
-    cName: "nav-links",
-  },
-  {
-    title: "FAQs",
-    url: "faqs",
-    cName: "nav-links",
-  },
-  {
-    title: "Feedback",
-    url: "feedback",
-    cName: "nav-links",
-  },
-  {
-    title: "Chat",
-    url: "chat",
-    cName: "nav-links",
-  },
-
-  {
-    title: "Sign in",
-    url: "signin",
-    cName: "nav-links-mobile",
+    cName: "nav-links register-btn",
   },
 ];
