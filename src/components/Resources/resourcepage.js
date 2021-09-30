@@ -1,64 +1,36 @@
 import React,{useState,useEffect} from 'react';
 import './Resource.css'
-import {db} from "../../firebase"
+import {db} from '../../firebase'
 import {
     useParams
-  } from "react-router-dom";
+} from "react-router-dom";
 import Box from "./resourcebox";
 function Resource() {
     let { id } = useParams();
-   
-   let [info , setInfo] = useState([]);
-    // Start the fetch operation as soon as
-    // the page loads
-    window.addEventListener('load', () => {
+    let [info , setInfo] = useState([]);
+    useEffect(() => {
         Fetchdata();
-      });
-  
-    // Fetch the required data using the get() method
+    },[]);
     const Fetchdata = ()=>{
-        db.collection("Development").get().then((querySnapshot) => {
-             
-            // Loop through the data and store
-            // it in array to display
+        db.collection(id).get().then((querySnapshot) => {
             querySnapshot.forEach(element => {
-                var data = element.data();
-                setInfo(arr => [...arr , data]);
-                  
+                setInfo(arr => [...arr , element]);
             });
         })
     }
-    function divclicked(event) {
-        if (event.target.nodeName === "I") {
-          event.target.classList.add("clicked", "inverted");
-          setTimeout(function () {
-            event.target.classList.remove("clicked", "inverted");
-          }, 500);
-        }
-      }
+    
+    info.sort((a,b) =>((b.data().upvote -b.data().downvote) > (a.data().upvote -a.data().downvote)) ? 1 : (((a.data().upvote -a.data().downvote)> (b.data().upvote -b.data().downvote))  ? -1 : 0))
     return (
         <div>
             <h1 className="SResourceHeading">{id} resources</h1>
-           
             {
                 info.map((resource) =>{
-                    return(<div>
-                        <Box title ={resource.Title} link={resource.Link}/>
-                        <div class="widget " onClick={divclicked}>
-                            <div class="upvote thumbs">
-                                <i class="thumbs-icon thumbs-icon-up"></i>
-                            </div>
-                            <div class="downvote thumbs">
-                                <i class="thumbs-icon thumbs-icon-down"></i>
-                            </div>
-                            </div>
-                        </div>);
+                return(
+                    <Box title ={resource} link={resource.data().Link} id= {id}/>);
                 })
-
             }
-            
         </div>
     );
-  }
-  
-  export default Resource;
+}
+
+export default Resource;
