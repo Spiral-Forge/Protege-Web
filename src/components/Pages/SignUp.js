@@ -5,20 +5,31 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  InputLabel,
   TextField,
 } from "@material-ui/core";
+import {
+  Checkbox,
+  FormControl,
+  ListItemText,
+  MenuItem,
+  NativeSelect,
+  Select,
+} from "@mui/material";
 import { useState } from "react";
-
+import { useAuth } from "../../context/AuthContext";
+import { auth, db } from "../../firebase";
 import "./SignUp.css";
 function SignUp() {
+  const { signUp, currentUser } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phoneNumber: "",
     email: "",
     password: "",
-    branch: "",
-    year: "",
+    branch: "CSE",
+    year: "1",
     rollNumber: "",
     hosteller: "",
     domain: "",
@@ -26,9 +37,15 @@ function SignUp() {
     linkedIn: "",
     github: "",
   });
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     // registration functionality here
-
+    // console.log(formData);
+    try {
+      await signUp(formData.email, formData.password);
+      await db.collection("Users").doc(auth.currentUser.uid).set(formData);
+    } catch (e) {
+      return console.log(e);
+    }
     setGuidelinesPopUp(true);
   };
   const handleGuidelinesClose = () => {
@@ -38,6 +55,7 @@ function SignUp() {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const branches = ["CSE", "ECE"];
   return (
     <div style={{ padding: "2rem 4rem" }}>
       <h1 className="signup-heading">
@@ -91,25 +109,44 @@ function SignUp() {
               style={{ width: "20rem" }}
             />
           </div>
-          <div>
-            <h4 className="input-label">Select your branch</h4>
-            <TextField
-              name="branch"
-              label="Pick Your Branch"
-              onChange={handleFormDataChange}
-              required
-              style={{ width: "20rem" }}
-            />
+          <div className="gridItem">
+            <h4 className="input-label select-label">Select your branch</h4>
+            <FormControl fullWidth>
+              <NativeSelect
+                // defaultValue={"Branch"}
+                inputProps={{
+                  name: "branch",
+                  id: "branch",
+                }}
+                name="branch"
+                onChange={(e) => {
+                  handleFormDataChange(e);
+                  console.log(formData);
+                }}
+              >
+                {branches.map((branch) => {
+                  return <option value={branch}>{branch}</option>;
+                })}
+              </NativeSelect>
+            </FormControl>
           </div>
-          <div>
-            <h4 className="input-label">Select your year</h4>
-            <TextField
-              name="year"
-              label="Current year of study"
-              required
-              onChange={handleFormDataChange}
-              style={{ width: "20rem" }}
-            />
+          <div className="gridItem">
+            <h4 className="input-label select-label">Select your year</h4>
+            <FormControl fullWidth>
+              <NativeSelect
+                defaultValue={"1"}
+                inputProps={{
+                  name: "year",
+                  id: "year",
+                }}
+                name="year"
+                onChange={handleFormDataChange}
+              >
+                {[1, 2, 3, 4].map((year) => {
+                  return <option value={year}>{year}</option>;
+                })}
+              </NativeSelect>
+            </FormControl>
           </div>
           <div>
             <h4 className="input-label">Roll Number</h4>

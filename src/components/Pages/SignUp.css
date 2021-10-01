@@ -9,6 +9,9 @@
 .input-label{
     color: #777777;
 }
+.select-label{
+  margin-bottom: 1rem;
+}
 .form-container {
   width: 80%;
   margin: 0 auto;
@@ -30,6 +33,7 @@
 
 .gridItem {
   margin: 0 auto;
+  width: 80%;
 }
 
 .submit-btn {

@@ -13,27 +13,30 @@ import ResourcePage from "./components/Resources/ResourcePage";
 import LayoutWithVerticalNav from "./components/LayoutWithVerticalNav.js";
 
 import { useHistory } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   const history = useHistory();
   return (
     <div className="App">
-      <Router history={history}>
-        <Navbar />
-        <Switch>
-          <Route path="/home" exact component={Homepage} />
-          <Route path="/aboutus" component={AboutUs} />
+      <AuthProvider>
+        <Router history={history}>
+          <Navbar />
+          <Switch>
+            <Route path="/home" exact component={Homepage} />
+            <Route path="/aboutus" component={AboutUs} />
             <Route path="/faqs" component={Faqs} />
             <Route path="/signin" component={SignIn} />
             <Route path="/register" component={SignUp} />
-          <LayoutWithVerticalNav>
-            <Route path="/feedback" component={Feedback} />
-            <Route path="/chat" component={Messenger} />
-            <Route path="/resource" component={Resource} />
-            {/* <Route path="/:id" component={ResourcePage} />  Change the paths to exact and path for resource to '/resources/:id'  */}
-          </LayoutWithVerticalNav>
-        </Switch>
-      </Router>
+            <LayoutWithVerticalNav>
+              <Route path="/feedback" component={Feedback} />
+              <Route path="/chat" component={Messenger} />
+              <Route path="/resource" component={Resource} />
+              {/* <Route path="/:id" component={ResourcePage} />  Change the paths to exact and path for resource to '/resources/:id'  */}
+            </LayoutWithVerticalNav>
+          </Switch>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }
