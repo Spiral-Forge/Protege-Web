@@ -6,6 +6,7 @@ import {
   DialogContentText,
   DialogTitle,
   InputLabel,
+  OutlinedInput,
   TextField,
 } from "@material-ui/core";
 import {
@@ -30,12 +31,12 @@ function SignUp() {
     password: "",
     branch: "CSE",
     year: "1",
-    rollNumber: "",
+    rollNo: "",
     hosteller: "",
-    domain: "",
-    language: "",
+    domains: [],
+    languages: [],
     linkedIn: "",
-    github: "",
+    githubURL: "",
   });
   const handleButtonClick = async () => {
     // registration functionality here
@@ -46,6 +47,7 @@ function SignUp() {
     } catch (e) {
       return console.log(e);
     }
+    console.log(auth.currentUser.uid);
     setGuidelinesPopUp(true);
   };
   const handleGuidelinesClose = () => {
@@ -56,6 +58,17 @@ function SignUp() {
     setFormData({ ...formData, [name]: value });
   };
   const branches = ["CSE", "ECE"];
+  const languagesArr = ["C++", "Python", "Java"];
+  const domainsArr = [
+    "Competitive Programming",
+    "Machine Learning",
+    "App Development",
+    "Web Development",
+    "IOT",
+    "BlockChain",
+    "Open Source",
+    "No Prefence",
+  ];
   return (
     <div style={{ padding: "2rem 4rem" }}>
       <h1 className="signup-heading">
@@ -119,10 +132,7 @@ function SignUp() {
                   id: "branch",
                 }}
                 name="branch"
-                onChange={(e) => {
-                  handleFormDataChange(e);
-                  console.log(formData);
-                }}
+                onChange={handleFormDataChange}
               >
                 {branches.map((branch) => {
                   return <option value={branch}>{branch}</option>;
@@ -151,7 +161,7 @@ function SignUp() {
           <div>
             <h4 className="input-label">Roll Number</h4>
             <TextField
-              name="rollNumber"
+              name="rollNo"
               label="Type your roll number here"
               onChange={handleFormDataChange}
               required
@@ -170,23 +180,45 @@ function SignUp() {
           </div>
           <div>
             <h4 className="input-label">Select your domains</h4>
-            <TextField
-              name="domain"
-              label="Domains"
-              onChange={handleFormDataChange}
-              required
-              style={{ width: "20rem" }}
-            />
+            <FormControl sx={{ mt: 1, width: 320 }}>
+              <Select
+                fullWidth
+                id="multiple-domains"
+                multiple
+                value={formData.domains}
+                name="domains"
+                onChange={handleFormDataChange}
+                input={<OutlinedInput label="Name" />}
+                // MenuProps={MenuProps}
+              >
+                {domainsArr.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
           <div>
             <h4 className="input-label">Select your language</h4>
-            <TextField
-              name="language"
-              label="Languages"
-              required
-              onChange={handleFormDataChange}
-              style={{ width: "20rem" }}
-            />
+            <FormControl sx={{ mt: 1, width: 320 }}>
+              <Select
+                fullWidth
+                id="multiple-lang"
+                multiple
+                value={formData.languages}
+                name="languages"
+                onChange={handleFormDataChange}
+                input={<OutlinedInput label="Name" />}
+                // MenuProps={MenuProps}
+              >
+                {languagesArr.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
           <div>
             <h4 className="input-label">LinkedIn Id</h4>
@@ -201,7 +233,7 @@ function SignUp() {
           <div>
             <h4 className="input-label">Github Id</h4>
             <TextField
-              name="github"
+              name="githubURL"
               label="Type your Github Id here"
               onChange={handleFormDataChange}
               required
