@@ -85,37 +85,44 @@ function SignUp() {
             <h4 className="input-label">Name</h4>
             <TextField
               name="name"
-              label="Type your name here"
+              label={formData.name === "" && "Type your name here"}
+              InputLabelProps={{ shrink: false }}
               onChange={handleFormDataChange}
               required
               style={{ width: "20rem" }}
             />
           </div>
-          <div>
+          <div className="gridItem">
             <h4 className="input-label">Email Id</h4>
             <TextField
               name="email"
-              label="Type your email Id here"
+              label={formData.email === "" && "Type your email Id here"}
               onChange={handleFormDataChange}
+              InputLabelProps={{ shrink: false }}
               required
               style={{ width: "20rem" }}
             />
           </div>
-          <div>
+          <div className="gridItem">
             <h4 className="input-label">Phone Number</h4>
             <TextField
               name="phoneNumber"
-              label="Type your phone number here"
+              label={
+                formData.phoneNumber === "" && "Type your phone number here"
+              }
+              InputLabelProps={{ shrink: false }}
               required
               onChange={handleFormDataChange}
               style={{ width: "20rem" }}
             />
           </div>
-          <div>
+          <div className="gridItem">
             <h4 className="input-label">Password</h4>
             <TextField
               name="password"
               label="Atleast 8 Characters"
+              label={formData.password === "" && "Atleast 8 Characters"}
+              InputLabelProps={{ shrink: false }}
               type="password"
               onChange={handleFormDataChange}
               required
@@ -124,7 +131,7 @@ function SignUp() {
           </div>
           <div className="gridItem">
             <h4 className="input-label select-label">Select your branch</h4>
-            <FormControl fullWidth>
+            <FormControl style={{ width: "20rem" }}>
               <NativeSelect
                 // defaultValue={"Branch"}
                 inputProps={{
@@ -142,7 +149,7 @@ function SignUp() {
           </div>
           <div className="gridItem">
             <h4 className="input-label select-label">Select your year</h4>
-            <FormControl fullWidth>
+            <FormControl style={{ width: "20rem" }}>
               <NativeSelect
                 defaultValue={"1"}
                 inputProps={{
@@ -158,27 +165,29 @@ function SignUp() {
               </NativeSelect>
             </FormControl>
           </div>
-          <div>
+          <div className="gridItem">
             <h4 className="input-label">Roll Number</h4>
             <TextField
               name="rollNo"
-              label="Type your roll number here"
+              label={formData.rollNo === "" && "Type your roll number here"}
+              InputLabelProps={{ shrink: false }}
               onChange={handleFormDataChange}
               required
               style={{ width: "20rem" }}
             />
           </div>
-          <div>
+          <div className="gridItem">
             <h4 className="input-label">Are you a Hosteller?</h4>
             <TextField
               name="hosteller"
-              label="Yes/No"
+              label={formData.hosteller === "" && "Yes/No"}
+              InputLabelProps={{ shrink: false }}
               onChange={handleFormDataChange}
               required
               style={{ width: "20rem" }}
             />
           </div>
-          <div>
+          <div className="gridItem">
             <h4 className="input-label">Select your domains</h4>
             <FormControl sx={{ mt: 1, width: 320 }}>
               <Select
@@ -199,7 +208,7 @@ function SignUp() {
               </Select>
             </FormControl>
           </div>
-          <div>
+          <div className="gridItem">
             <h4 className="input-label">Select your language</h4>
             <FormControl sx={{ mt: 1, width: 320 }}>
               <Select
@@ -220,21 +229,23 @@ function SignUp() {
               </Select>
             </FormControl>
           </div>
-          <div>
+          <div className="gridItem">
             <h4 className="input-label">LinkedIn Id</h4>
             <TextField
               name="linkedIn"
-              label="Type your LinkedIn here"
+              label={formData.linkedIn === "" && "Type your LinkedIn here"}
+              InputLabelProps={{ shrink: false }}
               onChange={handleFormDataChange}
               required
               style={{ width: "20rem" }}
             />
           </div>
-          <div>
+          <div className="gridItem">
             <h4 className="input-label">Github Id</h4>
             <TextField
               name="githubURL"
-              label="Type your Github Id here"
+              label={formData.githubURL === "" && "Type your Github Id here"}
+              InputLabelProps={{ shrink: false }}
               onChange={handleFormDataChange}
               required
               style={{ width: "20rem" }}
