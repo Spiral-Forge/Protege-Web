@@ -23,7 +23,7 @@ import { useAuth } from "../../context/AuthContext";
 import { auth, db } from "../../firebase";
 import "./SignUp.css";
 function SignUp() {
-  const history = useHistory()
+  const history = useHistory();
   const { signUp, currentUser } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
@@ -31,6 +31,8 @@ function SignUp() {
     phoneNumber: "",
     email: "",
     password: "",
+    gender: "",
+    college: "",
     branch: "CSE",
     year: "1",
     rollNo: "",
@@ -40,7 +42,7 @@ function SignUp() {
     linkedIn: "",
     githubURL: "",
   });
-  const handleAccept = async() => {
+  const handleAccept = async () => {
     try {
       await signUp(formData.email, formData.password);
       await db.collection("Users").doc(auth.currentUser.uid).set(formData);
@@ -49,8 +51,7 @@ function SignUp() {
     }
     console.log(auth.currentUser.uid);
     setGuidelinesPopUp(false);
-    history.push('/')
-
+    history.push("/");
   };
   const handleButtonClick = () => {
     setGuidelinesPopUp(true);
@@ -121,14 +122,36 @@ function SignUp() {
               style={{ width: "20rem" }}
             />
           </div>
+
           <div className="gridItem">
             <h4 className="input-label">Password</h4>
             <TextField
               name="password"
-              label="Atleast 8 Characters"
               label={formData.password === "" && "Atleast 8 Characters"}
               InputLabelProps={{ shrink: false }}
               type="password"
+              onChange={handleFormDataChange}
+              required
+              style={{ width: "20rem" }}
+            />
+          </div>
+          <div className="gridItem">
+            <h4 className="input-label">Gender</h4>
+            <TextField
+              name="gender"
+              label={formData.gender === "" && "Type your gender"}
+              InputLabelProps={{ shrink: false }}
+              onChange={handleFormDataChange}
+              required
+              style={{ width: "20rem" }}
+            />
+          </div>
+          <div className="gridItem">
+            <h4 className="input-label">College</h4>
+            <TextField
+              name="college"
+              label={formData.college === "" && "Type your College name"}
+              InputLabelProps={{ shrink: false }}
               onChange={handleFormDataChange}
               required
               style={{ width: "20rem" }}

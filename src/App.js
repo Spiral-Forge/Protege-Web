@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Homepage from "./components/Pages/Homepage";
 import Feedback from "./components/Pages/Feedback";
 import SignIn from "./components/Pages/SignIn";
-import SignUpMentor from "./components/Pages/SignUpMentor";
+import SignUpMentee from "./components/Pages/SignUpMentee";
 import Faqs from "./components/Pages/Faqs";
 import AboutUs from "./components/Pages/AboutUs";
 import Messenger from "./components/Chat/Messenger";
@@ -29,8 +29,8 @@ function App() {
             <Route path="/faqs" component={Faqs} />
             <Route path="/signin" component={SignIn} />
             <Route exact path="/register" component={ChooseSignUp} />
-            <Route path="/register/mentor" component={SignUpMentor} />
-            <Route path="/register/mentee" component={SignUpMentor} />
+            <Route path="/register/mentor" component={SignUpMentee} />
+            <Route path="/register/mentee" component={SignUpMentee} />
             <LayoutWithVerticalNav>
               <Route path="/feedback" component={Feedback} />
               <Route path="/chat" component={Messenger} />
