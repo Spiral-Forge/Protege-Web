@@ -1,3 +1,28 @@
+.choose-sign-up{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+.choose-sign-up-btn{
+  background-color: #80B9E8;
+  padding: 0.7rem 5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 45px;
+  margin: 0.6rem;
+  color:white;
+  text-decoration: none;
+}
+.choose-sign-up-already{
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+.choose-sign-up-already a {
+  color:#80b9e8;
+  font-weight: 700;
+}
 .signup-heading {
   font-size: 3rem;
   color: #777777;

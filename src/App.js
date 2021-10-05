@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Homepage from "./components/Pages/Homepage";
 import Feedback from "./components/Pages/Feedback";
 import SignIn from "./components/Pages/SignIn";
-import SignUp from "./components/Pages/SignUp";
+import SignUpMentor from "./components/Pages/SignUpMentor";
 import Faqs from "./components/Pages/Faqs";
 import AboutUs from "./components/Pages/AboutUs";
 import Messenger from "./components/Chat/Messenger";
@@ -14,6 +14,7 @@ import LayoutWithVerticalNav from "./components/LayoutWithVerticalNav.js";
 
 import { useHistory } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import ChooseSignUp from "./components/Pages/ChooseSignUp";
 
 function App() {
   const history = useHistory();
@@ -27,7 +28,9 @@ function App() {
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/faqs" component={Faqs} />
             <Route path="/signin" component={SignIn} />
-            <Route path="/register" component={SignUp} />
+            <Route exact path="/register" component={ChooseSignUp} />
+            <Route path="/register/mentor" component={SignUpMentor} />
+            <Route path="/register/mentee" component={SignUpMentor} />
             <LayoutWithVerticalNav>
               <Route path="/feedback" component={Feedback} />
               <Route path="/chat" component={Messenger} />
