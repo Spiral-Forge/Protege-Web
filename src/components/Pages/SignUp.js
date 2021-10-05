@@ -18,10 +18,12 @@ import {
   Select,
 } from "@mui/material";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { auth, db } from "../../firebase";
 import "./SignUp.css";
 function SignUp() {
+  const history = useHistory()
   const { signUp, currentUser } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
@@ -38,9 +40,7 @@ function SignUp() {
     linkedIn: "",
     githubURL: "",
   });
-  const handleButtonClick = async () => {
-    // registration functionality here
-    // console.log(formData);
+  const handleAccept = async() => {
     try {
       await signUp(formData.email, formData.password);
       await db.collection("Users").doc(auth.currentUser.uid).set(formData);
@@ -48,6 +48,11 @@ function SignUp() {
       return console.log(e);
     }
     console.log(auth.currentUser.uid);
+    setGuidelinesPopUp(false);
+    history.push('/')
+
+  };
+  const handleButtonClick = () => {
     setGuidelinesPopUp(true);
   };
   const handleGuidelinesClose = () => {
@@ -198,11 +203,12 @@ function SignUp() {
                 name="domains"
                 onChange={handleFormDataChange}
                 input={<OutlinedInput label="Name" />}
-                // MenuProps={MenuProps}
+                renderValue={(selected) => selected.join(", ")}
               >
                 {domainsArr.map((name) => (
                   <MenuItem key={name} value={name}>
-                    {name}
+                    <Checkbox checked={formData.domains.indexOf(name) > -1} />
+                    <ListItemText primary={name} />
                   </MenuItem>
                 ))}
               </Select>
@@ -219,11 +225,12 @@ function SignUp() {
                 name="languages"
                 onChange={handleFormDataChange}
                 input={<OutlinedInput label="Name" />}
-                // MenuProps={MenuProps}
+                renderValue={(selected) => selected.join(", ")}
               >
                 {languagesArr.map((name) => (
                   <MenuItem key={name} value={name}>
-                    {name}
+                    <Checkbox checked={formData.languages.indexOf(name) > -1} />
+                    <ListItemText primary={name} />
                   </MenuItem>
                 ))}
               </Select>
@@ -287,7 +294,7 @@ function SignUp() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleGuidelinesClose}>Disagree</Button>
-          <Button onClick={handleGuidelinesClose} autoFocus>
+          <Button onClick={handleAccept} autoFocus>
             Agree
           </Button>
         </DialogActions>
