@@ -37,6 +37,10 @@
 .select-label{
   margin-bottom: 1rem;
 }
+select{
+  font-size: 1.1rem;
+  padding: 1rem;
+}
 .form-container {
   width: 80%;
   margin: 0 auto;
@@ -53,7 +57,7 @@
   display: grid;
   grid-template-columns: repeat(2, auto);
   justify-items: center;
-  grid-gap: 3rem 0;
+  grid-gap: 2rem 0;
 }
 
 .gridItem {

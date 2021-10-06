@@ -37,7 +37,7 @@ function SignUp() {
     phoneNumber: "",
     email: "",
     password: "",
-    post: "Mentee",
+    post:"Mentor",
     gender: "Prefer not to mention",
     college: collegesArr[0],
     branch: branches[0],
