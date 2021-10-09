@@ -3,6 +3,8 @@ import {
   languagesArr,
   domainsArr,
   collegesArr,
+  years,
+  genders,
 } from "./SignUpOptions";
 import {
   Button,
@@ -28,7 +30,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { auth, db } from "../../firebase";
 import "./SignUp.css";
-function SignUp() {
+function SignUpForm({ post }) {
   const history = useHistory();
   const { signUp } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
@@ -37,11 +39,11 @@ function SignUp() {
     phoneNumber: "",
     email: "",
     password: "",
-    post:"Mentor",
-    gender: "Prefer not to mention",
+    post: post,
+    gender: genders[0],
     college: collegesArr[0],
     branch: branches[0],
-    year: 1,
+    year: years[0],
     rollNo: "",
     domains: [],
     languages: [],
@@ -53,7 +55,9 @@ function SignUp() {
   const handleAccept = async () => {
     try {
       await signUp(formData.email, formData.password);
-      await db.collection("Users").doc(auth.currentUser.uid).set(formData);
+      const tempObject = {...formData};
+      delete tempObject['password'];
+      await db.collection("Users").doc(auth.currentUser.uid).set(tempObject);
     } catch (e) {
       return console.log(e);
     }
@@ -62,6 +66,28 @@ function SignUp() {
     history.push("/");
   };
   const handleButtonClick = () => {
+    if (
+      formData["domains"].length === 0 ||
+      formData["languages"].length === 0
+    ) {
+      window.alert("Please complete the form");
+      return;
+    }
+    for (const prop in formData) {
+      if (typeof formData[prop] === "string") {
+        const val = formData[prop].trim(); 
+        if (
+          val === "" ||
+          val === genders[0] ||
+          val === collegesArr[0] ||
+          val === branches[0] ||
+          val === years[0]
+        ) {
+          window.alert("Please complete the form");
+          return;
+        }
+      } 
+    }
     setGuidelinesPopUp(true);
   };
   const handleGuidelinesClose = () => {
@@ -171,7 +197,6 @@ function SignUp() {
             <h4 className="input-label select-label">Select your year</h4>
             <FormControl style={{ width: "20rem" }}>
               <NativeSelect
-                defaultValue={"1"}
                 inputProps={{
                   name: "year",
                   id: "year",
@@ -179,7 +204,7 @@ function SignUp() {
                 name="year"
                 onChange={handleFormDataChange}
               >
-                {[1, 2, 3, 4].map((year) => {
+                {years.map((year) => {
                   return <option value={year}>{year}</option>;
                 })}
               </NativeSelect>
@@ -252,23 +277,7 @@ function SignUp() {
               </Select>
             </FormControl>
           </div>
-          <div className="gridItem">
-            <h4 className="input-label">Gender</h4>
-            <FormControl style={{ width: "20rem" }}>
-              <NativeSelect
-                inputProps={{
-                  name: "gender",
-                  id: "gender",
-                }}
-                name="gender"
-                onChange={handleFormDataChange}
-              >
-                {["Prefer Not to mention", "Male", "Female"].map((gender) => {
-                  return <option value={gender}>{gender}</option>;
-                })}
-              </NativeSelect>
-            </FormControl>
-          </div>
+
           <div className="gridItem">
             <h4 className="input-label">LinkedIn Id</h4>
             <TextField
@@ -290,6 +299,23 @@ function SignUp() {
               required
               style={{ width: "20rem" }}
             />
+          </div>
+          <div className="gridItem">
+            <h4 className="input-label">Gender</h4>
+            <FormControl style={{ width: "20rem" }}>
+              <NativeSelect
+                inputProps={{
+                  name: "gender",
+                  id: "gender",
+                }}
+                name="gender"
+                onChange={handleFormDataChange}
+              >
+                {["Prefer Not to mention", "Male", "Female"].map((gender) => {
+                  return <option value={gender}>{gender}</option>;
+                })}
+              </NativeSelect>
+            </FormControl>
           </div>
         </div>
         <button
@@ -336,4 +362,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpForm;

@@ -1,4 +1,5 @@
 export const branches = [
+  "Select your college",
   "Computer Science Engineering",
   "Information Technology Engineering",
   "Electrical Engineering",
@@ -17,4 +18,18 @@ export const domainsArr = [
   "Open Source",
   "No preference",
 ];
-export const collegesArr = ["IGDTUW", "DTU", "NSUT", "IIITD"];
+export const collegesArr = [
+  "Select your college",
+  "IGDTUW",
+  "DTU",
+  "NSUT",
+  "IIITD",
+];
+
+export const years = ["Select your year", "1st", "2nd", "3rd", "4th"];
+export const genders = [
+  "Select your gender",
+  "Male",
+  "Female",
+  "Prefer not to mention",
+];

@@ -1,21 +1,17 @@
+import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import Homepage from "./components/Pages/Homepage";
-import Feedback from "./components/Pages/Feedback";
-import SignIn from "./components/Pages/SignIn";
-import SignUpMentee from "./components/Pages/SignUpMentee";
-import SignUpMentor from "./components/Pages/SignUpMentor";
-import Faqs from "./components/Pages/Faqs";
-import AboutUs from "./components/Pages/AboutUs";
 import Messenger from "./components/Chat/Messenger";
-import Resource from "./components/Resources/Resource.js";
-import ResourcePage from "./components/Resources/ResourcePage";
 import LayoutWithVerticalNav from "./components/LayoutWithVerticalNav.js";
-
-import { useHistory } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import AboutUs from "./components/Pages/AboutUs";
+import Faqs from "./components/Pages/Faqs";
+import Feedback from "./components/Pages/Feedback";
+import Homepage from "./components/Pages/Homepage";
+import SignIn from "./components/Pages/SignIn";
+import SignUp from "./components/Pages/SignUp";
+import Resource from "./components/Resources/Resource.js";
 import { AuthProvider } from "./context/AuthContext";
-import ChooseSignUp from "./components/Pages/ChooseSignUp";
+
 
 function App() {
   const history = useHistory();
@@ -29,9 +25,7 @@ function App() {
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/faqs" component={Faqs} />
             <Route path="/signin" component={SignIn} />
-            <Route exact path="/register" component={ChooseSignUp} />
-            <Route path="/register/mentor" component={SignUpMentor} />
-            <Route path="/register/mentee" component={SignUpMentee} />
+            <Route exact path="/register" component={SignUp} />
             <LayoutWithVerticalNav>
               <Route path="/feedback" component={Feedback} />
               <Route path="/chat" component={Messenger} />
