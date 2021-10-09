@@ -105,13 +105,10 @@ function SignUpForm({ post }) {
   return (
     <div style={{ padding: "2rem 4rem" }}>
       <h1 className="signup-heading">
-        Mentee,
+        {post},
         <br />
         Register and Start your Journey.
       </h1>
-      <h4 className="signup-subheading">
-        Mentor and Uplift others through your Journey
-      </h4>
       <div className="form-container">
         <div className="form-grid">
           <div className="gridItem">
