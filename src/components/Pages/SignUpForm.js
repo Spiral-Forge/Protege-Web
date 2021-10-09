@@ -5,12 +5,17 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  TextField
+  TextField,
 } from "@material-ui/core";
 import {
-  Checkbox, FormControl, InputLabel, ListItemText,
+  Checkbox,
+  FormControl,
+  InputLabel,
+  ListItemText,
   MenuItem,
-  NativeSelect, OutlinedInput, Select
+  NativeSelect,
+  OutlinedInput,
+  Select,
 } from "@mui/material";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -18,7 +23,12 @@ import { useAuth } from "../../context/AuthContext";
 import { auth, db } from "../../firebase";
 import "./SignUp.css";
 import {
-  branches, collegesArr, domainsArr, genders, languagesArr, years
+  branches,
+  collegesArr,
+  domainsArr,
+  genders,
+  languagesArr,
+  years,
 } from "./SignUpOptions";
 function SignUpForm({ post }) {
   const history = useHistory();
@@ -77,7 +87,7 @@ function SignUpForm({ post }) {
           val === branches[0] ||
           val === years[0]
         ) {
-          window.alert("Please complete the form");
+          window.alert("Please fill " + prop + " in the form");
           return;
         }
       }
@@ -161,8 +171,12 @@ function SignUpForm({ post }) {
                 name="college"
                 onChange={handleFormDataChange}
               >
-                {collegesArr.map((college,index) => {
-                  return <option key={index} value={college}>{college}</option>;
+                {collegesArr.map((college, index) => {
+                  return (
+                    <option key={index} value={college}>
+                      {college}
+                    </option>
+                  );
                 })}
               </NativeSelect>
             </FormControl>
@@ -178,8 +192,12 @@ function SignUpForm({ post }) {
                 name="branch"
                 onChange={handleFormDataChange}
               >
-                {branches.map((branch,index) => {
-                  return <option key={index} value={branch}>{branch}</option>;
+                {branches.map((branch, index) => {
+                  return (
+                    <option key={index} value={branch}>
+                      {branch}
+                    </option>
+                  );
                 })}
               </NativeSelect>
             </FormControl>
@@ -195,8 +213,12 @@ function SignUpForm({ post }) {
                 name="year"
                 onChange={handleFormDataChange}
               >
-                {years.map((year,index) => {
-                  return <option key={index} value={year}>{year}</option>;
+                {years.map((year, index) => {
+                  return (
+                    <option key={index} value={year}>
+                      {year}
+                    </option>
+                  );
                 })}
               </NativeSelect>
             </FormControl>
