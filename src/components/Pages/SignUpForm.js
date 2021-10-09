@@ -55,8 +55,8 @@ function SignUpForm({ post }) {
   const handleAccept = async () => {
     try {
       await signUp(formData.email, formData.password);
-      const tempObject = {...formData};
-      delete tempObject['password'];
+      const tempObject = { ...formData };
+      delete tempObject["password"];
       await db.collection("Users").doc(auth.currentUser.uid).set(tempObject);
     } catch (e) {
       return console.log(e);
@@ -66,6 +66,10 @@ function SignUpForm({ post }) {
     history.push("/");
   };
   const handleButtonClick = () => {
+    if (isNaN(formData.phoneNumber)) {
+      window.alert("Please enter a valid number");
+      return;
+    }
     if (
       formData["domains"].length === 0 ||
       formData["languages"].length === 0
@@ -75,7 +79,7 @@ function SignUpForm({ post }) {
     }
     for (const prop in formData) {
       if (typeof formData[prop] === "string") {
-        const val = formData[prop].trim(); 
+        const val = formData[prop].trim();
         if (
           val === "" ||
           val === genders[0] ||
@@ -86,7 +90,7 @@ function SignUpForm({ post }) {
           window.alert("Please complete the form");
           return;
         }
-      } 
+      }
     }
     setGuidelinesPopUp(true);
   };
