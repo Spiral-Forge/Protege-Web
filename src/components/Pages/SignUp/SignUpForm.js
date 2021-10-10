@@ -19,8 +19,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { auth, db } from "../../firebase";
+import { useAuth } from "../../../context/AuthContext";
+import { auth, db } from "../../../firebase";
 import "./SignUp.css";
 import {
   branches,

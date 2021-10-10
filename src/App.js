@@ -8,7 +8,7 @@ import Faqs from "./components/Pages/Faqs";
 import Feedback from "./components/Pages/Feedback";
 import Homepage from "./components/Pages/Homepage";
 import SignIn from "./components/Pages/SignIn";
-import SignUp from "./components/Pages/SignUp";
+import SignUp from "./components/Pages/SignUp/SignUp";
 import Resource from "./components/Resources/Resource.js";
 import { AuthProvider } from "./context/AuthContext";
 
