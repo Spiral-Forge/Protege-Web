@@ -324,7 +324,7 @@ function SignUpForm({ post }) {
                 name="gender"
                 onChange={handleFormDataChange}
               >
-                {["Prefer Not to mention", "Male", "Female"].map((gender) => {
+                {genders.map((gender) => {
                   return <option value={gender}>{gender}</option>;
                 })}
               </NativeSelect>
