@@ -30,7 +30,7 @@ import {
   languagesArr,
   years,
 } from "./SignUpOptions";
-function SignUpForm({ post }) {
+function SignUpForm({ post, setPost }) {
   const history = useHistory();
   const { signUp } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
@@ -101,9 +101,17 @@ function SignUpForm({ post }) {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   return (
     <div style={{ padding: "2rem 4rem" }}>
+      <button
+        className="sign-up-back-btn"
+        onClick={() => {
+          setPost("");
+        }}
+      >
+        {" "}
+        <img src="back-icon.svg" height='20px'/> Back
+      </button>
       <h1 className="signup-heading">
         {post},
         <br />

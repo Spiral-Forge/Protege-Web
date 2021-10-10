@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
-import SignUpForm from './SignUpForm'
+import SignUpForm from "./SignUpForm";
 const SignUp = () => {
   const [post, setPost] = useState("");
   return (
@@ -32,7 +32,7 @@ const SignUp = () => {
           </div>
         </div>
       ) : (
-        <SignUpForm post={post}/>
+        <SignUpForm post={post} setPost={setPost} />
       )}
     </>
   );
