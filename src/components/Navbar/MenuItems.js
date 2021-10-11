@@ -30,10 +30,12 @@ export const MenuItems = [
     title: "Sign In",
     url: "/signin",
     cName: "nav-links",
+    hideWhenLoggedIn: true,
   },
   {
     title: "Register",
     url: "/register",
     cName: "nav-links register-btn",
+    hideWhenLoggedIn: true,
   },
 ];

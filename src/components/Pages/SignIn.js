@@ -5,7 +5,11 @@ import React, { useState } from "react";
 import { Button } from "../Navbar/Button";
 import "./SignIn.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useHistory } from "react-router-dom";
 const SignIn = () => {
+  const history = useHistory()
+  const { signIn } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,8 +21,13 @@ const SignIn = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleLogin = () => {
-    console.log(formData);
+  const handleLogin = async () => {
+    try {
+      await signIn(formData.email, formData.password);
+    } catch (e) {
+      console.log(e);
+    }
+    history.push('/resource')
   };
   return (
     <div style={{ padding: "2rem 4rem" }}>
@@ -77,7 +86,7 @@ const SignIn = () => {
           Login
         </button>
 
-        <div className='signup-link-container'>
+        <div className="signup-link-container">
           Don't have an account? <Link to="/register">SIGN UP</Link>
         </div>
       </div>

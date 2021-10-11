@@ -1,0 +1,108 @@
+.choose-sign-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+.choose-sign-up-btn {
+  background-color: #80b9e8;
+  padding: 0.7rem 5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 45px;
+  margin: 0.6rem;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.choose-sign-up-already {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+.choose-sign-up-already a {
+  color: #80b9e8;
+  font-weight: 700;
+}
+.sign-up-back-btn {
+  border: none;
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  background-color: #80b9e8;
+  padding: 0.4rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  column-gap:0.3rem ;
+}
+.signup-heading {
+  margin-top: 0.5rem;
+  font-size: 3rem;
+  color: #777777;
+}
+.signup-subheading {
+  color: #80b9e8;
+  font-size: 1.3rem;
+}
+.input-label {
+  color: #777777;
+}
+.select-label {
+  margin-bottom: 1rem;
+}
+select {
+  font-size: 1.1rem;
+  padding: 1rem;
+}
+.form-container {
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.2);
+  padding: 2rem 0;
+  margin-top: 4rem;
+  border-radius: 35px;
+}
+.form-grid {
+  width: 90%;
+  margin: 1rem auto;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-items: center;
+  grid-gap: 1.7rem 0;
+}
+
+.gridItem {
+  margin: 0 auto;
+  width: 80%;
+  /* border: 1px solid black; */
+  min-height: 4.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.submit-btn {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
+  background-color: #80b9e8;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: white;
+  border-radius: 10px;
+  padding: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0px 10px 9px -3px rgba(0, 0, 0, 0.2);
+}
+.form-submit-btn {
+  margin-top: 6rem;
+  width: 30rem;
+}
