@@ -1,22 +1,14 @@
-import React from "react";
-import { useState } from "react";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import DescriptionIcon from "@mui/icons-material/Description";
+import RoomIcon from "@mui/icons-material/Room";
+import ScheduleIcon from "@mui/icons-material/Schedule";
+import TextFieldsIcon from "@mui/icons-material/TextFields";
 import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogContentText,
-  TextField,
-  DialogActions,
-  Button,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
+  Button, Dialog, DialogActions, DialogContent,
+  DialogTitle, TextField
 } from "@mui/material";
 import { Box } from "@mui/system";
-import LinkIcon from "@mui/icons-material/Link";
-import AndroidIcon from "@mui/icons-material/Android";
-import TextFieldsIcon from "@mui/icons-material/TextFields";
+import React, { useState } from "react";
 import { db } from "../../../firebase";
 const AddEvent = ({ addEventDialog: open, setAddEventDialog: setOpen }) => {
   const HandleClose = () => {
@@ -68,28 +60,39 @@ const AddEvent = ({ addEventDialog: open, setAddEventDialog: setOpen }) => {
               fullWidth
             />
           </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <LinkIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+          <Box sx={{ display: "flex", mt: 1.5, alignItems: "flex-end" }}>
+            <DateRangeIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+
             <TextField
               onChange={HandleAddEventChange}
-              label="Date"
               variant="standard"
+              type="date"
               name="date"
+              label=""
+              InputLabelProps={{
+                shrink: false,
+              }}
               fullWidth
             />
           </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <LinkIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+          <Box sx={{ display: "flex", mt: 1.5, alignItems: "flex-end" }}>
+            <ScheduleIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
-              onChange={HandleAddEventChange}
-              label="Time"
-              variant="standard"
               name="time"
+              onChange={HandleAddEventChange}
+              type="time"
+              variant="standard"
+              InputLabelProps={{
+                shrink: false,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
               fullWidth
             />
           </Box>
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <LinkIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+            <RoomIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
               onChange={HandleAddEventChange}
               label="Venue"
@@ -99,7 +102,7 @@ const AddEvent = ({ addEventDialog: open, setAddEventDialog: setOpen }) => {
             />
           </Box>
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <LinkIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+            <DescriptionIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
               onChange={HandleAddEventChange}
               label="Description"
@@ -108,7 +111,7 @@ const AddEvent = ({ addEventDialog: open, setAddEventDialog: setOpen }) => {
               fullWidth
             />
           </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+          {/* <Box sx={{ display: "flex", alignItems: "flex-end" }}>
             <LinkIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
               onChange={HandleAddEventChange}
@@ -117,7 +120,7 @@ const AddEvent = ({ addEventDialog: open, setAddEventDialog: setOpen }) => {
               name="venue"
               fullWidth
             />
-          </Box>
+          </Box> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={HandleClose}>Cancel</Button>
