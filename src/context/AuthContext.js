@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 
 const AuthContext = React.createContext();
 
@@ -10,7 +10,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-
+  const [isMentor, setIsMentor] = useState(false);
   const signUp = async (email, password) => {
     await auth.createUserWithEmailAndPassword(email, password);
   };
@@ -24,8 +24,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setCurrentUser(user);
+      if (user) {
+        const userDoc = await db.collection("Users").doc(user.uid).get();
+        if (userDoc.data().post === "Mentor") {
+          setIsMentor(true);
+        }
+      }
       setLoading(false);
     });
     return unsubscribe;
@@ -33,6 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     currentUser,
+    isMentor,
     signUp,
     signIn,
     signOut,
