@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import AboutUs from "./components/Pages/AboutUs";
 import Faqs from "./components/Pages/Faqs";
 import Feedback from "./components/Pages/Feedback";
-import Homepage from "./components/Pages/Homepage";
+import Homepage from "./components/Pages/Homepage/Homepage";
 import SignIn from "./components/Pages/SignIn";
 import SignUp from "./components/Pages/SignUp/SignUp";
 import Resource from "./components/Resources/Resource.js";
