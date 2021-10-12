@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import "./App.css";
 import Messenger from "./components/Chat/Messenger";
 import LayoutWithVerticalNav from "./components/LayoutWithVerticalNav.js";
@@ -9,9 +14,8 @@ import Feedback from "./components/Pages/Feedback";
 import Homepage from "./components/Pages/Homepage";
 import SignIn from "./components/Pages/SignIn";
 import SignUp from "./components/Pages/SignUp/SignUp";
-import Resource from "./components/Resources/Resource.js";
+// import Resource from "./components/Resources/Resource.js";
 import { AuthProvider } from "./context/AuthContext";
-
 
 function App() {
   const history = useHistory();
@@ -29,7 +33,7 @@ function App() {
             <LayoutWithVerticalNav>
               <Route path="/feedback" component={Feedback} />
               <Route path="/chat" component={Messenger} />
-              <Route path="/resource" component={Resource} />
+              {/* <Route path="/resource" component={Resource} /> */}
               {/* <Route path="/:id" component={ResourcePage} />  Change the paths to exact and path for resource to '/resources/:id'  */}
             </LayoutWithVerticalNav>
           </Switch>

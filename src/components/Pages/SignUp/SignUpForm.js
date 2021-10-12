@@ -1,3 +1,11 @@
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
+import { auth, db } from "../../../firebase";
+import { MultiSelect } from "react-multi-select-component";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+import styles from "../../../styles/Signup.module.css";
 import {
   Button,
   Dialog,
@@ -5,23 +13,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  TextField,
 } from "@material-ui/core";
-import {
-  Checkbox,
-  FormControl,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  NativeSelect,
-  OutlinedInput,
-  Select,
-} from "@mui/material";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useAuth } from "../../../context/AuthContext";
-import { auth, db } from "../../../firebase";
-import "./SignUp.css";
 import {
   branches,
   collegesArr,
@@ -29,6 +21,8 @@ import {
   genders,
   languagesArr,
   years,
+  hostellers,
+  getArray,
 } from "./SignUpOptions";
 function SignUpForm({ post, setPost }) {
   const history = useHistory();
@@ -36,22 +30,22 @@ function SignUpForm({ post, setPost }) {
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    phoneNumber: "",
+    phone: "",
     email: "",
     password: "",
-    post: post,
-    gender: genders[0],
-    college: collegesArr[0],
-    branch: branches[0],
-    year: years[0],
     rollNo: "",
-    domains: [],
-    languages: [],
-    linkedIn: "",
+    linkedInURL: "",
     githubURL: "",
-    peerID: [],
-    photoURL: null,
   });
+
+  const [hosteller, setHosteller] = useState([]);
+  const [gender, setGender] = useState([]);
+  const [college, setCollege] = useState([]);
+  const [branch, setBranch] = useState([]);
+  const [year, setYear] = useState([]);
+  const [domain, setDomain] = useState([]);
+  const [lang, setLang] = useState([]);
+
   const handleAccept = async () => {
     try {
       await signUp(formData.email, formData.password);
@@ -65,287 +59,242 @@ function SignUpForm({ post, setPost }) {
     setGuidelinesPopUp(false);
     history.push("/");
   };
-  const handleButtonClick = () => {
-    if (isNaN(formData.phoneNumber)) {
-      window.alert("Please enter a valid number");
-      return;
-    }
-    if (
-      formData["domains"].length === 0 ||
-      formData["languages"].length === 0
-    ) {
-      window.alert("Please complete the form");
-      return;
-    }
-    for (const prop in formData) {
-      if (typeof formData[prop] === "string") {
-        const val = formData[prop].trim();
-        if (
-          val === "" ||
-          val === genders[0] ||
-          val === collegesArr[0] ||
-          val === branches[0] ||
-          val === years[0]
-        ) {
-          window.alert("Please fill " + prop + " in the form");
-          return;
-        }
+
+  const userObj = () => {
+    const obj = {
+      ...formData,
+      domains: getArray(domain),
+      languages: getArray(lang),
+      year: year.value,
+      branch: branch.value,
+      college: college.value,
+      gender: gender.value,
+      hosteller: hosteller.value,
+      peerID: [],
+      photoURL: null,
+      post,
+    };
+    return obj;
+  };
+
+  const validate = (e) => {
+    e.preventDefault();
+    const data = userObj();
+
+    try {
+      if (!data.name) {
+        throw "Name";
       }
+      if (!data.email) {
+        throw "Email";
+      }
+      if (!data.phone) {
+        throw "Phone";
+      }
+      if (isNaN(data.phone)) {
+        window.alert("Phone number is inValid");
+        return;
+      }
+      if (!data.password) {
+        throw "Password";
+      }
+      if (!data.college) {
+        throw "College";
+      }
+      if (!data.branch) {
+        throw "Branch";
+      }
+      if (!data.year) {
+        throw "Year";
+      }
+      if (!data.rollNo) {
+        throw "Roll";
+      }
+      if (!data.domains.length) {
+        throw "Domains";
+      }
+      if (!data.languages.length) {
+        throw "Languages";
+      }
+      if (!data.linkedInURL) {
+        throw "LinkedIn";
+      }
+      if (!data.githubURL) {
+        throw "Github";
+      }
+      if (!data.gender) {
+        throw "Gender";
+      }
+      if (!data.hosteller?.toString()) {
+        throw "Hosteller";
+      }
+    } catch (err) {
+      // console.log(`${err} field is required`);
+      window.alert(`${err} field is required`);
+      return;
     }
+
     setGuidelinesPopUp(true);
   };
+
   const handleGuidelinesClose = () => {
     setGuidelinesPopUp(false);
   };
-  const handleFormDataChange = (e) => {
+
+  const handleChange = (e) => {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   return (
-    <div style={{ padding: "2rem 4rem" }}>
-      <button
-        className="sign-up-back-btn"
-        onClick={() => {
-          setPost("");
-        }}
-      >
-        {" "}
-        <img src="back-icon.svg" height='20px'/> Back
-      </button>
-      <h1 className="signup-heading">
-        {post},
-        <br />
-        Register and Start your Journey.
-      </h1>
-      <div className="form-container">
-        <div className="form-grid">
-          <div className="gridItem">
-            <h4 className="input-label">Name</h4>
-            <TextField
+    <div className={styles.container}>
+      <div className={styles.heading}>
+        <h1>
+          Mentors, <br />
+          Register and Start your Journey.
+        </h1>
+        <p>Mentor and Uplift others through your Journey</p>
+      </div>
+
+      <form onSubmit={validate} className={styles.form}>
+        <div className={styles.inputs}>
+          <div className={styles.group}>
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
               name="name"
-              label={formData.name === "" && "Type your name here"}
-              InputLabelProps={{ shrink: false }}
-              onChange={handleFormDataChange}
-              required
-              style={{ width: "20rem" }}
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
             />
           </div>
-          <div className="gridItem">
-            <h4 className="input-label">Email Id</h4>
-            <TextField
+          <div className={styles.group}>
+            <label htmlFor="email">Email Id</label>
+            <input
+              type="email"
               name="email"
-              label={formData.email === "" && "Type your email Id here"}
-              onChange={handleFormDataChange}
-              InputLabelProps={{ shrink: false }}
-              required
-              style={{ width: "20rem" }}
+              placeholder="Email Id"
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
-          <div className="gridItem">
-            <h4 className="input-label">Phone Number</h4>
-            <TextField
-              name="phoneNumber"
-              label={
-                formData.phoneNumber === "" && "Type your phone number here"
-              }
-              InputLabelProps={{ shrink: false }}
-              required
-              onChange={handleFormDataChange}
-              style={{ width: "20rem" }}
+          <div className={styles.group}>
+            <label htmlFor="phone">Phone Number</label>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone"
+              value={formData.phone}
+              onChange={handleChange}
             />
           </div>
-
-          <div className="gridItem">
-            <h4 className="input-label">Password</h4>
-            <TextField
-              name="password"
-              label={formData.password === "" && "Atleast 8 Characters"}
-              InputLabelProps={{ shrink: false }}
+          <div className={styles.group}>
+            <label htmlFor="password">Password</label>
+            <input
               type="password"
-              onChange={handleFormDataChange}
-              required
-              style={{ width: "20rem" }}
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
             />
           </div>
 
-          <div className="gridItem">
-            <h4 className="input-label select-label">College</h4>
-            <FormControl style={{ width: "20rem" }}>
-              <NativeSelect
-                inputProps={{
-                  name: "college",
-                  id: "college",
-                }}
-                name="college"
-                onChange={handleFormDataChange}
-              >
-                {collegesArr.map((college, index) => {
-                  return (
-                    <option key={index} value={college}>
-                      {college}
-                    </option>
-                  );
-                })}
-              </NativeSelect>
-            </FormControl>
+          <div className={styles.group}>
+            <label htmlFor="college">College</label>
+            <Dropdown
+              options={collegesArr}
+              onChange={setCollege}
+              placeholder="Select an option"
+            />
           </div>
-          <div className="gridItem">
-            <h4 className="input-label select-label">Select your branch</h4>
-            <FormControl style={{ width: "20rem" }}>
-              <NativeSelect
-                inputProps={{
-                  name: "branch",
-                  id: "branch",
-                }}
-                name="branch"
-                onChange={handleFormDataChange}
-              >
-                {branches.map((branch, index) => {
-                  return (
-                    <option key={index} value={branch}>
-                      {branch}
-                    </option>
-                  );
-                })}
-              </NativeSelect>
-            </FormControl>
+          <div className={styles.group}>
+            <label htmlFor="branch">Branch</label>
+            <Dropdown
+              options={branches}
+              onChange={setBranch}
+              placeholder="Select an option"
+            />
           </div>
-          <div className="gridItem">
-            <h4 className="input-label select-label">Select your year</h4>
-            <FormControl style={{ width: "20rem" }}>
-              <NativeSelect
-                inputProps={{
-                  name: "year",
-                  id: "year",
-                }}
-                name="year"
-                onChange={handleFormDataChange}
-              >
-                {years.map((year, index) => {
-                  return (
-                    <option key={index} value={year}>
-                      {year}
-                    </option>
-                  );
-                })}
-              </NativeSelect>
-            </FormControl>
+          <div className={styles.group}>
+            <label htmlFor="year">Year</label>
+            <Dropdown
+              options={years}
+              onChange={setYear}
+              placeholder="Select an option"
+            />
           </div>
-          <div className="gridItem">
-            <h4 className="input-label">Roll Number</h4>
-            <TextField
+          <div className={styles.group}>
+            <label htmlFor="rollNo">Roll Number</label>
+            <input
+              type="text"
               name="rollNo"
-              label={formData.rollNo === "" && "Type your roll number here"}
-              InputLabelProps={{ shrink: false }}
-              onChange={handleFormDataChange}
-              required
-              style={{ width: "20rem" }}
+              placeholder="Roll Number"
+              value={formData.rollNo}
+              onChange={handleChange}
             />
           </div>
 
-          <div className="gridItem">
-            <h4 className="input-label select-label">Select your domains</h4>
-            <FormControl sx={{ mt: 1, width: 320 }}>
-              <InputLabel id="multiple-domains-label">
-                Select your domains
-              </InputLabel>
-              <Select
-                fullWidth
-                labelId="multiple-domains-label"
-                id="multiple-domains"
-                multiple
-                value={formData.domains}
-                name="domains"
-                onChange={handleFormDataChange}
-                input={<OutlinedInput label="Select your domains" />}
-                renderValue={(selected) => selected.join(", ")}
-              >
-                {domainsArr.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked={formData.domains.indexOf(name) > -1} />
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-          <div className="gridItem">
-            <h4 className="input-label select-label">Select your language</h4>
-            <FormControl sx={{ mt: 1, width: 320 }}>
-              <InputLabel id="multiple-lang-label">
-                Select your Programming Languages
-              </InputLabel>
-
-              <Select
-                labelId="multiple-lang-label"
-                fullWidth
-                id="multiple-lang"
-                multiple
-                value={formData.languages}
-                name="languages"
-                onChange={handleFormDataChange}
-                input={
-                  <OutlinedInput label="Select your Programming Languages" />
-                }
-                renderValue={(selected) => selected.join(", ")}
-              >
-                {languagesArr.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked={formData.languages.indexOf(name) > -1} />
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-
-          <div className="gridItem">
-            <h4 className="input-label">LinkedIn Id</h4>
-            <TextField
-              name="linkedIn"
-              label={formData.linkedIn === "" && "Type your LinkedIn here"}
-              InputLabelProps={{ shrink: false }}
-              onChange={handleFormDataChange}
-              required
-              style={{ width: "20rem" }}
+          <div className={styles.group}>
+            <label htmlFor="domain">Domains</label>
+            <MultiSelect
+              options={domainsArr}
+              value={domain}
+              onChange={setDomain}
+              labelledBy={"domains"}
+              className="multi-select"
             />
           </div>
-          <div className="gridItem">
-            <h4 className="input-label">Github Id</h4>
-            <TextField
+          <div className={styles.group}>
+            <label htmlFor="lang">Languages</label>
+            <MultiSelect
+              options={languagesArr}
+              value={lang}
+              onChange={setLang}
+              labelledBy={"languages"}
+              className="multi-select"
+            />
+          </div>
+          <div className={styles.group}>
+            <label htmlFor="linkedInURL">LinkedIn Id</label>
+            <input
+              type="text"
+              name="linkedInURL"
+              placeholder="LinkedIn Id"
+              value={formData.linkedInURL}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label htmlFor="githubURL">Github Id</label>
+            <input
+              type="text"
               name="githubURL"
-              label={formData.githubURL === "" && "Type your Github Id here"}
-              InputLabelProps={{ shrink: false }}
-              onChange={handleFormDataChange}
-              required
-              style={{ width: "20rem" }}
+              placeholder="Github Id"
+              value={formData.githubURL}
+              onChange={handleChange}
             />
           </div>
-          <div className="gridItem">
-            <h4 className="input-label">Gender</h4>
-            <FormControl style={{ width: "20rem" }}>
-              <NativeSelect
-                inputProps={{
-                  name: "gender",
-                  id: "gender",
-                }}
-                name="gender"
-                onChange={handleFormDataChange}
-              >
-                {genders.map((gender) => {
-                  return <option value={gender}>{gender}</option>;
-                })}
-              </NativeSelect>
-            </FormControl>
+          <div className={styles.group}>
+            <label htmlFor="gender">Gender</label>
+            <Dropdown
+              options={genders}
+              onChange={setGender}
+              placeholder="Select your Gender"
+            />
+          </div>
+          <div className={styles.group}>
+            <label htmlFor="hosteller">Are you a hosteller?</label>
+            <Dropdown
+              options={hostellers}
+              onChange={setHosteller}
+              placeholder="Yes / No"
+            />
           </div>
         </div>
-        <button
-          onClick={handleButtonClick}
-          className="submit-btn form-submit-btn"
-        >
-          SUBMIT
-        </button>
-      </div>
+        <div className={styles.cta}>
+          <button>SUBMIT</button>
+        </div>
+      </form>
       <Dialog
         open={guidelinesPopUp}
         onClose={handleGuidelinesClose}
