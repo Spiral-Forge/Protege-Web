@@ -1,0 +1,67 @@
+.card {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 400px;
+  border-radius: 10px;
+  padding: 0.4rem 1.2rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 10px;
+  border-bottom: 1px solid rgb(179, 179, 179);
+}
+
+.header p {
+  color: rgb(134, 134, 134);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.content {
+  padding-block: 10px;
+}
+
+.img {
+  border-radius: 10px;
+  overflow: hidden;
+  height: 180px;
+}
+
+.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  padding-block: 10px;
+}
+
+.body h1 {
+  font-weight: 600;
+  color: #464646;
+}
+
+.body p {
+  color: rgb(100, 100, 100);
+  font-weight: 500;
+}
+
+.cta button {
+  display: flex;
+  margin-left: auto;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: rgb(0, 123, 238);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cta button:hover {
+  color: rgb(0, 47, 255);
+}
