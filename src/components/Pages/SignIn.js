@@ -3,23 +3,18 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import React, { useState } from "react";
 import { Button } from "../Navbar/Button";
-import "./SignIn.css";
+import styles from "../../styles/Signin.module.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 const SignIn = () => {
-  const history = useHistory()
+  const history = useHistory();
   const { signIn } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    keepLoggedIn: false,
   });
-
-  const handleFormDataChange = (e) => {
-    const { value, name } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const [check, setCheck] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -27,69 +22,86 @@ const SignIn = () => {
     } catch (e) {
       console.log(e);
     }
-    history.push('/resource')
+    history.push("/resource");
   };
+
+  const validate = (e) => {
+    e.preventDefault();
+
+    try {
+      if (!formData.email) {
+        throw "Email";
+      }
+      if (!formData.password) {
+        throw "Password";
+      }
+    } catch (err) {
+      // console.log(`${err} field is required`);
+      window.alert(`${err} field is required`);
+      return;
+    }
+    handleLogin();
+  };
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   return (
-    <div style={{ padding: "2rem 4rem" }}>
-      <h1 className="signup-heading">
-        Mentor,
-        <br />
-        Login and Start your Journey.
-      </h1>
-      <h3 className="signup-subheading">
-        Mentor and Uplift others through you Journey
-      </h3>
-      <div
-        style={{
-          width: "50%",
-          display: "flex",
-          flexDirection: "column",
-          margin: "0 auto",
-          marginTop: "4rem",
-        }}
-      >
-        <h3>Your e-mail</h3>
-        <TextField
-          name="email"
-          label="Type your email here"
-          onChange={handleFormDataChange}
-          required
-          style={{ marginBottom: 30, width: "35rem", marginLeft: "1rem" }}
-        />
-        <h3>Password</h3>
-        <TextField
-          name="password"
-          type="password"
-          label="At least 8 characters"
-          onChange={handleFormDataChange}
-          required
-          style={{ marginBottom: 30, width: "35rem", marginLeft: "1rem" }}
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              name="checkedB"
-              color="primary"
-              onChange={() => {
-                setFormData({
-                  ...formData,
-                  ["keepLoggedIn"]: !formData.keepLoggedIn,
-                });
-              }}
-            />
-          }
-          label="Keep me logged In"
-          style={{ marginLeft: "0.5rem" }}
-        />
-
-        <button className="login-btn submit-btn " onClick={handleLogin}>
-          Login
-        </button>
-
-        <div className="signup-link-container">
-          Don't have an account? <Link to="/register">SIGN UP</Link>
-        </div>
+    <div className={styles.container}>
+      <div className={styles.heading}>
+        <h1>
+          Mentors, <br />
+          Login and Start your Journey.
+        </h1>
+        <p>Mentor and Uplift others through your Journey</p>
       </div>
+
+      <form onSubmit={validate} className={styles.form}>
+        <div className={styles.inputs}>
+          <div className={styles.group}>
+            <label htmlFor="email">Email Id</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Id"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className={styles.group}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.check}>
+            <input
+              type="checkbox"
+              checked={check}
+              onChange={() => setCheck(!check)}
+              name="check"
+            />
+            <label htmlFor="check">Keep me logged In</label>
+          </div>
+        </div>
+        <div className={styles.cta}>
+          <button>SUBMIT</button>
+        </div>
+
+        <p className={styles.route}>
+          Don't have an account?
+          <span>
+            <Link to="/register"> SIGN UP</Link>
+          </span>
+        </p>
+      </form>
     </div>
   );
 };

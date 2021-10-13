@@ -5,3 +5,16 @@
   padding: 0;
   font-family: "Quicksand", sans-serif;
 }
+
+.Dropdown-control {
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: 1px solid rgb(201, 201, 201) !important;
+  padding: 0.7rem !important;
+}
+
+.dropdown-container {
+  border: none !important;
+  border-bottom: 1px solid rgb(201, 201, 201) !important;
+  --rmsc-main: rgba(0, 0, 0, 0) !important;
+}

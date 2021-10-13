@@ -1,5 +1,4 @@
 export const branches = [
-  "Select your college",
   "Computer Science Engineering",
   "Information Technology Engineering",
   "Electrical Engineering",
@@ -7,29 +6,37 @@ export const branches = [
   "Chemical Engineering",
   "Mechanical Engineering",
 ];
-export const languagesArr = ["C++", "Python", "Java", "No preference"];
-export const domainsArr = [
-  "Competitive Programming",
-  "Machine Learning",
-  "App Development",
-  "Web Development",
-  "IOT",
-  "BlockChain",
-  "Open Source",
-  "No preference",
-];
-export const collegesArr = [
-  "Select your college",
-  "IGDTUW",
-  "DTU",
-  "NSUT",
-  "IIITD",
+
+export const languagesArr = [
+  { value: "C++", label: "C++" },
+  { value: "Python", label: "Python" },
+  { value: "Java", label: "Java" },
+  { value: "No preference", label: "No preference" },
 ];
 
-export const years = ["Select your year", "1st", "2nd", "3rd", "4th"];
-export const genders = [
-  "Select your gender",
-  "Male",
-  "Female",
-  "Prefer not to mention",
+export const domainsArr = [
+  { value: "Competitive Programming", label: "Competitive Programming" },
+  { value: "Machine Learning", label: "Machine Learning" },
+  { value: "App Development", label: "App Development" },
+  { value: "Web Development", label: "Web Development" },
+  { value: "IOT", label: "IOT" },
+  { value: "BlockChain", label: "BlockChain" },
+  { value: "Open Source", label: "Open Source" },
+  { value: "No preference", label: "No preference" },
 ];
+
+export const collegesArr = ["IGDTUW", "DTU", "NSUT", "IIITD"];
+
+export const years = ["1st", "2nd", "3rd", "4th"];
+export const genders = ["Male", "Female", "Prefer not to mention"];
+export const hostellers = [
+  { value: true, label: "Yes" },
+  { value: false, label: "No" },
+];
+
+export const getArray = (arrObj) => {
+  const arr = arrObj.map((ele) => {
+    return ele.value;
+  });
+  return arr;
+};
