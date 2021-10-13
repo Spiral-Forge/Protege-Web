@@ -3,6 +3,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import RoomIcon from "@mui/icons-material/Room";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import TextFieldsIcon from "@mui/icons-material/TextFields";
+import CropOriginalIcon from "@mui/icons-material/CropOriginal";
 import {
   Button, Dialog, DialogActions, DialogContent,
   DialogTitle, TextField
@@ -111,16 +112,10 @@ const AddEvent = ({ addEventDialog: open, setAddEventDialog: setOpen }) => {
               fullWidth
             />
           </Box>
-          {/* <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <LinkIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-            <TextField
-              onChange={HandleAddEventChange}
-              label="Venue"
-              variant="standard"
-              name="venue"
-              fullWidth
-            />
-          </Box> */}
+          <Box sx={{ display: "flex", mt:1.5,alignItems: "center" }}>
+            <CropOriginalIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+            <input type="file" />
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={HandleClose}>Cancel</Button>

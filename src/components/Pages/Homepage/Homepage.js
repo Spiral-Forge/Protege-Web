@@ -6,12 +6,13 @@ import img from "../../Navbar/Mentorship.jpg";
 import { Fab } from "@mui/material";
 import AddEvent from "./AddEvent";
 import AddIcon from "@mui/icons-material/Add";
-
+import { useAuth } from "../../../context/AuthContext";
 function Homepage() {
   const [addEventDialog, setAddEventDialog] = useState(false);
   const handleDialogOpen = () => {
     setAddEventDialog(true);
   };
+  const { isMentor } = useAuth();
   return (
     <>
       <div className="home__hero-section">
@@ -52,21 +53,28 @@ function Homepage() {
             </div>
           </div>
         </div>
-        <div className="floating-btn-container">
-          <Fab
-            style={{ backgroundColor: "rgba(48, 48, 48, 1)", color: "white" }}
-            aria-label="add"
-            onClick={handleDialogOpen}
-          >
-            <AddIcon />
-          </Fab>
-        </div>
-        <AddEvent
-          setAddEventDialog={setAddEventDialog}
-          addEventDialog={addEventDialog}
-        />
+        {isMentor && (
+          <>
+            <div className="floating-btn-container">
+              <Fab
+                style={{
+                  backgroundColor: "rgba(48, 48, 48, 1)",
+                  color: "white",
+                }}
+                aria-label="add"
+                onClick={handleDialogOpen}
+              >
+                <AddIcon />
+              </Fab>
+            </div>
+
+            <AddEvent
+              setAddEventDialog={setAddEventDialog}
+              addEventDialog={addEventDialog}
+            />
+          </>
+        )}
       </div>
-      {/* </div> */}
     </>
   );
 }
