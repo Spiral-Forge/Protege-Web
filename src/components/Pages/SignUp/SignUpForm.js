@@ -153,7 +153,7 @@ function SignUpForm({ post, setPost }) {
           Mentors, <br />
           Register and Start your Journey.
         </h1>
-        <p>Mentor and Uplift others through your Journey</p>
+        {/* <p>Mentor and Uplift others through your Journey</p> */}
       </div>
 
       <form onSubmit={validate} className={styles.form}>
