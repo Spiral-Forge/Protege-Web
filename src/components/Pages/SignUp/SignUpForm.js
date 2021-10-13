@@ -6,6 +6,7 @@ import { MultiSelect } from "react-multi-select-component";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import styles from "../../../styles/Signup.module.css";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import {
   Button,
   Dialog,
@@ -157,6 +158,11 @@ function SignUpForm({ post, setPost }) {
       </div>
 
       <form onSubmit={validate} className={styles.form}>
+        <button onClick={() => setPost("")} className={styles.back}>
+          {" "}
+          <IoMdArrowRoundBack /> Back
+        </button>
+
         <div className={styles.inputs}>
           <div className={styles.group}>
             <label htmlFor="name">Name</label>

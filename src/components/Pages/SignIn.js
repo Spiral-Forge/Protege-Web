@@ -98,7 +98,7 @@ const SignIn = () => {
         <p className={styles.route}>
           Don't have an account?
           <span>
-            <Link href="/register"> SIGN UP</Link>
+            <Link to="/register"> SIGN UP</Link>
           </span>
         </p>
       </form>

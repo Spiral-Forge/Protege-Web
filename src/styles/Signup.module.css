@@ -28,15 +28,29 @@
   flex-direction: column;
 }
 
+.back {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  padding: 0.6rem 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  background-color: #80b9e8;
+  color: white;
+  margin-bottom: 2rem;
+}
+
 .inputs {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .group {
   width: 45%;
-  margin-top: 2rem;
 }
 
 .group > label {
