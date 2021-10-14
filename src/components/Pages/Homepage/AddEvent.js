@@ -4,9 +4,14 @@ import RoomIcon from "@mui/icons-material/Room";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import TextFieldsIcon from "@mui/icons-material/TextFields";
 import CropOriginalIcon from "@mui/icons-material/CropOriginal";
+import LinkIcon from "@mui/icons-material/Link";
 import {
-  Button, Dialog, DialogActions, DialogContent,
-  DialogTitle, TextField
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
@@ -20,8 +25,9 @@ const AddEvent = ({ addEventDialog: open, setAddEventDialog: setOpen }) => {
     date: "",
     time: "",
     venue: "",
+    link: "",
     description: "",
-    pic: "",
+    imageURL: "",
     approved: false,
   });
   const HandleSubmit = () => {
@@ -103,6 +109,16 @@ const AddEvent = ({ addEventDialog: open, setAddEventDialog: setOpen }) => {
             />
           </Box>
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <LinkIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+            <TextField
+              onChange={HandleAddEventChange}
+              label="Event Link"
+              variant="standard"
+              name="link"
+              fullWidth
+            />
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
             <DescriptionIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
               onChange={HandleAddEventChange}
@@ -112,9 +128,15 @@ const AddEvent = ({ addEventDialog: open, setAddEventDialog: setOpen }) => {
               fullWidth
             />
           </Box>
-          <Box sx={{ display: "flex", mt:1.5,alignItems: "center" }}>
+          <Box sx={{ display: "flex", mt: 1.5, alignItems: "center" }}>
             <CropOriginalIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-            <input type="file" />
+            <TextField
+              onChange={HandleAddEventChange}
+              label="Image Link"
+              variant="standard"
+              name="imageURL"
+              fullWidth
+            />
           </Box>
         </DialogContent>
         <DialogActions>
