@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import "./App.css";
 import Messenger from "./components/Chat/Messenger";
 import LayoutWithVerticalNav from "./components/LayoutWithVerticalNav.js";
@@ -12,7 +17,6 @@ import SignUp from "./components/Pages/SignUp/SignUp";
 import Resource from "./components/Resources/Resource.js";
 import { AuthProvider } from "./context/AuthContext";
 
-
 function App() {
   const history = useHistory();
   return (
@@ -21,12 +25,12 @@ function App() {
         <Router history={history}>
           <Navbar />
           <Switch>
-            <Route path="/home" exact component={Homepage} />
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/faqs" component={Faqs} />
             <Route path="/signin" component={SignIn} />
             <Route exact path="/register" component={SignUp} />
             <LayoutWithVerticalNav>
+              <Route path="/home" exact component={Homepage} />
               <Route path="/feedback" component={Feedback} />
               <Route path="/chat" component={Messenger} />
               <Route path="/resource" component={Resource} />
