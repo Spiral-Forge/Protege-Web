@@ -18,7 +18,7 @@ function Homepage() {
           >
             <div className="col">
               <div className="home__hero-text-wrapper">
-                <h1 className="heading dark">Protégé</h1>
+                <h1 className="homepage-heading dark">Protégé</h1>
                 <p className="home__hero-subtitle dark">
                   Get Immersive Mentorship and Learning Experience
                 </p>
@@ -26,7 +26,7 @@ function Homepage() {
             </div>
             <div className="col">
               <div className="home__hero-img-wrapper">
-                <img src={img} alt="alt" className="home__hero-img" />
+                <img src={img} alt="alt" className="home__hero-img " />
               </div>
             </div>
           </div>

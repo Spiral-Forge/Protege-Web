@@ -1,6 +1,6 @@
 .home__hero-section {
     color: #fff;
-    padding: 160px 0px;
+    padding: 100px 0px;
   }
 
   .container {
@@ -9,7 +9,7 @@
   }
   
   .home__hero-row {
-    align-items: center;
+    /* align-items: center; */
   }
   
   .row {
@@ -46,9 +46,9 @@
     margin-bottom: 20px;
   }
   
-  .heading {
+  .homepage-heading {
     margin-bottom: 24px;
-    font-size: 48px;
+    font-size: 56px;
     line-height: 1.1;
     font-weight: 600;
     color: #f7f8fa;
