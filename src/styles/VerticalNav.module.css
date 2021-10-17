@@ -1,6 +1,6 @@
 .container {
   position: sticky;
-  top: 10%;
+  top: 105px;
   height: 83vh;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
   padding-block: 1.5rem;
   min-width: 120px;
   border-radius: 15px;
-  z-index: 100;
+  z-index: 9;
 }
 
 .pic {
@@ -55,7 +55,7 @@
   justify-content: center;
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 800px) {
   .container {
     height: initial;
     flex-direction: row;

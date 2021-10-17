@@ -1,0 +1,170 @@
+.container {
+  min-height: 92px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: top 0.5s ease;
+  box-shadow: 0px 1px 5px rgba(36, 36, 36, 0.233);
+}
+
+.container nav {
+  max-width: 1536px;
+  margin: auto;
+  display: flex;
+  padding: 0.5rem 2rem;
+  /* padding: 1.5rem 0; */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 80px;
+  z-index: 10;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.navlinks ul,
+.moblinks ul {
+  list-style: none;
+  display: flex;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.navlinks ul {
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.navlinks ul li {
+  padding-block: 5px;
+}
+
+.navlinks a,
+.moblinks a {
+  text-decoration: none;
+}
+.navlinks ul li,
+.moblinks ul li {
+  border: none !important;
+  user-select: none;
+  cursor: pointer;
+  color: #1a1a1a;
+}
+
+.moblinks ul {
+  width: 86%;
+  gap: 2rem;
+  margin: auto;
+}
+
+.moblinks ul:first-child {
+  margin-bottom: 10px;
+}
+
+.moblinks ul:last-child {
+  margin-top: 10px;
+}
+
+.moblinks ul li {
+  overflow: hidden;
+}
+
+.moblinks ul li div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logout {
+  color: #dadada;
+}
+
+.login,
+.signup {
+  /* border: none !important; */
+  font-weight: 600;
+  padding: 0.5rem 0.8rem !important;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login {
+  padding: 0 !important;
+}
+
+/* .login:hover {
+    border-color: transparent !important;
+    background-color: #e6e6e6;
+  } */
+
+.signup {
+  background-color: #1a1a1a;
+  color: #e4e4e4 !important;
+}
+
+.moblinks {
+  flex-direction: column;
+}
+
+.moblogin p {
+  margin-top: 2rem;
+  width: 100%;
+  text-align: center;
+  padding-block: 0.6rem;
+  border-radius: 5px;
+  color: rgb(245, 245, 245);
+  background-color: #1a1a1a;
+}
+
+.menu {
+  z-index: 1;
+}
+
+.moblinks {
+  position: fixed;
+  height: 110vh;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.moblinks ul {
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.dropItem {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media only screen and (min-width: 800px) {
+  .container .mob {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .container .web {
+    display: none;
+  }
+
+  .container nav {
+    justify-content: space-between;
+    padding: 1rem;
+  }
+}
