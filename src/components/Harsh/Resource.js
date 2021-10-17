@@ -1,4 +1,5 @@
 import styles from "../../styles/Resource.module.css";
+import { useHistory } from "react-router-dom";
 
 const cards = [
   {
@@ -49,8 +50,14 @@ export default function Resource() {
 }
 
 export function ResourceCard({ card }) {
+  let history = useHistory();
+
+  const handleClick = (id) => {
+    history.push("/harsh/" + id);
+  };
+
   return (
-    <div className={styles.card}>
+    <div onClick={() => handleClick(card.id)} className={styles.card}>
       <div className={styles.img}>
         <img src={card.img} alt="" />
       </div>

@@ -80,6 +80,14 @@
   justify-content: space-between;
 }
 
+.moblinks ul li div p {
+  transition: transform 0.3s;
+}
+
+.moblinks ul li:hover .moblinks ul li div p:last-child {
+  transform: translateX(-10px);
+}
+
 .logout {
   color: #dadada;
 }

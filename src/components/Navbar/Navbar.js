@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineRight } from "react-icons/ai";
 import { MenuItems } from "./MenuItems";
 import styles from "../../styles/Navbar.module.css";
@@ -10,7 +10,11 @@ import { Spiral as Hamburger } from "hamburger-react";
 
 const Navbar = () => {
   const { currentUser } = useAuth();
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState();
+
+  useEffect(() => {
+    setOpen(false);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -81,6 +85,14 @@ const Navbar = () => {
                   </div>
                 </li>
               </Link>
+              <li>
+                <div>
+                  <p>Deadlines</p>
+                  <p>
+                    <AiOutlineRight />
+                  </p>
+                </div>
+              </li>
               <Link to="/home">
                 <li>
                   <div>

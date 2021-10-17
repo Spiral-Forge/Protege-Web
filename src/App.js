@@ -17,6 +17,7 @@ import SignIn from "./components/Pages/SignIn";
 import SignUp from "./components/Pages/SignUp/SignUp";
 // import Resource from "./components/Resources/Resource.js";
 import { AuthProvider } from "./context/AuthContext";
+import ResourceLinks from "./components/Harsh/ResourceLinks";
 
 function App() {
   const history = useHistory();
@@ -27,6 +28,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route path="/harsh" exact component={Harsh} />
+            <Route path="/harsh/:id" component={ResourceLinks} />
             <Route path="/home" exact component={Homepage} />
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/faqs" component={Faqs} />
