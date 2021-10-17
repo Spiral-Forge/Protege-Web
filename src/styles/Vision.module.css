@@ -1,0 +1,116 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  gap: 2rem;
+  border-radius: 15px;
+}
+
+.heading h1 {
+  font-size: 2.5rem;
+  color: #5f5f5f;
+}
+
+.pees {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pees p {
+  width: 90%;
+  margin: auto;
+  font-size: 1.25rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  width: 250px;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.desc h3 {
+  color: #474747;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.desc button {
+  margin: auto;
+  border: none;
+  outline: none;
+  padding: 0.4rem 1rem;
+  background-color: transparent;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  border-radius: 3px;
+  color: #0089e4;
+}
+
+.desc button:hover {
+  background-color: #f5f5f5;
+}
+
+@media only screen and (max-width: 660px) {
+  .container {
+    margin-top: 0;
+    width: 100%;
+    padding: 2rem 0;
+  }
+
+  .card {
+    width: 180px;
+  }
+
+  .desc h3 {
+    font-size: 1rem;
+  }
+}

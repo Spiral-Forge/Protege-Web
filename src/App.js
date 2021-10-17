@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar/Navbar";
 import AboutUs from "./components/Pages/AboutUs";
 import Faqs from "./components/Pages/Faqs";
 import Feedback from "./components/Pages/Feedback";
+import Vision from "./components/Pages/Vision";
 import Homepage from "./components/Pages/Homepage";
 import Harsh from "./components/Harsh/Harsh";
 import SignIn from "./components/Pages/SignIn";
@@ -30,6 +31,7 @@ function App() {
             <Route path="/harsh" exact component={Harsh} />
             <Route path="/harsh/:id" component={ResourceLinks} />
             <Route path="/home" exact component={Homepage} />
+            <Route path="/vision" exact component={Vision} />
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/faqs" component={Faqs} />
             <Route path="/signin" component={SignIn} />
