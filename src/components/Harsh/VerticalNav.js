@@ -19,13 +19,7 @@ export default function VerticalNav() {
         <FaSwatchbook className={styles.icon} />
         <BsCalendarEventFill className={styles.icon} />
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div className={styles.logout}>
         <FiLogOut className={styles.icon} />
       </div>
     </div>

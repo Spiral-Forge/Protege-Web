@@ -1,8 +1,5 @@
-.container {
-}
-
 .flex {
   display: flex;
   padding: 1.5rem;
-  min-height: 90vh;
+  gap: 2rem;
 }
