@@ -1,4 +1,6 @@
 .container {
+  position: sticky;
+  top: 10%;
   height: 83vh;
   display: flex;
   flex-direction: column;
@@ -58,6 +60,7 @@
     height: initial;
     flex-direction: row;
     position: fixed;
+    top: initial;
     bottom: 1%;
     left: 50%;
     transform: translateX(-50%);
