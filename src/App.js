@@ -12,6 +12,7 @@ import AboutUs from "./components/Pages/AboutUs";
 import Faqs from "./components/Pages/Faqs";
 import Feedback from "./components/Pages/Feedback";
 import Homepage from "./components/Pages/Homepage";
+import Harsh from "./components/Harsh/Harsh";
 import SignIn from "./components/Pages/SignIn";
 import SignUp from "./components/Pages/SignUp/SignUp";
 // import Resource from "./components/Resources/Resource.js";
@@ -25,6 +26,7 @@ function App() {
         <Router history={history}>
           <Navbar />
           <Switch>
+            <Route path="/harsh" exact component={Harsh} />
             <Route path="/home" exact component={Homepage} />
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/faqs" component={Faqs} />
