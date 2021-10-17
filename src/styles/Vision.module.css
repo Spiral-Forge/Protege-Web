@@ -47,7 +47,7 @@
   background-color: white;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  width: 250px;
+  width: 20%;
   border-radius: 10px;
   padding: 1rem;
   display: flex;
@@ -72,6 +72,7 @@
 
 .desc h3 {
   color: #474747;
+  font-size: 1rem;
 }
 
 .desc {
@@ -79,6 +80,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 5px;
 }
 
 .desc button {
@@ -87,7 +89,7 @@
   outline: none;
   padding: 0.4rem 1rem;
   background-color: transparent;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   transition: background-color 0.3s;
   cursor: pointer;
@@ -107,10 +109,6 @@
   }
 
   .card {
-    width: 180px;
-  }
-
-  .desc h3 {
-    font-size: 1rem;
+    width: 40%;
   }
 }
