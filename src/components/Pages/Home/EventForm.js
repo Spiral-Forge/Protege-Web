@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../styles/EventForm.module.css";
+import styles from "../../../styles/EventForm.module.css";
 import { MdOutlineTextFields } from "react-icons/md";
 import { BsCalendarDay, BsCardImage, BsFillFileTextFill } from "react-icons/bs";
 import { BiTimeFive } from "react-icons/bi";

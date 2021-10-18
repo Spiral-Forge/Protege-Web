@@ -11,7 +11,7 @@ import AboutUs from "./components/Pages/AboutUs";
 import Faqs from "./components/Pages/Faqs";
 import Feedback from "./components/Pages/Feedback";
 import Vision from "./components/Pages/Vision";
-import Homepage from "./components/Pages/Homepage";
+import Homepage from "./components/Pages/Home/Homepage";
 import VerticalLayout from "./components/VerticalLayout";
 import SignIn from "./components/Pages/SignIn";
 import SignUp from "./components/Pages/SignUp/SignUp";

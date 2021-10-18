@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../../styles/Event.module.css";
+import styles from "../../../styles/Event.module.css";
 import EventCard from "./EventCard";
 import { GoPlus } from "react-icons/go";
 import {
@@ -10,7 +10,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
-import EventForm from "../EventForm";
+import EventForm from "./EventForm";
 export default function Event() {
   const [showModal, setShowModal] = useState(false);
 

@@ -1,8 +1,8 @@
 import React from "react";
 import "./Homepage.css";
-import { Button } from "../Navbar/Button";
+import { Button } from "../../Navbar/Button";
 import { Link } from "react-router-dom";
-import img from "../Navbar/Mentorship.jpg";
+import img from "../../Navbar/Mentorship.jpg";
 import Event from "./Event";
 
 function Homepage() {
