@@ -23,20 +23,6 @@ function Homepage() {
                 <p className="home__hero-subtitle dark">
                   Get Immersive Mentorship and Learning Experience
                 </p>
-                <div className="top-line">Register as</div>
-                <div>
-                  <Link to="/mentorsignup">
-                    <Button buttonSize="btn--large" buttonColor="blue">
-                      Mentor
-                    </Button>
-                  </Link>{" "}
-                  <Button buttonColor="white"></Button>
-                  <Link to="/menteesignup">
-                    <Button buttonSize="btn--large" buttonColor="blue">
-                      Mentee
-                    </Button>
-                  </Link>
-                </div>
               </div>
             </div>
             <div className="col">
