@@ -1,0 +1,98 @@
+.flex {
+  display: flex;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.wrapper {
+  width: 100%;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 1rem;
+  gap: 2rem;
+}
+
+.heading h1 {
+  font-size: 2.5rem;
+  color: #5f5f5f;
+}
+
+.content {
+  padding: 1rem;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.content::-webkit-scrollbar {
+  width: 0;
+}
+
+.card {
+  width: 100%;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.4rem;
+  border-radius: 15px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.desc p {
+  color: rgb(0, 117, 212);
+  cursor: pointer;
+}
+
+.vote {
+  /* width: 50px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.vote span {
+  width: max-content;
+}
+
+.icon {
+  font-size: 1.8rem;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: gray;
+}
+
+@media only screen and (max-width: 640px) {
+  .container {
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+  }
+
+  .content {
+    max-width: 400px;
+  }
+
+  .heading h1 {
+    font-size: 1.5rem;
+  }
+
+  .desc p {
+    word-break: break-all;
+  }
+}
