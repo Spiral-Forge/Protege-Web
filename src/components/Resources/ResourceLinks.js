@@ -1,5 +1,5 @@
 import styles from "../../styles/ResourceLinks.module.css";
-import VerticalNav from "./VerticalNav";
+
 import { AiFillCaretUp, AiFillCaretDown } from "react-icons/ai";
 const links = [
   {
@@ -31,19 +31,14 @@ const links = [
 
 export default function ResourceLinks() {
   return (
-    <div className={styles.container}>
-      <div className={styles.flex}>
-        <VerticalNav />
-        <div className={styles.wrapper}>
-          <div className={styles.heading}>
-            <h1>Resource Heading</h1>
-          </div>
-          <div className={styles.content}>
-            {links.map((link) => (
-              <LinkCard key={link.id} link={link} />
-            ))}
-          </div>
-        </div>
+    <div className={styles.wrapper}>
+      <div className={styles.heading}>
+        <h1>Resource Heading</h1>
+      </div>
+      <div className={styles.content}>
+        {links.map((link) => (
+          <LinkCard key={link.id} link={link} />
+        ))}
       </div>
     </div>
   );
