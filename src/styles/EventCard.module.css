@@ -50,18 +50,20 @@
   font-weight: 500;
 }
 
-.cta button {
+.cta a {
   display: flex;
   margin-left: auto;
   background-color: transparent;
+  width: max-content;
   border: none;
   outline: none;
   color: rgb(0, 123, 238);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.cta button:hover {
+.cta a:hover {
   color: rgb(0, 47, 255);
 }

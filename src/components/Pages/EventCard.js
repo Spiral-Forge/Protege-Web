@@ -1,29 +1,26 @@
 import styles from "../../styles/EventCard.module.css";
 
-export default function EventCard() {
+export default function EventCard({event}) {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
         <p>
-          <span>Oct 9, 2021</span> | <span>5:00 PM</span>
+          <span>{event.date}</span> | <span>{event.time}</span>
         </p>
         <p>Online</p>
       </div>
       <div className={styles.content}>
         <div className={styles.img}>
-          <img src="https://source.unsplash.com/random/600x400" alt="" />
+          <img src={event.url} alt="" />
         </div>
         <div className={styles.body}>
-          <h1>Title of Event</h1>
+          <h1>{event.name}</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga ipsum
-            libero obcaecati, laudantium eveniet laboriosam aliquam? Itaque
-            similique nemo nulla incidunt repudiandae distinctio, suscipit
-            labore deleniti omnis sedeleniti omnis sequi sed reprehenderit.
+           {event.description}
           </p>
         </div>
         <div className={styles.cta}>
-          <button>Register</button>
+          <a target='_blank' rel='noreferrer' href={event.link}>Register</a>
         </div>
       </div>
     </div>

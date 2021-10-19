@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Homepage.css";
 import { Button } from "../Navbar/Button";
 import { Link } from "react-router-dom";
 import img from "../Navbar/Mentorship.jpg";
 import Event from "./Event";
-
+import { db } from "../../firebase";
 function Homepage() {
+  
   return (
     <>
       <div className="home__hero-section">

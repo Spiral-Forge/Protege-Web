@@ -9,7 +9,11 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function EventForm({ setShowModal }) {
   const [date, setDate] = useState();
   const [time, setTime] = useState();
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowModal(false);
+  };
+  const [ formData,setFormData]= useState({})
   return (
     <form>
       <div className={styles.inputs}>
@@ -53,7 +57,7 @@ export default function EventForm({ setShowModal }) {
       </div>
       <div className={styles.cta}>
         <button onClick={() => setShowModal(false)}>Cancle</button>
-        <button onClick={() => setShowModal(false)}>Add Event</button>
+        <button onClick={handleSubmit}>Add Event</button>
       </div>
     </form>
   );
