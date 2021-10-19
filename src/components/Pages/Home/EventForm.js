@@ -10,7 +10,8 @@ import { db } from "../../../firebase";
 export default function EventForm({ setShowModal }) {
   const [date, setDate] = useState();
   const [time, setTime] = useState();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    if(!validate()) return;
     db.collection("Events").add({
       ...formData,
       Date: date,
@@ -18,6 +19,35 @@ export default function EventForm({ setShowModal }) {
       Approved: false,
     });
     setShowModal(false);
+  };
+  const validate = () => {
+    try {
+      if (!formData.Name) {
+        throw "Title";
+      }
+      if (!time) {
+        throw "Time";
+      }
+      if (!date) {
+        throw "Date";
+      }
+      if (!formData.Venue) {
+        throw "Venue";
+      }
+      if (!formData.ImageUrl) {
+        throw "Image URL";
+      }
+      if (!formData.Description) {
+        throw "Description";
+      }
+      if (!formData.Link) {
+        throw "Event link";
+      }
+    } catch (err) {
+      window.alert(`${err} field is required`);
+      return false;
+    }
+    return true;
   };
   const [formData, setFormData] = useState({
     Name: "",
