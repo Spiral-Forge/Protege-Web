@@ -6,20 +6,41 @@ import { BiTimeFive } from "react-icons/bi";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { db } from "../../../firebase";
 export default function EventForm({ setShowModal }) {
   const [date, setDate] = useState();
   const [time, setTime] = useState();
   const handleSubmit = (e) => {
-    e.preventDefault();
+    db.collection("Events").add({
+      ...formData,
+      Date: date,
+      Time: time,
+      Approved: false,
+    });
     setShowModal(false);
   };
-  const [ formData,setFormData]= useState({})
+  const [formData, setFormData] = useState({
+    Name: "",
+    Venue: "",
+    ImageUrl: "",
+    Description: "",
+    Link: "",
+  });
+  const handleFormDataChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
   return (
-    <form>
+    <div>
       <div className={styles.inputs}>
         <div className={styles.flex}>
           <MdOutlineTextFields className={styles.icon} />
-          <input type="text" placeholder="Title" />
+          <input
+            type="text"
+            placeholder="Title"
+            name="Name"
+            onChange={handleFormDataChange}
+          />
         </div>
         <div className={styles.flex}>
           <BsCalendarDay className={styles.icon} />
@@ -44,21 +65,36 @@ export default function EventForm({ setShowModal }) {
         </div>
         <div className={styles.flex}>
           <FaMapMarkerAlt className={styles.icon} />
-          <input type="text" placeholder="Venue" />
+          <input
+            type="text"
+            placeholder="Venue"
+            name="Venue"
+            onChange={handleFormDataChange}
+          />
         </div>
         <div className={styles.flex}>
           <BsCardImage className={styles.icon} />
-          <input type="text" placeholder="Image Url" />
+          <input
+            type="text"
+            placeholder="Image Url"
+            name="ImageUrl"
+            onChange={handleFormDataChange}
+          />
         </div>
         <div className={styles.flex}>
           <BsFillFileTextFill className={styles.icon} />
-          <textarea rows="1" placeholder="Description" />
+          <textarea
+            rows="1"
+            placeholder="Description"
+            name="Description"
+            onChange={handleFormDataChange}
+          />
         </div>
       </div>
       <div className={styles.cta}>
         <button onClick={() => setShowModal(false)}>Cancle</button>
         <button onClick={handleSubmit}>Add Event</button>
       </div>
-    </form>
+    </div>
   );
 }

@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
-import "./Homepage.css";
-import { Button } from "../../Navbar/Button";
-import { Link } from "react-router-dom";
+import React from "react";
 import img from "../../Navbar/Mentorship.jpg";
 import Event from "./Event";
-import { db } from "../../firebase";
+import "./Homepage.css";
 function Homepage() {
   
   return (

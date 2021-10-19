@@ -21,7 +21,7 @@ export default function Event() {
     let eventsArr = [];
     const querySnapshot = await db.collection("Events").get();
     querySnapshot.forEach((doc) => {
-      if (doc.data().approved) eventsArr.push(doc.data());
+      if (doc.data().Approved) eventsArr.push(doc.data());
     });
     setEvents(eventsArr);
   }, []);
