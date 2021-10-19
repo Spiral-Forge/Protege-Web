@@ -1,7 +1,13 @@
 import { useState } from "react";
 import styles from "../../../styles/EventForm.module.css";
 import { MdOutlineTextFields } from "react-icons/md";
-import { BsCalendarDay, BsCardImage, BsFillFileTextFill } from "react-icons/bs";
+import {
+  BsCalendarDay,
+  BsCardImage,
+  BsFillFileTextFill,
+  BsLink45Deg,
+} from "react-icons/bs";
+
 import { BiTimeFive } from "react-icons/bi";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
@@ -11,7 +17,7 @@ export default function EventForm({ setShowModal }) {
   const [date, setDate] = useState();
   const [time, setTime] = useState();
   const handleSubmit = async (e) => {
-    if(!validate()) return;
+    if (!validate()) return;
     db.collection("Events").add({
       ...formData,
       Date: date,
@@ -117,6 +123,15 @@ export default function EventForm({ setShowModal }) {
             rows="1"
             placeholder="Description"
             name="Description"
+            onChange={handleFormDataChange}
+          />
+        </div>
+        <div className={styles.flex}>
+          <BsLink45Deg className={styles.icon} />
+          <input
+            type="text"
+            placeholder="Event Url"
+            name="Link"
             onChange={handleFormDataChange}
           />
         </div>
