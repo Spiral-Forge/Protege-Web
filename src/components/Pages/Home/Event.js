@@ -1,15 +1,17 @@
+import styles from "../../../styles/Event.module.css";
+import EventCard from "./EventCard";
+import { GoPlus } from "react-icons/go";
+
 import {
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
+
 import React, { useEffect, useState } from "react";
-import { GoPlus } from "react-icons/go";
-import { db } from "../../firebase";
-import styles from "../../styles/Event.module.css";
-import EventForm from "../EventForm";
-import EventCard from "./EventCard";
+import { db } from "../../../firebase";
+import EventForm from "./EventForm";
 
 export default function Event() {
   const [showModal, setShowModal] = useState(false);
@@ -25,9 +27,6 @@ export default function Event() {
   }, []);
   return (
     <div className={styles.container}>
-      {/* <div className={styles.heading}>
-        <h1>Events</h1>
-      </div> */}
       <div className={styles.content}>
         {events.map((event) => {
           return <EventCard event={event} />;

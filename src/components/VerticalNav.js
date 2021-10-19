@@ -1,4 +1,4 @@
-import styles from "../../styles/VerticalNav.module.css";
+import styles from "../styles/VerticalNav.module.css";
 import { FiLogOut } from "react-icons/fi";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillChatDotsFill, BsCalendarEventFill } from "react-icons/bs";

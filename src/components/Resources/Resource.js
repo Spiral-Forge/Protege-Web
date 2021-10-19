@@ -1,75 +1,67 @@
-import React, { useState } from "react";
-import "./Resource.css";
-import developimg from "./development.png";
-import mlimg from "./ml.png";
-import scimg from "./scholarship.png";
-import dev2img from "./dev2.png";
-import dev3img from "./dev3.png";
-import gitimg from "./git.png";
-import ResourceCard from "./ResourceCard";
-import ResourcePage from "./ResourcePage";
-import { Fab } from "@material-ui/core";
-import AddIcon from "@mui/icons-material/Add";
-import AddResource from "./AddResource";
-function Resource() {
-  const [addResourceDialog, setAddResourceDialog] = useState(false);
-  const handleDialogOpen = () => {
-    setAddResourceDialog(true);
-  };
-  const resources = [
-    {
-      title: "abc",
-      link: "abc.com",
-    },
-    {
-      title: "abc",
-      link: "abc.com",
-    },
-    {
-      title: "abc",
-      link: "abc.com",
-    },
-    {
-      title: "abc",
-      link: "https://www.abc.com",
-    },
-  ];
+import styles from "../../styles/Resource.module.css";
+import { useHistory } from "react-router-dom";
+
+const cards = [
+  {
+    id: 1,
+    img: "https://source.unsplash.com/random/400x300",
+    txt: "Development",
+  },
+  {
+    id: 2,
+    img: "https://source.unsplash.com/random/400x420",
+    txt: "Machine Learning",
+  },
+  {
+    id: 3,
+    img: "https://source.unsplash.com/random/400x402",
+    txt: "Scholorships",
+  },
+  {
+    id: 4,
+    img: "https://source.unsplash.com/random/400x320",
+    txt: "Open Source",
+  },
+  {
+    id: 5,
+    img: "https://source.unsplash.com/random/300x400",
+    txt: "Development",
+  },
+  {
+    id: 6,
+    img: "https://source.unsplash.com/random/430x400",
+    txt: "Development",
+  },
+];
+
+export default function Resource() {
   return (
-    <div className="Resourcecontainer">
-      <h1 className="heading"> Resources Center</h1>
-      <div className="row">
-        <ResourceCard
-          className="col-sm"
-          src={developimg}
-          heading="Developement"
-        />
-        <ResourceCard
-          className="col-sm"
-          src={mlimg}
-          heading="Machine Learning"
-        />
-        <ResourceCard className="col-sm" src={scimg} heading="Scholarships" />
+    <div className={styles.container}>
+      <div className={styles.heading}>
+        <h1>Resource Center</h1>
       </div>
-      <div className="row">
-        <ResourceCard className="col-sm" src={gitimg} heading="Open Source" />
-        <ResourceCard className="col-sm" src={dev2img} heading="Developement" />
-        <ResourceCard className="col-sm" src={dev3img} heading="Developement" />
+      <div className={styles.content}>
+        {cards.map((card) => (
+          <ResourceCard key={card.id} card={card} />
+        ))}
       </div>
-      <div className="floating-btn-container">
-        <Fab
-          style={{ backgroundColor: "rgba(48, 48, 48, 1)", color: "white" }}
-          aria-label="add"
-          onClick={handleDialogOpen}
-        >
-          <AddIcon />
-        </Fab>
-      </div>
-      <AddResource
-        setAddResourceDialog={setAddResourceDialog}
-        addResourceDialog={addResourceDialog}
-      />
     </div>
   );
 }
 
-export default Resource;
+export function ResourceCard({ card }) {
+  let history = useHistory();
+
+  const handleClick = (id) => {
+    history.push("/resources/" + id);
+  };
+
+  return (
+    <div onClick={() => handleClick(card.id)} className={styles.card}>
+      <div className={styles.img}>
+        <img src={card.img} alt="" />
+      </div>
+      <p>{card.txt}</p>
+    </div>
+  );
+}
