@@ -18,6 +18,7 @@ import SignUp from "./components/Pages/SignUp/SignUp";
 import { AuthProvider } from "./context/AuthContext";
 import ResourceLinks from "./components/Resources/ResourceLinks";
 import Resource from "./components/Resources/Resource";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const history = useHistory();
@@ -34,10 +35,11 @@ function App() {
             <Route path="/signin" component={SignIn} />
             <Route exact path="/register" component={SignUp} />
             <VerticalLayout>
-              <Route path="/resources" exact component={Resource} />
+              <Route path="/resource" exact component={Resource} />
               <Route path="/feedback" component={Feedback} />
               <Route path="/resources/:id" component={ResourceLinks} />
               <Route path="/chat" component={Messenger} />
+              <Route path="/harsh" component={Profile} />
             </VerticalLayout>
           </Switch>
         </Router>
