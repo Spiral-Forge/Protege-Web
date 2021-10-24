@@ -129,10 +129,10 @@
 @media only screen and (max-width: 660px) {
   .container {
     padding-block: 0rem;
+    background-color: transparent;
   }
   .content {
     background-color: transparent;
-    box-shadow: none;
   }
   .head {
     padding-block: 0.8rem;
