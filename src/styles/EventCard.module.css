@@ -2,6 +2,7 @@
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   width: 400px;
+  height: max-content;
   border-radius: 10px;
   padding: 0.4rem 1.2rem;
 }
@@ -66,4 +67,10 @@
 
 .cta a:hover {
   color: rgb(0, 47, 255);
+}
+
+@media screen and (max-width: 880px) {
+  .card {
+    width: 350px;
+  }
 }

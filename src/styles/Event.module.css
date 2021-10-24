@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.content {
+/* .content {
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -23,8 +23,16 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+} */
+.content {
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px 20px;
+  grid-auto-flow: dense;
+  justify-content: center;
 }
-
 .btn {
   position: fixed;
   bottom: 5%;
@@ -50,4 +58,10 @@
 
 .btn button:active {
   transform: rotate(90deg) scale(0.95);
+}
+@media screen and (max-width: 880px) {
+  .content {
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
 }
