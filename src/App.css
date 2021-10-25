@@ -6,15 +6,26 @@
   font-family: "Quicksand", sans-serif;
 }
 
+.Dropdown-root {
+  width: 100%;
+}
+
 .Dropdown-control {
   box-shadow: none !important;
   border: none !important;
   border-bottom: 1px solid rgb(201, 201, 201) !important;
   padding: 0.7rem !important;
+  border-radius: 0 !important;
 }
 
 .dropdown-container {
   border: none !important;
   border-bottom: 1px solid rgb(201, 201, 201) !important;
   --rmsc-main: rgba(0, 0, 0, 0) !important;
+  border-radius: 0 !important;
+}
+
+.rmsc {
+  border-radius: 0 !important;
+  width: 100% !important;
 }
