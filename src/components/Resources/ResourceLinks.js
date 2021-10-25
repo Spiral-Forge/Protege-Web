@@ -1,35 +1,24 @@
 import styles from "../../styles/ResourceLinks.module.css";
-
+import { useEffect } from "react";
 import { AiFillCaretUp, AiFillCaretDown } from "react-icons/ai";
-const links = [
-  {
-    id: 1,
-    title: "Some Demo Title",
-    url: "https://www.instagram.com/harshpandey_002/",
-  },
-  {
-    id: 2,
-    title: "Some Demo Title",
-    url: "https://github.com/Spiral-Forge/Protege-Web/commits/harsh_resource/",
-  },
-  {
-    id: 3,
-    title: "Some Demo Title",
-    url: "https://open.spotify.com/track/4dASQiO1Eoo3RJvt74FtXB?si=3b770c4f115e45ac",
-  },
-  {
-    id: 4,
-    title: "Some Demo Title",
-    url: "https://open.spotify.com/track/7KW1AtQKFToSoF1kmyk2wE?si=9115794018fa43ba",
-  },
-  {
-    id: 5,
-    title: "Some Demo Title",
-    url: "https://open.spotify.com/track/0OgGn1ofaj55l2PcihQQGV?si=d58e797bf427477b",
-  },
-];
+import { useState } from "react";
+import { db } from "../../firebase";
+import { useParams } from "react-router";
 
 export default function ResourceLinks() {
+  const [links, setLinks] = useState([]);
+  const { id } = useParams();
+  useEffect(() => {
+    db.collection(id)
+      .get()
+      .then((querySnapshot) => {
+        let tempLinks = [];
+        querySnapshot.forEach((doc) => {
+          tempLinks.push(doc.data());
+        });
+        setLinks(tempLinks);
+      });
+  });
   return (
     <div className={styles.wrapper}>
       <div className={styles.heading}>
@@ -52,8 +41,8 @@ export function LinkCard({ link }) {
   return (
     <div className={styles.card}>
       <div className={styles.desc}>
-        <h3>{link.title}</h3>
-        <p onClick={() => handleClick(link.url)}>{link.url}</p>
+        <h3>{link.Title}</h3>
+        <p onClick={() => handleClick(link.Link)}>{link.Link}</p>
       </div>
       <div className={styles.vote}>
         <span>
