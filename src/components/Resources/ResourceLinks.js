@@ -5,20 +5,52 @@ import { useState } from "react";
 import { db } from "../../firebase";
 import { useParams } from "react-router";
 
+// temp
+
+let tempLinks = [
+  {
+    Title: "testing 1",
+    Votes: 4,
+    Link: "http://localhost:3000/resources/ML",
+  },
+  {
+    Title: "testing 2",
+    Votes: 2,
+    Link: "http://localhost:3000/resources/ML",
+  },
+  {
+    Title: "testing 3",
+    Votes: 6,
+    Link: "http://localhost:3000/resources/ML",
+  },
+  {
+    Title: "testing 4",
+    Votes: 4,
+    Link: "http://localhost:3000/resources/ML",
+  },
+];
+
+// temp
+
 export default function ResourceLinks() {
   const [links, setLinks] = useState([]);
   const { id } = useParams();
   useEffect(() => {
-    db.collection(id)
-      .get()
-      .then((querySnapshot) => {
-        let tempLinks = [];
-        querySnapshot.forEach((doc) => {
-          tempLinks.push(doc.data());
-        });
-        setLinks(tempLinks);
-      });
-  });
+    // db.collection(id)
+    //   .get()
+    //   .then((querySnapshot) => {
+    //     let tempLinks = [];
+    //     querySnapshot.forEach((doc) => {
+    //       tempLinks.push(doc.data());
+    //     });
+    //     tempLinks.sort((a, b) => a.Votes >= b.Votes);
+    //     setLinks(tempLinks);
+    //   });
+    tempLinks.sort((a, b) =>
+      a.Votes > b.Votes ? -1 : a.Votes < b.Votes ? 1 : 0
+    );
+    setLinks(tempLinks);
+  }, []);
   return (
     <div className={styles.wrapper}>
       <div className={styles.heading}>
@@ -44,7 +76,7 @@ export function LinkCard({ link }) {
         <span>
           <AiFillCaretUp className={styles.icon} />
         </span>
-        {link.Votes}
+        {link.Votes || 0}
         <span>
           <AiFillCaretDown className={styles.icon} />
         </span>
