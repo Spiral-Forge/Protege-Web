@@ -40,17 +40,18 @@ export function LinkCard({ link }) {
 
   return (
     <div className={styles.card}>
-      <div className={styles.desc}>
-        <h3>{link.Title}</h3>
-        <p onClick={() => handleClick(link.Link)}>{link.Link}</p>
-      </div>
       <div className={styles.vote}>
         <span>
           <AiFillCaretUp className={styles.icon} />
         </span>
+        {link.Votes}
         <span>
           <AiFillCaretDown className={styles.icon} />
         </span>
+      </div>
+      <div className={styles.desc}>
+        <h3>{link.Title}</h3>
+        <p onClick={() => handleClick(link.Link)}>{link.Link}</p>
       </div>
     </div>
   );

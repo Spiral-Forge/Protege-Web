@@ -24,18 +24,19 @@ const cards = [
     id: 4,
     img: "https://source.unsplash.com/random/400x320",
     txt: "Open Source",
-    txt: "OpenSource",
+    url: "OpenSource",
   },
   {
     id: 5,
     img: "https://source.unsplash.com/random/300x400",
     txt: "Competitive Coding",
-    txt: "CompCoding",
+    url: "CompCoding",
   },
   {
     id: 6,
     img: "https://source.unsplash.com/random/430x400",
     txt: "Development",
+    url: "Development",
   },
 ];
 
