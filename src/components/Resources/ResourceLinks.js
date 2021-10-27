@@ -69,8 +69,12 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
     let indexOfNewLink;
     let tempLinks = links.map((linkSnap, index) => {
       if (linkSnap.id === link.id) {
-        if (linkSnap.votesMap && linkSnap.votesMap[userId]) return linkSnap;
         indexOfNewLink = index;
+        if (linkSnap.votesMap && linkSnap.votesMap[userId]) {
+          linkSnap.Votes -= 1;
+          delete linkSnap.votesMap[userId];
+          return linkSnap;
+        }
         if (!linkSnap.Votes) linkSnap.Votes = 1;
         else if (linkSnap.votesMap[userId] === false) {
           linkSnap.Votes += 2;
@@ -87,8 +91,12 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
     let indexOfNewLink;
     let tempLinks = links.map((linkSnap, index) => {
       if (linkSnap.id === link.id) {
-        if (linkSnap.votesMap && !linkSnap.votesMap[userId]) return linkSnap;
         indexOfNewLink = index;
+        if (linkSnap.votesMap && linkSnap.votesMap[userId] === false) {
+          linkSnap.Votes += 1;
+          delete linkSnap.votesMap[userId];
+          return linkSnap;
+        }
         if (!linkSnap.Votes) linkSnap.Votes = -1;
         else if (linkSnap.votesMap[userId]) {
           linkSnap.Votes -= 2;
