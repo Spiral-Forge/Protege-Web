@@ -11,6 +11,25 @@ export default function ResourceLinks() {
   const { resource } = useParams();
   const { currentUser } = useAuth();
 
+  const sortByVotes = (arr) => {
+    arr.sort((a, b) => {
+      const isVotesUnDefA = typeof a.Votes === "undefined";
+      const isVotesUnDefB = typeof b.Votes === "undefined";
+      if (isVotesUnDefB) {
+        b.Votes = 0;
+      }
+      if (isVotesUnDefA) {
+        a.Votes = 0;
+      }
+      if (a.Votes < b.Votes) {
+        return 1;
+      } else if (a.Votes > b.Votes) {
+        return -1;
+      }
+      return 0;
+    });
+    return arr;
+  };
   useEffect(() => {
     db.collection(resource)
       .get()
@@ -18,15 +37,6 @@ export default function ResourceLinks() {
         let tempLinks = [];
         querySnapshot.forEach((doc) => {
           tempLinks.push({ id: doc.id, ...doc.data() });
-        });
-        tempLinks.sort((a, b) => {
-          const isVotesUnDefA = typeof a.Votes === "undefined";
-          const isVotesUnDefB = typeof b.Votes === "undefined";
-          return a.Votes > b.Votes || isVotesUnDefB
-            ? -1
-            : a.Votes < b.Votes || isVotesUnDefA
-            ? 1
-            : 0;
         });
         setLinks(tempLinks);
       });
@@ -38,7 +48,7 @@ export default function ResourceLinks() {
         <h1>Resource Heading</h1>
       </div>
       <div className={styles.content}>
-        {links.map((link) => (
+        {sortByVotes(links).map((link) => (
           <LinkCard
             key={link.id}
             link={link}
@@ -119,7 +129,7 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
             }
           />
         </span>
-        {link.Votes || 0}
+        {typeof link.Votes === "undefined" ? 0 : link.Votes}
         <span>
           <AiFillCaretDown
             className={styles.icon}
