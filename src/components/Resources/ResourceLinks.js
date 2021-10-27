@@ -36,20 +36,24 @@ export default function ResourceLinks() {
   const [links, setLinks] = useState([]);
   const { id } = useParams();
   useEffect(() => {
-    // db.collection(id)
-    //   .get()
-    //   .then((querySnapshot) => {
-    //     let tempLinks = [];
-    //     querySnapshot.forEach((doc) => {
-    //       tempLinks.push(doc.data());
-    //     });
-    //     tempLinks.sort((a, b) => a.Votes >= b.Votes);
-    //     setLinks(tempLinks);
-    //   });
-    tempLinks.sort((a, b) =>
-      a.Votes > b.Votes ? -1 : a.Votes < b.Votes ? 1 : 0
-    );
-    setLinks(tempLinks);
+    db.collection(id)
+      .get()
+      .then((querySnapshot) => {
+        let tempLinks = [];
+        querySnapshot.forEach((doc) => {
+          tempLinks.push(doc.data());
+        });
+        tempLinks.sort((a, b) => {
+          const isVotesUnDefA = typeof a.Votes === "undefined";
+          const isVotesUnDefB = typeof b.Votes === "undefined";
+          return a.Votes > b.Votes || isVotesUnDefB
+            ? -1
+            : a.Votes < b.Votes || isVotesUnDefA
+            ? 1
+            : 0;
+        });
+        setLinks(tempLinks);
+      });
   }, []);
   return (
     <div className={styles.wrapper}>
