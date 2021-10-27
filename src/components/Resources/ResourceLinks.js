@@ -70,16 +70,15 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
     let tempLinks = links.map((linkSnap, index) => {
       if (linkSnap.id === link.id) {
         indexOfNewLink = index;
-        if (linkSnap.votesMap && linkSnap.votesMap[userId]) {
+        if (!linkSnap.Votes) linkSnap.Votes = 0;
+        if (!linkSnap.votesMap) linkSnap.votesMap = {};
+        if (linkSnap.votesMap[userId] === true) {
           linkSnap.Votes -= 1;
           delete linkSnap.votesMap[userId];
           return linkSnap;
-        }
-        if (!linkSnap.Votes) linkSnap.Votes = 1;
-        else if (linkSnap.votesMap[userId] === false) {
+        } else if (linkSnap.votesMap[userId] === false) {
           linkSnap.Votes += 2;
         } else linkSnap.Votes += 1;
-        if (!linkSnap.votesMap) linkSnap.votesMap = {};
         linkSnap.votesMap[userId] = true;
       }
       return linkSnap;
@@ -92,16 +91,15 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
     let tempLinks = links.map((linkSnap, index) => {
       if (linkSnap.id === link.id) {
         indexOfNewLink = index;
-        if (linkSnap.votesMap && linkSnap.votesMap[userId] === false) {
+        if (!linkSnap.Votes) linkSnap.Votes = 0;
+        if (!linkSnap.votesMap) linkSnap.votesMap = {};
+        if (linkSnap.votesMap[userId] === false) {
           linkSnap.Votes += 1;
           delete linkSnap.votesMap[userId];
           return linkSnap;
-        }
-        if (!linkSnap.Votes) linkSnap.Votes = -1;
-        else if (linkSnap.votesMap[userId]) {
+        } else if (linkSnap.votesMap[userId] === true) {
           linkSnap.Votes -= 2;
         } else linkSnap.Votes -= 1;
-        if (!linkSnap.votesMap) linkSnap.votesMap = {};
         linkSnap.votesMap[userId] = false;
       }
       return linkSnap;
