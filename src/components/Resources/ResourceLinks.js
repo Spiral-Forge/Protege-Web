@@ -54,7 +54,7 @@ export default function ResourceLinks() {
             link={link}
             setLinks={setLinks}
             links={links}
-            userId={currentUser.uid}
+            userId={currentUser && currentUser.uid}
             resourceCategory={resource}
           />
         ))}
@@ -76,6 +76,10 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
       });
   };
   const handleUpvote = () => {
+    if (!userId) {
+      window.alert("Login or Signup to vote!");
+      return;
+    }
     let indexOfNewLink;
     let tempLinks = links.map((linkSnap, index) => {
       if (linkSnap.id === link.id) {
@@ -97,6 +101,10 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
     if (indexOfNewLink >= 0) UpdateDb(tempLinks[indexOfNewLink]);
   };
   const handleDownvote = () => {
+    if (!userId) {
+      window.alert("Login or Signup to vote!");
+      return;
+    }
     let indexOfNewLink;
     let tempLinks = links.map((linkSnap, index) => {
       if (linkSnap.id === link.id) {
