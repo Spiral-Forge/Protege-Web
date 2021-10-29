@@ -34,7 +34,6 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       year: year.value,
       domains: getArray(domain),
     };
-    console.log(tempObj);
     if (validate(tempObj)) {
       db.collection("Users").doc(currentUser.uid).set(tempObj);
       setUserData(tempObj);
