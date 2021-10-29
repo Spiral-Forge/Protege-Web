@@ -38,7 +38,7 @@ export default function Profile() {
                   </div>
                   <h2>{userData.name}</h2>
                   <h3>
-                    <em>Admin</em>
+                    <em>{userData.post}</em>
                   </h3>
                   <span onClick={() => setEdit(true)} className={styles.edit}>
                     <BsPencil /> <p>Edit Profile</p>

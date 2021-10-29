@@ -25,23 +25,25 @@ export default function ProfileInfo({ userData }) {
       <span className={styles.field}>
         <IoMdSchool className={styles.icon} />
         <div>
-          <p>Branch, year</p>
-          <p>Roll number {userData.rollNo}</p>
-          <p>Hosteller: Yes/No</p>
+          <p>
+            {userData.branch}, {userData.year} year, {userData.college}
+          </p>
+          <p>Roll number: {userData.rollNo}</p>
+          <p>Hosteller: {userData.hosteller ? "Yes" : "No"}</p>
         </div>
       </span>
       <span className={styles.field}>
         <BsGlobe className={styles.icon} />
         <div>
-          <p>Language</p>
-          <p>java, CPP</p>
+          <p>Languages</p>
+          <p>{userData.languages.join(", ")}</p>
         </div>
       </span>
       <span className={styles.field}>
         <BsCodeSlash className={styles.icon} />
         <div>
           <p>Domains</p>
-          <p>Web, Machine Learning</p>
+          <p>{userData.domains.join(", ")}</p>
         </div>
       </span>
       <span className={styles.field}>
