@@ -47,7 +47,11 @@ export default function Profile() {
                 <ProfileInfo userData={userData} />
               </>
             ) : (
-              <EditProfile userData={userData} setEdit={setEdit} />
+              <EditProfile
+                userData={userData}
+                setEdit={setEdit}
+                setUserData={setUserData}
+              />
             )}
           </div>
           <div className={styles.black} />
