@@ -7,26 +7,26 @@ import {
 } from "react-icons/bs";
 import { IoMdMail, IoMdSchool } from "react-icons/io";
 
-export default function ProfileInfo() {
+export default function ProfileInfo({ userData }) {
   return (
     <div className={styles.info}>
       <span className={styles.field}>
         <BsFillTelephoneFill className={styles.icon} />
         <div>
-          <p>6296343307</p>
+          <p>{userData.phone}</p>
         </div>
       </span>
       <span className={styles.field}>
         <IoMdMail className={styles.icon} />
         <div>
-          <p>coding.harshp@gmail.com</p>
+          <p>{userData.email}</p>
         </div>
       </span>
       <span className={styles.field}>
         <IoMdSchool className={styles.icon} />
         <div>
           <p>Branch, year</p>
-          <p>Roll number here</p>
+          <p>Roll number {userData.rollNo}</p>
           <p>Hosteller: Yes/No</p>
         </div>
       </span>
@@ -48,11 +48,8 @@ export default function ProfileInfo() {
         <BsLinkedin style={{ fontSize: 50 }} className={styles.icon} />
         <div>
           <p>Linkedin</p>
-          <a
-            href="https://www.linkedin.com/in/harsh-kumar-pandey-5ab9071aa/"
-            target="_blank"
-          >
-            https://www.linkedin.com/in/harsh-kumar-pandey-5ab9071aa/
+          <a href={userData.linkedInURL} target="_blank">
+            {userData.linkedInURL}
           </a>
         </div>
       </span>
