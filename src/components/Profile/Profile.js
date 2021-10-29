@@ -32,7 +32,10 @@ export default function Profile() {
                 <div className={styles.head}>
                   <div className={styles.img}>
                     <img
-                      src="https://avatars.githubusercontent.com/u/44186440?v=4"
+                      src={
+                        userData.photoURL ||
+                        "https://avatars.githubusercontent.com/u/44186440?v=4"
+                      }
                       alt=""
                     />
                   </div>
