@@ -1,6 +1,6 @@
 import styles from "../../styles/Conversations.module.css";
 
-export default function Conversations() {
+export default function Conversations({ setChat }) {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -13,23 +13,23 @@ export default function Conversations() {
         </div>
       </div>
       <div className={styles.bottom}>
-        <Peer active />
-        <Peer active />
-        <Peer />
-        <Peer />
-        <Peer />
-        <Peer />
-        <Peer />
-        <Peer />
-        <Peer />
+        <Peer active setChat={setChat} />
+        <Peer active setChat={setChat} />
+        <Peer setChat={setChat} />
+        <Peer setChat={setChat} />
+        <Peer setChat={setChat} />
+        <Peer setChat={setChat} />
+        <Peer setChat={setChat} />
+        <Peer setChat={setChat} />
+        <Peer setChat={setChat} />
       </div>
     </div>
   );
 }
 
-export const Peer = ({ active }) => {
+export const Peer = ({ active, setChat }) => {
   return (
-    <div className={styles.peer}>
+    <div onClick={() => setChat(true)} className={styles.peer}>
       <div className={styles.peerImg}>
         <img
           src="https://avatars.githubusercontent.com/u/44186440?v=4"
