@@ -1,5 +1,6 @@
 .container {
   flex: 2;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -43,6 +44,7 @@
 }
 
 .info p {
+  text-align: center;
   font-weight: 500;
   color: gray;
 }
@@ -50,12 +52,22 @@
 .bottom {
   display: flex;
   flex-direction: column;
-  max-height: 400px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .bottom::-webkit-scrollbar {
-  width: 0;
+  width: 4px;
+}
+
+/* Handle */
+.bottom::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.226);
+  border-radius: 10px;
+}
+
+.bottom::-webkit-scrollbar-track {
+  background: #f1f1f100;
+  margin-block: 10px;
 }
 
 .peer {
