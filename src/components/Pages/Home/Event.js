@@ -12,10 +12,11 @@ import {
 import React, { useEffect, useState } from "react";
 import { db } from "../../../firebase";
 import EventForm from "./EventForm";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function Event() {
+  const { isMentor } = useAuth();
   const [showModal, setShowModal] = useState(false);
-
   const [events, setEvents] = useState([]);
   useEffect(async () => {
     let eventsArr = [];
@@ -32,29 +33,33 @@ export default function Event() {
           return <EventCard event={event} />;
         })}
       </div>
-      <div className={styles.btn}>
-        <button onClick={() => setShowModal(true)}>
-          <GoPlus />
-        </button>
-      </div>
-      <Dialog
-        PaperProps={{
-          style: {
-            overflow: "visible",
-          },
-        }}
-        open={showModal}
-        onClose={() => setShowModal(false)}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Add Event"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <EventForm setShowModal={setShowModal} />
-          </DialogContentText>
-        </DialogContent>
-      </Dialog>
+      {isMentor && (
+        <>
+          <div className={styles.btn}>
+            <button onClick={() => setShowModal(true)}>
+              <GoPlus />
+            </button>
+          </div>
+          <Dialog
+            PaperProps={{
+              style: {
+                overflow: "visible",
+              },
+            }}
+            open={showModal}
+            onClose={() => setShowModal(false)}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Add Event"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                <EventForm setShowModal={setShowModal} />
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
     </div>
   );
 }
