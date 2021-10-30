@@ -5,6 +5,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import "./App.css";
+// import Messenger from "./components/ChatUrvi/Messenger";
 import Messenger from "./components/Chat/Messenger";
 import Navbar from "./components/Navbar/Navbar";
 import AboutUs from "./components/Pages/AboutUs";
