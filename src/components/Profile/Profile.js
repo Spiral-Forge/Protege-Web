@@ -34,7 +34,7 @@ export default function Profile() {
                     <img
                       src={
                         userData.photoURL ||
-                        "https://avatars.githubusercontent.com/u/44186440?v=4"
+                        `https://avatars.dicebear.com/api/micah/${currentUser.uid}.svg`
                       }
                       alt=""
                     />
