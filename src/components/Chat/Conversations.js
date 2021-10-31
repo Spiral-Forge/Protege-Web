@@ -8,7 +8,7 @@ export default function Conversations({ setChat }) {
           <img src="https://gcdn.pbrd.co/images/piXh0PKBM6Bq.png?o=1" alt="" />
         </div>
         <div className={styles.info}>
-          <h3>Urvi Goel</h3>
+          <h3>Tanmay Kachroo</h3>
           <p>Computer Science Engineering</p>
         </div>
       </div>
@@ -35,7 +35,7 @@ export const Peer = ({ active, setChat }) => {
         {active && <div className={styles.green} />}
       </div>
 
-      <p>Nitasha Dhingra</p>
+      <p>Harsh Pandey</p>
     </div>
   );
 };

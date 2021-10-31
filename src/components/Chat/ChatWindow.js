@@ -97,7 +97,7 @@ export default function ChatWindow({ chat, setChat }) {
               alt=""
             />
           </div>
-          <p>Nitasha Dhingra</p>
+          <p>Harsh Pandey</p>
         </div>
       </div>
       <div className={styles.chat}>
