@@ -4,6 +4,7 @@ import {
   BsGlobe,
   BsCodeSlash,
   BsLinkedin,
+  BsGithub,
 } from "react-icons/bs";
 import { IoMdMail, IoMdSchool } from "react-icons/io";
 
@@ -52,6 +53,15 @@ export default function ProfileInfo({ userData }) {
           <p>Linkedin</p>
           <a href={userData.linkedInURL} target="_blank">
             {userData.linkedInURL}
+          </a>
+        </div>
+      </span>
+      <span className={styles.field}>
+        <BsGithub style={{ fontSize: 50 }} className={styles.icon} />
+        <div>
+          <p>Github</p>
+          <a href={userData.githubURL} target="_blank">
+            {userData.githubURL}
           </a>
         </div>
       </span>
