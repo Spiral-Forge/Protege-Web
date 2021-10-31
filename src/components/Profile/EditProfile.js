@@ -7,6 +7,7 @@ import {
   domainsArr,
   years,
   getArray,
+  languagesArr,
 } from "../Pages/SignUp/SignUpOptions";
 import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
@@ -25,6 +26,11 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       return { label: dom, value: dom };
     })
   );
+  const [languages, setLanguages] = useState(
+    userData.languages.map((lang) => {
+      return { label: lang, value: lang };
+    })
+  );
   let newFormData = { ...userData };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +38,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       ...newFormData,
       branch: branch.value,
       year: year.value,
+      languages: getArray(languages),
       domains: getArray(domain),
     };
     if (validate(tempObj)) {
@@ -140,6 +147,15 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
             onChange={setYear}
             value={year}
             placeholder="Year"
+          />
+        </div>
+        <div className={styles.flex}>
+          <MultiSelect
+            options={languagesArr}
+            value={languages}
+            onChange={setLanguages}
+            labelledBy="Languages"
+            className="multi-select"
           />
         </div>
         <div className={styles.flex}>
