@@ -5,7 +5,7 @@ export default function Conversations({ setChat }) {
     <div className={styles.container}>
       <div className={styles.top}>
         <div className={styles.img}>
-          <img src="https://gcdn.pbrd.co/images/a32jYcov1Buc.png?o=1" alt="" />
+          <img src="https://gcdn.pbrd.co/images/piXh0PKBM6Bq.png?o=1" alt="" />
         </div>
         <div className={styles.info}>
           <h3>Urvi Goel</h3>
@@ -31,10 +31,7 @@ export const Peer = ({ active, setChat }) => {
   return (
     <div onClick={() => setChat(true)} className={styles.peer}>
       <div className={styles.peerImg}>
-        <img
-          src="https://avatars.githubusercontent.com/u/44186440?v=4"
-          alt=""
-        />
+        <img src="https://gcdn.pbrd.co/images/NLhKZ0n35MHv.jpg?o=1" alt="" />
         {active && <div className={styles.green} />}
       </div>
 

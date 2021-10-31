@@ -5,47 +5,53 @@ import { IoMdSend, IoMdArrowBack } from "react-icons/io";
 const convo = [
   {
     comment: true,
-    message: "Hi Urvi",
+    message: "Hi",
   },
   {
     comment: false,
-    message: "Hello Nitasha",
+    message: "Hello ",
   },
   {
     comment: true,
-    message: "Whats up!!",
+    message:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores inventore cupiditate quidem voluptatem error placeat liquam.",
   },
   {
     comment: false,
-    message: "nm",
+    message: "Lorem ipsum dolor sit amet consectetur adipisici",
   },
   {
     comment: true,
-    message: "okay !",
+    message:
+      "Lorem ipsum dolor sit amet consectetur adipisici Lorem ipsum dolor sit amet consectetur adipisici",
   },
   {
     comment: false,
-    message: "hmm",
+    message: "Lorem ipsum dolor sit amet consectetur adipisici",
   },
   {
     comment: true,
-    message: "hmmm",
+    message:
+      "Lorem ipsum dolor sit amet consectetur adipisiciLorem ipsum dolor sit amet consectetur adipisici Lorem ipsum dolor sit amet consectetur adipisici",
   },
   {
     comment: false,
-    message: "hmmmmm",
+    message: "Lorem ipsum dolor sit amet consectetur adipisici",
   },
   {
     comment: false,
-    message: "hmmmmmmmmmm",
+    message:
+      "Lorem ipsum dolor sit amet consectetur adipisici Lorem ipsum dolor adipisici",
   },
   {
     comment: true,
-    message: "hmmmmmmmmm hmmmmmm",
+    message:
+      "Lorem ipsum dolor siLorem ipsum dolor sit amet consectetur adipisici Lorem ipsum dolor sit amet consectetur adipisicir adipisici",
   },
   {
     comment: true,
-    message: "hmmmmmm hmmmmmmm hmmmmmm",
+    message:
+      "Lorem ipsum doloLorem ipsum dolor sit amet consectetur adipisicionsectetur adipisici ",
   },
   {
     comment: false,
@@ -59,11 +65,11 @@ const convo = [
   },
   {
     comment: false,
-    message: "k bye",
+    message: "Lorem ipsum dolor sit amet consectetur adipisici",
   },
   {
     comment: true,
-    message: "bye bye !",
+    message: "Lorem sectetur adipisici",
   },
 ];
 
@@ -120,10 +126,7 @@ export const Comment = ({ message }) => {
     <div className={styles.commentWrapper}>
       <div className={styles.comment}>
         <div className={styles.dp}>
-          <img
-            src="https://avatars.githubusercontent.com/u/44186440?v=4"
-            alt=""
-          />
+          <img src="https://gcdn.pbrd.co/images/NLhKZ0n35MHv.jpg?o=1" alt="" />
         </div>
         <div className={styles.message}>
           <h5>{message}</h5>
@@ -139,7 +142,7 @@ export const Reply = ({ message }) => {
     <div className={styles.replyWrapper}>
       <div className={styles.reply}>
         <div className={styles.dp}>
-          <img src="https://gcdn.pbrd.co/images/a32jYcov1Buc.png?o=1" alt="" />
+          <img src="https://gcdn.pbrd.co/images/piXh0PKBM6Bq.png?o=1" alt="" />
         </div>
         <div className={styles.message}>
           <h5>{message}</h5>
