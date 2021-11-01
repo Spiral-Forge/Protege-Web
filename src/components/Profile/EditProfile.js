@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/EditProfile.module.css";
 import { MultiSelect } from "react-multi-select-component";
 import Dropdown from "react-dropdown";
+import { ProfilePicStorageRef } from "../../firebase";
 import {
   branches,
   domainsArr,
@@ -13,6 +14,7 @@ import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
 export default function EditProfile({ setEdit, userData, setUserData }) {
   const { currentUser } = useAuth();
+  const imageInputRef = useRef(null);
   const [branch, setBranch] = useState({
     label: userData.branch,
     value: userData.branch,
@@ -42,12 +44,22 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       domains: getArray(domain),
     };
     if (validate(tempObj)) {
+      uploadImage();
       db.collection("Users").doc(currentUser.uid).set(tempObj);
       setUserData(tempObj);
       setEdit(false);
     }
   };
-
+  const uploadImage = async () => {
+    if (imageInputRef.current.files.length === 0) return;
+    const file = imageInputRef.current.files[0];
+    const fileRef = ProfilePicStorageRef.child(currentUser.uid);
+    await fileRef.put(file);
+    const url = await fileRef.getDownloadURL();
+    await currentUser.updateProfile({
+      photoURL: url,
+    });
+  };
   const validate = (data) => {
     try {
       if (!data.name) {
@@ -118,6 +130,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
         <div className={styles.flex}>
           Image:{" "}
           <input
+            ref={imageInputRef}
             type="file"
             placeholder="Image Url"
             name="photo"
