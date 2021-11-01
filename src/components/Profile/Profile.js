@@ -33,7 +33,7 @@ export default function Profile() {
                   <div className={styles.img}>
                     <img
                       src={
-                        userData.photoURL ||
+                        currentUser.photoURL ||
                         `https://avatars.dicebear.com/api/micah/${currentUser.uid}.svg`
                       }
                       alt=""

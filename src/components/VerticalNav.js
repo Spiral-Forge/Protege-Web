@@ -12,7 +12,10 @@ export default function VerticalNav() {
       <div className={styles.pic}>
         <Link to="/profile">
           <img
-            src={`https://avatars.dicebear.com/api/micah/${currentUser.uid}.svg`}
+            src={
+              currentUser.photoURL ||
+              `https://avatars.dicebear.com/api/micah/${currentUser.uid}.svg`
+            }
             alt=""
           />
         </Link>

@@ -44,7 +44,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       domains: getArray(domain),
     };
     if (validate(tempObj)) {
-      uploadImage();
+      await uploadImage();
       db.collection("Users").doc(currentUser.uid).set(tempObj);
       setUserData(tempObj);
       setEdit(false);
