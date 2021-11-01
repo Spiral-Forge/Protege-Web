@@ -33,15 +33,18 @@ const Navbar = () => {
               <li>Home</li>
             </Link>
 
-            <Link to="/vision">
-              <li>Vision</li>
-            </Link>
             <Link to="/faqs">
               <li>FAQs</li>
             </Link>
-            <Link to="/help">
-              <li>Help Center</li>
+            <Link to="/about">
+              <li>About Us</li>
             </Link>
+            <Link to="/vision">
+              <li>Vision</li>
+            </Link>
+            {/* <Link to="/help">
+              <li>Help Center</li>
+            </Link> */}
             <Link to="/signin">
               <li className={styles.login}>Login</li>
             </Link>
