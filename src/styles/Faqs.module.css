@@ -30,7 +30,7 @@
 .details {
   width: 100%;
   max-height: 5rem;
-  border-bottom: 1px solid rgb(190, 190, 190);
+  border-bottom: 1px solid rgb(207, 207, 207);
   transition: max-height 1s;
 }
 .details summary {
@@ -55,6 +55,8 @@
 details[open] {
   background-color: #80b9e8;
   max-height: 30rem;
+  border-bottom: 1px solid white;
+
 }
 .tri {
   transform: rotateZ(180deg);
