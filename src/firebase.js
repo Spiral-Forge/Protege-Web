@@ -15,6 +15,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 
-
 export const db = app.firestore();
 export const auth = app.auth();
+const storage = app.storage();
+const ProfilePicRef = storage.ref().child("dp");
