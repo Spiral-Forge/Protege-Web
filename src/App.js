@@ -8,7 +8,7 @@ import "./App.css";
 import Messenger from "./components/Chat/Messenger";
 import Navbar from "./components/Navbar/Navbar";
 import AboutUs from "./components/Pages/AboutUs";
-import Faqs from "./components/Pages/Faqs";
+import Faqs from "./components/Pages/Faqs/Faqs";
 import Feedback from "./components/Pages/Feedback";
 import Vision from "./components/Pages/Vision";
 import Homepage from "./components/Pages/Home/Homepage";
