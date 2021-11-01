@@ -116,12 +116,13 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
+          Image:{" "}
           <input
-            type="text"
+            type="file"
             placeholder="Image Url"
-            defaultValue={newFormData.photoURL}
-            name="photoURL"
-            onChange={handleFormChange}
+            name="photo"
+            style={{ border: "none" }}
+            accept="image/png, image/jpeg"
           />
         </div>
         <div className={styles.flex}>
