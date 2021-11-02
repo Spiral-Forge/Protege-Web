@@ -1,6 +1,7 @@
 import styles from "../../../styles/Event.module.css";
 import EventCard from "./EventCard";
 import { GoPlus } from "react-icons/go";
+import Masonry from "react-masonry-css";
 
 import {
   Dialog,
@@ -18,6 +19,13 @@ export default function Event() {
   const { isMentor } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [events, setEvents] = useState([]);
+
+  const breakpoints = {
+    default: 3,
+    1100: 2,
+    700: 1,
+  };
+
   useEffect(async () => {
     let eventsArr = [];
     const querySnapshot = await db.collection("Events").get();
@@ -28,11 +36,25 @@ export default function Event() {
   }, []);
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
+      {/* <div className={styles.content}>
         {events.map((event) => {
           return <EventCard event={event} />;
         })}
-      </div>
+        {events.map((event) => {
+          return <EventCard event={event} />;
+        })}
+      </div> */}
+
+      <Masonry
+        breakpointCols={breakpoints}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {events.map((event) => {
+          return <EventCard event={event} />;
+        })}
+      </Masonry>
+
       {isMentor && (
         <>
           <div className={styles.btn}>
