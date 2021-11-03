@@ -151,7 +151,7 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
         </span>
       </div>
       <div className={styles.desc}>
-        <h3>{link.Title}</h3>
+        <h3 onClick={() => handleClick(link.Link)}>{link.Title}</h3>
         <p onClick={() => handleClick(link.Link)}>{link.Link}</p>
       </div>
     </div>

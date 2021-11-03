@@ -51,6 +51,9 @@
   transform: translateY(-3px);
 }
 
+.desc h3 {
+  cursor: pointer;
+}
 .desc p {
   color: rgb(0, 117, 212);
   cursor: pointer;
@@ -64,7 +67,6 @@
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
-  
 }
 
 .vote span {
