@@ -110,6 +110,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.inputs}>
         <div className={styles.flex}>
+          <label> Name:</label>
           <input
             type="text"
             placeholder="Name"
@@ -119,7 +120,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
-          Image:{" "}
+          <label>Image:</label>
           <input
             ref={imageInputRef}
             type="file"
@@ -130,6 +131,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
+          <label> Phone:</label>
           <input
             type="text"
             placeholder="Phone"
@@ -139,6 +141,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
+          <label> Branch:</label>
           <Dropdown
             options={branches}
             onChange={setBranch}
@@ -147,6 +150,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
+          <label>Year:</label>
           <Dropdown
             options={years}
             onChange={setYear}
@@ -155,6 +159,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
+          <label> Languages:</label>
           <MultiSelect
             options={languagesArr}
             value={languages}
@@ -164,6 +169,8 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
+          <label> Domains:</label>
+
           <MultiSelect
             options={domainsArr}
             value={domain}
@@ -173,6 +180,8 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
+          <label> Roll No:</label>
+
           <input
             type="text"
             placeholder="Roll Number"
@@ -182,6 +191,8 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
+          <label> LinkedIn:</label>
+
           <input
             type="text"
             placeholder="LinkedIn Url"
@@ -191,6 +202,8 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           />
         </div>
         <div className={styles.flex}>
+          <label> Github:</label>
+
           <input
             type="text"
             placeholder="Github Url"

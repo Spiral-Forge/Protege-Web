@@ -17,9 +17,10 @@
 
 .flex {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 0.6rem;
 }
 
 .icon {
@@ -37,6 +38,10 @@
   transition: all 0.3s;
 }
 
+.flex > label {
+  display: block;
+  font-weight: 600;
+}
 .flex textarea {
   resize: vertical;
 }
