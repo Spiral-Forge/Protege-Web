@@ -111,4 +111,7 @@
   .card {
     width: 40%;
   }
+  .desc h3 {
+    width: max-content;
+  }
 }

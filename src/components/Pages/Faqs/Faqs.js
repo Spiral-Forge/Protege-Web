@@ -8,9 +8,9 @@ function Faqs() {
         <h1>FAQs</h1>
       </div>
       <div className={styles.content}>
-        {faqsArr.map((faq) => {
+        {faqsArr.map((faq, index) => {
           return (
-            <details className={styles.details}>
+            <details key={index} className={styles.details}>
               <summary>
                 <i>{faq.question}</i>
                 <BsFillTriangleFill className={styles.tri} />
