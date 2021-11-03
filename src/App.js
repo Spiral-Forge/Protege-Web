@@ -28,13 +28,13 @@ function App() {
         <Router history={history}>
           <Navbar />
           <Switch>
-            <Route path="/home" exact component={Homepage} />
-            <Route path="/vision" exact component={Vision} />
-            <Route path="/about" component={AboutUs} />
-            <Route path="/faqs" component={Faqs} />
             <Route path="/signin" component={SignIn} />
             <Route exact path="/register" component={SignUp} />
             <VerticalLayout>
+              <Route path="/home" exact component={Homepage} />
+              <Route path="/vision" exact component={Vision} />
+              <Route path="/about" component={AboutUs} />
+              <Route path="/faqs" component={Faqs} />
               <Route path="/resource" exact component={Resource} />
               <Route path="/feedback" component={Feedback} />
               <Route path="/resources/:id" component={ResourceLinks} />
