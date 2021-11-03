@@ -24,7 +24,7 @@ export default function ProfileInfo({ userData }) {
         </div>
       </span>
       <span className={styles.field}>
-        <IoMdSchool className={styles.icon} />
+        <IoMdSchool style={{ fontSize: "3.4rem" }} className={styles.icon} />
         <div>
           <p>
             {userData.branch}, {userData.year} year, {userData.college}
@@ -41,14 +41,14 @@ export default function ProfileInfo({ userData }) {
         </div>
       </span>
       <span className={styles.field}>
-        <BsCodeSlash className={styles.icon} />
+        <BsCodeSlash style={{ fontSize: "3.4rem" }} className={styles.icon} />
         <div>
           <p>Domains</p>
           <p>{userData.domains.join(", ")}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <BsLinkedin style={{ fontSize: 50 }} className={styles.icon} />
+        <BsLinkedin className={styles.icon} />
         <div>
           <p>Linkedin</p>
           <a href={userData.linkedInURL} target="_blank">
@@ -57,7 +57,7 @@ export default function ProfileInfo({ userData }) {
         </div>
       </span>
       <span className={styles.field}>
-        <BsGithub style={{ fontSize: 50 }} className={styles.icon} />
+        <BsGithub className={styles.icon} />
         <div>
           <p>Github</p>
           <a href={userData.githubURL} target="_blank">
