@@ -93,17 +93,8 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       if (!data.languages.length) {
         throw "Languages";
       }
-      if (!data.linkedInURL) {
-        throw "LinkedIn";
-      }
-      if (!data.githubURL) {
-        throw "Github";
-      }
       if (!data.gender) {
         throw "Gender";
-      }
-      if (!data.hosteller?.toString()) {
-        throw "Hosteller";
       }
     } catch (err) {
       window.alert(`${err} field is required`);
