@@ -74,7 +74,8 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background-color: #f3f3f3;
+  background-color: #4b7191;
+  color: white;
   padding: 5px 10px;
   border-radius: 15px;
   font-size: 0.8rem;
