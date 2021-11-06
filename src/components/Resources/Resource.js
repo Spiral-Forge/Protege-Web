@@ -1,7 +1,7 @@
 import styles from "../../styles/Resource.module.css";
 import { useHistory } from "react-router-dom";
 
-const cards = [
+export const resourceCategories = [
   {
     id: 1,
     img: "https://source.unsplash.com/random/400x300",
@@ -47,7 +47,7 @@ export default function Resource() {
         <h1>Resource Center</h1>
       </div>
       <div className={styles.content}>
-        {cards.map((card) => (
+        {resourceCategories.map((card) => (
           <ResourceCard key={card.id} card={card} />
         ))}
       </div>

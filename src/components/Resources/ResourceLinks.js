@@ -5,12 +5,13 @@ import { useState } from "react";
 import { db } from "../../firebase";
 import { useParams } from "react-router";
 import { useAuth } from "../../context/AuthContext";
-
+import { resourceCategories } from "./Resource";
 export default function ResourceLinks() {
   const [links, setLinks] = useState([]);
   const { resource } = useParams();
   const { currentUser } = useAuth();
-
+  const [heading, setHeading] = useState("");
+  const [found, setFound] = useState(false);
   const sortByVotes = (arr) => {
     arr.sort((a, b) => {
       const isVotesUnDefA = typeof a.Votes === "undefined";
@@ -31,6 +32,16 @@ export default function ResourceLinks() {
     return arr;
   };
   useEffect(() => {
+    let inDb = false;
+    resourceCategories.forEach((resourceCat) => {
+      if (resourceCat.url === resource) {
+        inDb = true;
+        setHeading(resourceCat.txt);
+        setFound(true);
+        return;
+      }
+    });
+    if (!inDb) return;
     db.collection(resource)
       .get()
       .then((querySnapshot) => {
@@ -40,26 +51,29 @@ export default function ResourceLinks() {
         });
         setLinks(tempLinks);
       });
-    console.log("useEffect ran");
   }, []);
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.heading}>
-        <h1>Resource Heading</h1>
-      </div>
-      <div className={styles.content}>
-        {sortByVotes(links).map((link) => (
-          <LinkCard
-            key={link.id}
-            link={link}
-            setLinks={setLinks}
-            links={links}
-            userId={currentUser && currentUser.uid}
-            resourceCategory={resource}
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      {found && (
+        <div className={styles.wrapper}>
+          <div className={styles.heading}>
+            <h1>{heading}</h1>
+          </div>
+          <div className={styles.content}>
+            {sortByVotes(links).map((link) => (
+              <LinkCard
+                key={link.id}
+                link={link}
+                setLinks={setLinks}
+                links={links}
+                userId={currentUser && currentUser.uid}
+                resourceCategory={resource}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
