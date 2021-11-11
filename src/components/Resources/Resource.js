@@ -17,8 +17,8 @@ export const resourceCategories = [
   {
     id: 3,
     img: "https://source.unsplash.com/random/400x402",
-    txt: "Scholorships",
-    url: "Scholorships",
+    txt: "Scholarships",
+    url: "Scholarship",
   },
   {
     id: 4,
