@@ -27,6 +27,7 @@
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
+  width: 100%;
 }
 
 .content::-webkit-scrollbar {
@@ -53,11 +54,6 @@
 
 .desc h3 {
   cursor: pointer;
-}
-.desc p {
-  color: rgb(0, 117, 212);
-  cursor: pointer;
-  word-break: break-all;
 }
 
 .vote {
