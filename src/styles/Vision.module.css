@@ -83,7 +83,7 @@
   gap: 5px;
 }
 
-.desc button {
+.desc a {
   margin: auto;
   border: none;
   outline: none;
@@ -95,9 +95,10 @@
   cursor: pointer;
   border-radius: 3px;
   color: #0089e4;
+  text-decoration: none;
 }
 
-.desc button:hover {
+.desc a:hover {
   background-color: #f5f5f5;
 }
 

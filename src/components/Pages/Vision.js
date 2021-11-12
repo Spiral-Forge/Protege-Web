@@ -1,5 +1,5 @@
 import styles from "../../styles/Vision.module.css";
-
+import { team } from "./staticPagesData";
 export default function Vision() {
   return (
     <div className={styles.container}>
@@ -27,42 +27,24 @@ export default function Vision() {
           </p>
         </div>
         <div className={styles.cards}>
-          <div className={styles.card}>
-            <div className={styles.img}>
-              <img src="https://source.unsplash.com/random/400x250" alt="" />
-            </div>
-            <div className={styles.desc}>
-              <h3>Nitasha Dhingra</h3>
-              <button>Connect</button>
-            </div>
-          </div>
-          <div className={styles.card}>
-            <div className={styles.img}>
-              <img src="https://source.unsplash.com/random/400x220" alt="" />
-            </div>
-            <div className={styles.desc}>
-              <h3>Nitasha Dhingra</h3>
-              <button>Connect</button>
-            </div>
-          </div>
-          <div className={styles.card}>
-            <div className={styles.img}>
-              <img src="https://source.unsplash.com/random/400x252" alt="" />
-            </div>
-            <div className={styles.desc}>
-              <h3>Nitasha Dhingra</h3>
-              <button>Connect</button>
-            </div>
-          </div>
-          <div className={styles.card}>
-            <div className={styles.img}>
-              <img src="https://source.unsplash.com/random/420x250" alt="" />
-            </div>
-            <div className={styles.desc}>
-              <h3>Nitasha Dhingra</h3>
-              <button>Connect</button>
-            </div>
-          </div>
+          {team.map((mem) => {
+            return (
+              <div className={styles.card}>
+                <div className={styles.img}>
+                  <img
+                    src="https://source.unsplash.com/random/400x250"
+                    alt=""
+                  />
+                </div>
+                <div className={styles.desc}>
+                  <h3>{mem.name}</h3>
+                  <a href={mem.linkedIn} target="_blank" rel="noreferrer">
+                    Connect
+                  </a>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
