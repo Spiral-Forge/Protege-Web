@@ -1,67 +1,171 @@
 import styles from "../../styles/ResourceLinks.module.css";
-
+import { useEffect } from "react";
 import { AiFillCaretUp, AiFillCaretDown } from "react-icons/ai";
-const links = [
-  {
-    id: 1,
-    title: "Some Demo Title",
-    url: "https://www.instagram.com/harshpandey_002/",
-  },
-  {
-    id: 2,
-    title: "Some Demo Title",
-    url: "https://github.com/Spiral-Forge/Protege-Web/commits/harsh_resource/",
-  },
-  {
-    id: 3,
-    title: "Some Demo Title",
-    url: "https://open.spotify.com/track/4dASQiO1Eoo3RJvt74FtXB?si=3b770c4f115e45ac",
-  },
-  {
-    id: 4,
-    title: "Some Demo Title",
-    url: "https://open.spotify.com/track/7KW1AtQKFToSoF1kmyk2wE?si=9115794018fa43ba",
-  },
-  {
-    id: 5,
-    title: "Some Demo Title",
-    url: "https://open.spotify.com/track/0OgGn1ofaj55l2PcihQQGV?si=d58e797bf427477b",
-  },
-];
-
+import { useState } from "react";
+import { db } from "../../firebase";
+import { useParams } from "react-router";
+import { useAuth } from "../../context/AuthContext";
+import { resourceCategories } from "./Resource";
 export default function ResourceLinks() {
+  const [links, setLinks] = useState([]);
+  const { resource } = useParams();
+  const { currentUser } = useAuth();
+  const [heading, setHeading] = useState("");
+  const [found, setFound] = useState(false);
+  const sortByVotes = (arr) => {
+    arr.sort((a, b) => {
+      const isVotesUnDefA = typeof a.Votes === "undefined";
+      const isVotesUnDefB = typeof b.Votes === "undefined";
+      if (isVotesUnDefB) {
+        b.Votes = 0;
+      }
+      if (isVotesUnDefA) {
+        a.Votes = 0;
+      }
+      if (a.Votes < b.Votes) {
+        return 1;
+      } else if (a.Votes > b.Votes) {
+        return -1;
+      }
+      return 0;
+    });
+    return arr;
+  };
+  useEffect(() => {
+    let inDb = false;
+    resourceCategories.forEach((resourceCat) => {
+      if (resourceCat.url === resource) {
+        inDb = true;
+        setHeading(resourceCat.txt);
+        setFound(true);
+        return;
+      }
+    });
+    if (!inDb) return;
+    db.collection(resource)
+      .get()
+      .then((querySnapshot) => {
+        let tempLinks = [];
+        querySnapshot.forEach((doc) => {
+          tempLinks.push({ id: doc.id, ...doc.data() });
+        });
+        setLinks(tempLinks);
+      });
+  }, []);
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.heading}>
-        <h1>Resource Heading</h1>
-      </div>
-      <div className={styles.content}>
-        {links.map((link) => (
-          <LinkCard key={link.id} link={link} />
-        ))}
-      </div>
-    </div>
+    <>
+      {found && (
+        <div className={styles.wrapper}>
+          <div className={styles.heading}>
+            <h1>{heading}</h1>
+          </div>
+          <div className={styles.content}>
+            {sortByVotes(links).map((link) => (
+              <LinkCard
+                key={link.id}
+                link={link}
+                setLinks={setLinks}
+                links={links}
+                userId={currentUser && currentUser.uid}
+                resourceCategory={resource}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
-export function LinkCard({ link }) {
+export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
   const handleClick = (url) => {
     window.open(url, "_blank");
   };
-
+  const UpdateDb = (newDoc) => {
+    db.collection(resourceCategory)
+      .doc(link.id)
+      .set(newDoc)
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleUpvote = () => {
+    if (!userId) {
+      window.alert("Login or Signup to vote!");
+      return;
+    }
+    let indexOfNewLink;
+    let tempLinks = links.map((linkSnap, index) => {
+      if (linkSnap.id === link.id) {
+        indexOfNewLink = index;
+        if (!linkSnap.Votes) linkSnap.Votes = 0;
+        if (!linkSnap.votesMap) linkSnap.votesMap = {};
+        if (linkSnap.votesMap[userId] === true) {
+          linkSnap.Votes -= 1;
+          delete linkSnap.votesMap[userId];
+          return linkSnap;
+        } else if (linkSnap.votesMap[userId] === false) {
+          linkSnap.Votes += 2;
+        } else linkSnap.Votes += 1;
+        linkSnap.votesMap[userId] = true;
+      }
+      return linkSnap;
+    });
+    setLinks(tempLinks);
+    if (indexOfNewLink >= 0) UpdateDb(tempLinks[indexOfNewLink]);
+  };
+  const handleDownvote = () => {
+    if (!userId) {
+      window.alert("Login or Signup to vote!");
+      return;
+    }
+    let indexOfNewLink;
+    let tempLinks = links.map((linkSnap, index) => {
+      if (linkSnap.id === link.id) {
+        indexOfNewLink = index;
+        if (!linkSnap.Votes) linkSnap.Votes = 0;
+        if (!linkSnap.votesMap) linkSnap.votesMap = {};
+        if (linkSnap.votesMap[userId] === false) {
+          linkSnap.Votes += 1;
+          delete linkSnap.votesMap[userId];
+          return linkSnap;
+        } else if (linkSnap.votesMap[userId] === true) {
+          linkSnap.Votes -= 2;
+        } else linkSnap.Votes -= 1;
+        linkSnap.votesMap[userId] = false;
+      }
+      return linkSnap;
+    });
+    setLinks(tempLinks);
+    if (indexOfNewLink >= 0) UpdateDb(tempLinks[indexOfNewLink]);
+  };
   return (
     <div className={styles.card}>
-      <div className={styles.desc}>
-        <h3>{link.title}</h3>
-        <p onClick={() => handleClick(link.url)}>{link.url}</p>
-      </div>
       <div className={styles.vote}>
         <span>
-          <AiFillCaretUp className={styles.icon} />
+          <AiFillCaretUp
+            className={styles.icon}
+            onClick={handleUpvote}
+            style={
+              link.votesMap && link.votesMap[userId] ? { color: "green" } : {}
+            }
+          />
         </span>
+        {typeof link.Votes === "undefined" ? 0 : link.Votes}
         <span>
-          <AiFillCaretDown className={styles.icon} />
+          <AiFillCaretDown
+            className={styles.icon}
+            onClick={handleDownvote}
+            style={
+              link.votesMap && link.votesMap[userId] === false
+                ? { color: "red" }
+                : {}
+            }
+          />
         </span>
+      </div>
+      <div className={styles.desc}>
+        <h3 onClick={() => handleClick(link.Link)}>{link.Title}</h3>
       </div>
     </div>
   );
