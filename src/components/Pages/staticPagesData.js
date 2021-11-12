@@ -25,16 +25,26 @@ export const guidelinesMentees = [
 ];
 
 export const faqQuestionAnswers = [
-  `When will I be connected with my mentor/mentee?`,
-  `We take some time to study all profiles and match mentees with a mentor who is right for them. So be patient and you will be notified as soon as you’re connected with your mentor/mentee.`,
-  `I am facing technical issues with the app. What do I do?`,
-  `Send us feedback through the app describing your issue. If that is not possible, reach out to us at spiralforge4@gmail.com.`,
-  `I am unable to form a friendly connection with my mentor/mentee and would like to have a change in my mentor/mentee.`,
-  `College life is all about bursting your ideal-world-bubble and learning to deal with different kinds of people. Put forth your feelings to your mentor/mentee and try to talk it out. If it still does not work out, contact us at spiralforge4@gmail.com.`,
-  `My mentor is not following the guidelines proposed by the society and I wish to report her. Will my identity be shared with her if I do so?`,
-  `We assure you that your feedback and identity will be kept confidential in such cases.`,
-  `What if I mailed regarding an issue at given email id and hasn’t received a response yet?`,
-  `We try to respond to emails within 3-4 working days. If it has been more than 4 days since you emailed us, send us a follow-up email and we will get back to you asap!`,
+  {
+    question: `When will I be connected with my mentor/mentee?`,
+    answer: `We take some time to study all profiles and match mentees with a mentor who is right for them. So be patient and you will be notified as soon as you’re connected with your mentor/mentee.`,
+  },
+  {
+    question: `I am facing technical issues with the app. What do I do?`,
+    answer: `Send us feedback through the app describing your issue. If that is not possible, reach out to us at spiralforge4@gmail.com.`,
+  },
+  {
+    question: `I am unable to form a friendly connection with my mentor/mentee and would like to have a change in my mentor/mentee.`,
+    answer: `College life is all about bursting your ideal-world-bubble and learning to deal with different kinds of people. Put forth your feelings to your mentor/mentee and try to talk it out. If it still does not work out, contact us at spiralforge4@gmail.com.`,
+  },
+  {
+    question: `My mentor is not following the guidelines proposed by the society and I wish to report her. Will my identity be shared with her if I do so?`,
+    answer: `We assure you that your feedback and identity will be kept confidential in such cases.`,
+  },
+  {
+    question: `What if I mailed regarding an issue at given email id and hasn’t received a response yet?`,
+    answer: `We try to respond to emails within 3-4 working days. If it has been more than 4 days since you emailed us, send us a follow-up email and we will get back to you asap!`,
+  },
 ];
 
 // aboutSoc =      ‘During our first year in IGDTUW, we often felt intimidated by our new surroundings, and found ourselves pondering upon questions like \n\n”Which society should I join?” “Which programming language to learn?” “Which books to refer?” “How to not miss-out on opportunities?” “HOW TO SURVIVE IGDTUW?“\n\nProtégé aims to answer all these questions and more by connecting students with their seniors who will mentor them in all aspects of college life!’;

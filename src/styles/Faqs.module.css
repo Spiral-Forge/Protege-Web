@@ -29,14 +29,16 @@
 
 .details {
   width: 100%;
-  max-height: 5rem;
+  max-height: 7rem;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
   border-bottom: 1px solid rgb(207, 207, 207);
   transition: max-height 1s;
 }
 .details summary {
   width: 100%;
   padding: 1rem 2rem;
-  height: 5rem;
+  height: max-content;
   padding-top: 2rem;
   list-style: none;
   cursor: pointer;
@@ -56,13 +58,13 @@ details[open] {
   background-color: #80b9e8;
   max-height: 30rem;
   border-bottom: 1px solid white;
-
 }
 .tri {
   transform: rotateZ(180deg);
   font-size: 0.9rem;
   transition: transform 0.5s;
 }
+
 details[open] summary .tri {
   transform: rotateZ(0deg);
 }
