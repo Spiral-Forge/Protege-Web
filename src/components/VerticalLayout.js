@@ -1,4 +1,4 @@
-import styles from "../styles/Harsh.module.css";
+import styles from "../styles/VerticalFlex.module.css";
 import VerticalNav from "./VerticalNav";
 import { useAuth } from "../context/AuthContext";
 export default function VerticalLayout({ children }) {
