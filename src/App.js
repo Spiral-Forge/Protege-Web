@@ -37,7 +37,7 @@ function App() {
               <Route path="/faqs" component={Faqs} />
               <Route path="/resource" exact component={Resource} />
               <Route path="/feedback" component={Feedback} />
-              <Route path="/resources/:id" component={ResourceLinks} />
+              <Route path="/resources/:resource" component={ResourceLinks} />
               <Route path="/chat" component={Messenger} />
               <Route path="/harsh" component={Profile} />
             </VerticalLayout>
