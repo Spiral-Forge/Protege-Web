@@ -25,6 +25,9 @@ import {
   hostellers,
   getArray,
 } from "./SignUpOptions";
+
+import { guidelinesMentors, guidelinesMentees } from "../staticPagesData";
+
 function SignUpForm({ post, setPost }) {
   const history = useHistory();
   const { signUp } = useAuth();
@@ -82,58 +85,58 @@ function SignUpForm({ post, setPost }) {
     e.preventDefault();
     const data = userObj();
 
-    try {
-      if (!data.name) {
-        throw "Name";
-      }
-      if (!data.email) {
-        throw "Email";
-      }
-      if (!data.phone) {
-        throw "Phone";
-      }
-      if (isNaN(data.phone)) {
-        window.alert("Phone number is inValid");
-        return;
-      }
-      if (!data.password) {
-        throw "Password";
-      }
-      if (!data.college) {
-        throw "College";
-      }
-      if (!data.branch) {
-        throw "Branch";
-      }
-      if (!data.year) {
-        throw "Year";
-      }
-      if (!data.rollNo) {
-        throw "Roll";
-      }
-      if (!data.domains.length) {
-        throw "Domains";
-      }
-      if (!data.languages.length) {
-        throw "Languages";
-      }
-      if (!data.linkedInURL) {
-        throw "LinkedIn";
-      }
-      if (!data.githubURL) {
-        throw "Github";
-      }
-      if (!data.gender) {
-        throw "Gender";
-      }
-      if (!data.hosteller?.toString()) {
-        throw "Hosteller";
-      }
-    } catch (err) {
-      // console.log(`${err} field is required`);
-      window.alert(`${err} field is required`);
-      return;
-    }
+    // try {
+    //   if (!data.name) {
+    //     throw "Name";
+    //   }
+    //   if (!data.email) {
+    //     throw "Email";
+    //   }
+    //   if (!data.phone) {
+    //     throw "Phone";
+    //   }
+    //   if (isNaN(data.phone)) {
+    //     window.alert("Phone number is inValid");
+    //     return;
+    //   }
+    //   if (!data.password) {
+    //     throw "Password";
+    //   }
+    //   if (!data.college) {
+    //     throw "College";
+    //   }
+    //   if (!data.branch) {
+    //     throw "Branch";
+    //   }
+    //   if (!data.year) {
+    //     throw "Year";
+    //   }
+    //   if (!data.rollNo) {
+    //     throw "Roll";
+    //   }
+    //   if (!data.domains.length) {
+    //     throw "Domains";
+    //   }
+    //   if (!data.languages.length) {
+    //     throw "Languages";
+    //   }
+    //   if (!data.linkedInURL) {
+    //     throw "LinkedIn";
+    //   }
+    //   if (!data.githubURL) {
+    //     throw "Github";
+    //   }
+    //   if (!data.gender) {
+    //     throw "Gender";
+    //   }
+    //   if (!data.hosteller?.toString()) {
+    //     throw "Hosteller";
+    //   }
+    // } catch (err) {
+    //   // console.log(`${err} field is required`);
+    //   window.alert(`${err} field is required`);
+    //   return;
+    // }
 
     setGuidelinesPopUp(true);
   };
@@ -312,19 +315,19 @@ function SignUpForm({ post, setPost }) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus
-            sit amet luctus venenatis lectus magna fringilla urna. Ipsum dolor
-            sit amet consectetur adipiscing elit ut aliquam. Id cursus metus
-            aliquam eleifend. Quisque egestas diam in arcu. Bibendum neque
-            egestas congue quisque egestas. Aenean sed adipiscing diam donec
-            adipiscing tristique risus. Phasellus vestibulum lorem sed risus.
-            Fermentum dui faucibus in ornare quam viverra orci sagittis. Donec
-            et odio pellentesque diam volutpat commodo sed. Amet aliquam id diam
-            maecenas. Purus gravida quis blandit turpis cursus in. Dui ut ornare
-            lectus sit amet. At quis risus sed vulputate odio. Enim nunc
-            faucibus a pellentesque sit amet. At quis risus sed vulputate odio
-            ut enim blandit volutpat. Eros in cursus turpis massa tincidunt dui.
+            {post === "Mentor" ? (
+              <ol>
+                {guidelinesMentors.map((guideline) => {
+                  return <li>{guideline}</li>;
+                })}
+              </ol>
+            ) : (
+              <ol>
+                {guidelinesMentees.map((guideline) => {
+                  return <li>{guideline}</li>;
+                })}
+              </ol>
+            )}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
