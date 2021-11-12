@@ -33,7 +33,6 @@ function App() {
             <VerticalLayout>
               <Route path="/home" exact component={Homepage} />
               <Route path="/vision" exact component={Vision} />
-              <Route path="/about" component={AboutUs} />
               <Route path="/faqs" component={Faqs} />
               <Route path="/resource" exact component={Resource} />
               <Route path="/feedback" component={Feedback} />
