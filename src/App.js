@@ -39,7 +39,7 @@ function App() {
               <Route path="/feedback" component={Feedback} />
               <Route path="/resources/:resource" component={ResourceLinks} />
               <Route path="/chat" component={Messenger} />
-              <Route path="/harsh" component={Profile} />
+              <Route path="/profile" component={Profile} />
             </VerticalLayout>
           </Switch>
         </Router>
