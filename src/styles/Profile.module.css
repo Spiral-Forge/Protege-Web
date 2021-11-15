@@ -32,7 +32,8 @@
 
 .info {
   width: max-content;
-  max-width: 300px;
+  /*max-width: 300px; */
+  max-width: 80%;
   margin: 0 auto;
   margin-top: 10px;
   display: flex;

@@ -12,19 +12,25 @@ export default function ProfileInfo({ userData }) {
   return (
     <div className={styles.info}>
       <span className={styles.field}>
-        <BsFillTelephoneFill className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <BsFillTelephoneFill className={styles.icon} />
+        </div>
         <div>
           <p>{userData.phone}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <IoMdMail className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <IoMdMail className={styles.icon} />
+        </div>
         <div>
           <p>{userData.email}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <IoMdSchool style={{ fontSize: "3.4rem" }} className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <IoMdSchool className={styles.icon} />
+        </div>
         <div>
           <p>
             {userData.branch}, {userData.year} year, {userData.college}
@@ -34,21 +40,27 @@ export default function ProfileInfo({ userData }) {
         </div>
       </span>
       <span className={styles.field}>
-        <BsGlobe className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <BsGlobe className={styles.icon} />
+        </div>
         <div>
           <p>Languages</p>
           <p>{userData.languages.join(", ")}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <BsCodeSlash style={{ fontSize: "3.4rem" }} className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <BsCodeSlash className={styles.icon} />
+        </div>
         <div>
           <p>Domains</p>
           <p>{userData.domains.join(", ")}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <BsLinkedin className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <BsLinkedin className={styles.icon} />
+        </div>
         <div>
           <p>Linkedin</p>
           <a href={userData.linkedInURL} target="_blank">
@@ -57,7 +69,9 @@ export default function ProfileInfo({ userData }) {
         </div>
       </span>
       <span className={styles.field}>
-        <BsGithub className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <BsGithub className={styles.icon} />
+        </div>
         <div>
           <p>Github</p>
           <a href={userData.githubURL} target="_blank">
