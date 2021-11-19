@@ -47,7 +47,7 @@ export const faqQuestionAnswers = [
   },
 ];
 
-// aboutSoc =      ‘During our first year in IGDTUW, we often felt intimidated by our new surroundings, and found ourselves pondering upon questions like \n\n”Which society should I join?” “Which programming language to learn?” “Which books to refer?” “How to not miss-out on opportunities?” “HOW TO SURVIVE IGDTUW?“\n\nProtégé aims to answer all these questions and more by connecting students with their seniors who will mentor them in all aspects of college life!’;
+export const aboutSoc = `During our first year in IGDTUW, we often felt intimidated by our new surroundings, and found ourselves pondering upon questions like: \n\n"Which society should I join?", "Which programming language to learn?", "Which books to refer?", "How to not miss-out on opportunities?", "HOW TO SURVIVE IGDTUW?"\n\nProtégé aims to answer all these questions and more by connecting students with their seniors who will mentor them in all aspects of college life!`;
 
 export const team = [
   {
