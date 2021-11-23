@@ -53,7 +53,7 @@ function SignUpForm({ post, setPost }) {
   const handleAccept = async () => {
     try {
       await signUp(formData.email, formData.password);
-      const tempObject = { ...formData };
+      const tempObject = userObj();
       delete tempObject["password"];
       await db.collection("Users").doc(auth.currentUser.uid).set(tempObject);
     } catch (e) {

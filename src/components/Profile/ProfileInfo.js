@@ -4,55 +4,78 @@ import {
   BsGlobe,
   BsCodeSlash,
   BsLinkedin,
+  BsGithub,
 } from "react-icons/bs";
 import { IoMdMail, IoMdSchool } from "react-icons/io";
 
-export default function ProfileInfo() {
+export default function ProfileInfo({ userData }) {
   return (
     <div className={styles.info}>
       <span className={styles.field}>
-        <BsFillTelephoneFill className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <BsFillTelephoneFill className={styles.icon} />
+        </div>
         <div>
-          <p>6296343307</p>
+          <p>{userData.phone}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <IoMdMail className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <IoMdMail className={styles.icon} />
+        </div>
         <div>
-          <p>coding.harshp@gmail.com</p>
+          <p>{userData.email}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <IoMdSchool className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <IoMdSchool className={styles.icon} />
+        </div>
         <div>
-          <p>Branch, year</p>
-          <p>Roll number here</p>
-          <p>Hosteller: Yes/No</p>
+          <p>
+            {userData.branch}, {userData.year} year, {userData.college}
+          </p>
+          <p>Roll number: {userData.rollNo}</p>
+          <p>Hosteller: {userData.hosteller ? "Yes" : "No"}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <BsGlobe className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <BsGlobe className={styles.icon} />
+        </div>
         <div>
-          <p>Language</p>
-          <p>java, CPP</p>
+          <p>Languages</p>
+          <p>{userData.languages.join(", ")}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <BsCodeSlash className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <BsCodeSlash className={styles.icon} />
+        </div>
         <div>
           <p>Domains</p>
-          <p>Web, Machine Learning</p>
+          <p>{userData.domains.join(", ")}</p>
         </div>
       </span>
       <span className={styles.field}>
-        <BsLinkedin style={{ fontSize: 50 }} className={styles.icon} />
+        <div className={styles.iconContainer}>
+          <BsLinkedin className={styles.icon} />
+        </div>
         <div>
           <p>Linkedin</p>
-          <a
-            href="https://www.linkedin.com/in/harsh-kumar-pandey-5ab9071aa/"
-            target="_blank"
-          >
-            https://www.linkedin.com/in/harsh-kumar-pandey-5ab9071aa/
+          <a href={userData.linkedInURL} target="_blank">
+            {userData.linkedInURL}
+          </a>
+        </div>
+      </span>
+      <span className={styles.field}>
+        <div className={styles.iconContainer}>
+          <BsGithub className={styles.icon} />
+        </div>
+        <div>
+          <p>Github</p>
+          <a href={userData.githubURL} target="_blank">
+            {userData.githubURL}
           </a>
         </div>
       </span>

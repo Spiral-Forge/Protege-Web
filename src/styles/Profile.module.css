@@ -32,13 +32,15 @@
 
 .info {
   width: max-content;
-  max-width: 300px;
+  /*max-width: 300px; */
+  max-width: 80%;
   margin: 0 auto;
   margin-top: 10px;
   display: flex;
   gap: 15px;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: 1rem;
 }
 
 .img {
@@ -74,7 +76,8 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background-color: #f3f3f3;
+  background-color: #4b7191;
+  color: white;
   padding: 5px 10px;
   border-radius: 15px;
   font-size: 0.8rem;
@@ -94,6 +97,7 @@
 .field {
   display: flex;
   gap: 20px;
+  width: 100%;
 }
 
 .field div p {
