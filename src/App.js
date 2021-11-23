@@ -19,6 +19,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ResourceLinks from "./components/Resources/ResourceLinks";
 import Resource from "./components/Resources/Resource";
 import Profile from "./components/Profile/Profile";
+import Deadlines from "./components/Pages/Deadlines";
 
 function App() {
   const history = useHistory();
@@ -40,6 +41,7 @@ function App() {
               <Route path="/resources/:resource" component={ResourceLinks} />
               <Route path="/chat" component={Messenger} />
               <Route path="/profile" component={Profile} />
+              <Route path="/deadlines" component={Deadlines} />
             </VerticalLayout>
           </Switch>
         </Router>
