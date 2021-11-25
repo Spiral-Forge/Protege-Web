@@ -36,6 +36,7 @@ const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(parseInt(today.getMonth()));
   const [currentYear, setCurrentYear] = useState(parseInt(today.getFullYear()));
   const [currentDate, setCurrentDate] = useState(parseInt(today.getDate()));
+  const [currentDateDeadlines, setCurrentDateDeadlines] = useState([]);
   const [deadlinesObj, setDeadlinesObj] = useState({});
   useEffect(async () => {
     let tempObj = {};
@@ -49,6 +50,32 @@ const Calendar = () => {
       });
     setDeadlinesObj(tempObj);
   }, []);
+
+  const handleDeadlineClick = (e) => {
+    let tempDate = e.target.dataset.date,
+      tempMonth = currentMonth + 1;
+    setCurrentDate(tempDate);
+    if (tempDate < 10) tempDate = "0" + tempDate;
+    if (tempMonth < 10) tempMonth = "0" + tempMonth;
+
+    const tempFullDate = `${currentYear}-${tempMonth}-${tempDate}`;
+    let tempDeadlinesArr = [];
+    db.collection("Deadlines")
+      .doc(tempFullDate + "T12:00:00.000Z")
+      .collection("Listed")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((snap) => {
+          tempDeadlinesArr.push(snap.data());
+        });
+        console.log(tempDeadlinesArr);
+        setCurrentDateDeadlines(tempDeadlinesArr);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <div className={styles.calendarContainer}>
@@ -111,18 +138,29 @@ const Calendar = () => {
               if (tempMonth < 10) tempMonth = "0" + currentMonth;
 
               const fullDate = `${currentYear}-${tempMonth}-${tempdate}`;
-              // if (deadlinesObj[fullDate]) console.log(fullDate);
               return (
                 <span
                   className={`${styles.date} ${
                     deadlinesObj[fullDate] && styles.deadlineDate
                   }`}
+                  onClick={handleDeadlineClick}
+                  data-date={date}
                 >
                   {date}
                 </span>
               );
             })}
         </div>
+      </div>
+      <div>
+        <div className={styles.deadlinesHeading}>
+          <h1>
+            Deadlines for {currentDate} {months[currentMonth]}, {currentYear}
+          </h1>
+        </div>
+        {currentDateDeadlines.map((deadline) => {
+          return <>{deadline.Title}</>;
+        })}
       </div>
     </>
   );
