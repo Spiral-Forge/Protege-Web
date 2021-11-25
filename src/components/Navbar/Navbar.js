@@ -29,14 +29,16 @@ const Navbar = () => {
         </div>
         <div className={styles.navlinks}>
           <ul>
-            <Link to="/home">
-              <li>Home</li>
-            </Link>
+            {!currentUser && (
+              <Link to="/home">
+                <li>Home</li>
+              </Link>
+            )}
 
             <Link to="/faqs">
               <li>FAQs</li>
             </Link>
-            
+
             <Link to="/vision">
               <li>Vision</li>
             </Link>

@@ -33,7 +33,7 @@ function App() {
               <Route path="/home" exact component={Homepage} />
               <Route path="/vision" exact component={Vision} />
               <Route path="/faqs" component={Faqs} />
-              <Route path="/resource" exact component={Resource} />
+              <Route path="/resources" exact component={Resource} />
               <Route path="/feedback" component={Feedback} />
               <Route path="/resources/:resource" component={ResourceLinks} />
               <Route path="/chat" component={Messenger} />
