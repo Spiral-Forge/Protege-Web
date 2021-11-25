@@ -1,0 +1,47 @@
+.container {
+  width: 100%;
+}
+
+.heading h1 {
+  font-size: 2.5rem;
+  color: #5f5f5f;
+  margin: 0 auto;
+  width: max-content;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+.calendarContainer {
+  margin: 0 auto;
+  background-color: #80b9e8;
+  width: 90%;
+  padding: 1rem;
+  border: 3px solid rgb(81, 191, 235);
+  border-radius: 20px;
+  color: white;
+}
+.monthsContainer {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.monthsContainer span {
+  color: rgb(236, 236, 236);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.monthsContainer .currentDate {
+  color: white;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weekContainer {
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
