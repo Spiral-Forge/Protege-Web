@@ -29,6 +29,7 @@
   color: rgb(236, 236, 236);
   font-size: 1.1rem;
   font-weight: 500;
+  cursor: pointer;
 }
 .monthsContainer .currentDate {
   color: white;
@@ -44,4 +45,26 @@
   margin-top: 2rem;
   display: flex;
   justify-content: space-between;
+  font-weight: 600;
+}
+
+.datesContainer {
+  margin: 0 auto;
+  margin-top: 1rem;
+  display: grid;
+  width: 88%;
+  grid-template-columns: repeat(7, auto);
+  justify-content: space-between;
+}
+
+.date {
+  margin: 1rem;
+  font-weight: 600;
+}
+.prevMonthDate {
+  color: rgb(241, 241, 241);
+  font-weight: 400;
+}
+.deadlineDate{
+  color: aqua;
 }
