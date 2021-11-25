@@ -33,14 +33,12 @@ const Navbar = () => {
               <li>Home</li>
             </Link>
 
-            <Link to="/vision">
-              <li>Vision</li>
-            </Link>
             <Link to="/faqs">
               <li>FAQs</li>
             </Link>
-            <Link to="/help">
-              <li>Help Center</li>
+            
+            <Link to="/vision">
+              <li>Vision</li>
             </Link>
             {!currentUser && (
               <>
@@ -52,6 +50,7 @@ const Navbar = () => {
                 </Link>
               </>
             )}
+
             {/* <li className={styles.logout}>Logout</li> */}
           </ul>
         </div>

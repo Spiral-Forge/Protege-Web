@@ -16,23 +16,18 @@
   text-align: center;
 }
 
-/* .content {
-  width: 90%;
+
+.content {
+  width: 85%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 20px;
-} */
-.content {
-  width: 90%;
-  margin: 0 auto;
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  /* grid-auto-flow: dense; */
+  
 }
+
 
 .btn {
   position: fixed;

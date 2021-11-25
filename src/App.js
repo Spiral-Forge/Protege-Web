@@ -7,8 +7,7 @@ import {
 import "./App.css";
 import Messenger from "./components/Chat/Messenger";
 import Navbar from "./components/Navbar/Navbar";
-import AboutUs from "./components/Pages/AboutUs";
-import Faqs from "./components/Pages/Faqs";
+import Faqs from "./components/Pages/Faqs/Faqs";
 import Feedback from "./components/Pages/Feedback";
 import Vision from "./components/Pages/Vision";
 import Homepage from "./components/Pages/Home/Homepage";
@@ -28,13 +27,12 @@ function App() {
         <Router history={history}>
           <Navbar />
           <Switch>
-            <Route path="/home" exact component={Homepage} />
-            <Route path="/vision" exact component={Vision} />
-            <Route path="/aboutus" component={AboutUs} />
-            <Route path="/faqs" component={Faqs} />
             <Route path="/signin" component={SignIn} />
             <Route exact path="/register" component={SignUp} />
             <VerticalLayout>
+              <Route path="/home" exact component={Homepage} />
+              <Route path="/vision" exact component={Vision} />
+              <Route path="/faqs" component={Faqs} />
               <Route path="/resource" exact component={Resource} />
               <Route path="/feedback" component={Feedback} />
               <Route path="/resources/:resource" component={ResourceLinks} />
