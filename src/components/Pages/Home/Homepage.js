@@ -5,7 +5,7 @@ import "./Homepage.css";
 function Homepage() {
   
   return (
-    <>
+    <div>
       <div className="home__hero-section">
         <div className="container">
           <div
@@ -34,7 +34,7 @@ function Homepage() {
       <div>
         <Event />
       </div>
-    </>
+    </div>
   );
 }
 
