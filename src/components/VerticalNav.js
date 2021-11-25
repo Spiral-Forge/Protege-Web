@@ -21,10 +21,18 @@ export default function VerticalNav() {
         </Link>
       </div>
       <div className={styles.icons}>
-        <AiFillHome className={styles.icon} />
-        <BsFillChatDotsFill className={styles.icon} />
-        <FaSwatchbook className={styles.icon} />
-        <BsCalendarEventFill className={styles.icon} />
+        <Link to="/home">
+          <AiFillHome className={styles.icon} />
+        </Link>
+        <Link to="/chat">
+          <BsFillChatDotsFill className={styles.icon} />
+        </Link>
+        <Link to="/resources">
+          <FaSwatchbook className={styles.icon} />
+        </Link>
+        <Link to="/deadlines">
+          <BsCalendarEventFill className={styles.icon} />
+        </Link>
       </div>
       <div className={styles.logout}>
         <FiLogOut className={styles.icon} />
