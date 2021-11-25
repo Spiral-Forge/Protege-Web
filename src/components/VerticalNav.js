@@ -3,10 +3,20 @@ import { FiLogOut } from "react-icons/fi";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillChatDotsFill, BsCalendarEventFill } from "react-icons/bs";
 import { FaSwatchbook } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 export default function VerticalNav() {
-  const { currentUser } = useAuth();
+  const { currentUser, signOut } = useAuth();
+  const history = useHistory();
+  const handleSignOut = async () => {
+    if (!window.confirm("Are you sure you want to log out?")) return;
+    try {
+      await signOut();
+    } catch (err) {
+      console.log(err);
+    }
+    history.push("/home");
+  };
   return (
     <div className={styles.container}>
       <div className={styles.pic}>
@@ -35,7 +45,7 @@ export default function VerticalNav() {
         </Link>
       </div>
       <div className={styles.logout}>
-        <FiLogOut className={styles.icon} />
+        <FiLogOut onClick={handleSignOut} className={styles.icon} />
       </div>
     </div>
   );
