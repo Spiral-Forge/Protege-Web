@@ -10,7 +10,7 @@
   margin-top: 1.5rem;
   margin-bottom: 2rem;
 }
-.deadlinesHeading h1 {
+.deadlinesHeading h2 {
   font-size: 2rem;
   color: #5f5f5f;
   margin: 0 auto;
@@ -101,4 +101,22 @@
   color: #5f5f5f;
   width: fit-content;
   margin: 0 auto;
+}
+
+@media only screen and (max-width: 660px) {
+  .deadlinesHeading h2 {
+    font-size: 1.5rem;
+  }
+  .monthsContainer {
+    width: 80%;
+  }
+  .weekContainer {
+    width: 95%;
+  }
+  .datesContainer {
+    width: 100%;
+  }
+  .calendarContainer {
+    width: 95%;
+  }
 }

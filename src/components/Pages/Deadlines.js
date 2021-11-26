@@ -65,7 +65,6 @@ const Calendar = () => {
         snapshot.forEach((snap) => {
           tempDeadlinesArr.push(snap.data());
         });
-        console.log(tempDeadlinesArr);
         setCurrentDateDeadlines(tempDeadlinesArr);
       })
       .catch((err) => {
@@ -81,6 +80,10 @@ const Calendar = () => {
     if (tempMonth < 10) tempMonth = "0" + tempMonth;
 
     const tempFullDate = `${currentYear}-${tempMonth}-${tempDate}`;
+    if (!deadlinesObj[tempFullDate]) {
+      setCurrentDateDeadlines([]);
+      return;
+    }
     let tempDeadlinesArr = [];
     db.collection("Deadlines")
       .doc(tempFullDate + "T12:00:00.000Z")
@@ -90,7 +93,6 @@ const Calendar = () => {
         snapshot.forEach((snap) => {
           tempDeadlinesArr.push(snap.data());
         });
-        console.log(tempDeadlinesArr);
         setCurrentDateDeadlines(tempDeadlinesArr);
       })
       .catch((err) => {
@@ -129,8 +131,8 @@ const Calendar = () => {
         </div>
 
         <div className={styles.weekContainer}>
-          {week.map((day) => {
-            return <span>{day}</span>;
+          {week.map((day, index) => {
+            return <span key={index}>{day}</span>;
           })}
         </div>
         <div className={styles.datesContainer}>
@@ -144,9 +146,12 @@ const Calendar = () => {
                 new Date(currentYear, currentMonth, 1).getDay() +
                 1
             )
-            .map((date) => {
+            .map((date, index) => {
               return (
-                <span className={`${styles.date} ${styles.prevMonthDate}`}>
+                <span
+                  key={index}
+                  className={`${styles.date} ${styles.prevMonthDate}`}
+                >
                   {date}
                 </span>
               );
@@ -157,7 +162,7 @@ const Calendar = () => {
             ).keys(),
           ]
             .slice(1)
-            .map((date) => {
+            .map((date, index) => {
               let tempdate = date,
                 tempMonth = currentMonth + 1;
               if (tempdate < 10) tempdate = "0" + date;
@@ -166,6 +171,7 @@ const Calendar = () => {
               const fullDate = `${currentYear}-${tempMonth}-${tempdate}`;
               return (
                 <span
+                  key={index}
                   className={`${styles.date} ${
                     deadlinesObj[fullDate] && styles.deadlineDate
                   }`}
@@ -180,13 +186,13 @@ const Calendar = () => {
       </div>
       <div>
         <div className={styles.deadlinesHeading}>
-          <h1>
+          <h2>
             Deadlines for {currentDate} {months[currentMonth]}, {currentYear}
-          </h1>
+          </h2>
         </div>
-        {currentDateDeadlines.map((deadline) => {
+        {currentDateDeadlines.map((deadline, index) => {
           return (
-            <div className={styles.deadlineContainer}>
+            <div key={index} className={styles.deadlineContainer}>
               <h2>{deadline.Title}</h2>
               Link:{" "}
               <a href={deadline.Link.trim()} target="_blank" rel="noreferrer">
@@ -196,9 +202,9 @@ const Calendar = () => {
           );
         })}
         {currentDateDeadlines.length === 0 && (
-          <h2 className={styles.noDeadlinesFound}>
+          <h3 className={styles.noDeadlinesFound}>
             No deadlines on selected date
-          </h2>
+          </h3>
         )}
       </div>
     </>
