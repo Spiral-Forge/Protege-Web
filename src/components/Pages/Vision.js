@@ -15,10 +15,7 @@ export default function Vision() {
             return (
               <div className={styles.card}>
                 <div className={styles.img}>
-                  <img
-                    src="https://source.unsplash.com/random/400x250"
-                    alt=""
-                  />
+                  <img src={"./assets/founders/" + mem.image} alt="" />
                 </div>
                 <div className={styles.desc}>
                   <h3>{mem.name}</h3>

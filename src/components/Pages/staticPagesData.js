@@ -53,14 +53,21 @@ export const team = [
   {
     name: "Nitasha Dhingra",
     linkedIn: "https://www.linkedin.com/in/nitashadhingra",
+    image: "NitashaDhingra.jpg",
   },
   {
     name: "Suhani Chawla",
     linkedIn: "https://www.linkedin.com/in/suhani-chawla-891919171/",
+    image: "SuhaniChawla.jpeg",
   },
-  { name: "Urvi Goel", linkedIn: "https://www.linkedin.com/in/urvi-goel/" },
+  {
+    name: "Urvi Goel",
+    linkedIn: "https://www.linkedin.com/in/urvi-goel/",
+    image: "UrviGoel.jpg",
+  },
   {
     name: "Oshin Saini",
     linkedIn: "https://www.linkedin.com/in/oshin-saini-838718184/",
+    image: "OshinSaini.jpg",
   },
 ];
