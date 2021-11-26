@@ -49,6 +49,28 @@ const Calendar = () => {
         });
       });
     setDeadlinesObj(tempObj);
+
+    let tempDate = parseInt(today.getDate()),
+      tempMonth = parseInt(today.getMonth()) + 1;
+    if (tempDate < 10) tempDate = "0" + tempDate;
+    if (tempMonth < 10) tempMonth = "0" + tempMonth;
+
+    const tempFullDate = `${today.getFullYear()}-${tempMonth}-${tempDate}`;
+    let tempDeadlinesArr = [];
+    db.collection("Deadlines")
+      .doc(tempFullDate + "T12:00:00.000Z")
+      .collection("Listed")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((snap) => {
+          tempDeadlinesArr.push(snap.data());
+        });
+        console.log(tempDeadlinesArr);
+        setCurrentDateDeadlines(tempDeadlinesArr);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const handleDeadlineClick = (e) => {
@@ -162,12 +184,17 @@ const Calendar = () => {
           return (
             <div className={styles.deadlineContainer}>
               <h2>{deadline.Title}</h2>
-              {deadline.Link}
+              Link:{" "}
+              <a href={deadline.Link.trim()} target="_blank" rel="noreferrer">
+                {deadline.Link}
+              </a>
             </div>
           );
         })}
         {currentDateDeadlines.length === 0 && (
-          <h2 className={styles.noDeadlinesFound}>No deadlines on selected date</h2>
+          <h2 className={styles.noDeadlinesFound}>
+            No deadlines on selected date
+          </h2>
         )}
       </div>
     </>
