@@ -74,8 +74,9 @@
   justify-content: center;
 }
 .prevMonthDate {
-  color: rgb(241, 241, 241);
+  color: rgb(228, 228, 228);
   font-weight: 400;
+  font-size: 0.9rem;
 }
 .deadlineDate {
   background-color: #8da7ea;

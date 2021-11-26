@@ -107,8 +107,10 @@ const Calendar = () => {
               if (currentMonth === 0) setCurrentYear(currentYear - 1);
               setCurrentMonth((currentMonth - 1 + 12) % 12);
             }}
+            className={styles.currentDate}
           >
-            {months[(currentMonth - 1 + 12) % 12]}
+            <span>{months[(currentMonth - 1 + 12) % 12]}</span>
+            <span>{"<"}</span>
           </span>
           <span className={styles.currentDate}>
             <span>{months[currentMonth]} </span>
@@ -119,8 +121,10 @@ const Calendar = () => {
               if (currentMonth === 11) setCurrentYear(currentYear + 1);
               setCurrentMonth((currentMonth + 1) % 12);
             }}
+            className={styles.currentDate}
           >
-            {months[(currentMonth + 1) % 12]}
+            <span>{months[(currentMonth + 1) % 12]}</span>
+            <span>{">"}</span>
           </span>
         </div>
 
