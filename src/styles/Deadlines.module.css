@@ -83,3 +83,18 @@
   padding: 0.5rem;
   cursor: pointer;
 }
+
+.deadlineContainer {
+  width: 90%;
+  margin: 0 auto;
+  background-color: rgb(219, 219, 219);
+  padding: 1.5rem;
+  border-radius: 15px;
+  color: #5f5f5f;
+}
+
+.noDeadlinesFound {
+  color: #5f5f5f;
+  width: fit-content;
+  margin: 0 auto;
+}

@@ -159,8 +159,16 @@ const Calendar = () => {
           </h1>
         </div>
         {currentDateDeadlines.map((deadline) => {
-          return <>{deadline.Title}</>;
+          return (
+            <div className={styles.deadlineContainer}>
+              <h2>{deadline.Title}</h2>
+              {deadline.Link}
+            </div>
+          );
         })}
+        {currentDateDeadlines.length === 0 && (
+          <h2 className={styles.noDeadlinesFound}>No deadlines on selected date</h2>
+        )}
       </div>
     </>
   );
