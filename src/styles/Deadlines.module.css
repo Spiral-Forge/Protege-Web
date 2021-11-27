@@ -72,6 +72,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1.5px solid transparent;
 }
 .prevMonthDate {
   color: rgb(228, 228, 228);
@@ -81,10 +82,12 @@
 .deadlineDate {
   background-color: #8da7ea;
   border-radius: 50%;
-  padding: 0.5rem;
   cursor: pointer;
 }
-
+.selectedDate {
+  border: 1.5px solid white;
+  border-radius: 50%;
+}
 .deadlineContainer {
   width: 90%;
   margin: 0 auto;

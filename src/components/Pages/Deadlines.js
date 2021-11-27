@@ -38,6 +38,7 @@ const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(parseInt(today.getDate()));
   const [currentDateDeadlines, setCurrentDateDeadlines] = useState([]);
   const [deadlinesObj, setDeadlinesObj] = useState({});
+  const [currentFullDate, setCurrentFullDate] = useState("");
   useEffect(async () => {
     let tempObj = {};
     await db
@@ -56,6 +57,7 @@ const Calendar = () => {
     if (tempMonth < 10) tempMonth = "0" + tempMonth;
 
     const tempFullDate = `${today.getFullYear()}-${tempMonth}-${tempDate}`;
+    setCurrentFullDate(tempFullDate);
     let tempDeadlinesArr = [];
     db.collection("Deadlines")
       .doc(tempFullDate + "T12:00:00.000Z")
@@ -80,6 +82,7 @@ const Calendar = () => {
     if (tempMonth < 10) tempMonth = "0" + tempMonth;
 
     const tempFullDate = `${currentYear}-${tempMonth}-${tempDate}`;
+    setCurrentFullDate(tempFullDate);
     if (!deadlinesObj[tempFullDate]) {
       setCurrentDateDeadlines([]);
       return;
@@ -173,8 +176,8 @@ const Calendar = () => {
                 <span
                   key={index}
                   className={`${styles.date} ${
-                    deadlinesObj[fullDate] && styles.deadlineDate
-                  }`}
+                    deadlinesObj[fullDate] ? styles.deadlineDate : ""
+                  } ${fullDate === currentFullDate ? styles.selectedDate : ""}`}
                   onClick={handleDeadlineClick}
                   data-date={date}
                 >
