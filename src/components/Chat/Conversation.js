@@ -1,9 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import "./Conversation.css";
 
 export default function Conversation({ conversation, currentUser }) {
-
   return (
     <div className="conversation">
       <img
