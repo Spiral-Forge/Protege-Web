@@ -109,7 +109,9 @@ const Calendar = () => {
         <div className={styles.monthsContainer}>
           <span
             onClick={() => {
-              if (currentMonth === 0) setCurrentYear(currentYear - 1);
+              if (currentMonth === 0) {
+                setCurrentYear(currentYear - 1);
+              }
               setCurrentMonth((currentMonth - 1 + 12) % 12);
             }}
             className={styles.currentDate}
@@ -169,7 +171,7 @@ const Calendar = () => {
               let tempdate = date,
                 tempMonth = currentMonth + 1;
               if (tempdate < 10) tempdate = "0" + date;
-              if (tempMonth < 10) tempMonth = "0" + currentMonth;
+              if (tempMonth < 10) tempMonth = "0" + tempMonth;
 
               const fullDate = `${currentYear}-${tempMonth}-${tempdate}`;
               return (
@@ -177,7 +179,8 @@ const Calendar = () => {
                   key={index}
                   className={`${styles.date} ${
                     deadlinesObj[fullDate] ? styles.deadlineDate : ""
-                  } ${fullDate === currentFullDate ? styles.selectedDate : ""}`}
+                  } ${fullDate === currentFullDate ? styles.selectedDate : ""}
+                  ${fullDate} ${currentFullDate}`}
                   onClick={handleDeadlineClick}
                   data-date={date}
                 >
