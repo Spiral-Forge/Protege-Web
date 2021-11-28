@@ -121,6 +121,7 @@ export default function Messenger() {
                     message={msg.message}
                     pic={profilePics[msg.sentBy]}
                     own={msg.sentBy === currentUser.uid}
+                    timestamp={msg.timestamp}
                   />
                 );
               })}
@@ -130,8 +131,14 @@ export default function Messenger() {
                 type="text"
                 className="chatMessageInput"
                 placeholder="Write something"
+                value={inputText}
                 onChange={(e) => {
                   setInputText(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSendMessage();
+                  }
                 }}
               ></input>
               <button className="chatSubmitButton" onClick={handleSendMessage}>
