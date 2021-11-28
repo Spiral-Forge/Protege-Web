@@ -11,7 +11,8 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
   const [isMentor, setIsMentor] = useState(false);
-
+  const [peerID, setPeerID] = useState([]);
+  
   const signUp = async (email, password) => {
     await auth.createUserWithEmailAndPassword(email, password);
   };
@@ -33,6 +34,7 @@ export const AuthProvider = ({ children }) => {
           if (userDoc.data().post === "Mentor") {
             setIsMentor(true);
           }
+          setPeerID(userDoc.data().peerID);
         } catch (err) {
           console.log(err);
         }
@@ -48,6 +50,7 @@ export const AuthProvider = ({ children }) => {
     signUp,
     signIn,
     signOut,
+    peerID,
   };
   return (
     <AuthContext.Provider value={value}>
