@@ -4,15 +4,16 @@ import Message from "./Message";
 import { useContext, useEffect, useRef, useState } from "react";
 import ChatOnline from "./ChatOnline";
 import { useAuth } from "../../context/AuthContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { db } from "../../firebase";
 export default function Messenger() {
-  const { currentUser, isMentor } = useAuth();
+  const { currentUser, isMentor, peerID } = useAuth();
   const { id } = useParams();
   const [chatArr, setChatArr] = useState([]);
+  const [peerData, setPeerData] = useState([]);
   const [inputText, setInputText] = useState("");
   let chatRoomId;
-  useEffect(() => {
+  useEffect(async () => {
     if (isMentor) {
       chatRoomId = currentUser.uid + id;
     } else {
@@ -30,6 +31,17 @@ export default function Messenger() {
         });
         setChatArr(tempChatArr);
       });
+    let tempPeerArr = [];
+    for (const id of peerID) {
+      await db
+        .collection("Users")
+        .doc(id)
+        .get()
+        .then((doc) => {
+          tempPeerArr.push({ ...doc.data(), userID: id });
+        });
+    }
+    setPeerData(tempPeerArr);
   }, []);
 
   const handleSendMessage = () => {
@@ -38,12 +50,13 @@ export default function Messenger() {
     } else {
       chatRoomId = id + currentUser.uid;
     }
-    console.log(chatRoomId);
+
     db.collection("ChatRoom").doc(chatRoomId).collection("chats").add({
       message: inputText,
       sentBy: currentUser.uid,
       timestamp: new Date().getTime(),
     });
+    setInputText("");
   };
   return (
     <div style={{ width: "100%" }}>
@@ -51,15 +64,22 @@ export default function Messenger() {
         <div className="chatMenu">
           <div className="chatMenuWrapper">
             <input placeholder="Search for friends" className="chatMenuInput" />
-            <Conversation />
+            {peerData.map((peer) => {
+              return (
+                <Link to={`/chat/${peer.userID}`}>
+                  <Conversation peer={peer} />
+                </Link>
+              );
+            })}
           </div>
         </div>
         <div className="chatBox">
           <div className="chatBoxWrapper">
             <div className="chatBoxTop">
-              {chatArr.map((msg) => {
+              {chatArr.map((msg, index) => {
                 return (
                   <Message
+                    key={index}
                     message={msg.message}
                     own={msg.sentBy === currentUser.uid}
                   />
