@@ -102,9 +102,9 @@ export default function Messenger() {
               .filter((x) => {
                 return x.name.toLowerCase().includes(searchInput);
               })
-              .map((peer) => {
+              .map((peer, index) => {
                 return (
-                  <Link to={`/chat/${peer.userID}`}>
+                  <Link to={`/chat/${peer.userID}`} key={index}>
                     <Conversation pic={profilePics[peer.userID]} peer={peer} />
                   </Link>
                 );

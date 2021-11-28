@@ -75,9 +75,6 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
         window.alert("Phone number is inValid");
         return;
       }
-      if (!data.college) {
-        throw "College";
-      }
       if (!data.branch) {
         throw "Branch";
       }
