@@ -25,6 +25,10 @@
   justify-content: space-between;
   position: relative;
 }
+.chatMenuWrapper a{
+  text-decoration: none;
+  color: inherit;
+}
 
 .chatBoxTop {
   height: 100%;

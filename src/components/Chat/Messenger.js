@@ -12,6 +12,7 @@ export default function Messenger() {
   const [chatArr, setChatArr] = useState([]);
   const [peerData, setPeerData] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   let chatRoomId;
   useEffect(async () => {
     if (isMentor) {
@@ -45,6 +46,8 @@ export default function Messenger() {
   }, []);
 
   const handleSendMessage = () => {
+    console.log(chatRoomId);
+    if (inputText.trim() === "") return;
     if (isMentor) {
       chatRoomId = currentUser.uid + id;
     } else {
@@ -63,14 +66,24 @@ export default function Messenger() {
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
-            {peerData.map((peer) => {
-              return (
-                <Link to={`/chat/${peer.userID}`}>
-                  <Conversation peer={peer} />
-                </Link>
-              );
-            })}
+            <input
+              onChange={(e) => {
+                setSearchInput(e.target.value);
+              }}
+              placeholder="Search for friends"
+              className="chatMenuInput"
+            />
+            {peerData
+              .filter((x) => {
+                return x.name.toLowerCase().includes(searchInput);
+              })
+              .map((peer) => {
+                return (
+                  <Link to={`/chat/${peer.userID}`}>
+                    <Conversation peer={peer} />
+                  </Link>
+                );
+              })}
           </div>
         </div>
         <div className="chatBox">
