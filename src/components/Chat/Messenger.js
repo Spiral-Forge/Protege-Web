@@ -5,7 +5,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import ChatOnline from "./ChatOnline";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useParams } from "react-router-dom";
-import { db } from "../../firebase";
+import { db, ProfilePicStorageRef } from "../../firebase";
 export default function Messenger() {
   const { currentUser, isMentor, peerID } = useAuth();
   const { id } = useParams();
@@ -13,6 +13,7 @@ export default function Messenger() {
   const [peerData, setPeerData] = useState([]);
   const [inputText, setInputText] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const [profilePics, setProfilePics] = useState({});
   let chatRoomId;
   useEffect(async () => {
     if (isMentor) {
@@ -33,6 +34,7 @@ export default function Messenger() {
         setChatArr(tempChatArr);
       });
     let tempPeerArr = [];
+    let profilePicsObj = {};
     for (const id of peerID) {
       await db
         .collection("Users")
@@ -41,8 +43,31 @@ export default function Messenger() {
         .then((doc) => {
           tempPeerArr.push({ ...doc.data(), userID: id });
         });
+      let tempDownloadURL;
+      try {
+        tempDownloadURL = await ProfilePicStorageRef.child(id).getDownloadURL();
+      } catch (err) {
+        if (err) {
+          tempDownloadURL =
+            "https://avatars.dicebear.com/api/micah/" + id + ".svg";
+        }
+      }
+      profilePicsObj[id] = tempDownloadURL;
     }
     setPeerData(tempPeerArr);
+    let ownProfilePic;
+    try {
+      ownProfilePic = await ProfilePicStorageRef.child(
+        currentUser.uid
+      ).getDownloadURL();
+    } catch (err) {
+      if (err) {
+        ownProfilePic =
+          "https://avatars.dicebear.com/api/micah/" + currentUser.uid + ".svg";
+      }
+    }
+    profilePicsObj[currentUser.uid] = ownProfilePic;
+    setProfilePics(profilePicsObj);
   }, []);
 
   const handleSendMessage = () => {
@@ -80,7 +105,7 @@ export default function Messenger() {
               .map((peer) => {
                 return (
                   <Link to={`/chat/${peer.userID}`}>
-                    <Conversation peer={peer} />
+                    <Conversation pic={profilePics[peer.userID]} peer={peer} />
                   </Link>
                 );
               })}
@@ -94,6 +119,7 @@ export default function Messenger() {
                   <Message
                     key={index}
                     message={msg.message}
+                    pic={profilePics[msg.sentBy]}
                     own={msg.sentBy === currentUser.uid}
                   />
                 );
