@@ -25,7 +25,7 @@
   justify-content: space-between;
   position: relative;
 }
-.chatMenuWrapper a{
+.chatMenuWrapper a {
   text-decoration: none;
   color: inherit;
 }
@@ -45,9 +45,9 @@
 
 .chatMessageInput {
   width: 80%;
-  height: 90px;
+  border: none;
+  border: 1px solid gray;
   padding: 10px;
-  margin-bottom: 30px;
 }
 
 .chatSubmitButton {
