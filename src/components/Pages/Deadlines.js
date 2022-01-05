@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { db } from "../../firebase";
 import styles from "../../styles/Deadlines.module.css";
+import { BiLinkExternal } from "react-icons/bi";
+
 const Deadlines = () => {
   return (
     <div className={styles.container}>
@@ -199,10 +201,11 @@ const Calendar = () => {
         {currentDateDeadlines.map((deadline, index) => {
           return (
             <div key={index} className={styles.deadlineContainer}>
-              <h2>{deadline.Title}</h2>
-              Link:{" "}
-              <a href={deadline.Link.trim()} target="_blank" rel="noreferrer">
-                {deadline.Link}
+              <a href={deadline.Link.trim()} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+                <h2>
+                  {deadline.Title} 
+                  <div className={styles.openLink}><BiLinkExternal /></div>
+                </h2>
               </a>
             </div>
           );
