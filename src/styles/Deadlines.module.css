@@ -1,0 +1,133 @@
+.container {
+  width: 100%;
+}
+
+.heading h1 {
+  font-size: 2.5rem;
+  color: #5f5f5f;
+  margin: 0 auto;
+  width: max-content;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+.deadlinesHeading h2 {
+  font-size: 2rem;
+  color: #5f5f5f;
+  margin: 0 auto;
+  width: max-content;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.calendarContainer {
+  margin: 0 auto;
+  background-color: rgba(128, 185, 232, 0.835);
+  width: 90%;
+  padding: 1rem;
+  /* border: 3px solid rgb(81, 191, 235); */
+  border-radius: 20px;
+  color: white;
+}
+.monthsContainer {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.monthsContainer span {
+  color: rgb(37, 37, 37);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.monthsContainer .currentDate {
+  color: white;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weekContainer {
+  color: rgb(37, 37, 37);
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.datesContainer {
+  margin: 0 auto;
+  margin-top: 1rem;
+  display: grid;
+  width: 88%;
+  grid-template-columns: repeat(7, auto);
+  justify-content: space-between;
+  row-gap: 1rem;
+}
+
+.date {
+  padding: 0.6rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid transparent;
+}
+.prevMonthDate {
+  color: rgb(228, 228, 228);
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+.deadlineDate {
+  background-color: #939393;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.selectedDate {
+  border: 1.5px solid white;
+  border-radius: 50%;
+}
+.deadlineContainer {
+  width: 90%;
+  margin: 0 auto;
+  background-color: rgba(219, 219, 219, 0.712);
+  padding: 1rem;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+}
+.deadlineContainer h2 {
+  color: #5f5f5f;
+  display: flex;
+  flex-direction: row;
+}
+
+.openLink {
+  margin-top: 4px;
+  margin-left: 6px;
+}
+
+.noDeadlinesFound {
+  color: #5f5f5f;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 660px) {
+  .deadlinesHeading h2 {
+    font-size: 1.5rem;
+  }
+  .monthsContainer {
+    width: 80%;
+  }
+  .weekContainer {
+    width: 95%;
+  }
+  .datesContainer {
+    width: 100%;
+  }
+  .calendarContainer {
+    width: 95%;
+  }
+}
