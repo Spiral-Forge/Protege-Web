@@ -1,3 +1,9 @@
+import nit from "../../img/Nit.png"
+import su from "../../img/Nit.png"
+import viru from "../../img/viru.jpeg"
+import osh from "../../img/Nit.png"
+
+
 export const guidelinesMentors = [
   `As soon as you’re connected to your mentees, introduce yourself, share your contact and get familiar to each other.`,
   `You can view the profile page of your mentees through their chat screen.`,
@@ -51,15 +57,20 @@ export const aboutSoc = `During our first year in IGDTUW, we often felt intimida
 
 export const team = [
   {
+    photo: nit,
     name: "Nitasha Dhingra",
     linkedIn: "https://www.linkedin.com/in/nitashadhingra",
   },
   {
+    photo: su,
     name: "Suhani Chawla",
     linkedIn: "https://www.linkedin.com/in/suhani-chawla-891919171/",
   },
-  { name: "Urvi Goel", linkedIn: "https://www.linkedin.com/in/urvi-goel/" },
+  { 
+    photo: viru,
+    name: "Urvi Goel", linkedIn: "https://www.linkedin.com/in/urvi-goel/" },
   {
+    photo: osh,
     name: "Oshin Saini",
     linkedIn: "https://www.linkedin.com/in/oshin-saini-838718184/",
   },
