@@ -53,7 +53,7 @@ export const team = [
   {
     name: "Nitasha Dhingra",
     linkedIn: "https://www.linkedin.com/in/nitashadhingra",
-    image: "NitashaDhingra.jpg",
+    image: "Nitasha.png",
   },
   {
     name: "Suhani Chawla",
