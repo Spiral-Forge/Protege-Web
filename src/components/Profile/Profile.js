@@ -11,7 +11,7 @@ export default function Profile() {
   const [userData, setUserData] = useState();
   useEffect(() => {
     console.log(currentUser.uid);
-    db.collection("Users")
+    db.collection("users")
       .doc(currentUser.uid)
       .get()
       .then((doc) => {

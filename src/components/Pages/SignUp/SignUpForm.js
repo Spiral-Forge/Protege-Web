@@ -55,7 +55,7 @@ function SignUpForm({ post, setPost }) {
       await signUp(formData.email, formData.password);
       const tempObject = userObj();
       delete tempObject["password"];
-      await db.collection("Users").doc(auth.currentUser.uid).set(tempObject);
+      await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
     } catch (e) {
       return console.log(e);
     }

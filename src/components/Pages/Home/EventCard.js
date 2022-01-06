@@ -5,23 +5,23 @@ export default function EventCard({ event }) {
     <div className={styles.card}>
       <div className={styles.header}>
         <p>
-          <span>{event.Date.toDate().toDateString()}</span> | {" "}
+          <span>{ event.date.toDate().toDateString() }</span> | {" "}
           <span>
-            {new Date(event.Time.seconds * 1000).toLocaleTimeString()}
+            { new Date(event.time.seconds * 1000).toLocaleTimeString() }
           </span>
         </p>
-        <p>{event.Venue}</p>
+        <p>{event.venue}</p>
       </div>
       <div className={styles.content}>
         <div className={styles.img}>
-          <img src={event.ImageUrl} alt="" />
+          <img src={event.imageUrl} alt="" />
         </div>
         <div className={styles.body}>
-          <h1>{event.Name}</h1>
-          <p>{event.Description}</p>
+          <h1>{event.name}</h1>
+          <p>{event.description}</p>
         </div>
         <div className={styles.cta}>
-          <a target="_blank" rel="noreferrer" href={event.Link}>
+          <a target="_blank" rel="noreferrer" href={event.registrationLink}>
             Register
           </a>
         </div>

@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
       setCurrentUser(user);
       if (user) {
         try {
-          const userDoc = await db.collection("Users").doc(user.uid).get();
+          const userDoc = await db.collection("users").doc(user.uid).get();
           if (userDoc.data().post === "Mentor") {
             setIsMentor(true);
           }

@@ -28,9 +28,9 @@ export default function Event() {
 
   useEffect(async () => {
     let eventsArr = [];
-    const querySnapshot = await db.collection("Events").get();
+    const querySnapshot = await db.collection("events").get();
     querySnapshot.forEach((doc) => {
-      if (doc.data().Approved) eventsArr.push(doc.data());
+      if (doc.data().approved) eventsArr.push(doc.data());
     });
     setEvents(eventsArr);
   }, []);

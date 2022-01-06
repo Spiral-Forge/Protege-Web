@@ -18,17 +18,17 @@ export default function EventForm({ setShowModal }) {
   const [time, setTime] = useState();
   const handleSubmit = async (e) => {
     if (!validate()) return;
-    db.collection("Events").add({
+    db.collection("events").add({
       ...formData,
-      Date: date,
-      Time: time,
-      Approved: false,
+      date: date,
+      time: time,
+      approved: false,
     });
     setShowModal(false);
   };
   const validate = () => {
     try {
-      if (!formData.Name) {
+      if (!formData.name) {
         throw "Title";
       }
       if (!time) {
@@ -37,16 +37,16 @@ export default function EventForm({ setShowModal }) {
       if (!date) {
         throw "Date";
       }
-      if (!formData.Venue) {
+      if (!formData.venue) {
         throw "Venue";
       }
-      if (!formData.ImageUrl) {
+      if (!formData.imageUrl) {
         throw "Image URL";
       }
-      if (!formData.Description) {
+      if (!formData.description) {
         throw "Description";
       }
-      if (!formData.Link) {
+      if (!formData.registrationLink) {
         throw "Event link";
       }
     } catch (err) {
@@ -56,11 +56,11 @@ export default function EventForm({ setShowModal }) {
     return true;
   };
   const [formData, setFormData] = useState({
-    Name: "",
-    Venue: "",
-    ImageUrl: "",
-    Description: "",
-    Link: "",
+    name: "",
+    venue: "",
+    imageUrl: "",
+    description: "",
+    registrationLink: "",
   });
   const handleFormDataChange = (e) => {
     const { name, value } = e.target;
@@ -73,8 +73,8 @@ export default function EventForm({ setShowModal }) {
           <MdOutlineTextFields className={styles.icon} />
           <input
             type="text"
-            placeholder="Title"
-            name="Name"
+            placeholder="Event Title"
+            name="name"
             onChange={handleFormDataChange}
           />
         </div>
@@ -104,7 +104,7 @@ export default function EventForm({ setShowModal }) {
           <input
             type="text"
             placeholder="Venue"
-            name="Venue"
+            name="venue"
             onChange={handleFormDataChange}
           />
         </div>
@@ -112,8 +112,8 @@ export default function EventForm({ setShowModal }) {
           <BsCardImage className={styles.icon} />
           <input
             type="text"
-            placeholder="Image Url"
-            name="ImageUrl"
+            placeholder="Event Banner Link"
+            name="imageUrl"
             onChange={handleFormDataChange}
           />
         </div>
@@ -122,7 +122,7 @@ export default function EventForm({ setShowModal }) {
           <textarea
             rows="1"
             placeholder="Description"
-            name="Description"
+            name="description"
             onChange={handleFormDataChange}
           />
         </div>
@@ -130,14 +130,14 @@ export default function EventForm({ setShowModal }) {
           <BsLink45Deg className={styles.icon} />
           <input
             type="text"
-            placeholder="Event Url"
-            name="Link"
+            placeholder="Event Registration Link"
+            name="registrationLink"
             onChange={handleFormDataChange}
           />
         </div>
       </div>
       <div className={styles.cta}>
-        <button onClick={() => setShowModal(false)}>Cancle</button>
+        <button onClick={() => setShowModal(false)}>Cancel</button>
         <button onClick={handleSubmit}>Add Event</button>
       </div>
     </div>
