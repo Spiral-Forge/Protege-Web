@@ -4,39 +4,50 @@ import { useHistory } from "react-router-dom";
 export const resourceCategories = [
   {
     id: 1,
-    img: "https://source.unsplash.com/random/400x300",
+    img: "development.png",
     txt: "Development",
     url: "Development",
   },
   {
     id: 2,
-    img: "https://source.unsplash.com/random/400x420",
+    img: "ml.png",
     txt: "Machine Learning",
     url: "ML",
   },
   {
     id: 3,
-    img: "https://source.unsplash.com/random/400x402",
+    img: "blogs.png",
     txt: "Scholarships",
     url: "Scholarship",
   },
   {
     id: 4,
-    img: "https://source.unsplash.com/random/400x320",
+    img: "opensrc.png",
     txt: "Open Source",
     url: "OpenSource",
   },
   {
     id: 5,
-    img: "https://source.unsplash.com/random/300x400",
+    img: "competitive.jpg",
     txt: "Competitive Coding",
     url: "CompCoding",
   },
   {
     id: 6,
-    img: "https://source.unsplash.com/random/430x400",
-    txt: "Development",
-    url: "Development",
+    img: "college.jpg",
+    txt: "College Resources",
+    url: "College",
+  },
+  {
+    id: 7,
+    img: "blogs.png",
+    txt: "Blogs and Articles",
+    url: "Blogs and Articles",
+  },{
+    id: 6,
+    img: "other.png",
+    txt: "Miscellaneous",
+    url: "Miscellaneous",
   },
 ];
 
@@ -65,7 +76,7 @@ export function ResourceCard({ card }) {
   return (
     <div onClick={() => handleClick(card.url)} className={styles.card}>
       <div className={styles.img}>
-        <img src={card.img} alt="" />
+        <img src={"./assets/resources/" + card.img} alt="" />
       </div>
       <p>{card.txt}</p>
     </div>
