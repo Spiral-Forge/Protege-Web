@@ -34,12 +34,12 @@ function SignUpForm({ post, setPost }) {
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
+    phoneNo: "",
     email: "",
     password: "",
-    rollNo: "",
-    linkedInURL: "",
-    githubURL: "",
+    roll: "",
+    linkedInUrl: "",
+    githubUrl: "",
   });
 
   const [hosteller, setHosteller] = useState([]);
@@ -75,7 +75,7 @@ function SignUpForm({ post, setPost }) {
       gender: gender.value,
       hosteller: hosteller.value,
       peerID: [],
-      photoURL: null,
+      photoUrl: null,
       post,
     };
     return obj;
@@ -84,59 +84,6 @@ function SignUpForm({ post, setPost }) {
   const validate = (e) => {
     e.preventDefault();
     const data = userObj();
-
-    // try {
-    //   if (!data.name) {
-    //     throw "Name";
-    //   }
-    //   if (!data.email) {
-    //     throw "Email";
-    //   }
-    //   if (!data.phone) {
-    //     throw "Phone";
-    //   }
-    //   if (isNaN(data.phone)) {
-    //     window.alert("Phone number is inValid");
-    //     return;
-    //   }
-    //   if (!data.password) {
-    //     throw "Password";
-    //   }
-    //   if (!data.college) {
-    //     throw "College";
-    //   }
-    //   if (!data.branch) {
-    //     throw "Branch";
-    //   }
-    //   if (!data.year) {
-    //     throw "Year";
-    //   }
-    //   if (!data.rollNo) {
-    //     throw "Roll";
-    //   }
-    //   if (!data.domains.length) {
-    //     throw "Domains";
-    //   }
-    //   if (!data.languages.length) {
-    //     throw "Languages";
-    //   }
-    //   if (!data.linkedInURL) {
-    //     throw "LinkedIn";
-    //   }
-    //   if (!data.githubURL) {
-    //     throw "Github";
-    //   }
-    //   if (!data.gender) {
-    //     throw "Gender";
-    //   }
-    //   if (!data.hosteller?.toString()) {
-    //     throw "Hosteller";
-    //   }
-    // } catch (err) {
-    //   // console.log(`${err} field is required`);
-    //   window.alert(`${err} field is required`);
-    //   return;
-    // }
 
     setGuidelinesPopUp(true);
   };
@@ -188,12 +135,12 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="phone">Phone Number</label>
+            <label htmlFor="phoneNo">Phone Number</label>
             <input
               type="text"
-              name="phone"
-              placeholder="Phone"
-              value={formData.phone}
+              name="phoneNo"
+              placeholder="Contact Info"
+              value={formData.phoneNo}
               onChange={handleChange}
             />
           </div>
@@ -233,12 +180,12 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="rollNo">Roll Number</label>
+            <label htmlFor="roll">Roll Number</label>
             <input
               type="text"
-              name="rollNo"
+              name="roll"
               placeholder="Roll Number"
-              value={formData.rollNo}
+              value={formData.roll}
               onChange={handleChange}
             />
           </div>
@@ -264,22 +211,22 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="linkedInURL">LinkedIn Id</label>
+            <label htmlFor="linkedInUrl">LinkedIn Profile Link</label>
             <input
               type="text"
-              name="linkedInURL"
+              name="linkedInUrl"
               placeholder="LinkedIn Id"
-              value={formData.linkedInURL}
+              value={formData.linkedInUrl}
               onChange={handleChange}
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="githubURL">Github Id</label>
+            <label htmlFor="githubUrl">Github Profile Link</label>
             <input
               type="text"
-              name="githubURL"
+              name="githubUrl"
               placeholder="Github Id"
-              value={formData.githubURL}
+              value={formData.githubUrl}
               onChange={handleChange}
             />
           </div>

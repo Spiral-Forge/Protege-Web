@@ -23,7 +23,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
     label: userData.year,
     value: userData.year,
   });
-  const [domain, setDomain] = useState(
+  const [domains, setDomain] = useState(
     userData.domains.map((dom) => {
       return { label: dom, value: dom };
     })
@@ -41,7 +41,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       branch: branch.value,
       year: year.value,
       languages: getArray(languages),
-      domains: getArray(domain),
+      domains: getArray(domains),
     };
     if (validate(tempObj)) {
       await uploadImage();
@@ -57,7 +57,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
     await fileRef.put(file);
     const url = await fileRef.getDownloadURL();
     await currentUser.updateProfile({
-      photoURL: url,
+      photoUrl: url,
     });
   };
   const validate = (data) => {
@@ -68,10 +68,10 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       if (!data.email) {
         throw "Email";
       }
-      if (!data.phone) {
-        throw "Phone";
+      if (!data.phoneNo) {
+        throw "Phone Number";
       }
-      if (isNaN(data.phone)) {
+      if (isNaN(data.phoneNo)) {
         window.alert("Phone number is inValid");
         return;
       }
@@ -84,7 +84,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       if (!data.year) {
         throw "Year";
       }
-      if (!data.rollNo) {
+      if (!data.roll) {
         throw "Roll";
       }
       if (!data.domains.length) {
@@ -125,18 +125,18 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
             ref={imageInputRef}
             type="file"
             placeholder="Image Url"
-            name="photo"
+            name="photoUrl"
             style={{ border: "none" }}
             accept="image/png, image/jpeg"
           />
         </div>
         <div className={styles.flex}>
-          <label> Phone:</label>
+          <label> Phone Number:</label>
           <input
             type="text"
-            placeholder="Phone"
-            defaultValue={newFormData.phone}
-            name="phone"
+            placeholder="Contact Info"
+            defaultValue={newFormData.phoneNo}
+            name="phoneNo"
             onChange={handleFormChange}
           />
         </div>
@@ -173,7 +173,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
 
           <MultiSelect
             options={domainsArr}
-            value={domain}
+            value={domains}
             onChange={setDomain}
             labelledBy="Domain"
             className="multi-select"
@@ -185,30 +185,30 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           <input
             type="text"
             placeholder="Roll Number"
-            defaultValue={newFormData.rollNo}
-            name="rollNo"
+            defaultValue={newFormData.roll}
+            name="roll"
             onChange={handleFormChange}
           />
         </div>
         <div className={styles.flex}>
-          <label> LinkedIn:</label>
+          <label> LinkedIn Profile:</label>
 
           <input
             type="text"
-            placeholder="LinkedIn Url"
-            defaultValue={newFormData.linkedInURL}
-            name="linkedInURL"
+            placeholder="LinkedIn Profile"
+            defaultValue={newFormData.linkedInUrl}
+            name="linkedInUrl"
             onChange={handleFormChange}
           />
         </div>
         <div className={styles.flex}>
-          <label> Github:</label>
+          <label> Github Profile:</label>
 
           <input
             type="text"
-            placeholder="Github Url"
-            defaultValue={newFormData.githubURL}
-            name="githubURL"
+            placeholder="Github Profile"
+            defaultValue={newFormData.githubUrl}
+            name="githubUrl"
             onChange={handleFormChange}
           />
         </div>
