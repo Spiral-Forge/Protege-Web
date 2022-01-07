@@ -20,8 +20,8 @@ export default function EventForm({ setShowModal }) {
     if (!validate()) return;
     db.collection("events").add({
       ...formData,
-      date: date,
-      time: time,
+      dateTime: date,
+      // time: time,
       approved: false,
     });
     setShowModal(false);
@@ -30,9 +30,6 @@ export default function EventForm({ setShowModal }) {
     try {
       if (!formData.name) {
         throw "Title";
-      }
-      if (!time) {
-        throw "Time";
       }
       if (!date) {
         throw "Date";
@@ -63,6 +60,8 @@ export default function EventForm({ setShowModal }) {
     registrationLink: "",
   });
   const handleFormDataChange = (e) => {
+    console.log("HELLLOOO")
+    console.log(e.target)
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -80,23 +79,13 @@ export default function EventForm({ setShowModal }) {
         </div>
         <div className={styles.flex}>
           <BsCalendarDay className={styles.icon} />
-          <DatePicker
+          <DatePicker 
             placeholderText="Date"
-            selected={date}
-            onChange={setDate}
-          />
-        </div>
-        <div className={styles.flex}>
-          <BiTimeFive className={styles.icon} />
-          <DatePicker
-            selected={time}
-            onChange={setTime}
             showTimeSelect
-            showTimeSelectOnly
             timeIntervals={30}
-            timeCaption="Time"
-            dateFormat="h:mm aa"
-            placeholderText="Time"
+            dateFormat="MMMM d, yyyy h:mmaa"
+            selected={date}
+            onChange={date => setDate(date)} 
           />
         </div>
         <div className={styles.flex}>
@@ -112,7 +101,7 @@ export default function EventForm({ setShowModal }) {
           <BsCardImage className={styles.icon} />
           <input
             type="text"
-            placeholder="Event Banner Link"
+            placeholder="Event Poster link"
             name="imageUrl"
             onChange={handleFormDataChange}
           />

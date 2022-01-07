@@ -5,9 +5,9 @@ export default function EventCard({ event }) {
     <div className={styles.card}>
       <div className={styles.header}>
         <p>
-          <span>{ event.date.toDate().toDateString() }</span> | {" "}
+          <span>{ event.dateTime.toDate().toDateString() }</span> | {" "}
           <span>
-            { new Date(event.time.seconds * 1000).toLocaleTimeString() }
+            { new Date(event.dateTime.seconds * 1000).toLocaleTimeString() }
           </span>
         </p>
         <p>{event.venue}</p>
