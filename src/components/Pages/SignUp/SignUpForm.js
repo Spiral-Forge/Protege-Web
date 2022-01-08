@@ -30,13 +30,14 @@ import { guidelinesMentors, guidelinesMentees } from "../staticPagesData";
 
 function SignUpForm({ post, setPost }) {
   const history = useHistory();
-  const { signUp } = useAuth();
+  // const { signUp } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phoneNo: "",
     email: "",
     password: "",
+    confirm_password: "",
     roll: "",
     linkedInUrl: "",
     githubUrl: "",
@@ -52,16 +53,20 @@ function SignUpForm({ post, setPost }) {
 
   const handleAccept = async () => {
     try {
-      await signUp(formData.email, formData.password);
+      // await signUp(formData.email, formData.password);
       const tempObject = userObj();
       delete tempObject["password"];
+      delete tempObject["confirm_password"];
+
       await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
+      history.push("/home");
     } catch (e) {
+      window.alert("USER CANNOT BE CREATED")
       return console.log(e);
     }
     console.log(auth.currentUser.uid);
     setGuidelinesPopUp(false);
-    history.push("/");
+    history.push("/home");
   };
 
   const userObj = () => {
@@ -84,7 +89,54 @@ function SignUpForm({ post, setPost }) {
   const validate = (e) => {
     e.preventDefault();
     const data = userObj();
+    try {
+      if (!data.name) {
+        throw "Name";
+      }
+      if (!data.email) {
+        throw "Email";
+      }
+      if (!data.phoneNo) {
+        throw "Phone Number";
+      }
+      if (isNaN(data.phoneNo)) {
+        window.alert("Phone number is inValid");
+        return;
+      }
+      if (!data.college) {
+        throw "College";
+      }
+      if (!data.branch) {
+        throw "Branch";
+      }
+      if (!data.year) {
+        throw "Year";
+      }
+      if (!data.roll) {
+        throw "Roll";
+      }
+      if (!data.domains.length) {
+        throw "Domains";
+      }
+      if (!data.languages.length) {
+        throw "Languages";
+      }
+    } catch (err) {
+      window.alert(`${err} field is required`);
+      return false;
+    }
 
+    try {
+      if (data.password != data.confirm_password) {
+          throw "Passwords don't match.";
+      } 
+      if (data.password.length < 6){
+        throw "Password must have atleast 6 characters";
+      }
+    } catch (err){
+      window.alert(err);
+      return false;
+    }
     setGuidelinesPopUp(true);
   };
 
@@ -101,7 +153,6 @@ function SignUpForm({ post, setPost }) {
     <div className={styles.container}>
       <div className={styles.heading}>
         <h1>
-          Mentors, <br />
           Register and Start your Journey.
         </h1>
         {/* <p>Mentor and Uplift others through your Journey</p> */}
@@ -125,16 +176,6 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="email">Email Id</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Id"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.group}>
             <label htmlFor="phoneNo">Phone Number</label>
             <input
               type="text"
@@ -145,12 +186,41 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
+            <label htmlFor="gender">Gender</label>
+            <Dropdown
+              options={genders}
+              onChange={setGender}
+              placeholder="Select your Gender"
+            />
+          </div>
+          <div className={styles.group}>
+            <label htmlFor="email">Email Id</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Id"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
             <label htmlFor="password">Password</label>
             <input
               type="password"
               name="password"
               placeholder="Password"
               value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className={styles.group}>
+            <label htmlFor="confirm_password">Confirm Password</label>
+            <input
+              type="password"
+              name="confirm_password"
+              placeholder="Confirm Password"
+              value={formData.confirm_password}
               onChange={handleChange}
             />
           </div>
@@ -193,6 +263,7 @@ function SignUpForm({ post, setPost }) {
           <div className={styles.group}>
             <label htmlFor="domain">Domains</label>
             <MultiSelect
+              hasSelectAll={false}
               options={domainsArr}
               value={domain}
               onChange={setDomain}
@@ -203,6 +274,7 @@ function SignUpForm({ post, setPost }) {
           <div className={styles.group}>
             <label htmlFor="lang">Languages</label>
             <MultiSelect
+              hasSelectAll={false}
               options={languagesArr}
               value={lang}
               onChange={setLang}
@@ -230,14 +302,7 @@ function SignUpForm({ post, setPost }) {
               onChange={handleChange}
             />
           </div>
-          <div className={styles.group}>
-            <label htmlFor="gender">Gender</label>
-            <Dropdown
-              options={genders}
-              onChange={setGender}
-              placeholder="Select your Gender"
-            />
-          </div>
+          
           <div className={styles.group}>
             <label htmlFor="hosteller">Are you a hosteller?</label>
             <Dropdown

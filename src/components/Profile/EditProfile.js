@@ -93,9 +93,6 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       if (!data.languages.length) {
         throw "Languages";
       }
-      if (!data.gender) {
-        throw "Gender";
-      }
     } catch (err) {
       window.alert(`${err} field is required`);
       return false;
