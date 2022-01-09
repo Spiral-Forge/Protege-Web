@@ -79,11 +79,7 @@ img {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .home__hero-text-wrapper {
-    padding-bottom: 65px;
-  }
-
+@media screen and (max-width: 880px) {
   .col {
     max-width: 100%;
     flex-basis: 100%;

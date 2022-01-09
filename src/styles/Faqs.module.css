@@ -29,7 +29,7 @@
 
 .details {
   width: 100%;
-  max-height: 7rem;
+  /* max-height: 7rem; */
   padding-bottom: 1rem;
   padding-right: 1rem;
   border-bottom: 1px solid rgb(207, 207, 207);
@@ -59,9 +59,14 @@ details[open] {
   max-height: 30rem;
   border-bottom: 1px solid white;
 }
+
+i{
+  width:80%;
+}
 .tri {
   transform: rotateZ(180deg);
-  font-size: 0.9rem;
+  font-size: 10px;
+  /* font-size: 0.9rem; */
   transition: transform 0.5s;
 }
 
@@ -69,7 +74,7 @@ details[open] summary .tri {
   transform: rotateZ(0deg);
 }
 
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 880px) {
   .container {
     margin-top: 0;
     width: 100%;
