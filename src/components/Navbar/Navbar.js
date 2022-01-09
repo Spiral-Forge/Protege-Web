@@ -3,17 +3,30 @@ import { AiOutlineRight } from "react-icons/ai";
 import { MenuItems } from "./MenuItems";
 import styles from "../../styles/Navbar.module.css";
 import { Button } from "./Button";
-import { withRouter, Link } from "react-router-dom";
-import logo from "./logo.jpg";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Spiral as Hamburger } from "hamburger-react";
 
 const Navbar = () => {
-  const { currentUser } = useAuth();
+
+  const { currentUser, signOut } = useAuth();
+  const history = useHistory();
   const [isOpen, setOpen] = useState();
 
-  useEffect(() => {
-    setOpen(false);
+  const handleSignOut = async () => {
+    if (!window.confirm("Are you sure you want to log out?")) return;
+    try {
+      await signOut();
+    } catch (err) {
+      console.log(err);
+    }
+    history.push("/home");
+  };
+
+  // useEffect((open) => {
+  //   setOpen(open);
+    useEffect(() => {
+      setOpen(false);
   }, []);
 
   return (
@@ -80,7 +93,7 @@ const Navbar = () => {
         {isOpen && (
           <div className={styles.moblinks}>
             <ul>
-              <Link to="/home">
+              <Link to="/profile">
                 <li>
                   <div>
                     <p>Nitasha Dhingra</p>
@@ -90,18 +103,19 @@ const Navbar = () => {
                   </div>
                 </li>
               </Link>
-              <li>
-                <div>
-                  <p>Deadlines</p>
-                  <p>
-                    <AiOutlineRight />
-                  </p>
-                </div>
-              </li>
-              <Link to="/home">
+              { !currentUser && (
+                <Link to="/home">
+                  <li>
+                    <div>
+                      Home<AiOutlineRight />
+                    </div>
+                  </li>
+                </Link>
+              )}
+              <Link to="/faqs" >
                 <li>
                   <div>
-                    <p>Home</p>
+                    <p>FAQs</p>
                     <p>
                       <AiOutlineRight />
                     </p>
@@ -119,50 +133,22 @@ const Navbar = () => {
                 </li>
               </Link>
 
-              <Link to="/faqs">
-                <li>
-                  <div>
-                    <p>FAQs</p>
-                    <p>
-                      <AiOutlineRight />
-                    </p>
-                  </div>
-                </li>
-              </Link>
-              <Link to="/help">
-                <li>
-                  <div>
-                    <p>Help Center</p>
-                    <p>
-                      <AiOutlineRight />
-                    </p>
-                  </div>
-                </li>
-              </Link>
-              {/* <Link to="/signin">
-                  <li>
-                    <div >
-                      <p>Login</p>
-                      <p>
-                        <AiOutlineRight />
-                      </p>
-                    </div>
-                  </li>
-                </Link> */}
+              
             </ul>
             <ul>
-              <Link to="/signin">
-                <li className={styles.moblogin}>
-                  <div>
-                    <p>Login</p>
-                  </div>
-                </li>
-              </Link>
-              {/* <li className={styles.moblogin}>
-                  <div>
-                    <p>Logout</p>
-                  </div>
-                </li> */}
+              { !currentUser && (
+                  <Link to="/signin">
+                    <li className={styles.moblogin}>
+                        <p>Login</p>
+                    </li>
+                  </Link>
+              )}
+
+              { currentUser && (
+                  <li className={styles.moblogin} onClick={handleSignOut}>
+                      <p>Logout</p>
+                  </li>
+              )}
             </ul>
           </div>
         )}

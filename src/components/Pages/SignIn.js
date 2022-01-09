@@ -22,7 +22,7 @@ const SignIn = () => {
     } catch (e) {
       console.log(e);
     }
-    history.push("/resource");
+    history.push("/home");
   };
 
   const validate = (e) => {
