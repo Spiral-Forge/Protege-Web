@@ -22,7 +22,7 @@ const SignIn = () => {
     } catch (e) {
       console.log(e);
     }
-    history.push("/resource");
+    history.push("/home");
   };
 
   const validate = (e) => {
@@ -52,10 +52,9 @@ const SignIn = () => {
     <div className={styles.container}>
       <div className={styles.heading}>
         <h1>
-          Mentors, <br />
-          Login and Start your Journey.
+          Login and <br />Start your Journey.
         </h1>
-        <p>Mentor and Uplift others through your Journey</p>
+        <p>Upskill and uplift others</p>
       </div>
 
       <form onSubmit={validate} className={styles.form}>
@@ -98,7 +97,7 @@ const SignIn = () => {
         <p className={styles.route}>
           Don't have an account?
           <span>
-            <Link to="/register"> SIGN UP</Link>
+            <Link to="/register"> Sign Up</Link>
           </span>
         </p>
       </form>

@@ -23,7 +23,7 @@ export default function VerticalNav() {
         <Link to="/profile">
           <img
             src={
-              currentUser.photoURL ||
+              currentUser.photoUrl ||
               `https://avatars.dicebear.com/api/micah/${currentUser.uid}.svg`
             }
             alt=""

@@ -8,7 +8,7 @@ const SignUp = () => {
     <>
       {!post ? (
         <div className="choose-sign-up">
-          <h1 className="signup-heading">Hey, Register yourself as</h1> <br />
+          <h1 className="signup-heading">Hey, <br />Register yourself as</h1> <br />
           <br />
           <div
             onClick={() => {

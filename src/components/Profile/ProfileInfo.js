@@ -16,7 +16,7 @@ export default function ProfileInfo({ userData }) {
           <BsFillTelephoneFill className={styles.icon} />
         </div>
         <div>
-          <p>{userData.phone}</p>
+          <p>{userData.phoneNo}</p>
         </div>
       </span>
       <span className={styles.field}>
@@ -35,7 +35,7 @@ export default function ProfileInfo({ userData }) {
           <p>
             {userData.branch}, {userData.year} year, {userData.college}
           </p>
-          <p>Roll number: {userData.rollNo}</p>
+          <p>Roll number: {userData.roll}</p>
           <p>Hosteller: {userData.hosteller ? "Yes" : "No"}</p>
         </div>
       </span>
@@ -62,9 +62,9 @@ export default function ProfileInfo({ userData }) {
           <BsLinkedin className={styles.icon} />
         </div>
         <div>
-          <p>Linkedin</p>
-          <a href={userData.linkedInURL} target="_blank">
-            {userData.linkedInURL}
+          <p>LinkedIn Profile</p>
+          <a href={userData.linkedInUrl} target="_blank">
+            {userData.linkedInUrl}
           </a>
         </div>
       </span>
@@ -73,9 +73,9 @@ export default function ProfileInfo({ userData }) {
           <BsGithub className={styles.icon} />
         </div>
         <div>
-          <p>Github</p>
-          <a href={userData.githubURL} target="_blank">
-            {userData.githubURL}
+          <p>Github Profile</p>
+          <a href={userData.githubUrl} target="_blank">
+            {userData.githubUrl}
           </a>
         </div>
       </span>

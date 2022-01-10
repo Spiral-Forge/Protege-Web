@@ -53,6 +53,8 @@ export default function Event() {
         {events.map((event) => {
           return <EventCard event={event} />;
         })}
+     
+      
       </Masonry>
 
       {isMentor && (

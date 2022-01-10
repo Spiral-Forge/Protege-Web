@@ -60,4 +60,14 @@
     grid-template-columns: 1fr;
     justify-items: center;
   }
+
+  .container{
+    padding: 20px;
+  }
+
+  .btn {
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+  }
 }
