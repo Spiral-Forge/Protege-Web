@@ -23,11 +23,13 @@ const Navbar = () => {
     history.push("/home");
   };
 
-  // useEffect((open) => {
-  //   setOpen(open);
-    useEffect(() => {
-      setOpen(false);
+  useEffect(() => {
+    setOpen(false);
   }, []);
+
+  const handleToggle = () => {
+      setOpen(!isOpen);
+  };
 
   return (
     <div className={styles.container}>
@@ -61,7 +63,7 @@ const Navbar = () => {
                   <li className={styles.login}>Login</li>
                 </Link>
                 <Link to="/register">
-                  <li className={styles.signup}>Signup</li>
+                  <li className={styles.signup}>Sign up</li>
                 </Link>
               </>
             )}
@@ -93,42 +95,36 @@ const Navbar = () => {
         {isOpen && (
           <div className={styles.moblinks}>
             <ul>
-              <Link to="/profile">
-                <li>
-                  <div>
-                    <p>Nitasha Dhingra</p>
-                    <p>
-                      <AiOutlineRight />
-                    </p>
-                  </div>
-                </li>
-              </Link>
+            { currentUser && (
+                <Link to="/profile">
+                  <li>
+                    <div onClick={handleToggle}>
+                      USER NAME<AiOutlineRight />
+                    </div>
+                  </li>
+                </Link>
+              )}
               { !currentUser && (
                 <Link to="/home">
                   <li>
-                    <div>
+                    <div onClick={handleToggle}>
                       Home<AiOutlineRight />
                     </div>
                   </li>
                 </Link>
               )}
-              <Link to="/faqs" >
+              <Link to="/faqs">
                 <li>
-                  <div>
-                    <p>FAQs</p>
-                    <p>
-                      <AiOutlineRight />
-                    </p>
+                  <div onClick={handleToggle}>
+                    FAQs<AiOutlineRight />
                   </div>
                 </li>
               </Link>
+              
               <Link to="/vision">
                 <li>
-                  <div>
-                    <p>Vision</p>
-                    <p>
-                      <AiOutlineRight />
-                    </p>
+                  <div onClick={handleToggle}>
+                    Vision<AiOutlineRight />
                   </div>
                 </li>
               </Link>
@@ -139,14 +135,14 @@ const Navbar = () => {
               { !currentUser && (
                   <Link to="/signin">
                     <li className={styles.moblogin}>
-                        <p>Login</p>
+                        <p onClick={handleToggle}>Login</p>
                     </li>
                   </Link>
               )}
 
               { currentUser && (
                   <li className={styles.moblogin} onClick={handleSignOut}>
-                      <p>Logout</p>
+                      <p onClick={handleToggle}>Logout</p>
                   </li>
               )}
             </ul>
