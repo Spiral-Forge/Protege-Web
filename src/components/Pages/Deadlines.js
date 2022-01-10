@@ -62,8 +62,8 @@ const Calendar = () => {
     setCurrentFullDate(tempFullDate);
     let tempDeadlinesArr = [];
     db.collection("Deadlines")
-      .doc(tempFullDate + "T12:00:00.000Z")
-      .collection("Listed")
+      .doc(tempFullDate + "T00:00:00.000Z")
+      .collection("events")
       .get()
       .then((snapshot) => {
         snapshot.forEach((snap) => {
@@ -72,6 +72,7 @@ const Calendar = () => {
         setCurrentDateDeadlines(tempDeadlinesArr);
       })
       .catch((err) => {
+        console.log("Can't print deadlines")
         console.log(err);
       });
   }, []);
@@ -91,8 +92,8 @@ const Calendar = () => {
     }
     let tempDeadlinesArr = [];
     db.collection("Deadlines")
-      .doc(tempFullDate + "T12:00:00.000Z")
-      .collection("Listed")
+      .doc(tempFullDate + "T00:00:00.000Z")
+      .collection("events")
       .get()
       .then((snapshot) => {
         snapshot.forEach((snap) => {
@@ -201,9 +202,9 @@ const Calendar = () => {
         {currentDateDeadlines.map((deadline, index) => {
           return (
             <div key={index} className={styles.deadlineContainer}>
-              <a href={deadline.Link.trim()} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+              <a href={deadline.link.trim()} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
                 <h2>
-                  {deadline.Title} 
+                  {deadline.title} 
                   <div className={styles.openLink}><BiLinkExternal /></div>
                 </h2>
               </a>
