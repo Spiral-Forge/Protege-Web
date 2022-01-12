@@ -12,19 +12,19 @@ export default function ResourceLinks() {
   const { currentUser } = useAuth();
   const [heading, setHeading] = useState("");
   const [found, setFound] = useState(false);
-  const sortByVotes = (arr) => {
+  const sortByvotes = (arr) => {
     arr.sort((a, b) => {
-      const isVotesUnDefA = typeof a.Votes === "undefined";
-      const isVotesUnDefB = typeof b.Votes === "undefined";
-      if (isVotesUnDefB) {
-        b.Votes = 0;
+      const isvotesUnDefA = typeof a.votes === "undefined";
+      const isvotesUnDefB = typeof b.votes === "undefined";
+      if (isvotesUnDefB) {
+        b.votes = 0;
       }
-      if (isVotesUnDefA) {
-        a.Votes = 0;
+      if (isvotesUnDefA) {
+        a.votes = 0;
       }
-      if (a.Votes < b.Votes) {
+      if (a.votes < b.votes) {
         return 1;
-      } else if (a.Votes > b.Votes) {
+      } else if (a.votes > b.votes) {
         return -1;
       }
       return 0;
@@ -32,24 +32,31 @@ export default function ResourceLinks() {
     return arr;
   };
   useEffect(() => {
-    let inDb = false;
-    resourceCategories.forEach((resourceCat) => {
-      if (resourceCat.url === resource) {
-        inDb = true;
-        setHeading(resourceCat.txt);
-        setFound(true);
-        return;
-      }
-    });
-    if (!inDb) return;
-    db.collection(resource)
+    db.collection("resources01")
+      .where("categoryName", "==", "College")
       .get()
       .then((querySnapshot) => {
         let tempLinks = [];
-        querySnapshot.forEach((doc) => {
-          tempLinks.push({ id: doc.id, ...doc.data() });
+        querySnapshot.forEach(async (doc) => {
+          setHeading(doc.data().categoryName);
+          await db
+            .collection("resources01")
+            .doc(doc.id)
+            .collection("data")
+            .get()
+            .then((docs) => {
+              docs.forEach((docu) => {
+                tempLinks.push({
+                  id: docu.id,
+                  ...docu.data(),
+                  resourceCategory: doc.id,
+                });
+              });
+            });
+          setLinks(tempLinks);
+          console.log(tempLinks);
+          setFound(true);
         });
-        setLinks(tempLinks);
       });
   }, []);
   return (
@@ -60,14 +67,14 @@ export default function ResourceLinks() {
             <h1>{heading}</h1>
           </div>
           <div className={styles.content}>
-            {sortByVotes(links).map((link) => (
+            {sortByvotes(links).map((link) => (
               <LinkCard
                 key={link.id}
                 link={link}
                 setLinks={setLinks}
                 links={links}
                 userId={currentUser && currentUser.uid}
-                resourceCategory={resource}
+                resourceCategory={link.resourceCategory}
               />
             ))}
           </div>
@@ -82,7 +89,9 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
     window.open(url, "_blank");
   };
   const UpdateDb = (newDoc) => {
-    db.collection(resourceCategory)
+    db.collection("resources01")
+      .doc(resourceCategory)
+      .collection("data")
       .doc(link.id)
       .set(newDoc)
       .catch((err) => {
@@ -98,15 +107,15 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
     let tempLinks = links.map((linkSnap, index) => {
       if (linkSnap.id === link.id) {
         indexOfNewLink = index;
-        if (!linkSnap.Votes) linkSnap.Votes = 0;
+        if (!linkSnap.votes) linkSnap.votes = 0;
         if (!linkSnap.votesMap) linkSnap.votesMap = {};
         if (linkSnap.votesMap[userId] === true) {
-          linkSnap.Votes -= 1;
+          linkSnap.votes -= 1;
           delete linkSnap.votesMap[userId];
           return linkSnap;
         } else if (linkSnap.votesMap[userId] === false) {
-          linkSnap.Votes += 2;
-        } else linkSnap.Votes += 1;
+          linkSnap.votes += 2;
+        } else linkSnap.votes += 1;
         linkSnap.votesMap[userId] = true;
       }
       return linkSnap;
@@ -123,15 +132,15 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
     let tempLinks = links.map((linkSnap, index) => {
       if (linkSnap.id === link.id) {
         indexOfNewLink = index;
-        if (!linkSnap.Votes) linkSnap.Votes = 0;
+        if (!linkSnap.votes) linkSnap.votes = 0;
         if (!linkSnap.votesMap) linkSnap.votesMap = {};
         if (linkSnap.votesMap[userId] === false) {
-          linkSnap.Votes += 1;
+          linkSnap.votes += 1;
           delete linkSnap.votesMap[userId];
           return linkSnap;
         } else if (linkSnap.votesMap[userId] === true) {
-          linkSnap.Votes -= 2;
-        } else linkSnap.Votes -= 1;
+          linkSnap.votes -= 2;
+        } else linkSnap.votes -= 1;
         linkSnap.votesMap[userId] = false;
       }
       return linkSnap;
@@ -151,7 +160,7 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
             }
           />
         </span>
-        {typeof link.Votes === "undefined" ? 0 : link.Votes}
+        {typeof link.votes === "undefined" ? 0 : link.votes}
         <span>
           <AiFillCaretDown
             className={styles.icon}
@@ -165,7 +174,7 @@ export function LinkCard({ link, links, setLinks, userId, resourceCategory }) {
         </span>
       </div>
       <div className={styles.desc}>
-        <h3 onClick={() => handleClick(link.Link)}>{link.Title}</h3>
+        <h3 onClick={() => handleClick(link.link)}>{link.title}</h3>
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ import { guidelinesMentors, guidelinesMentees } from "../staticPagesData";
 
 function SignUpForm({ post, setPost }) {
   const history = useHistory();
-  // const { signUp } = useAuth();
+  const { signUp } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -53,7 +53,7 @@ function SignUpForm({ post, setPost }) {
 
   const handleAccept = async () => {
     try {
-      // await signUp(formData.email, formData.password);
+      await signUp(formData.email, formData.password);
       const tempObject = userObj();
       delete tempObject["password"];
       delete tempObject["confirm_password"];
