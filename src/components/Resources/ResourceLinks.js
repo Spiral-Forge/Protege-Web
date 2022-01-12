@@ -33,7 +33,7 @@ export default function ResourceLinks() {
   };
   useEffect(() => {
     db.collection("resources01")
-      .where("categoryName", "==", "College")
+      .where("categoryName", "==", resource.split("-").join(" "))
       .get()
       .then((querySnapshot) => {
         let tempLinks = [];
