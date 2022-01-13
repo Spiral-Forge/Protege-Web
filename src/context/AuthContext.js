@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
   const [isMentor, setIsMentor] = useState(false);
+  const [userData, setUserData] = useState();
 
   const signUp = async (email, password) => {
     await auth.createUserWithEmailAndPassword(email, password);
@@ -30,6 +31,7 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         try {
           const userDoc = await db.collection("users").doc(user.uid).get();
+          setUserData(userDoc.data());
           if (userDoc.data().post === "Mentor") {
             setIsMentor(true);
           }
@@ -44,6 +46,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     currentUser,
+    userData,
     isMentor,
     signUp,
     signIn,
