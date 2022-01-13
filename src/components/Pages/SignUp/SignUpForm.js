@@ -62,8 +62,11 @@ function SignUpForm({ post, setPost }) {
       await auth.currentUser.sendEmailVerification();
       // await auth.signOut();
     } catch (e) {
-      window.alert("USER CANNOT BE CREATED");
-      return console.log(e);
+      if (e.code == "auth/email-already-in-use") {
+        window.alert(
+          "The email address is already in use by another account."
+        );
+      }
     }
     setGuidelinesPopUp(false);
     // history.push({

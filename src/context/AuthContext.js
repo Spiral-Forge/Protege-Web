@@ -14,8 +14,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isMentor, setIsMentor] = useState(false);
 
-  const signUp = async (email, password) => {
-    await auth.createUserWithEmailAndPassword(email, password);
+  const signUp = (email, password) => {
+    return auth.createUserWithEmailAndPassword(email, password);
   };
 
   const signIn = (email, password) => {
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       // console.log(user.emailVerified)
-      
+
       setCurrentUser(user);
       if (user) {
         try {
