@@ -60,16 +60,16 @@ function SignUpForm({ post, setPost }) {
 
       await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
       await auth.currentUser.sendEmailVerification();
-      await auth.signOut();
+      // await auth.signOut();
     } catch (e) {
       window.alert("USER CANNOT BE CREATED");
       return console.log(e);
     }
     setGuidelinesPopUp(false);
-    history.push({
-      pathname: "/signin",
-      state: { verify: true },
-    });
+    // history.push({
+    //   pathname: "/signin",
+    //   state: { verify: true },
+    // });
   };
 
   const userObj = () => {

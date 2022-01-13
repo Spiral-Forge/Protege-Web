@@ -8,13 +8,14 @@ import {
 } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../Navbar/Button";
 import styles from "../../styles/Signin.module.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { auth } from "../../firebase";
 const SignIn = () => {
   const history = useHistory();
   const location = useLocation();
@@ -23,16 +24,13 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  console.log(location.state.verify)
   const [check, setCheck] = useState(false);
   const handleLogin = async () => {
     try {
       await signIn(formData.email, formData.password);
-      
     } catch (e) {
       console.log(e);
     }
-    history.push("/home");
   };
   const validate = (e) => {
     e.preventDefault();
@@ -56,8 +54,16 @@ const SignIn = () => {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  const [verifyModal, setVerifyModal] = useState(location.state.verify);
+  const { currentUser } = useAuth();
+  useEffect(() => {
+    if (currentUser && !currentUser.emailVerified) {
+      auth.signOut();
+      setVerifyModal(true);
+    } else if (currentUser) {
+      history.push("/home");
+    }
+  }, [currentUser]);
+  const [verifyModal, setVerifyModal] = useState(location.state?.verify);
   return (
     <div className={styles.container}>
       <div className={styles.heading}>

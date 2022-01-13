@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { auth, db } from "../firebase";
 
 const AuthContext = React.createContext();
@@ -8,6 +9,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+  const history = useHistory();
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
   const [isMentor, setIsMentor] = useState(false);
@@ -27,6 +29,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       // console.log(user.emailVerified)
+      
       setCurrentUser(user);
       if (user) {
         try {
