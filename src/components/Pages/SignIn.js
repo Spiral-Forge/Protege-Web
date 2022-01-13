@@ -1,4 +1,11 @@
-import { TextField } from "@material-ui/core";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import React, { useState } from "react";
@@ -7,24 +14,26 @@ import styles from "../../styles/Signin.module.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 const SignIn = () => {
   const history = useHistory();
+  const location = useLocation();
   const { signIn } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  console.log(location.state.verify)
   const [check, setCheck] = useState(false);
-
   const handleLogin = async () => {
     try {
       await signIn(formData.email, formData.password);
+      
     } catch (e) {
       console.log(e);
     }
     history.push("/home");
   };
-
   const validate = (e) => {
     e.preventDefault();
 
@@ -48,11 +57,13 @@ const SignIn = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const [verifyModal, setVerifyModal] = useState(location.state.verify);
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
         <h1>
-          Login and <br />Start your Journey.
+          Login and <br />
+          Start your Journey.
         </h1>
         <p>Upskill and uplift others</p>
       </div>
@@ -101,6 +112,34 @@ const SignIn = () => {
           </span>
         </p>
       </form>
+      <Dialog
+        open={verifyModal}
+        onClose={() => {
+          setVerifyModal(false);
+        }}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Please verify your email"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Check for verification email in your inbox and sign in again.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              console.log(verifyModal);
+              setVerifyModal(false);
+            }}
+            autoFocus
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

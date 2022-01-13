@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      // console.log(user.emailVerified)
       setCurrentUser(user);
       if (user) {
         try {

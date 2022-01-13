@@ -30,7 +30,7 @@ import { guidelinesMentors, guidelinesMentees } from "../staticPagesData";
 
 function SignUpForm({ post, setPost }) {
   const history = useHistory();
-  // const { signUp } = useAuth();
+  const { signUp } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -53,20 +53,23 @@ function SignUpForm({ post, setPost }) {
 
   const handleAccept = async () => {
     try {
-      // await signUp(formData.email, formData.password);
+      await signUp(formData.email, formData.password);
       const tempObject = userObj();
       delete tempObject["password"];
       delete tempObject["confirm_password"];
 
       await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
-      history.push("/home");
+      await auth.currentUser.sendEmailVerification();
+      await auth.signOut();
     } catch (e) {
-      window.alert("USER CANNOT BE CREATED")
+      window.alert("USER CANNOT BE CREATED");
       return console.log(e);
     }
-    console.log(auth.currentUser.uid);
     setGuidelinesPopUp(false);
-    history.push("/home");
+    history.push({
+      pathname: "/signin",
+      state: { verify: true },
+    });
   };
 
   const userObj = () => {
@@ -128,12 +131,12 @@ function SignUpForm({ post, setPost }) {
 
     try {
       if (data.password != data.confirm_password) {
-          throw "Passwords don't match.";
-      } 
-      if (data.password.length < 6){
+        throw "Passwords don't match.";
+      }
+      if (data.password.length < 6) {
         throw "Password must have atleast 6 characters";
       }
-    } catch (err){
+    } catch (err) {
       window.alert(err);
       return false;
     }
@@ -152,9 +155,7 @@ function SignUpForm({ post, setPost }) {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
-        <h1>
-          Register and Start your Journey.
-        </h1>
+        <h1>Register and Start your Journey.</h1>
         {/* <p>Mentor and Uplift others through your Journey</p> */}
       </div>
 
@@ -302,7 +303,7 @@ function SignUpForm({ post, setPost }) {
               onChange={handleChange}
             />
           </div>
-          
+
           <div className={styles.group}>
             <label htmlFor="hosteller">Are you a hosteller?</label>
             <Dropdown
