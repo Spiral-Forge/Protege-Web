@@ -72,7 +72,7 @@ const Calendar = () => {
         setCurrentDateDeadlines(tempDeadlinesArr);
       })
       .catch((err) => {
-        console.log("Can't print deadlines")
+        console.log("Can't print deadlines");
         console.log(err);
       });
   }, []);
@@ -116,6 +116,7 @@ const Calendar = () => {
                 setCurrentYear(currentYear - 1);
               }
               setCurrentMonth((currentMonth - 1 + 12) % 12);
+              setCurrentDate(0);
             }}
             className={styles.currentDate}
           >
@@ -130,6 +131,7 @@ const Calendar = () => {
             onClick={() => {
               if (currentMonth === 11) setCurrentYear(currentYear + 1);
               setCurrentMonth((currentMonth + 1) % 12);
+              setCurrentDate(0);
             }}
             className={styles.currentDate}
           >
@@ -193,30 +195,39 @@ const Calendar = () => {
             })}
         </div>
       </div>
-      <div>
-        <div className={styles.deadlinesHeading}>
-          <h2>
-            Deadlines for {currentDate} {months[currentMonth]}, {currentYear}
-          </h2>
+      {currentDate !== 0 && (
+        <div>
+          <div className={styles.deadlinesHeading}>
+            <h2>
+              Deadlines for {currentDate} {months[currentMonth]}, {currentYear}
+            </h2>
+          </div>
+          {currentDateDeadlines.map((deadline, index) => {
+            return (
+              <div key={index} className={styles.deadlineContainer}>
+                <a
+                  href={deadline.link.trim()}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ textDecoration: "none" }}
+                >
+                  <h2>
+                    {deadline.title}
+                    <div className={styles.openLink}>
+                      <BiLinkExternal />
+                    </div>
+                  </h2>
+                </a>
+              </div>
+            );
+          })}
+          {currentDateDeadlines.length === 0 && (
+            <h3 className={styles.noDeadlinesFound}>
+              No deadlines on selected date
+            </h3>
+          )}
         </div>
-        {currentDateDeadlines.map((deadline, index) => {
-          return (
-            <div key={index} className={styles.deadlineContainer}>
-              <a href={deadline.link.trim()} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
-                <h2>
-                  {deadline.title} 
-                  <div className={styles.openLink}><BiLinkExternal /></div>
-                </h2>
-              </a>
-            </div>
-          );
-        })}
-        {currentDateDeadlines.length === 0 && (
-          <h3 className={styles.noDeadlinesFound}>
-            No deadlines on selected date
-          </h3>
-        )}
-      </div>
+      )}
     </>
   );
 };
