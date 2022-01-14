@@ -128,9 +128,9 @@ const SignIn = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
+        {/* <DialogTitle id="alert-dialog-title">
           {"Email not verified!"}
-        </DialogTitle>
+        </DialogTitle> */}
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Please check your inbox and verify your email to sign in.
