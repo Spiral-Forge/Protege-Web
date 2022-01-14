@@ -10,13 +10,11 @@ export default function Profile() {
   const [edit, setEdit] = useState(false);
   const [userData, setUserData] = useState();
   useEffect(() => {
-    console.log(currentUser.uid);
     db.collection("users")
       .doc(currentUser.uid)
       .get()
       .then((doc) => {
         setUserData(doc.data());
-        console.log(doc.data());
       })
       .catch((err) => {
         console.log(err);

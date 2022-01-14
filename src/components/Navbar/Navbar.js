@@ -8,8 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 import { Spiral as Hamburger } from "hamburger-react";
 
 const Navbar = () => {
-
-  const { currentUser, signOut } = useAuth();
+  const { currentUser, userData, signOut } = useAuth();
   const history = useHistory();
   const [isOpen, setOpen] = useState();
 
@@ -28,7 +27,7 @@ const Navbar = () => {
   }, []);
 
   const handleToggle = () => {
-      setOpen(!isOpen);
+    setOpen(!isOpen);
   };
 
   return (
@@ -95,20 +94,22 @@ const Navbar = () => {
         {isOpen && (
           <div className={styles.moblinks}>
             <ul>
-            { currentUser && (
+              {currentUser && (
                 <Link to="/profile">
                   <li>
                     <div onClick={handleToggle}>
-                      USER NAME<AiOutlineRight />
+                      {userData.name}
+                      <AiOutlineRight />
                     </div>
                   </li>
                 </Link>
               )}
-              { !currentUser && (
+              {!currentUser && (
                 <Link to="/home">
                   <li>
                     <div onClick={handleToggle}>
-                      Home<AiOutlineRight />
+                      Home
+                      <AiOutlineRight />
                     </div>
                   </li>
                 </Link>
@@ -116,34 +117,34 @@ const Navbar = () => {
               <Link to="/faqs">
                 <li>
                   <div onClick={handleToggle}>
-                    FAQs<AiOutlineRight />
+                    FAQs
+                    <AiOutlineRight />
                   </div>
                 </li>
               </Link>
-              
+
               <Link to="/vision">
                 <li>
                   <div onClick={handleToggle}>
-                    Vision<AiOutlineRight />
+                    Vision
+                    <AiOutlineRight />
                   </div>
                 </li>
               </Link>
-
-              
             </ul>
             <ul>
-              { !currentUser && (
-                  <Link to="/signin">
-                    <li className={styles.moblogin}>
-                        <p onClick={handleToggle}>Login</p>
-                    </li>
-                  </Link>
+              {!currentUser && (
+                <Link to="/signin">
+                  <li className={styles.moblogin}>
+                    <p onClick={handleToggle}>Login</p>
+                  </li>
+                </Link>
               )}
 
-              { currentUser && (
-                  <li className={styles.moblogin} onClick={handleSignOut}>
-                      <p onClick={handleToggle}>Logout</p>
-                  </li>
+              {currentUser && (
+                <li className={styles.moblogin} onClick={handleSignOut}>
+                  <p onClick={handleToggle}>Logout</p>
+                </li>
               )}
             </ul>
           </div>
