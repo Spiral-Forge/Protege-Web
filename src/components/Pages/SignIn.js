@@ -29,7 +29,9 @@ const SignIn = () => {
     try {
       await signIn(formData.email, formData.password);
     } catch (e) {
-      console.log(e);
+      if(e.code ==='auth/user-not-found'){
+        window.alert("This email address is not registered.");
+      }
     }
   };
   const validate = (e) => {
