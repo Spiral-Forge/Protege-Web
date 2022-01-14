@@ -127,11 +127,11 @@ const SignIn = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Please verify your email"}
+          {"Email not verified!"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Check for verification email in your inbox and sign in again.
+            Please check your inbox and verify your email to sign in.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

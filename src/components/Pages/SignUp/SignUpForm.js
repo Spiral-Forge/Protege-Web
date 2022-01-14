@@ -60,7 +60,7 @@ function SignUpForm({ post, setPost }) {
 
       await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
       await auth.currentUser.sendEmailVerification();
-      // await auth.signOut();
+      await auth.signOut();
     } catch (e) {
       if (e.code == "auth/email-already-in-use") {
         window.alert(
@@ -69,10 +69,10 @@ function SignUpForm({ post, setPost }) {
       }
     }
     setGuidelinesPopUp(false);
-    // history.push({
-    //   pathname: "/signin",
-    //   state: { verify: true },
-    // });
+    history.push({
+      pathname: "/signin",
+      state: { verify: true },
+    });
   };
 
   const userObj = () => {
