@@ -3,18 +3,32 @@ import { AiOutlineRight } from "react-icons/ai";
 import { MenuItems } from "./MenuItems";
 import styles from "../../styles/Navbar.module.css";
 import { Button } from "./Button";
-import { withRouter, Link } from "react-router-dom";
-import logo from "./logo.jpg";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Spiral as Hamburger } from "hamburger-react";
 
 const Navbar = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, userData, signOut } = useAuth();
+  const history = useHistory();
   const [isOpen, setOpen] = useState();
+
+  const handleSignOut = async () => {
+    if (!window.confirm("Are you sure you want to log out?")) return;
+    try {
+      await signOut();
+    } catch (err) {
+      console.log(err);
+    }
+    history.push("/home");
+  };
 
   useEffect(() => {
     setOpen(false);
   }, []);
+
+  const handleToggle = () => {
+    setOpen(!isOpen);
+  };
 
   return (
     <div className={styles.container}>
@@ -29,25 +43,30 @@ const Navbar = () => {
         </div>
         <div className={styles.navlinks}>
           <ul>
-            <Link to="/home">
-              <li>Home</li>
+            {!currentUser && (
+              <Link to="/home">
+                <li>Home</li>
+              </Link>
+            )}
+
+            <Link to="/faqs">
+              <li>FAQs</li>
             </Link>
 
             <Link to="/vision">
               <li>Vision</li>
             </Link>
-            <Link to="/faqs">
-              <li>FAQs</li>
-            </Link>
-            <Link to="/help">
-              <li>Help Center</li>
-            </Link>
-            <Link to="/signin">
-              <li className={styles.login}>Login</li>
-            </Link>
-            <Link to="/register">
-              <li className={styles.signup}>Signup</li>
-            </Link>
+            {!currentUser && (
+              <>
+                <Link to="/signin">
+                  <li className={styles.login}>Login</li>
+                </Link>
+                <Link to="/register">
+                  <li className={styles.signup}>Sign up</li>
+                </Link>
+              </>
+            )}
+
             {/* <li className={styles.logout}>Logout</li> */}
           </ul>
         </div>
@@ -75,89 +94,58 @@ const Navbar = () => {
         {isOpen && (
           <div className={styles.moblinks}>
             <ul>
-              <Link to="/home">
-                <li>
-                  <div>
-                    <p>Nitasha Dhingra</p>
-                    <p>
+              {currentUser && (
+                <Link to="/profile">
+                  <li>
+                    <div onClick={handleToggle}>
+                      {userData.name}
                       <AiOutlineRight />
-                    </p>
-                  </div>
-                </li>
-              </Link>
-              <li>
-                <div>
-                  <p>Deadlines</p>
-                  <p>
+                    </div>
+                  </li>
+                </Link>
+              )}
+              {!currentUser && (
+                <Link to="/home">
+                  <li>
+                    <div onClick={handleToggle}>
+                      Home
+                      <AiOutlineRight />
+                    </div>
+                  </li>
+                </Link>
+              )}
+              <Link to="/faqs">
+                <li>
+                  <div onClick={handleToggle}>
+                    FAQs
                     <AiOutlineRight />
-                  </p>
-                </div>
-              </li>
-              <Link to="/home">
-                <li>
-                  <div>
-                    <p>Home</p>
-                    <p>
-                      <AiOutlineRight />
-                    </p>
-                  </div>
-                </li>
-              </Link>
-              <Link to="/vision">
-                <li>
-                  <div>
-                    <p>Vision</p>
-                    <p>
-                      <AiOutlineRight />
-                    </p>
                   </div>
                 </li>
               </Link>
 
-              <Link to="/faqs">
+              <Link to="/vision">
                 <li>
-                  <div>
-                    <p>FAQs</p>
-                    <p>
-                      <AiOutlineRight />
-                    </p>
+                  <div onClick={handleToggle}>
+                    Vision
+                    <AiOutlineRight />
                   </div>
                 </li>
               </Link>
-              <Link to="/help">
-                <li>
-                  <div>
-                    <p>Help Center</p>
-                    <p>
-                      <AiOutlineRight />
-                    </p>
-                  </div>
-                </li>
-              </Link>
-              {/* <Link to="/signin">
-                  <li>
-                    <div >
-                      <p>Login</p>
-                      <p>
-                        <AiOutlineRight />
-                      </p>
-                    </div>
-                  </li>
-                </Link> */}
             </ul>
             <ul>
-              <Link to="/signin">
-                <li className={styles.moblogin}>
-                  <div>
-                    <p>Login</p>
-                  </div>
+              {!currentUser && (
+                <Link to="/signin">
+                  <li className={styles.moblogin}>
+                    <p onClick={handleToggle}>Login</p>
+                  </li>
+                </Link>
+              )}
+
+              {currentUser && (
+                <li className={styles.moblogin} onClick={handleSignOut}>
+                  <p onClick={handleToggle}>Logout</p>
                 </li>
-              </Link>
-              {/* <li className={styles.moblogin}>
-                  <div>
-                    <p>Logout</p>
-                  </div>
-                </li> */}
+              )}
             </ul>
           </div>
         )}

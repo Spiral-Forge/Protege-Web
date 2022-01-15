@@ -1,13 +1,11 @@
 import React from "react";
-import "./Homepage.css";
-import { Button } from "../../Navbar/Button";
-import { Link } from "react-router-dom";
 import img from "../../Navbar/Mentorship.jpg";
 import Event from "./Event";
-
+import "./Homepage.css";
 function Homepage() {
+  
   return (
-    <>
+    <div>
       <div className="home__hero-section">
         <div className="container">
           <div
@@ -23,20 +21,6 @@ function Homepage() {
                 <p className="home__hero-subtitle dark">
                   Get Immersive Mentorship and Learning Experience
                 </p>
-                <div className="top-line">Register as</div>
-                <div>
-                  <Link to="/mentorsignup">
-                    <Button buttonSize="btn--large" buttonColor="blue">
-                      Mentor
-                    </Button>
-                  </Link>{" "}
-                  <Button buttonColor="white"></Button>
-                  <Link to="/menteesignup">
-                    <Button buttonSize="btn--large" buttonColor="blue">
-                      Mentee
-                    </Button>
-                  </Link>
-                </div>
               </div>
             </div>
             <div className="col">
@@ -50,7 +34,7 @@ function Homepage() {
       <div>
         <Event />
       </div>
-    </>
+    </div>
   );
 }
 

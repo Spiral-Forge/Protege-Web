@@ -29,3 +29,17 @@
   border-radius: 0 !important;
   width: 100% !important;
 }
+
+.my-masonry-grid {
+  max-width: 1420px;
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -15px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 15px; /* gutter size */
+  width: 50% !important;
+  background-clip: padding-box;
+}

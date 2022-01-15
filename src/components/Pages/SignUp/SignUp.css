@@ -37,7 +37,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  column-gap:0.3rem ;
+  column-gap: 0.3rem;
 }
 .signup-heading {
   margin-top: 0.5rem;
@@ -105,4 +105,20 @@ select {
 .form-submit-btn {
   margin-top: 6rem;
   width: 30rem;
+}
+
+#alert-dialog-description {
+  padding: 1rem 1.8rem;
+  color: black;
+}
+#alert-dialog-description li{
+  margin-bottom: 0.5rem;
+}
+
+@media only screen and (max-width: 880px) {
+  .signup-heading {
+    margin: 8%;
+    font-size: 32px;
+    text-align: center;
+  }
 }

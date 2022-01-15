@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../firebase";
+import { useHistory } from "react-router-dom";
+import { auth, db } from "../firebase";
 
 const AuthContext = React.createContext();
 
@@ -8,11 +9,14 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+  const history = useHistory();
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [isMentor, setIsMentor] = useState(false);
+  const [userData, setUserData] = useState();
 
-  const signUp = async (email, password) => {
-    await auth.createUserWithEmailAndPassword(email, password);
+  const signUp = (email, password) => {
+    return auth.createUserWithEmailAndPassword(email, password);
   };
 
   const signIn = (email, password) => {
@@ -24,8 +28,21 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      // console.log(user.emailVerified)
+
       setCurrentUser(user);
+      if (user) {
+        try {
+          const userDoc = await db.collection("users").doc(user.uid).get();
+          setUserData(userDoc.data());
+          if (userDoc.data().post === "Mentor") {
+            setIsMentor(true);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
       setLoading(false);
     });
     return unsubscribe;
@@ -33,6 +50,8 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     currentUser,
+    userData,
+    isMentor,
     signUp,
     signIn,
     signOut,

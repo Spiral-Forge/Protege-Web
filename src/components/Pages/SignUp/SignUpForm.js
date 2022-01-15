@@ -25,18 +25,22 @@ import {
   hostellers,
   getArray,
 } from "./SignUpOptions";
+
+import { guidelinesMentors, guidelinesMentees } from "../staticPagesData";
+
 function SignUpForm({ post, setPost }) {
   const history = useHistory();
   const { signUp } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
+    phoneNo: "",
     email: "",
     password: "",
-    rollNo: "",
-    linkedInURL: "",
-    githubURL: "",
+    confirm_password: "",
+    roll: "",
+    linkedInUrl: "",
+    githubUrl: "",
   });
 
   const [hosteller, setHosteller] = useState([]);
@@ -50,15 +54,25 @@ function SignUpForm({ post, setPost }) {
   const handleAccept = async () => {
     try {
       await signUp(formData.email, formData.password);
-      const tempObject = { ...formData };
+      const tempObject = userObj();
       delete tempObject["password"];
-      await db.collection("Users").doc(auth.currentUser.uid).set(tempObject);
+      delete tempObject["confirm_password"];
+
+      await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
+      await auth.currentUser.sendEmailVerification();
+      await auth.signOut();
     } catch (e) {
-      return console.log(e);
+      if (e.code == "auth/email-already-in-use") {
+        window.alert(
+          "The email address is already in use by another account."
+        );
+      }
     }
-    console.log(auth.currentUser.uid);
     setGuidelinesPopUp(false);
-    history.push("/");
+    history.push({
+      pathname: "/signin",
+      state: { verify: true },
+    });
   };
 
   const userObj = () => {
@@ -72,7 +86,7 @@ function SignUpForm({ post, setPost }) {
       gender: gender.value,
       hosteller: hosteller.value,
       peerID: [],
-      photoURL: null,
+      photoUrl: null,
       post,
     };
     return obj;
@@ -81,7 +95,6 @@ function SignUpForm({ post, setPost }) {
   const validate = (e) => {
     e.preventDefault();
     const data = userObj();
-
     try {
       if (!data.name) {
         throw "Name";
@@ -89,15 +102,12 @@ function SignUpForm({ post, setPost }) {
       if (!data.email) {
         throw "Email";
       }
-      if (!data.phone) {
-        throw "Phone";
+      if (!data.phoneNo) {
+        throw "Phone Number";
       }
-      if (isNaN(data.phone)) {
+      if (isNaN(data.phoneNo)) {
         window.alert("Phone number is inValid");
         return;
-      }
-      if (!data.password) {
-        throw "Password";
       }
       if (!data.college) {
         throw "College";
@@ -108,7 +118,7 @@ function SignUpForm({ post, setPost }) {
       if (!data.year) {
         throw "Year";
       }
-      if (!data.rollNo) {
+      if (!data.roll) {
         throw "Roll";
       }
       if (!data.domains.length) {
@@ -117,24 +127,22 @@ function SignUpForm({ post, setPost }) {
       if (!data.languages.length) {
         throw "Languages";
       }
-      if (!data.linkedInURL) {
-        throw "LinkedIn";
-      }
-      if (!data.githubURL) {
-        throw "Github";
-      }
-      if (!data.gender) {
-        throw "Gender";
-      }
-      if (!data.hosteller?.toString()) {
-        throw "Hosteller";
-      }
     } catch (err) {
-      // console.log(`${err} field is required`);
       window.alert(`${err} field is required`);
-      return;
+      return false;
     }
 
+    try {
+      if (data.password != data.confirm_password) {
+        throw "Passwords don't match.";
+      }
+      if (data.password.length < 6) {
+        throw "Password must have atleast 6 characters";
+      }
+    } catch (err) {
+      window.alert(err);
+      return false;
+    }
     setGuidelinesPopUp(true);
   };
 
@@ -150,10 +158,7 @@ function SignUpForm({ post, setPost }) {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
-        <h1>
-          Mentors, <br />
-          Register and Start your Journey.
-        </h1>
+        <h1>Register and Start your Journey.</h1>
         {/* <p>Mentor and Uplift others through your Journey</p> */}
       </div>
 
@@ -175,6 +180,24 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
+            <label htmlFor="phoneNo">Phone Number</label>
+            <input
+              type="text"
+              name="phoneNo"
+              placeholder="Contact Info"
+              value={formData.phoneNo}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={styles.group}>
+            <label htmlFor="gender">Gender</label>
+            <Dropdown
+              options={genders}
+              onChange={setGender}
+              placeholder="Select your Gender"
+            />
+          </div>
+          <div className={styles.group}>
             <label htmlFor="email">Email Id</label>
             <input
               type="email"
@@ -185,22 +208,23 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="phone">Phone Number</label>
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.group}>
             <label htmlFor="password">Password</label>
             <input
               type="password"
               name="password"
               placeholder="Password"
               value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className={styles.group}>
+            <label htmlFor="confirm_password">Confirm Password</label>
+            <input
+              type="password"
+              name="confirm_password"
+              placeholder="Confirm Password"
+              value={formData.confirm_password}
               onChange={handleChange}
             />
           </div>
@@ -230,12 +254,12 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="rollNo">Roll Number</label>
+            <label htmlFor="roll">Roll Number</label>
             <input
               type="text"
-              name="rollNo"
+              name="roll"
               placeholder="Roll Number"
-              value={formData.rollNo}
+              value={formData.roll}
               onChange={handleChange}
             />
           </div>
@@ -243,6 +267,7 @@ function SignUpForm({ post, setPost }) {
           <div className={styles.group}>
             <label htmlFor="domain">Domains</label>
             <MultiSelect
+              hasSelectAll={false}
               options={domainsArr}
               value={domain}
               onChange={setDomain}
@@ -253,6 +278,7 @@ function SignUpForm({ post, setPost }) {
           <div className={styles.group}>
             <label htmlFor="lang">Languages</label>
             <MultiSelect
+              hasSelectAll={false}
               options={languagesArr}
               value={lang}
               onChange={setLang}
@@ -261,33 +287,26 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="linkedInURL">LinkedIn Id</label>
+            <label htmlFor="linkedInUrl">LinkedIn Profile Link</label>
             <input
               type="text"
-              name="linkedInURL"
+              name="linkedInUrl"
               placeholder="LinkedIn Id"
-              value={formData.linkedInURL}
+              value={formData.linkedInUrl}
               onChange={handleChange}
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="githubURL">Github Id</label>
+            <label htmlFor="githubUrl">Github Profile Link</label>
             <input
               type="text"
-              name="githubURL"
+              name="githubUrl"
               placeholder="Github Id"
-              value={formData.githubURL}
+              value={formData.githubUrl}
               onChange={handleChange}
             />
           </div>
-          <div className={styles.group}>
-            <label htmlFor="gender">Gender</label>
-            <Dropdown
-              options={genders}
-              onChange={setGender}
-              placeholder="Select your Gender"
-            />
-          </div>
+
           <div className={styles.group}>
             <label htmlFor="hosteller">Are you a hosteller?</label>
             <Dropdown
@@ -312,19 +331,19 @@ function SignUpForm({ post, setPost }) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus
-            sit amet luctus venenatis lectus magna fringilla urna. Ipsum dolor
-            sit amet consectetur adipiscing elit ut aliquam. Id cursus metus
-            aliquam eleifend. Quisque egestas diam in arcu. Bibendum neque
-            egestas congue quisque egestas. Aenean sed adipiscing diam donec
-            adipiscing tristique risus. Phasellus vestibulum lorem sed risus.
-            Fermentum dui faucibus in ornare quam viverra orci sagittis. Donec
-            et odio pellentesque diam volutpat commodo sed. Amet aliquam id diam
-            maecenas. Purus gravida quis blandit turpis cursus in. Dui ut ornare
-            lectus sit amet. At quis risus sed vulputate odio. Enim nunc
-            faucibus a pellentesque sit amet. At quis risus sed vulputate odio
-            ut enim blandit volutpat. Eros in cursus turpis massa tincidunt dui.
+            {post === "Mentor" ? (
+              <ol>
+                {guidelinesMentors.map((guideline) => {
+                  return <li>{guideline}</li>;
+                })}
+              </ol>
+            ) : (
+              <ol>
+                {guidelinesMentees.map((guideline) => {
+                  return <li>{guideline}</li>;
+                })}
+              </ol>
+            )}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

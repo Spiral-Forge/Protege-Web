@@ -27,7 +27,7 @@ export const domainsArr = [
 
 export const collegesArr = ["IGDTUW", "DTU", "NSUT", "IIITD"];
 
-export const years = ["1st", "2nd", "3rd", "4th"];
+export const years = ["First", "Second", "Third", "Fourth"];
 export const genders = ["Male", "Female", "Prefer not to mention"];
 export const hostellers = [
   { value: true, label: "Yes" },

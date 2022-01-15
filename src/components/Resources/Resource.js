@@ -1,47 +1,31 @@
 import styles from "../../styles/Resource.module.css";
 import { useHistory } from "react-router-dom";
-
-const cards = [
-  {
-    id: 1,
-    img: "https://source.unsplash.com/random/400x300",
-    txt: "Development",
-  },
-  {
-    id: 2,
-    img: "https://source.unsplash.com/random/400x420",
-    txt: "Machine Learning",
-  },
-  {
-    id: 3,
-    img: "https://source.unsplash.com/random/400x402",
-    txt: "Scholorships",
-  },
-  {
-    id: 4,
-    img: "https://source.unsplash.com/random/400x320",
-    txt: "Open Source",
-  },
-  {
-    id: 5,
-    img: "https://source.unsplash.com/random/300x400",
-    txt: "Development",
-  },
-  {
-    id: 6,
-    img: "https://source.unsplash.com/random/430x400",
-    txt: "Development",
-  },
-];
+import { useEffect } from "react";
+import { db } from "../../firebase";
+import { useState } from "react";
 
 export default function Resource() {
+  const tempCardsData = [];
+  const [cardsData, setCardsData] = useState([]);
+  useEffect(() => {
+    db.collection("resources01")
+      .get()
+      .then((querySnap) => {
+        querySnap.forEach((snap) => {
+          tempCardsData.push(snap.data());
+        });
+      })
+      .then(() => {
+        setCardsData(tempCardsData);
+      });
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
         <h1>Resource Center</h1>
       </div>
       <div className={styles.content}>
-        {cards.map((card) => (
+        {cardsData.map((card) => (
           <ResourceCard key={card.id} card={card} />
         ))}
       </div>
@@ -52,16 +36,19 @@ export default function Resource() {
 export function ResourceCard({ card }) {
   let history = useHistory();
 
-  const handleClick = (id) => {
-    history.push("/resources/" + id);
+  const handleClick = (url) => {
+    history.push("/resources/" + url);
   };
 
   return (
-    <div onClick={() => handleClick(card.id)} className={styles.card}>
+    <div
+      onClick={() => handleClick(card.categoryName.split(" ").join("-"))}
+      className={styles.card}
+    >
       <div className={styles.img}>
-        <img src={card.img} alt="" />
+        <img src={card.categoryLogo} alt="" />
       </div>
-      <p>{card.txt}</p>
+      <p>{card.categoryName}</p>
     </div>
   );
 }

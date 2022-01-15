@@ -8,8 +8,7 @@ import "./App.css";
 // import Messenger from "./components/ChatUrvi/Messenger";
 import Messenger from "./components/Chat/Messenger";
 import Navbar from "./components/Navbar/Navbar";
-import AboutUs from "./components/Pages/AboutUs";
-import Faqs from "./components/Pages/Faqs";
+import Faqs from "./components/Pages/Faqs/Faqs";
 import Feedback from "./components/Pages/Feedback";
 import Vision from "./components/Pages/Vision";
 import Homepage from "./components/Pages/Home/Homepage";
@@ -20,31 +19,32 @@ import { AuthProvider } from "./context/AuthContext";
 import ResourceLinks from "./components/Resources/ResourceLinks";
 import Resource from "./components/Resources/Resource";
 import Profile from "./components/Profile/Profile";
+import Deadlines from "./components/Pages/Deadlines";
 
 function App() {
   const history = useHistory();
   return (
     <div className="App">
-      <AuthProvider>
-        <Router history={history}>
+      <Router history={history}>
+        <AuthProvider>
           <Navbar />
           <Switch>
-            <Route path="/home" exact component={Homepage} />
-            <Route path="/vision" exact component={Vision} />
-            <Route path="/aboutus" component={AboutUs} />
-            <Route path="/faqs" component={Faqs} />
             <Route path="/signin" component={SignIn} />
             <Route exact path="/register" component={SignUp} />
             <VerticalLayout>
-              <Route path="/resource" exact component={Resource} />
+              <Route path="/home" exact component={Homepage} />
+              <Route path="/vision" exact component={Vision} />
+              <Route path="/faqs" component={Faqs} />
+              <Route path="/resources" exact component={Resource} />
               <Route path="/feedback" component={Feedback} />
-              <Route path="/resources/:id" component={ResourceLinks} />
+              <Route path="/resources/:resource" component={ResourceLinks} />
               <Route path="/chat" component={Messenger} />
-              <Route path="/harsh" component={Profile} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/deadlines" component={Deadlines} />
             </VerticalLayout>
           </Switch>
-        </Router>
-      </AuthProvider>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }
