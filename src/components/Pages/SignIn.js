@@ -29,8 +29,13 @@ const SignIn = () => {
     try {
       await signIn(formData.email, formData.password);
     } catch (e) {
-      if(e.code ==='auth/user-not-found'){
-        window.alert("This email address is not registered.");
+      switch (e.code) {
+        case "auth/user-not-found":
+          window.alert("This email address is not registered.");
+          break;
+        case "auth/wrong-password":
+          window.alert("Incorrect password");
+          break;
       }
     }
   };
