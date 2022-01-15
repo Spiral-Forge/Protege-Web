@@ -1,15 +1,22 @@
 import styles from "../../styles/Conversations.module.css";
-
+import { useAuth } from "../../context/AuthContext";
 export default function Conversations({ setChat }) {
+  const { userData, currentUser } = useAuth();
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <div className={styles.img}>
-          <img src="https://gcdn.pbrd.co/images/piXh0PKBM6Bq.png?o=1" alt="" />
+          <img
+            src={
+              currentUser.photoUrl ||
+              `https://avatars.dicebear.com/api/micah/${currentUser.uid}.svg`
+            }
+            alt=""
+          />
         </div>
         <div className={styles.info}>
-          <h3>Tanmay Kachroo</h3>
-          <p>Computer Science Engineering</p>
+          <h3>{userData.name}</h3>
+          <p>{userData.branch}</p>
         </div>
       </div>
       <div className={styles.bottom}>
