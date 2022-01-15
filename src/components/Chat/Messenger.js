@@ -87,7 +87,12 @@ export default function Messenger() {
   return (
     <div className={styles.container}>
       <Conversations peerData={peerData} profilePics={profilePics} />
-      <ChatWindow profilePics={profilePics} id={id} chat={chatArr} />
+      <ChatWindow
+        peerData={peerData}
+        profilePics={profilePics}
+        id={id}
+        chat={chatArr}
+      />
     </div>
   );
 }

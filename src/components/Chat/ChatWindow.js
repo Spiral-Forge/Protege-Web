@@ -4,7 +4,7 @@ import { IoMdSend, IoMdArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
 
-export default function ChatWindow({ profilePics, id, chat, setChat }) {
+export default function ChatWindow({ profilePics, id, chat, peerData }) {
   const scroll = useRef();
   const { currentUser, isMentor, userData } = useAuth();
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function ChatWindow({ profilePics, id, chat, setChat }) {
   const scrollBottom = () => {
     scroll.current.scrollIntoView();
   };
-  let [chatRoomId, setChatRoomId] = useState("");
+  const [chatRoomId, setChatRoomId] = useState("");
   const [inputText, setInputText] = useState("");
   console.log(currentUser.uid);
   const handleSendMessage = () => {
@@ -34,23 +34,16 @@ export default function ChatWindow({ profilePics, id, chat, setChat }) {
     } else {
       setChatRoomId(id + "_" + currentUser.uid);
     }
+    // console.log("id:", id);
+    // console.log("bruh",peerData.find((o) => {o.userID}).userID);
   }, []);
+
   return (
     <div className={`${styles.container} ${chat && `${styles.block}`} `}>
-      <div className={styles.header}>
-        <div onClick={() => setChat(false)} className={styles.back}>
-          <IoMdArrowBack />
-        </div>
-        <div className={styles.peer}>
-          <div className={styles.dpmob}>
-            <img
-              src="https://avatars.githubusercontent.com/u/44186440?v=4"
-              alt=""
-            />
-          </div>
-          <p>Harsh Pandey</p>
-        </div>
-      </div>
+      <h2 className={styles.name}>
+        {peerData.find((o) => o.userID === id).name}
+      </h2>
+
       <div className={styles.chat}>
         {chat.map((data) => {
           return data.sentBy === currentUser.uid ? (
@@ -69,7 +62,7 @@ export default function ChatWindow({ profilePics, id, chat, setChat }) {
         })}
         <div ref={scroll} style={{ backgroundColor: "black" }} />
       </div>
-      {id in userData.peerID && (
+      {userData.peerID.indexOf(id) >= 0 && (
         <div className={styles.input}>
           <textarea
             rows={1}
