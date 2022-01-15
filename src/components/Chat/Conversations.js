@@ -1,6 +1,7 @@
 import styles from "../../styles/Conversations.module.css";
 import { useAuth } from "../../context/AuthContext";
-export default function Conversations({ setChat }) {
+import { Link } from "react-router-dom";
+export default function Conversations({ setChat, peerData, profilePics }) {
   const { userData, currentUser } = useAuth();
   return (
     <div className={styles.container}>
@@ -20,29 +21,23 @@ export default function Conversations({ setChat }) {
         </div>
       </div>
       <div className={styles.bottom}>
-        <Peer active setChat={setChat} />
-        <Peer active setChat={setChat} />
-        <Peer setChat={setChat} />
-        <Peer setChat={setChat} />
-        <Peer setChat={setChat} />
-        <Peer setChat={setChat} />
-        <Peer setChat={setChat} />
-        <Peer setChat={setChat} />
-        <Peer setChat={setChat} />
+        {peerData.map((peer) => {
+          return <Peer peer={peer} profilePic={profilePics[peer.userID]} />;
+        })}
       </div>
     </div>
   );
 }
 
-export const Peer = ({ active, setChat }) => {
+export const Peer = ({ peer, profilePic }) => {
   return (
-    <div onClick={() => setChat(true)} className={styles.peer}>
-      <div className={styles.peerImg}>
-        <img src="https://gcdn.pbrd.co/images/NLhKZ0n35MHv.jpg?o=1" alt="" />
-        {active && <div className={styles.green} />}
+    <Link to={`/chat/${peer.userID}`}>
+      <div className={styles.peer}>
+        <div className={styles.peerImg}>
+          <img src={profilePic} alt="" />
+        </div>
+        <p>{peer.name}</p>
       </div>
-
-      <p>Harsh Pandey</p>
-    </div>
+    </Link>
   );
 };
