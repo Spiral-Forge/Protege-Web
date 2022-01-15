@@ -24,8 +24,8 @@ function App() {
   const history = useHistory();
   return (
     <div className="App">
-      <AuthProvider>
-        <Router history={history}>
+      <Router history={history}>
+        <AuthProvider>
           <Navbar />
           <Switch>
             <Route path="/signin" component={SignIn} />
@@ -42,8 +42,8 @@ function App() {
               <Route path="/deadlines" component={Deadlines} />
             </VerticalLayout>
           </Switch>
-        </Router>
-      </AuthProvider>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }
