@@ -14,18 +14,32 @@ export default function Messenger() {
   const [inputText, setInputText] = useState("");
   const [profilePics, setProfilePics] = useState({});
   let chatRoomId;
-
   useEffect(async () => {
     if (isMentor) {
-      chatRoomId = currentUser.uid + id;
+      chatRoomId = currentUser.uid + "_" + id;
     } else {
-      chatRoomId = id + currentUser.uid;
+      chatRoomId = id + "_" + currentUser.uid;
     }
-
+    if (id) {
+      await db
+        .collection("ChatRoom")
+        .doc(chatRoomId)
+        .get()
+        .then((snap) => {
+          if (!snap.exists) {
+            db.collection("ChatRoom")
+              .doc(chatRoomId)
+              .set({
+                ChatRoomID: chatRoomId,
+                users: [currentUser.uid, id],
+              });
+          }
+        });
+    }
     db.collection("ChatRoom")
       .doc(chatRoomId)
       .collection("chats")
-      .orderBy("timestamp")
+      .orderBy("time")
       .onSnapshot((snapshot) => {
         let tempChatArr = [];
         snapshot.forEach((snap) => {
@@ -72,12 +86,8 @@ export default function Messenger() {
 
   return (
     <div className={styles.container}>
-      <Conversations
-        peerData={peerData}
-        profilePics={profilePics}
-        // setChat={setChat}
-      />
-      <ChatWindow chat={chat} setChat={setChat} />
+      <Conversations peerData={peerData} profilePics={profilePics} />
+      <ChatWindow profilePics={profilePics} id={id} chat={chatArr} />
     </div>
   );
 }

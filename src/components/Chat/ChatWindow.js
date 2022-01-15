@@ -1,81 +1,12 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import styles from "../../styles/ChatWindow.module.css";
 import { IoMdSend, IoMdArrowBack } from "react-icons/io";
+import { useAuth } from "../../context/AuthContext";
+import { db } from "../../firebase";
 
-const convo = [
-  {
-    comment: true,
-    message: "Hi",
-  },
-  {
-    comment: false,
-    message: "Hello ",
-  },
-  {
-    comment: true,
-    message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores inventore cupiditate quidem voluptatem error placeat liquam.",
-  },
-  {
-    comment: false,
-    message: "Lorem ipsum dolor sit amet consectetur adipisici",
-  },
-  {
-    comment: true,
-    message:
-      "Lorem ipsum dolor sit amet consectetur adipisici Lorem ipsum dolor sit amet consectetur adipisici",
-  },
-  {
-    comment: false,
-    message: "Lorem ipsum dolor sit amet consectetur adipisici",
-  },
-  {
-    comment: true,
-    message:
-      "Lorem ipsum dolor sit amet consectetur adipisiciLorem ipsum dolor sit amet consectetur adipisici Lorem ipsum dolor sit amet consectetur adipisici",
-  },
-  {
-    comment: false,
-    message: "Lorem ipsum dolor sit amet consectetur adipisici",
-  },
-  {
-    comment: false,
-    message:
-      "Lorem ipsum dolor sit amet consectetur adipisici Lorem ipsum dolor adipisici",
-  },
-  {
-    comment: true,
-    message:
-      "Lorem ipsum dolor siLorem ipsum dolor sit amet consectetur adipisici Lorem ipsum dolor sit amet consectetur adipisicir adipisici",
-  },
-  {
-    comment: true,
-    message:
-      "Lorem ipsum doloLorem ipsum dolor sit amet consectetur adipisicionsectetur adipisici ",
-  },
-  {
-    comment: false,
-    message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis iure in facere voluptas exercitationem aperiam. Blanditiis dolore officiis architecto perferendis eligendi. Nemo reiciendis debitis, facilis iusto suscipit ex! Inventore, cum.",
-  },
-  {
-    comment: true,
-    message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritor sit amet consectetur adipisicing elit. Veritatis iure in facere voluptas exercitationem aperiam. Blanditiis dolore officiis architecto perferendis eligendi. Nemo reiciendis debitis, facilis iusto suscipit ex! Inventore, cum.",
-  },
-  {
-    comment: false,
-    message: "Lorem ipsum dolor sit amet consectetur adipisici",
-  },
-  {
-    comment: true,
-    message: "Lorem sectetur adipisici",
-  },
-];
-
-export default function ChatWindow({ chat, setChat }) {
+export default function ChatWindow({ profilePics, id, chat, setChat }) {
   const scroll = useRef();
-
+  const { currentUser, isMentor, userData } = useAuth();
   useEffect(() => {
     scrollBottom();
   }, [chat]);
@@ -83,7 +14,27 @@ export default function ChatWindow({ chat, setChat }) {
   const scrollBottom = () => {
     scroll.current.scrollIntoView();
   };
+  let [chatRoomId, setChatRoomId] = useState("");
+  const [inputText, setInputText] = useState("");
+  console.log(currentUser.uid);
+  const handleSendMessage = () => {
+    if (inputText.trim() === "") return;
 
+    console.log(chatRoomId);
+    db.collection("ChatRoom").doc(chatRoomId).collection("chats").add({
+      message: inputText,
+      sentBy: currentUser.uid,
+      time: new Date().getTime(),
+    });
+    setInputText("");
+  };
+  useEffect(() => {
+    if (isMentor) {
+      setChatRoomId(currentUser.uid + "_" + id);
+    } else {
+      setChatRoomId(id + "_" + currentUser.uid);
+    }
+  }, []);
   return (
     <div className={`${styles.container} ${chat && `${styles.block}`} `}>
       <div className={styles.header}>
@@ -101,52 +52,69 @@ export default function ChatWindow({ chat, setChat }) {
         </div>
       </div>
       <div className={styles.chat}>
-        {convo.map((data) =>
-          data.comment ? (
-            <Comment message={data.message} />
+        {chat.map((data) => {
+          return data.sentBy === currentUser.uid ? (
+            <Reply
+              profilePic={profilePics[data.sentBy]}
+              time={data.time}
+              message={data.message}
+            />
           ) : (
-            <Reply message={data.message} />
-          )
-        )}
-
+            <Comment
+              profilePic={profilePics[data.sentBy]}
+              time={data.time}
+              message={data.message}
+            />
+          );
+        })}
         <div ref={scroll} style={{ backgroundColor: "black" }} />
       </div>
-      <div className={styles.input}>
-        <textarea rows={1} type="text" placeholder="Enter your message here" />
-        <button>
-          Send <IoMdSend />
-        </button>
-      </div>
+      {id in userData.peerID && (
+        <div className={styles.input}>
+          <textarea
+            rows={1}
+            type="text"
+            placeholder="Enter your message here"
+            value={inputText}
+            onChange={(e) => {
+              setInputText(e.target.value);
+            }}
+          />
+          <button onClick={handleSendMessage}>
+            Send <IoMdSend />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
-export const Comment = ({ message }) => {
+export const Comment = ({ profilePic, message, time }) => {
   return (
     <div className={styles.commentWrapper}>
       <div className={styles.comment}>
         <div className={styles.dp}>
-          <img src="https://gcdn.pbrd.co/images/NLhKZ0n35MHv.jpg?o=1" alt="" />
+          <img src={profilePic} alt="" />
         </div>
         <div className={styles.message}>
           <h5>{message}</h5>
-          <p>6:56 PM</p>
+          <p>{new Date(time).toLocaleString("en-GB")}</p>
         </div>
       </div>
     </div>
   );
 };
 
-export const Reply = ({ message }) => {
+export const Reply = ({ profilePic, message, time }) => {
   return (
     <div className={styles.replyWrapper}>
       <div className={styles.reply}>
         <div className={styles.dp}>
-          <img src="https://gcdn.pbrd.co/images/piXh0PKBM6Bq.png?o=1" alt="" />
+          <img src={profilePic} alt="" />
         </div>
         <div className={styles.message}>
           <h5>{message}</h5>
-          <p>7:00 PM</p>
+          <p>{new Date(time).toLocaleString("en-GB")}</p>
         </div>
       </div>
     </div>
