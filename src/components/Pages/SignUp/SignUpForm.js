@@ -64,6 +64,8 @@ function SignUpForm({ post, setPost }) {
     } catch (e) {
       if (e.code == "auth/email-already-in-use") {
         window.alert("The email address is already in use by another account.");
+        setGuidelinesPopUp(false);
+        return;
       }
     }
     setGuidelinesPopUp(false);
