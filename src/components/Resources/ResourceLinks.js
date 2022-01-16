@@ -54,7 +54,6 @@ export default function ResourceLinks() {
               });
             });
           setLinks(tempLinks);
-          console.log(tempLinks);
           setFound(true);
         });
       });

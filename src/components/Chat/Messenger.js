@@ -6,12 +6,10 @@ import styles from "../../styles/Messenger.module.css";
 import ChatWindow from "./ChatWindow";
 import Conversations from "./Conversations";
 export default function Messenger() {
-  const [chat, setChat] = useState(false);
   const { currentUser, isMentor, userData } = useAuth();
   const { id } = useParams();
   const [chatArr, setChatArr] = useState([]);
   const [peerData, setPeerData] = useState([]);
-  const [inputText, setInputText] = useState("");
   const [profilePics, setProfilePics] = useState({});
   let chatRoomId;
   useEffect(async () => {

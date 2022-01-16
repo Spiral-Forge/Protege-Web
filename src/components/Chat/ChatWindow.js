@@ -16,11 +16,9 @@ export default function ChatWindow({ profilePics, id, chat, peerData }) {
   };
   const [chatRoomId, setChatRoomId] = useState("");
   const [inputText, setInputText] = useState("");
-  console.log(currentUser.uid);
   const handleSendMessage = () => {
     if (inputText.trim() === "") return;
 
-    console.log(chatRoomId);
     db.collection("ChatRoom").doc(chatRoomId).collection("chats").add({
       message: inputText,
       sentBy: currentUser.uid,
@@ -28,21 +26,21 @@ export default function ChatWindow({ profilePics, id, chat, peerData }) {
     });
     setInputText("");
   };
+  const [peer, setPeer] = useState();
   useEffect(() => {
     if (isMentor) {
       setChatRoomId(currentUser.uid + "_" + id);
     } else {
       setChatRoomId(id + "_" + currentUser.uid);
     }
-    // console.log("id:", id);
-    // console.log("bruh",peerData.find((o) => {o.userID}).userID);
   }, []);
 
+  useEffect(() => {
+    setPeer(peerData.find((o) => o.userID === id));
+  }, [peerData]);
   return (
     <div className={`${styles.container} ${chat && `${styles.block}`} `}>
-      <h2 className={styles.name}>
-        {peerData.find((o) => o.userID === id).name}
-      </h2>
+      <h2 className={styles.name}>{peer && peer.name}</h2>
 
       <div className={styles.chat}>
         {chat.map((data) => {

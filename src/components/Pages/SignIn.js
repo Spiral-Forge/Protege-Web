@@ -144,7 +144,6 @@ const SignIn = () => {
         <DialogActions>
           <Button
             onClick={() => {
-              console.log(verifyModal);
               setVerifyModal(false);
             }}
             autoFocus
