@@ -71,7 +71,7 @@ export default function Messenger() {
     profilePicsObj[currentUser.uid] = ownProfilePic;
     setProfilePics(profilePicsObj);
   }, []);
-
+  let opened = false;
   useEffect(() => {
     db.collection("ChatRoom")
       .doc(chatRoomId)
@@ -82,6 +82,14 @@ export default function Messenger() {
         snapshot.forEach((snap) => {
           tempChatArr.push(snap.data());
         });
+        console.log(tempChatArr[tempChatArr.length - 1]);
+        if (
+          opened &&
+          tempChatArr[tempChatArr.length - 1].sentBy !== currentUser.uid
+        ) {
+          document.title = "New Message";
+        }
+        opened = true;
         console.log(tempChatArr);
         setChatArr(tempChatArr);
       });
