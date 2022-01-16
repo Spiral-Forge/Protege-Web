@@ -16,7 +16,7 @@ import EventForm from "./EventForm";
 import { useAuth } from "../../../context/AuthContext";
 
 export default function Event() {
-  const { isMentor } = useAuth();
+  const { isMentor, currentUser } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [events, setEvents] = useState([]);
 
@@ -53,11 +53,9 @@ export default function Event() {
         {events.map((event) => {
           return <EventCard event={event} />;
         })}
-     
-      
       </Masonry>
 
-      {isMentor && (
+      {currentUser && isMentor && (
         <>
           <div className={styles.btn}>
             <button onClick={() => setShowModal(true)}>
