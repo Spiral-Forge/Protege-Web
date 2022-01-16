@@ -33,7 +33,7 @@ export default function ChatWindow({ profilePics, id, chat, peerData }) {
     } else {
       setChatRoomId(id + "_" + currentUser.uid);
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     setPeer(peerData.find((o) => o.userID === id));
