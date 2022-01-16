@@ -5,6 +5,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import "./App.css";
+// import Messenger from "./components/ChatUrvi/Messenger";
 import Messenger from "./components/Chat/Messenger";
 import Navbar from "./components/Navbar/Navbar";
 import Faqs from "./components/Pages/Faqs/Faqs";
@@ -37,7 +38,8 @@ function App() {
               <Route path="/resources" exact component={Resource} />
               <Route path="/feedback" component={Feedback} />
               <Route path="/resources/:resource" component={ResourceLinks} />
-              <Route path="/chat" component={Messenger} />
+              <Route path="/chat/:id" component={Messenger} />
+              <Route exact path="/chat" component={Messenger} />
               <Route path="/profile" component={Profile} />
               <Route path="/deadlines" component={Deadlines} />
             </VerticalLayout>
