@@ -24,6 +24,7 @@ export default function Conversations({ setChat, peerData, profilePics }) {
         {peerData.map((peer) => {
           return <Peer peer={peer} profilePic={profilePics[peer.userID]} />;
         })}
+        {peerData.length === 0 && <div className={styles.noPeers}>No peers yet</div>}
       </div>
     </div>
   );

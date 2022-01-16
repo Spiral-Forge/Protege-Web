@@ -70,6 +70,9 @@
   margin-block: 10px;
 }
 
+.noPeers {
+  margin: 1rem auto;
+}
 .peer {
   border-radius: 10px;
   padding: 10px;
