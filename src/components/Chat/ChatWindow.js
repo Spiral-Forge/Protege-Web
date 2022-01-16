@@ -37,7 +37,7 @@ export default function ChatWindow({ profilePics, id, chat, peerData }) {
 
   useEffect(() => {
     setPeer(peerData.find((o) => o.userID === id));
-  }, [peerData]);
+  }, [peerData, id]);
   return (
     <div className={`${styles.container} ${chat && `${styles.block}`} `}>
       <h2 className={styles.name}>{peer && peer.name}</h2>
