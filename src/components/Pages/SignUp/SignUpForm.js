@@ -63,9 +63,7 @@ function SignUpForm({ post, setPost }) {
       await auth.signOut();
     } catch (e) {
       if (e.code == "auth/email-already-in-use") {
-        window.alert(
-          "The email address is already in use by another account."
-        );
+        window.alert("The email address is already in use by another account.");
       }
     }
     setGuidelinesPopUp(false);
@@ -88,6 +86,7 @@ function SignUpForm({ post, setPost }) {
       peerID: [],
       photoUrl: null,
       post,
+      fcmToken: "",
     };
     return obj;
   };
