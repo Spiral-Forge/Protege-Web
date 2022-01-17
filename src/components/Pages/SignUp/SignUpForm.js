@@ -90,6 +90,7 @@ function SignUpForm({ post, setPost }) {
       peerID: [],
       photoUrl: null,
       post,
+      fcmToken: "",
     };
     return obj;
   };
