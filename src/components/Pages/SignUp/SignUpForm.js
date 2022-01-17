@@ -25,16 +25,13 @@ import {
   hostellers,
   getArray,
 } from "./SignUpOptions";
-import ErrorDialog from "../../ErrorDialog";
+
 import { guidelinesMentors, guidelinesMentees } from "../staticPagesData";
 
 function SignUpForm({ post, setPost }) {
   const history = useHistory();
   const { signUp } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
   const [formData, setFormData] = useState({
     name: "",
     phoneNo: "",
@@ -66,8 +63,9 @@ function SignUpForm({ post, setPost }) {
       await auth.signOut();
     } catch (e) {
       if (e.code == "auth/email-already-in-use") {
-        setErrorMessage("The email address is already in use by another account.");
-        setShowErrorMessage(true);
+        window.alert(
+          "The email address is already in use by another account."
+        );
       }
     }
     setGuidelinesPopUp(false);
@@ -90,7 +88,6 @@ function SignUpForm({ post, setPost }) {
       peerID: [],
       photoUrl: null,
       post,
-      fcmToken: "",
     };
     return obj;
   };
@@ -109,8 +106,7 @@ function SignUpForm({ post, setPost }) {
         throw "Phone Number";
       }
       if (isNaN(data.phoneNo)) {
-        setErrorMessage("Phone number is inValid");
-        setShowErrorMessage(true);
+        window.alert("Phone number is inValid");
         return;
       }
       if (!data.college) {
@@ -132,8 +128,7 @@ function SignUpForm({ post, setPost }) {
         throw "Languages";
       }
     } catch (err) {
-      setErrorMessage(`${err} field is required`);
-      setShowErrorMessage(true);
+      window.alert(`${err} field is required`);
       return false;
     }
 
@@ -145,8 +140,7 @@ function SignUpForm({ post, setPost }) {
         throw "Password must have atleast 6 characters";
       }
     } catch (err) {
-      setErrorMessage(err);
-      setShowErrorMessage(true);
+      window.alert(err);
       return false;
     }
     setGuidelinesPopUp(true);
@@ -359,7 +353,6 @@ function SignUpForm({ post, setPost }) {
           </Button>
         </DialogActions>
       </Dialog>
-      <ErrorDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false)} errorMessage={errorMessage} />
     </div>
   );
 }

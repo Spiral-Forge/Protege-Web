@@ -1,43 +1,44 @@
-
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import React, { useEffect, useState } from "react";
+import { Button } from "../Navbar/Button";
 import styles from "../../styles/Signin.module.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { auth } from "../../firebase";
-import ErrorDialog from "../ErrorDialog";
-
 const SignIn = () => {
-
   const history = useHistory();
+  const location = useLocation();
   const { signIn } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [check, setCheck] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
-
-
   const handleLogin = async () => {
     try {
       await signIn(formData.email, formData.password);
     } catch (e) {
       switch (e.code) {
         case "auth/user-not-found":
-          setErrorMessage("This email address is not registered.");
-          setShowErrorMessage(true);
+          window.alert("This email address is not registered.");
           break;
         case "auth/wrong-password":
-          setErrorMessage("Incorrect password. Try Again!");
-          setShowErrorMessage(true);
+          window.alert("Incorrect password");
           break;
       }
     }
   };
-
   const validate = (e) => {
     e.preventDefault();
 
@@ -50,8 +51,7 @@ const SignIn = () => {
       }
     } catch (err) {
       // console.log(`${err} field is required`);
-      setErrorMessage(`${err} field is required.`);
-      setShowErrorMessage(true);
+      window.alert(`${err} field is required`);
       return;
     }
     handleLogin();
@@ -61,18 +61,16 @@ const SignIn = () => {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const { currentUser } = useAuth();
   useEffect(() => {
     if (currentUser && !currentUser.emailVerified) {
       auth.signOut();
-      setErrorMessage("Please check your inbox and verify your email to sign in.")
-      setShowErrorMessage(true);
+      setVerifyModal(true);
     } else if (currentUser) {
       history.push("/home");
     }
   }, [currentUser]);
-  
+  const [verifyModal, setVerifyModal] = useState(location.state?.verify);
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
@@ -127,9 +125,34 @@ const SignIn = () => {
           </span>
         </p>
       </form>
-      <ErrorDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false)} errorMessage={errorMessage} />
-
-      
+      <Dialog
+        open={verifyModal}
+        onClose={() => {
+          setVerifyModal(false);
+        }}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        {/* <DialogTitle id="alert-dialog-title">
+          {"Email not verified!"}
+        </DialogTitle> */}
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Please check your inbox and verify your email to sign in.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              console.log(verifyModal);
+              setVerifyModal(false);
+            }}
+            autoFocus
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

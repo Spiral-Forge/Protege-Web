@@ -12,13 +12,8 @@ import {
 } from "../Pages/SignUp/SignUpOptions";
 import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
-import ErrorDialog from "../ErrorDialog";
-
 export default function EditProfile({ setEdit, userData, setUserData }) {
   const { currentUser } = useAuth();
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
   const imageInputRef = useRef(null);
   const [branch, setBranch] = useState({
     label: userData.branch,
@@ -38,7 +33,6 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       return { label: lang, value: lang };
     })
   );
-
   let newFormData = { ...userData };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +50,6 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       setEdit(false);
     }
   };
-
   const uploadImage = async () => {
     if (imageInputRef.current.files.length === 0) return;
     const file = imageInputRef.current.files[0];
@@ -67,7 +60,6 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       photoUrl: url,
     });
   };
-
   const validate = (data) => {
     try {
       if (!data.name) {
@@ -80,8 +72,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
         throw "Phone Number";
       }
       if (isNaN(data.phoneNo)) {
-        setErrorMessage("Phone number is inValid");
-        setShowErrorMessage(true);
+        window.alert("Phone number is inValid");
         return;
       }
       if (!data.college) {
@@ -103,9 +94,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
         throw "Languages";
       }
     } catch (err) {
-      setErrorMessage(`${err} field is required`);
-      setShowErrorMessage(true);
-
+      window.alert(`${err} field is required`);
       return false;
     }
     return true;
@@ -225,8 +214,6 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
         <button onClick={() => setEdit(false)}>Cancel</button>
         <button>Update Profile</button>
       </div>
-      <ErrorDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false)} errorMessage={errorMessage} />
     </form>
-    
   );
 }

@@ -7,17 +7,15 @@ import {
   BsFillFileTextFill,
   BsLink45Deg,
 } from "react-icons/bs";
+
+import { BiTimeFive } from "react-icons/bi";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { db } from "../../../firebase";
-import ErrorDialog from "../../ErrorDialog";
-
 export default function EventForm({ setShowModal }) {
   const [date, setDate] = useState();
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
+  const [time, setTime] = useState();
   const handleSubmit = async (e) => {
     if (!validate()) return;
     db.collection("events").add({
@@ -28,7 +26,6 @@ export default function EventForm({ setShowModal }) {
     });
     setShowModal(false);
   };
-
   const validate = () => {
     try {
       if (!formData.name) {
@@ -47,11 +44,10 @@ export default function EventForm({ setShowModal }) {
         throw "Description";
       }
       if (!formData.registrationLink) {
-        throw "Registration link";
+        throw "Event link";
       }
     } catch (err) {
-      setErrorMessage(`${err} field is required.`);
-      setShowErrorMessage(true);
+      window.alert(`${err} field is required`);
       return false;
     }
     return true;
@@ -131,8 +127,6 @@ export default function EventForm({ setShowModal }) {
         <button onClick={() => setShowModal(false)}>Cancel</button>
         <button onClick={handleSubmit}>Add Event</button>
       </div>
-      <ErrorDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false)} errorMessage={errorMessage} />
-
     </div>
   );
 }
