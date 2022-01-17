@@ -36,14 +36,6 @@ export default function Event() {
   }, []);
   return (
     <div className={styles.container}>
-      {/* <div className={styles.content}>
-        {events.map((event) => {
-          return <EventCard event={event} />;
-        })}
-        {events.map((event) => {
-          return <EventCard event={event} />;
-        })}
-      </div> */}
 
       <Masonry
         breakpointCols={breakpoints}
