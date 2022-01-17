@@ -47,6 +47,9 @@ function App() {
             <Route path="/resources/:resource">
               {currentUser ? <ResourceLinks /> : <Redirect to="/signin" />}
             </Route>
+            <Route path="/chat/:id">
+              {currentUser ? <Messenger /> : <Redirect to="/signin" />}
+            </Route>
             <Route path="/chat">
               {currentUser ? <Messenger /> : <Redirect to="/signin" />}
             </Route>
