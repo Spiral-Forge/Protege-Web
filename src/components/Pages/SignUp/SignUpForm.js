@@ -25,13 +25,16 @@ import {
   hostellers,
   getArray,
 } from "./SignUpOptions";
-
+import ErrorDialog from "../../ErrorDialog";
 import { guidelinesMentors, guidelinesMentees } from "../staticPagesData";
 
 function SignUpForm({ post, setPost }) {
   const history = useHistory();
   const { signUp } = useAuth();
   const [guidelinesPopUp, setGuidelinesPopUp] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     phoneNo: "",
@@ -61,11 +64,13 @@ function SignUpForm({ post, setPost }) {
       await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
       await auth.currentUser.sendEmailVerification();
       await auth.signOut();
+      setErrorMessage("Please check your inbox and verify your email to sign in.")
+      setShowErrorMessage(true);
+      console.log(errorMessage)
     } catch (e) {
       if (e.code == "auth/email-already-in-use") {
-        window.alert(
-          "The email address is already in use by another account."
-        );
+        setErrorMessage("The email address is already in use by another account.");
+        setShowErrorMessage(true);
       }
     }
     setGuidelinesPopUp(false);
@@ -88,6 +93,7 @@ function SignUpForm({ post, setPost }) {
       peerId: [],
       photoUrl: null,
       post,
+      fcmToken: "",
     };
     return obj;
   };
@@ -106,7 +112,8 @@ function SignUpForm({ post, setPost }) {
         throw "Phone Number";
       }
       if (isNaN(data.phoneNo)) {
-        window.alert("Phone number is inValid");
+        setErrorMessage("Phone number is inValid");
+        setShowErrorMessage(true);
         return;
       }
       if (!data.college) {
@@ -128,7 +135,8 @@ function SignUpForm({ post, setPost }) {
         throw "Languages";
       }
     } catch (err) {
-      window.alert(`${err} field is required`);
+      setErrorMessage(`${err} field is required`);
+      setShowErrorMessage(true);
       return false;
     }
 
@@ -140,7 +148,8 @@ function SignUpForm({ post, setPost }) {
         throw "Password must have atleast 6 characters";
       }
     } catch (err) {
-      window.alert(err);
+      setErrorMessage(err);
+      setShowErrorMessage(true);
       return false;
     }
     setGuidelinesPopUp(true);
@@ -353,6 +362,7 @@ function SignUpForm({ post, setPost }) {
           </Button>
         </DialogActions>
       </Dialog>
+      <ErrorDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false)} errorMessage={errorMessage} />
     </div>
   );
 }
