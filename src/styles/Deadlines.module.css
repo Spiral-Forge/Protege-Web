@@ -20,12 +20,10 @@
 }
 .calendarContainer {
   margin: 0 auto;
-  background-color: rgba(128, 185, 232, 0.835);
   width: 90%;
   padding: 1rem;
-  /* border: 3px solid rgb(81, 191, 235); */
   border-radius: 20px;
-  color: white;
+  color:#585757;
 }
 .monthsContainer {
   width: 60%;
@@ -76,17 +74,21 @@
   border: 1.5px solid transparent;
 }
 .prevMonthDate {
-  color: rgb(228, 228, 228);
+  color: rgb(143, 142, 142);
   font-weight: 400;
   font-size: 0.9rem;
 }
 .deadlineDate {
-  background-color: #939393;
+  background-color: rgba(128, 185, 232, 0.52);
+  color: rgb(72, 132, 180);
+  font-weight: 900;
   border-radius: 50%;
   cursor: pointer;
 }
 .selectedDate {
-  border: 1.5px solid white;
+  background-color: rgba(128, 185, 232);
+  color: whitesmoke;
+  font-weight: 900;
   border-radius: 50%;
 }
 .deadlineContainer {
