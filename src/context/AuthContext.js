@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
         try {
           const userDoc = await db.collection("users").doc(user.uid).get();
           setUserData(userDoc.data());
-          setMyPeers(userDoc.data().peerID)
+          setMyPeers(userDoc.data().peerId)
           if (userDoc.data().post === "Mentor") {
             setIsMentor(true);
           }

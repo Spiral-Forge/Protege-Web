@@ -85,7 +85,7 @@ function SignUpForm({ post, setPost }) {
       college: college.value,
       gender: gender.value,
       hosteller: hosteller.value,
-      peerID: [],
+      peerId: [],
       photoUrl: null,
       post,
     };
