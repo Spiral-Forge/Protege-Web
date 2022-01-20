@@ -14,8 +14,6 @@ export default function Messenger() {
   const [profilePics, setProfilePics] = useState({});
   const [chat, setChat] = useState(false);
 
-  const [loading, setLoading] = useState(true);
-
   let chatRoomId;
   if (isMentor) {
     chatRoomId = currentUser.uid + "_" + id;
@@ -49,7 +47,6 @@ export default function Messenger() {
 
     let tempPeerArr = [];
     let profilePicsObj = {};
-    // for (const id of userData.peerID) {
     for (const id of myPeers) {
       await db
         .collection("users")

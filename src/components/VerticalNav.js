@@ -5,11 +5,26 @@ import { BsFillChatDotsFill, BsCalendarEventFill } from "react-icons/bs";
 import { FaSwatchbook } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+} from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import Button from '@mui/material/Button';
+
 export default function VerticalNav() {
+
   const { currentUser, signOut } = useAuth();
   const history = useHistory();
+  const location = useLocation();
+  const [verifyModal, setVerifyModal] = useState(location.state?.verify);
+
+
+
   const handleSignOut = async () => {
-    if (!window.confirm("Are you sure you want to log out?")) return;
     try {
       await signOut();
     } catch (err) {
@@ -17,7 +32,9 @@ export default function VerticalNav() {
     }
     history.push("/home");
   };
+
   return (
+    
     <div className={styles.container}>
       <div className={styles.pic}>
         <Link to="/profile">
@@ -45,8 +62,33 @@ export default function VerticalNav() {
         </Link>
       </div>
       <div className={styles.logout}>
-        <FiLogOut onClick={handleSignOut} className={styles.icon} />
+        <FiLogOut onClick={()=> {setVerifyModal(true)}} className={styles.icon} />
       </div>
+      <Dialog
+        open={verifyModal}
+        onClose={() => {
+          setVerifyModal(false);
+        }}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          Are you sure you want to log out?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+              onClick={() => {
+                setVerifyModal(false);
+              }}>
+              No
+          </Button>
+          <Button onClick={handleSignOut} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
