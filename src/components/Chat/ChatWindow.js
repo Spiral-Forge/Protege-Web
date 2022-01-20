@@ -84,7 +84,7 @@ export default function ChatWindow({ profilePics, id, chatArr, peerData, setChat
         })}
         <div ref={scroll} style={{ backgroundColor: "black" }} />
       </div>
-      {myPeers && myPeers.indexOf(id) >= 0 && ( 
+      {myPeers.indexOf(id) >= 0 && ( 
         <div className={styles.input}>
           <textarea
             rows={1}

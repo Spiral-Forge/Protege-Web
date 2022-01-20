@@ -1,0 +1,125 @@
+.container {
+    flex: 2;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .top {
+    width: 100%;
+    background-color: #f5f5f5;
+    border: 2px solid rgb(238, 238, 238);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .info h3 {
+    font-size: 1.4rem;
+  }
+  
+  .info p {
+    text-align: center;
+    font-weight: 500;
+    color: gray;
+  }
+  
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .bottom::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  /* Handle */
+  .bottom::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.226);
+    border-radius: 10px;
+  }
+  
+  .bottom::-webkit-scrollbar-track {
+    background: #f1f1f100;
+    margin-block: 10px;
+  }
+  
+  .noPeers {
+    margin: 1rem auto;
+  }
+  .peer {
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    cursor: pointer;
+  }
+  
+  .peer:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .peerImg {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .peerImg img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .peer p {
+    font-weight: 500;
+    color: gray;
+  }
+  
+  .green {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    top: 5px;
+    right: 0;
+  }
+  
+  @media only screen and (max-width: 800px) {
+    .top {
+      display: none;
+    }
+  }
+  
