@@ -194,6 +194,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 100;
   }
 
   .input {
@@ -203,6 +204,10 @@
     width: 100%;
     border-radius: 0;
     padding: 8px;
+  }
+
+  .chat{
+    height: 90vh;
   }
 
   .dp {

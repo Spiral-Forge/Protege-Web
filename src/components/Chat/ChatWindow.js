@@ -3,22 +3,28 @@ import styles from "../../styles/ChatWindow.module.css";
 import { IoMdSend, IoMdArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
+import {useHistory} from "react-router-dom"
 
-export default function ChatWindow({ profilePics, id, chat, peerData }) {
+export default function ChatWindow({ profilePics, id, chatArr, peerData, setChat, chat }) {
   const scroll = useRef();
-  const { currentUser, isMentor, userData } = useAuth();
+  const { currentUser, isMentor, myPeers } = useAuth();
   useEffect(() => {
     scrollBottom();
-  }, [chat]);
+  }, [chatArr]);
+
+  // console.log("Chat window peerdata:",peerData)
+  // console.log("photos: ", profilePics)
 
   const scrollBottom = () => {
     scroll.current.scrollIntoView();
   };
   const [chatRoomId, setChatRoomId] = useState("");
   const [inputText, setInputText] = useState("");
+  const  history  = useHistory();
+
   const handleSendMessage = () => {
     if (inputText.trim() === "") return;
-
+  
     db.collection("ChatRoom").doc(chatRoomId).collection("chats").add({
       message: inputText,
       sentBy: currentUser.uid,
@@ -38,12 +44,30 @@ export default function ChatWindow({ profilePics, id, chat, peerData }) {
   useEffect(() => {
     setPeer(peerData.find((o) => o.userID === id));
   }, [peerData, id]);
+
+  const handleBack = () => {
+    setChat(false)
+  }
+  
   return (
-    <div className={`${styles.container} ${chat && `${styles.block}`} `}>
-      <h2 className={styles.name}>{peer && peer.name}</h2>
+    <div className={`${styles.container} ${chatArr && chat && `${styles.block}`} `}>
+      <div className={styles.header}>
+        <div onClick={handleBack} className={styles.back}>
+          <IoMdArrowBack />
+        </div>
+        <div className={styles.peer}>
+          {/* <div className={styles.dpmob}> */}
+            {/* <img
+              src={peer.photoUrl}
+              alt=""
+            /> */}
+          {/* </div> */}
+          <p>{peer && peer.name}</p>
+        </div>
+      </div>
 
       <div className={styles.chat}>
-        {chat.map((data) => {
+        {chatArr.map((data) => {
           return data.sentBy === currentUser.uid ? (
             <Reply
               profilePic={profilePics[data.sentBy]}
@@ -60,7 +84,7 @@ export default function ChatWindow({ profilePics, id, chat, peerData }) {
         })}
         <div ref={scroll} style={{ backgroundColor: "black" }} />
       </div>
-      {userData.peerID.indexOf(id) >= 0 && (
+      {myPeers && myPeers.indexOf(id) >= 0 && ( 
         <div className={styles.input}>
           <textarea
             rows={1}
