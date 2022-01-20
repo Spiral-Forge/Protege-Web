@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { auth, db } from "../firebase";
 
 const AuthContext = React.createContext();
@@ -9,11 +8,11 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const history = useHistory();
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
   const [isMentor, setIsMentor] = useState(false);
   const [userData, setUserData] = useState();
+  const [myPeers, setMyPeers] = useState();
 
   const signUp = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -36,11 +35,12 @@ export const AuthProvider = ({ children }) => {
         try {
           const userDoc = await db.collection("users").doc(user.uid).get();
           setUserData(userDoc.data());
+          setMyPeers(userDoc.data().peerID)
           if (userDoc.data().post === "Mentor") {
             setIsMentor(true);
           }
         } catch (err) {
-          console.log(err);
+          console.log("CAN'T FETCH USER");
         }
       }
       setLoading(false);
@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
     currentUser,
     userData,
     isMentor,
+    myPeers,
     signUp,
     signIn,
     signOut,
