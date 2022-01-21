@@ -64,16 +64,16 @@ function SignUpForm({ post, setPost }) {
       await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
       await auth.currentUser.sendEmailVerification();
       await auth.signOut();
+      setGuidelinesPopUp(false);
       setErrorMessage("Please check your inbox and verify your email to sign in.")
       setShowErrorMessage(true);
-      console.log(errorMessage)
     } catch (e) {
       if (e.code == "auth/email-already-in-use") {
+        setGuidelinesPopUp(false);
         setErrorMessage("The email address is already in use by another account.");
         setShowErrorMessage(true);
       }
     }
-    setGuidelinesPopUp(false);
     history.push({
       pathname: "/signin",
       state: { verify: true },
@@ -94,6 +94,7 @@ function SignUpForm({ post, setPost }) {
       photoUrl: null,
       post,
       fcmToken: "",
+      token: ""
     };
     return obj;
   };

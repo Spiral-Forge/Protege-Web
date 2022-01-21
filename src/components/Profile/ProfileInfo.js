@@ -62,9 +62,9 @@ export default function ProfileInfo({ userData }) {
           <BsLinkedin className={styles.icon} />
         </div>
         <div>
-          <p>LinkedIn Profile</p>
+          
           <a href={userData.linkedInUrl} target="_blank">
-            {userData.linkedInUrl}
+            <p>LinkedIn Profile</p>
           </a>
         </div>
       </span>
@@ -73,9 +73,9 @@ export default function ProfileInfo({ userData }) {
           <BsGithub className={styles.icon} />
         </div>
         <div>
-          <p>Github Profile</p>
+          
           <a href={userData.githubUrl} target="_blank">
-            {userData.githubUrl}
+          <p>Github Profile</p>
           </a>
         </div>
       </span>
