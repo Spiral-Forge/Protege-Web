@@ -23,7 +23,6 @@ export default function EventForm({ setShowModal }) {
     db.collection("events").add({
       ...formData,
       dateTime: date,
-      // time: time,
       approved: false,
     });
     setShowModal(false);

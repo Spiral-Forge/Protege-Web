@@ -1,7 +1,7 @@
 import styles from "../../../styles/Faqs.module.css";
 import { BsFillTriangleFill } from "react-icons/bs";
-import faqsArr from "./faqsArr";
 import { faqQuestionAnswers } from "../staticPagesData";
+
 function Faqs() {
   return (
     <div className={styles.container}>

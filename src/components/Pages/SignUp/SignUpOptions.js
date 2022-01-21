@@ -29,10 +29,7 @@ export const collegesArr = ["IGDTUW", "DTU", "NSUT", "IIITD"];
 
 export const years = ["First", "Second", "Third", "Fourth"];
 export const genders = ["Male", "Female", "Prefer not to mention"];
-export const hostellers = [
-  { value: true, label: "Yes" },
-  { value: false, label: "No" },
-];
+
 
 export const getArray = (arrObj) => {
   const arr = arrObj.map((ele) => {

@@ -36,7 +36,7 @@ export default function ProfileInfo({ userData }) {
             {userData.branch}, {userData.year} year, {userData.college}
           </p>
           <p>Roll number: {userData.roll}</p>
-          <p>Hosteller: {userData.hosteller ? "Yes" : "No"}</p>
+          {/* <p>Hosteller: {userData.hosteller ? "Yes" : "No"}</p> */}
         </div>
       </span>
       <span className={styles.field}>

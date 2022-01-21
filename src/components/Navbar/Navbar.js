@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineRight } from "react-icons/ai";
-import { MenuItems } from "./MenuItems";
 import styles from "../../styles/Navbar.module.css";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -9,10 +8,8 @@ import LogoutDialog from "../LogoutDialog";
 
 const Navbar = () => {
   const { currentUser, userData, signOut } = useAuth();
-  const history = useHistory();
   const [isOpen, setOpen] = useState();
   const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setOpen(false);

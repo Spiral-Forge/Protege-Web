@@ -5,7 +5,7 @@ import { useState } from "react";
 import { db } from "../../firebase";
 import { useParams } from "react-router";
 import { useAuth } from "../../context/AuthContext";
-import { resourceCategories } from "./Resource";
+
 export default function ResourceLinks() {
   const [links, setLinks] = useState([]);
   const { resource } = useParams();
