@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "../../styles/EditProfile.module.css";
 import { MultiSelect } from "react-multi-select-component";
 import Dropdown from "react-dropdown";

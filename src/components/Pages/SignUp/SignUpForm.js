@@ -22,7 +22,6 @@ import {
   genders,
   languagesArr,
   years,
-  hostellers,
   getArray,
 } from "./SignUpOptions";
 import ErrorDialog from "../../ErrorDialog";
@@ -46,7 +45,6 @@ function SignUpForm({ post, setPost }) {
     githubUrl: "",
   });
 
-  const [hosteller, setHosteller] = useState([]);
   const [gender, setGender] = useState([]);
   const [college, setCollege] = useState([]);
   const [branch, setBranch] = useState([]);
@@ -89,7 +87,6 @@ function SignUpForm({ post, setPost }) {
       branch: branch.value,
       college: college.value,
       gender: gender.value,
-      hosteller: hosteller.value,
       peerId: [],
       photoUrl: null,
       post,
@@ -317,14 +314,14 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
 
-          <div className={styles.group}>
+          {/* <div className={styles.group}>
             <label htmlFor="hosteller">Are you a hosteller?</label>
             <Dropdown
               options={hostellers}
               onChange={setHosteller}
               placeholder="Yes / No"
             />
-          </div>
+          </div> */}
         </div>
         <div className={styles.cta}>
           <button>SUBMIT</button>

@@ -8,7 +8,6 @@ import "./App.css";
 import Messenger from "./components/Chat/Messenger";
 import Navbar from "./components/Navbar/Navbar";
 import Faqs from "./components/Pages/Faqs/Faqs";
-import Feedback from "./components/Pages/Feedback";
 import Vision from "./components/Pages/Vision";
 import Homepage from "./components/Pages/Home/Homepage";
 import VerticalLayout from "./components/VerticalLayout";
@@ -19,6 +18,7 @@ import ResourceLinks from "./components/Resources/ResourceLinks";
 import Resource from "./components/Resources/Resource";
 import Profile from "./components/Profile/Profile";
 import Deadlines from "./components/Pages/Deadlines";
+import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
   const history = useHistory();
@@ -34,13 +34,12 @@ function App() {
               <Route path="/home" exact component={Homepage} />
               <Route path="/vision" exact component={Vision} />
               <Route path="/faqs" component={Faqs} />
-              <Route path="/resources" exact component={Resource} />
-              <Route path="/feedback" component={Feedback} />
-              <Route path="/resources/:resource" component={ResourceLinks} />
-              <Route path="/chat/:id" component={Messenger} />
-              <Route exact path="/chat" component={Messenger} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/deadlines" component={Deadlines} />
+              <ProtectedRoute path="/resources" exact component={Resource} />
+              <ProtectedRoute path="/resources/:resource" component={ResourceLinks} />
+              <ProtectedRoute path="/chat/:id" component={Messenger} />
+              <ProtectedRoute exact path="/chat" component={Messenger} />
+              <ProtectedRoute path="/profile" component={Profile} />
+              <ProtectedRoute path="/deadlines" component={Deadlines} />
             </VerticalLayout>
           </Switch>
         </AuthProvider>

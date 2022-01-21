@@ -20,7 +20,6 @@ export default function ChatWindow({ profilePics, id, chatArr, peerData, setChat
   };
   const [chatRoomId, setChatRoomId] = useState("");
   const [inputText, setInputText] = useState("");
-  const  history  = useHistory();
 
   const handleSendMessage = () => {
     if (inputText.trim() === "") return;

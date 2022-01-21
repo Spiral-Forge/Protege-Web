@@ -64,6 +64,7 @@ const SignIn = () => {
 
   const { currentUser } = useAuth();
   useEffect(() => {
+    console.log(currentUser)
     if (currentUser && !currentUser.emailVerified) {
       auth.signOut();
       setErrorMessage("Please check your inbox and verify your email to sign in.")
