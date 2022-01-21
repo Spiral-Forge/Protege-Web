@@ -29,7 +29,7 @@ export default function VerticalNav() {
         </Link>
       </div>
       <div className={styles.icons}>
-        <Link to="/home">
+        <Link to="/">
           <AiFillHome className={styles.icon} />
         </Link>
         <Link to="/chat">

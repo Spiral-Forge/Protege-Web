@@ -70,7 +70,7 @@ const SignIn = () => {
       setErrorMessage("Please check your inbox and verify your email to sign in.")
       setShowErrorMessage(true);
     } else if (currentUser) {
-      history.push("/home");
+      history.push("/");
     }
   }, [currentUser]);
   

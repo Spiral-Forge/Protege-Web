@@ -31,7 +31,7 @@ function App() {
             <Route path="/signin" component={SignIn} />
             <Route exact path="/register" component={SignUp} />
             <VerticalLayout>
-              <Route path="/home" exact component={Homepage} />
+              <Route path="/" exact component={Homepage} />
               <Route path="/vision" exact component={Vision} />
               <Route path="/faqs" component={Faqs} />
               <ProtectedRoute path="/resources" exact component={Resource} />

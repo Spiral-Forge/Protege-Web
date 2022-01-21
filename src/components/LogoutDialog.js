@@ -21,7 +21,7 @@ const LogoutDialog = ({isOpen, closeModal, errorMessage}) => {
             <ErrorDialog isOpen={isOpen} closeModal={()=>closeModal()} errorMessage="Unable to sign out" />
             console.log(err);
         }
-        history.push("/home");
+        history.push("/");
     };
 
     return (

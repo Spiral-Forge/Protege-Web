@@ -33,7 +33,7 @@ const Navbar = () => {
         <div className={styles.navlinks}>
           <ul>
             {!currentUser && (
-              <Link to="/home">
+              <Link to="/">
                 <li>Home</li>
               </Link>
             )}
@@ -94,7 +94,7 @@ const Navbar = () => {
                 </Link>
               )}
               {!currentUser && (
-                <Link to="/home">
+                <Link to="/">
                   <li>
                     <div onClick={handleToggle}>
                       Home
