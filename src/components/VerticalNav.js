@@ -5,33 +5,14 @@ import { BsFillChatDotsFill, BsCalendarEventFill } from "react-icons/bs";
 import { FaSwatchbook } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-} from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import Button from '@mui/material/Button';
+import React, { useState } from "react";
+import LogoutDialog from "./LogoutDialog"
 
 export default function VerticalNav() {
 
-  const { currentUser, signOut } = useAuth();
-  const history = useHistory();
-  const location = useLocation();
-  const [verifyModal, setVerifyModal] = useState(location.state?.verify);
+  const { currentUser } = useAuth();
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-
-
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-    } catch (err) {
-      console.log(err);
-    }
-    history.push("/home");
-  };
 
   return (
     
@@ -62,33 +43,9 @@ export default function VerticalNav() {
         </Link>
       </div>
       <div className={styles.logout}>
-        <FiLogOut onClick={()=> {setVerifyModal(true)}} className={styles.icon} />
+        <FiLogOut onClick={()=> {setShowErrorMessage(true)}} className={styles.icon} />
       </div>
-      <Dialog
-        open={verifyModal}
-        onClose={() => {
-          setVerifyModal(false);
-        }}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-          Are you sure you want to log out?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-              onClick={() => {
-                setVerifyModal(false);
-              }}>
-              No
-          </Button>
-          <Button onClick={handleSignOut} autoFocus>
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <LogoutDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false) }/>
     </div>
   );
 }

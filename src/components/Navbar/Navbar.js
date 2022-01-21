@@ -2,25 +2,17 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineRight } from "react-icons/ai";
 import { MenuItems } from "./MenuItems";
 import styles from "../../styles/Navbar.module.css";
-import { Button } from "./Button";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Spiral as Hamburger } from "hamburger-react";
+import LogoutDialog from "../LogoutDialog";
 
 const Navbar = () => {
   const { currentUser, userData, signOut } = useAuth();
   const history = useHistory();
   const [isOpen, setOpen] = useState();
-
-  const handleSignOut = async () => {
-    if (!window.confirm("Are you sure you want to log out?")) return;
-    try {
-      await signOut();
-    } catch (err) {
-      console.log(err);
-    }
-    history.push("/home");
-  };
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setOpen(false);
@@ -142,7 +134,7 @@ const Navbar = () => {
               )}
 
               {currentUser && (
-                <li className={styles.moblogin} onClick={handleSignOut}>
+                <li className={styles.moblogin} onClick={() => setShowErrorMessage(true)}>
                   <p onClick={handleToggle}>Logout</p>
                 </li>
               )}
@@ -150,6 +142,8 @@ const Navbar = () => {
           </div>
         )}
       </nav>
+      <LogoutDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false) }/>
+
     </div>
   );
 };
