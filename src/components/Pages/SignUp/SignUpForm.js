@@ -91,7 +91,9 @@ function SignUpForm({ post, setPost }) {
       photoUrl: null,
       post,
       fcmToken: "",
-      token: ""
+      token: "",
+      course: null,
+      password: ""
     };
     return obj;
   };

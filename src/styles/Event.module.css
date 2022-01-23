@@ -8,9 +8,6 @@
   align-items: center;
 }
 
-.heading {
-  /* background-color: rgba(165, 42, 42, 0.411); */
-}
 
 .heading h1 {
   text-align: center;
@@ -55,6 +52,7 @@
 .btn button:active {
   transform: rotate(90deg) scale(0.95);
 }
+
 @media screen and (max-width: 880px) {
   .content {
     grid-template-columns: 1fr;
@@ -69,5 +67,16 @@
     position: fixed;
     bottom: 10%;
     right: 5%;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .card {
+    width: 100%;
+    margin-left: 0;
+  }
+  .container {
+    padding: 0;
+    width: 0;
   }
 }
