@@ -38,8 +38,8 @@ function SignUpForm({ post, setPost }) {
     name: "",
     phoneNo: "",
     email: "",
-    password: "",
-    confirm_password: "",
+    pwd: "",
+    confirm_pwd: "",
     roll: "",
     linkedInUrl: "",
     githubUrl: "",
@@ -54,10 +54,11 @@ function SignUpForm({ post, setPost }) {
 
   const handleAccept = async () => {
     try {
-      await signUp(formData.email, formData.password);
+      await signUp(formData.email, formData.pwd);
       const tempObject = userObj();
-      delete tempObject["password"];
-      delete tempObject["confirm_password"];
+      delete tempObject["pwd"];
+      delete tempObject["confirm_pwd"];
+      tempObject["token"] = auth.currentUser.uid;
 
       await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
       await auth.currentUser.sendEmailVerification();
@@ -93,7 +94,7 @@ function SignUpForm({ post, setPost }) {
       fcmToken: "",
       token: "",
       course: null,
-      password: ""
+      password: "",
     };
     return obj;
   };
@@ -141,10 +142,10 @@ function SignUpForm({ post, setPost }) {
     }
 
     try {
-      if (data.password != data.confirm_password) {
+      if (data.pwd != data.confirm_pwd) {
         throw "Passwords don't match.";
       }
-      if (data.password.length < 6) {
+      if (data.pwd.length < 6) {
         throw "Password must have atleast 6 characters";
       }
     } catch (err) {
@@ -217,23 +218,23 @@ function SignUpForm({ post, setPost }) {
             />
           </div>
           <div className={styles.group}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="pwd">Password</label>
             <input
               type="password"
-              name="password"
+              name="pwd"
               placeholder="Password"
-              value={formData.password}
+              value={formData.pwd}
               onChange={handleChange}
             />
           </div>
 
           <div className={styles.group}>
-            <label htmlFor="confirm_password">Confirm Password</label>
+            <label htmlFor="confirm_pwd">Confirm Password</label>
             <input
               type="password"
-              name="confirm_password"
+              name="confirm_pwd"
               placeholder="Confirm Password"
-              value={formData.confirm_password}
+              value={formData.confirm_pwd}
               onChange={handleChange}
             />
           </div>
