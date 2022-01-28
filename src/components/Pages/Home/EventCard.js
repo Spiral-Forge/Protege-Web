@@ -1,13 +1,19 @@
 import styles from "../../../styles/EventCard.module.css";
 
 export default function EventCard({ event }) {
+
+  const eDate = event.dateTime.toDate();
+  let mins = eDate.getMinutes()
+  if(mins<10)
+      mins = '0' + mins;
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
         <p>
-          <span>{ event.dateTime.toDate().toDateString() }</span> | {" "}
+          <span>{ eDate.toLocaleString('default', { month: 'short' })+ " "+ eDate.getDate() +", "+eDate.getFullYear() }</span> | {" "}
           <span>
-            { new Date(event.dateTime.seconds * 1000).toLocaleTimeString() }
+            { eDate.getHours()+":"+mins }
           </span>
         </p>
         <p>{event.venue}</p>
