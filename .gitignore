@@ -4,3 +4,4 @@ build
 .firebase
 firebase.json
 .firebaserc
+firebase-debug.log

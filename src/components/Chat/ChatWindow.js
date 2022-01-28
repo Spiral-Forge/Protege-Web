@@ -3,53 +3,112 @@ import styles from "../../styles/ChatWindow.module.css";
 import { IoMdSend, IoMdArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
-import {useHistory} from "react-router-dom"
 
-export default function ChatWindow({ profilePics, id, chatArr, peerData, setChat, chat }) {
+export default function ChatWindow({ profilePics, peerID, peerData, setChatID }) {
   const scroll = useRef();
+  const [chatArr, setChatArr] = useState([]);
   const { currentUser, isMentor, myPeers } = useAuth();
   useEffect(() => {
     scrollBottom();
   }, [chatArr]);
 
-  // console.log("Chat window peerdata:",peerData)
-  // console.log("photos: ", profilePics)
-
   const scrollBottom = () => {
     scroll.current.scrollIntoView();
   };
+
   const [chatRoomId, setChatRoomId] = useState("");
+
+  useEffect(async() => {
+    let room = "";
+
+    try{
+      if (isMentor) {
+        room = peerID + "_" + currentUser.uid;
+        console.log(room)
+      } else {
+        room = currentUser.uid + "_" + peerID;
+        console.log(room)
+      }
+      // console.log("check rooom", room);
+      await db
+        .collection("ChatRoom")
+        .doc(room)
+        .get()
+        .then((snap) => {
+          if (!snap.exists) {
+            db.collection("ChatRoom")
+              .doc(room)
+              .set({
+                ChatRoomID: room,
+                users: [currentUser.uid, peerID],
+              });
+          }
+        });
+    } catch(e) {
+      console.log("Chatrroom ID error")
+    }
+
+    let opened = false;
+    try {
+      db.collection("ChatRoom")
+        .doc(room)
+        .collection("chats")
+        .orderBy("time")
+        .onSnapshot((snapshot) => {
+          let tempChatArr = [];
+          snapshot.forEach((snap) => {
+            tempChatArr.push(snap.data());
+          });
+
+          // if(tempChatArr.length > 0){
+          //   console.log("Last msg", tempChatArr[tempChatArr.length - 1]);
+          // }
+          if (
+            opened &&
+            tempChatArr[tempChatArr.length - 1].sentBy !== currentUser.uid
+          ) {
+            document.title = "New Message";
+          }
+          opened = true;
+          console.log("CHAT ARRAY:", tempChatArr);
+          setChatArr(tempChatArr);
+        });
+    } catch(e) {
+      console.log("Chats fetching error")
+    }
+
+    setChatRoomId(room);
+    // console.log("penul",room)
+    // console.log("ul",chatRoomId)
+  }, [])
+
+  
+  
   const [inputText, setInputText] = useState("");
 
   const handleSendMessage = () => {
     if (inputText.trim() === "") return;
-  
+    console.log("sending to", chatRoomId);
     db.collection("ChatRoom").doc(chatRoomId).collection("chats").add({
       message: inputText,
       sentBy: currentUser.uid,
-      time: new Date().getTime(),
+      time: new Date(),
+      isRead: false,
     });
     setInputText("");
   };
+
   const [peer, setPeer] = useState();
   useEffect(() => {
-    if (isMentor) {
-      setChatRoomId(currentUser.uid + "_" + id);
-    } else {
-      setChatRoomId(id + "_" + currentUser.uid);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    setPeer(peerData.find((o) => o.userID === id));
-  }, [peerData, id]);
+    setPeer(peerData.find((o) => o.userID === peerID));
+  }, [peerData, peerID]);
 
   const handleBack = () => {
-    setChat(false)
+    setChatID(null)
   }
   
   return (
-    <div className={`${styles.container} ${chatArr && chat && `${styles.block}`} `}>
+    <div className={`${styles.container} ${chatArr && `${styles.block}`} `}>
       <div className={styles.header}>
         <div onClick={handleBack} className={styles.back}>
           <IoMdArrowBack />
@@ -70,20 +129,20 @@ export default function ChatWindow({ profilePics, id, chatArr, peerData, setChat
           return data.sentBy === currentUser.uid ? (
             <Reply
               profilePic={profilePics[data.sentBy]}
-              time={data.time}
+              time={data.time.toDate()}
               message={data.message}
             />
           ) : (
             <Comment
               profilePic={profilePics[data.sentBy]}
-              time={data.time}
+              time={data.time.toDate()}
               message={data.message}
             />
           );
         })}
         <div ref={scroll} style={{ backgroundColor: "black" }} />
       </div>
-      {myPeers.indexOf(id) >= 0 && ( 
+      {myPeers.indexOf(peerID) >= 0 && ( 
         <div className={styles.input}>
           <textarea
             rows={1}
@@ -112,7 +171,7 @@ export const Comment = ({ profilePic, message, time }) => {
         </div>
         <div className={styles.message}>
           <h5>{message}</h5>
-          <p>{new Date(time).toLocaleString("en-GB")}</p>
+          <p>{time.getHours() + ":" + time.getMinutes()}</p>
         </div>
       </div>
     </div>
@@ -128,7 +187,7 @@ export const Reply = ({ profilePic, message, time }) => {
         </div>
         <div className={styles.message}>
           <h5>{message}</h5>
-          <p>{new Date(time).toLocaleString("en-GB")}</p>
+          <p>{time.getHours() + ":" + time.getMinutes()}</p>
         </div>
       </div>
     </div>

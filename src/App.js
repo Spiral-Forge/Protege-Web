@@ -36,7 +36,7 @@ function App() {
               <Route path="/faqs" component={Faqs} />
               <ProtectedRoute path="/resources" exact component={Resource} />
               <ProtectedRoute path="/resources/:resource" component={ResourceLinks} />
-              <ProtectedRoute path="/chat/:id" component={Messenger} />
+              {/* <ProtectedRoute path="/chat/:id" component={Messenger} /> */}
               <ProtectedRoute exact path="/chat" component={Messenger} />
               <ProtectedRoute path="/profile" component={Profile} />
               <ProtectedRoute path="/deadlines" component={Deadlines} />
