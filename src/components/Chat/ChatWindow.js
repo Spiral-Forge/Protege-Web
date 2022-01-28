@@ -187,7 +187,7 @@ export const Reply = ({ profilePic, message, time }) => {
         </div>
         <div className={styles.message}>
           <h5>{message}</h5>
-          <p>{time.getHours() + ":" + time.getMinutes()}</p>
+          <p>{time.getHours() + ":" + (time.getMinutes()<10 ? "0"+time.getMinutes() : time.getMinutes())}</p>
         </div>
       </div>
     </div>
