@@ -3,7 +3,7 @@ import { FiLogOut } from "react-icons/fi";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillChatDotsFill, BsCalendarEventFill } from "react-icons/bs";
 import { FaSwatchbook } from "react-icons/fa";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import React, { useState } from "react";
 import LogoutDialog from "./LogoutDialog"

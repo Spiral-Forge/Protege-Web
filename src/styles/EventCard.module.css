@@ -1,7 +1,7 @@
 .card {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  min-width: 350px;
+  /* min-width: 350px; */
   height: max-content;
   border-radius: 10px;
   padding: 0.4rem 1.2rem;
@@ -21,6 +21,7 @@
   color: rgb(134, 134, 134);
   font-weight: 500;
   font-size: 1.1rem;
+  letter-spacing: 0.12rem;
 }
 
 .content {
@@ -73,7 +74,7 @@
 
 @media screen and (max-width: 880px) {
   .card {
-    width: 350px;
+    width: 96vw;
   }
   .container {
     width:90vw;

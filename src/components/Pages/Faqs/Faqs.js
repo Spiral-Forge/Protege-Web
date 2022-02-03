@@ -13,10 +13,10 @@ function Faqs() {
           return (
             <details key={index} className={styles.details}>
               <summary>
-                <i>{faq.question}</i>
-                <BsFillTriangleFill className={styles.tri} />
+                <div className={styles.qno}><p>{index+1}</p></div>
+                <p className={styles.question}>{faq.question}</p>
               </summary>
-              <p>{faq.answer}</p>
+              <p className={styles.answer}>{faq.answer}</p>
             </details>
           );
         })}

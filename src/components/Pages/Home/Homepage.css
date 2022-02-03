@@ -37,8 +37,9 @@
 
 .heading {
   margin-bottom: 20px;
-  font-size: 38px;
-  font-weight: 600;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.25;
   color: #f7f8fa;
 }
 
@@ -49,8 +50,8 @@
   
 .home__hero-subtitle {
   max-width: 500px;
-  font-size: 25px;
-  line-height: 40px;
+  font-size: 19px;
+  /* line-height: 40px; */
 }
 
 .home__hero-img-wrapper {
