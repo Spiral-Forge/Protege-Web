@@ -91,7 +91,6 @@ const SignIn = () => {
             <input
               type="email"
               name="email"
-              placeholder="Email Id"
               value={formData.email}
               onChange={handleChange}
             />
@@ -102,7 +101,6 @@ const SignIn = () => {
             <input
               type="password"
               name="password"
-              placeholder="Password"
               value={formData.password}
               onChange={handleChange}
             />
@@ -118,7 +116,7 @@ const SignIn = () => {
           </div>
         </div>
         <div className={styles.cta}>
-          <button>SUBMIT</button>
+          <button>Login</button>
         </div>
 
         <p className={styles.route}>

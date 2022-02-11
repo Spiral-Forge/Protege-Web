@@ -78,6 +78,9 @@ img {
     padding-right: 30px;
     padding-left: 30px;
   }
+  .home__hero-section {
+    padding-top: 0;
+  }
 }
 
 @media screen and (max-width: 880px) {

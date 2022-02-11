@@ -3,8 +3,8 @@
 }
 
 .btn {
-    padding: 8px 20px;
-    border-radius: 4px;
+    padding: 10px 12px;
+    border-radius: 8px;
     outline: none;
     border: none;
     cursor: pointer;
@@ -18,8 +18,8 @@
     padding: 8px 20px;
     transition: all 0.3s ease-out;
     background: white;
-    color:#c28cf5;
-    transition: 250ms
+    color:#1f2229;
+    transition: 250ms;
 }
 
 .btn-outline {

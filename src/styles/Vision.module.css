@@ -24,9 +24,9 @@
 }
 
 .pees p {
-  width: 90%;
+  width: 84%;
   margin: auto;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   white-space: pre-line;
 }
 
@@ -59,8 +59,8 @@
 }
 
 .img {
-  width: 120px;
-  height: 120px;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -73,7 +73,7 @@
 
 .desc h3 {
   color: #474747;
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 .desc {
@@ -88,14 +88,15 @@
   margin: auto;
   border: none;
   outline: none;
-  padding: 0.4rem 1rem;
+  padding: 0.1rem 0.4rem;
   background-color: transparent;
-  font-size: 1rem;
+  font-size: 0.7rem;
   font-weight: 500;
   transition: background-color 0.3s;
   cursor: pointer;
   border-radius: 3px;
   color: #0089e4;
+  background-color: #0089e410;
   text-decoration: none;
 }
 

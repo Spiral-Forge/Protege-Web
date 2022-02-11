@@ -25,25 +25,26 @@ export default function VerticalNav() {
               `https://avatars.dicebear.com/api/micah/${currentUser.uid}.svg`
             }
             alt=""
-          />
+          /> <div className={styles.iconlabel}>View Profile</div>
         </Link>
       </div>
       <div className={styles.icons}>
-        <Link to="/">
-          <AiFillHome className={styles.icon} />
+        <Link className={styles.icon} to="/" >
+          <AiFillHome className={styles.iconlogo} />
+          <div className={styles.iconlabel}>Home</div>
         </Link>
-        <Link to="/chat">
-          <BsFillChatDotsFill className={styles.icon} />
+        <Link className={styles.icon} to="/chat">
+          <BsFillChatDotsFill className={styles.iconlogo} /><div className={styles.iconlabel}>Chat</div>
         </Link>
-        <Link to="/resources">
-          <FaSwatchbook className={styles.icon} />
+        <Link className={styles.icon} to="/resources">
+          <FaSwatchbook className={styles.iconlogo} /><div className={styles.iconlabel}>Resources</div>
         </Link>
-        <Link to="/deadlines">
-          <BsCalendarEventFill className={styles.icon} />
+        <Link className={styles.icon} to="/deadlines">
+          <BsCalendarEventFill className={styles.iconlogo} /><div className={styles.iconlabel}>Opportunities</div>
         </Link>
       </div>
       <div className={styles.logout}>
-        <FiLogOut onClick={()=> {setShowErrorMessage(true)}} className={styles.icon} />
+        <FiLogOut onClick={()=> {setShowErrorMessage(true)}} className={styles.iconlogo} /><div className={styles.iconlabel}>Logout</div>
       </div>
       <LogoutDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false) }/>
     </div>
