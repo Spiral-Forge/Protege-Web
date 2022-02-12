@@ -43,8 +43,8 @@ export default function VerticalNav() {
           <BsCalendarEventFill className={styles.iconlogo} /><div className={styles.iconlabel}>Opportunities</div>
         </Link>
       </div>
-      <div className={styles.logout}>
-        <FiLogOut onClick={()=> {setShowErrorMessage(true)}} className={styles.iconlogo} /><div className={styles.iconlabel}>Logout</div>
+      <div onClick={()=> {setShowErrorMessage(true)}} className={styles.logout}>
+        <FiLogOut className={styles.iconlogo} /><div className={styles.iconlabel}>Logout</div>
       </div>
       <LogoutDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false) }/>
     </div>
