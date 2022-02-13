@@ -20,7 +20,7 @@ export default function ChatWindow({ profilePics, peerID, peerData, setChatID })
 
   useEffect(async() => {
     let room = "";
-
+    console.log(peerID);
     try{
       if (isMentor) {
         room = peerID + "_" + currentUser.uid;
@@ -80,7 +80,7 @@ export default function ChatWindow({ profilePics, peerID, peerData, setChatID })
     setChatRoomId(room);
     // console.log("penul",room)
     // console.log("ul",chatRoomId)
-  }, [])
+  }, [peerID])
 
   
   
@@ -180,7 +180,7 @@ export const Comment = ({ profilePic, message, time }) => {
 
 export const Reply = ({ profilePic, message, time }) => {
   return (
-    <div className={styles.replyWrapper}>
+    <div style={{whiteSpace: 'pre-wrap'}} className={styles.replyWrapper}>
       <div className={styles.reply}>
         <div className={styles.dp}>
           <img src={profilePic} alt="" />
