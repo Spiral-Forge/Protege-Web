@@ -184,7 +184,7 @@ function SignUpForm({ post, setPost }) {
             <input
               type="text"
               name="name"
-              placeholder="Name"
+              // placeholder="Name"
               value={formData.name}
               onChange={handleChange}
             />
@@ -194,7 +194,7 @@ function SignUpForm({ post, setPost }) {
             <input
               type="text"
               name="phoneNo"
-              placeholder="Contact Info"
+              // placeholder="Contact Info"
               value={formData.phoneNo}
               onChange={handleChange}
             />
@@ -204,7 +204,7 @@ function SignUpForm({ post, setPost }) {
             <Dropdown
               options={genders}
               onChange={setGender}
-              placeholder="Select your Gender"
+              // placeholder="Select your Gender"
             />
           </div>
           <div className={styles.group}>
@@ -212,7 +212,7 @@ function SignUpForm({ post, setPost }) {
             <input
               type="email"
               name="email"
-              placeholder="Email Id"
+              // placeholder="Email Id"
               value={formData.email}
               onChange={handleChange}
             />
@@ -222,7 +222,7 @@ function SignUpForm({ post, setPost }) {
             <input
               type="password"
               name="pwd"
-              placeholder="Password"
+              // placeholder="Password"
               value={formData.pwd}
               onChange={handleChange}
             />
@@ -233,7 +233,7 @@ function SignUpForm({ post, setPost }) {
             <input
               type="password"
               name="confirm_pwd"
-              placeholder="Confirm Password"
+              // placeholder="Confirm Password"
               value={formData.confirm_pwd}
               onChange={handleChange}
             />
@@ -268,7 +268,7 @@ function SignUpForm({ post, setPost }) {
             <input
               type="text"
               name="roll"
-              placeholder="Roll Number"
+              // placeholder="Roll Number"
               value={formData.roll}
               onChange={handleChange}
             />
@@ -301,7 +301,7 @@ function SignUpForm({ post, setPost }) {
             <input
               type="text"
               name="linkedInUrl"
-              placeholder="LinkedIn Id"
+              // placeholder="LinkedIn Id"
               value={formData.linkedInUrl}
               onChange={handleChange}
             />
@@ -311,7 +311,7 @@ function SignUpForm({ post, setPost }) {
             <input
               type="text"
               name="githubUrl"
-              placeholder="Github Id"
+              // placeholder="Github Id"
               value={formData.githubUrl}
               onChange={handleChange}
             />

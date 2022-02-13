@@ -40,11 +40,12 @@
 .navlinks ul {
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  /* gap: 2rem; */
 }
 
 .navlinks ul li {
-  padding-block: 5px;
+  padding: 5px 0;
+  margin-left: 2rem;
 }
 
 .navlinks a,

@@ -18,9 +18,14 @@
 .Dropdown-control {
   box-shadow: none !important;
   border: none !important;
-  border-bottom: 1px solid rgb(201, 201, 201) !important;
-  padding: 0.7rem !important;
-  border-radius: 0 !important;
+  border: 1px solid rgb(201, 201, 201) !important;
+  border-radius: 10px !important;
+  margin: 0.1rem 0 !important;
+  padding: 0.4rem 0.6rem !important;
+  font-size: 1rem !important;
+  /* border-bottom: 1px solid rgb(201, 201, 201) !important; */
+  /* padding: 0.3rem !important;
+  border-radius: 0 !important; */
 }
 
 .dropdown-container {
@@ -48,8 +53,15 @@
   width: 50% !important;
   background-clip: padding-box;
 }
-
+@media screen and (max-width: 880px) {
+  html{
+    -webkit-text-size-adjust: none;
+  }
+}
 @media screen and (max-width: 430px) {
+  html{
+    -webkit-text-size-adjust: none;
+  }
   .my-masonry-grid_column {
     padding-left: 0;
   }
