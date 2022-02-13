@@ -3,6 +3,7 @@ import { FiLogOut } from "react-icons/fi";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillChatDotsFill, BsCalendarEventFill } from "react-icons/bs";
 import { SiBuzzfeed} from "react-icons/si";
+import { VscFeedback} from "react-icons/vsc";
 import { FaSwatchbook } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -44,7 +45,7 @@ export default function VerticalNav() {
           <BsCalendarEventFill className={styles.iconlogo} /><div className={styles.iconlabel}>Opportunities</div>
         </Link>
         <Link className={styles.icon} to="/feedback">
-          <SiBuzzfeed className={styles.iconlogo} /><div className={styles.iconlabel}>Feedback</div>
+          <VscFeedback className={styles.iconlogo} /><div className={styles.iconlabel}>Feedback</div>
         </Link>
       </div>
       <div className={styles.logout}>

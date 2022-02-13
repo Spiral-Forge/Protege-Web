@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { db, ProfilePicStorageRef } from "../../firebase";
 import styles from "../../styles/Messenger.module.css";
+import styles1 from "../../styles/FeedbackList.module.css";
 import PeerTiles from "./peerList";
 import FeedbackForm from "./feedbackForm";
 
@@ -11,6 +12,8 @@ export default function FeedbackList() {
   const [profilePics, setProfilePics] = useState({});
   const [chatID, setChatID] = useState(null);
 
+  const[isAccessible, setAccessibility] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -19,6 +22,12 @@ export default function FeedbackList() {
     // console.log(currentUser)
     // console.log("user data: ", userData)
     // console.log("peers: ", myPeers)
+    var today = new Date();
+    console.log(today.getDate());
+
+    if (today.getDate() >= 25) {
+      setAccessibility(true);
+    }
 
     let tempPeerArr = [];
     let profilePicsObj = {};
@@ -76,7 +85,16 @@ export default function FeedbackList() {
 
   return (
     <div className={styles.container}>
-      <PeerTiles setChatID={setChatID} peerData={peerData} profilePics={profilePics} />
+        <div className={styles1.container}>
+        <div className={styles1.top}>
+  
+  <div className={styles1.heading}>
+    <h1>Feedback</h1>
+  </div>
+</div>
+    {!isAccessible && <div> <h5>Feedback is not available before 25th of the month.</h5></div>}
+    {isAccessible && <PeerTiles setChatID={setChatID} peerData={peerData} profilePics={profilePics} />}
+      </div>
       {chatID && <FeedbackForm
         peerData={peerData}
         profilePics={profilePics}

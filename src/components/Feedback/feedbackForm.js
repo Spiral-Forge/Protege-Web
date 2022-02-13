@@ -12,8 +12,8 @@ export default function FeedbackForm({ profilePics, peerID, peerData, setChatID 
   
   return (
     <div className={`${styles.container} ${styles.block}` }>
-    {!isMentor && <MentorForm profilePics = {profilePics} peerID = {peerID} peerData = {peerData} setChatID = {setChatID} />}
-    {isMentor && <MenteeForm profilePics = {profilePics} peerID = {peerID} peerData = {peerData} setChatID = {setChatID} />}
+    {isMentor && <MentorForm profilePics = {profilePics} peerID = {peerID} peerData = {peerData} setChatID = {setChatID} />}
+    {!isMentor && <MenteeForm profilePics = {profilePics} peerID = {peerID} peerData = {peerData} setChatID = {setChatID} />}
     </div>
   );
 }
