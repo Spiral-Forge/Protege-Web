@@ -8,6 +8,8 @@
   justify-content: space-between;
   z-index: 0;
 }
+
+
 .name {
   width: 100%;
   background-color: white;
@@ -165,6 +167,7 @@
   align-items: center;
   gap: 20px;
 }
+
 
 .back {
   font-size: 1.5rem;
