@@ -112,11 +112,11 @@ const SignIn = () => {
               onChange={() => setCheck(!check)}
               name="check"
             />
-            <label htmlFor="check">Keep me logged In</label>
+            <label htmlFor="check">Keep me logged in</label>
           </div>
         </div>
         <div className={styles.cta}>
-          <button>Login</button>
+          <button className="button-1">Login</button>
         </div>
 
         <p className={styles.route}>

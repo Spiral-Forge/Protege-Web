@@ -20,7 +20,7 @@
   border: none !important;
   border: 1px solid rgb(201, 201, 201) !important;
   border-radius: 10px !important;
-  margin: 0.1rem 0 !important;
+  margin: 0.1rem auto !important;
   padding: 0.4rem 0.6rem !important;
   font-size: 1rem !important;
   /* border-bottom: 1px solid rgb(201, 201, 201) !important; */
@@ -35,9 +35,94 @@
   border-radius: 0 !important;
 }
 
+input {
+  width: 100%;
+  /* border: none; */
+  outline: none;
+  border: 1px solid rgb(201, 201, 201);
+  border-radius: 10px;
+
+  /* border-bottom: 1px solid rgb(201, 201, 201); */
+  margin: 0.3rem auto;
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+}
+
+.button-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  background-color: #80b9e8;
+  box-shadow: -5px -5px 20px #fff,  5px 5px 20px #b0b3bd;
+  
+  /* box-shadow: 3px -3px 10px #fff,  3px 3px 10px #b0b3bd; */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  margin: auto;
+  padding: 0.4rem 0;
+  width: 200px;
+  /* width: 200px; */
+  
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.button-1:hover {
+  background-color: #488ec7;
+}
+
+
+.button-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgb(63, 62, 62);
+  background-color: white;
+  border: 1px solid #80b9e8;
+  border-radius: 10px;
+  cursor: pointer;
+
+  margin: auto;
+  padding: 0.4rem 0;
+  width: 200px;
+  /* width: 200px; */
+  
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.button-2:hover {
+  background-color: #e1e2e2;
+}
+
+.backbutton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 75px;
+  padding: 0.3rem 0.8rem;
+  margin-left: 3rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  background-color: #80b9e8;
+  color: white;
+  cursor: pointer;
+}
+
 .rmsc {
   border-radius: 0 !important;
   width: 100% !important;
+}
+
+.rmsc .item-renderer input {
+  width: max-content;
 }
 
 .my-masonry-grid {
@@ -64,5 +149,11 @@
   }
   .my-masonry-grid_column {
     padding-left: 0;
+  }
+  .button-1 {
+    width: 100%;
+  }
+  .backbutton{
+    margin-left: 1rem;
   }
 }

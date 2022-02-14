@@ -5,6 +5,7 @@ import { auth, db } from "../../../firebase";
 import { MultiSelect } from "react-multi-select-component";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+import "../../../App.css"
 import styles from "../../../styles/Signup.module.css";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import {
@@ -173,7 +174,7 @@ function SignUpForm({ post, setPost }) {
       </div>
 
       <form onSubmit={validate} className={styles.form}>
-        <button onClick={() => setPost("")} className={styles.back}>
+        <button onClick={() => setPost("")} className="backbutton">
           {" "}
           <IoMdArrowRoundBack /> Back
         </button>
@@ -327,7 +328,7 @@ function SignUpForm({ post, setPost }) {
           </div> */}
         </div>
         <div className={styles.cta}>
-          <button>SUBMIT</button>
+          <button className="button-1">SUBMIT</button>
         </div>
       </form>
       <Dialog

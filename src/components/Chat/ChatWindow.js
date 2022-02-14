@@ -22,14 +22,16 @@ export default function ChatWindow({ profilePics, peerID, peerData, setChatID })
     let room = "";
 
     try{
-      if (isMentor) {
+      if (peerID < currentUser.uid) {
         room = peerID + "_" + currentUser.uid;
         console.log(room)
       } else {
         room = currentUser.uid + "_" + peerID;
         console.log(room)
       }
+
       // console.log("check rooom", room);
+      
       await db
         .collection("ChatRoom")
         .doc(room)

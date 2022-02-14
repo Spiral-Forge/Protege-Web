@@ -29,7 +29,7 @@
   flex-direction: column;
 }
 
-.back {
+/* .back {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,7 +43,7 @@
   background-color: #80b9e8;
   color: white;
   cursor: pointer;
-}
+} */
 
 .inputs {
   display: flex;
@@ -59,12 +59,13 @@
 }
 
 .group > label {
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-left: 0.3rem;
   padding-bottom: 0.3rem;
   color: rgb(123, 122, 122);
   font-weight: 500;
 }
+
 
 .group > input {
   width: 100%;
@@ -83,29 +84,14 @@
   font-size: 1em;
 }
 
-.cta {
+.group > input::placeholder {
+  font-size: 1rem;
+}
+
+.cta{
   margin-top: 2rem;
 }
 
-.cta > button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  margin: auto;
-  width: 200px;
-  border: none;
-  outline: none;
-  padding: 0.6rem 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-  background-color: #80b9e8;
-  box-shadow: -5px -5px 20px #fff,  5px 5px 20px #b0b3bd;
-
-  /* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.678); */
-  border-radius: 10px;
-  cursor: pointer;
-}
 
 @media only screen and (max-width: 930px) {
   .container {
@@ -126,11 +112,19 @@
     width: 100%;
   }
 
+  .inputs{
+    margin-left: 0;
+    margin-right: 0;
+  }
+/* 
+  .backbutton{
+    margin-left:0;
+  } */
+
   .group {
     width: 100%;
+    margin: 0.5rem;
   }
 
-  .cta > button {
-    width: 100%;
-  }
+  
 }
