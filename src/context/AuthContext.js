@@ -13,6 +13,8 @@ export const AuthProvider = ({ children }) => {
   const [isMentor, setIsMentor] = useState(false);
   const [userData, setUserData] = useState();
   const [myPeers, setMyPeers] = useState();
+  const [peerData, setPeerData] = useState([]);
+
 
   const signUp = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -31,11 +33,33 @@ export const AuthProvider = ({ children }) => {
       setCurrentUser(user);
       if (user) {
         try {
+          console.log("Fetching user")
           const userDoc = await db.collection("users").doc(user.uid).get();
           setUserData(userDoc.data());
-          setMyPeers(userDoc.data().peerId)
+
           if (userDoc.data().post === "Mentor") {
             setIsMentor(true);
+          }
+
+          let peerIDs = userDoc.data().peerId;
+          setMyPeers(peerIDs);
+          if(peerIDs){
+            let tempPeerArr = [];
+            console.log("Fetching peer data")
+            for (const id of peerIDs) {
+              try{
+                await db
+                .collection("users")
+                .doc(id)
+                .get()
+                .then((doc) => {
+                  tempPeerArr.push({...doc.data(), userID:id});
+                });
+              } catch (e) {
+                console.log("Peer data error", id)
+              }
+            }
+            setPeerData(tempPeerArr);
           }
         } catch (err) {
           console.log("CAN'T FETCH USER");
@@ -51,6 +75,7 @@ export const AuthProvider = ({ children }) => {
     userData,
     isMentor,
     myPeers,
+    peerData,
     signUp,
     signIn,
     signOut,

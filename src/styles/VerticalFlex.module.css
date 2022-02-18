@@ -2,11 +2,11 @@
   display: flex;
   padding: 1rem;
   gap: 2rem;
-  padding-bottom: 5rem;
+  /* padding-bottom: 5rem; */
 }
 
-/* @media screen and (max-width: 430px) {
+@media screen and (max-height: 800px) {
   .flex {
-    padding: 30px;
-  } */
-/* } */
+    padding-bottom: 80px;
+  }  
+}

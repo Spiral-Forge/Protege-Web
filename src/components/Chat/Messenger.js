@@ -6,50 +6,36 @@ import ChatWindow from "./ChatWindow";
 import Conversations from "./Conversations";
 
 export default function Messenger() {
-  const { currentUser, isMentor, userData, myPeers } = useAuth();
-  const [peerData, setPeerData] = useState([]);
+  const { currentUser, myPeers, peerData } = useAuth();
   const [profilePics, setProfilePics] = useState({});
   const [chatID, setChatID] = useState(null);
   
   useEffect(async () => {
+    console.log(peerData)
     // console.log(currentUser)
     // console.log("user data: ", userData)
     // console.log("peers: ", myPeers)
 
-    let tempPeerArr = [];
+    // let tempPeerArr = [];
     let profilePicsObj = {};
-    for (const id of myPeers) {
-      let photoUrl = null;
-      try{
-        await db
-        .collection("users")
-        .doc(id)
-        .get()
-        .then((doc) => {
-          tempPeerArr.push({ name: doc.data().name, userID: id });
-          photoUrl = doc.data().photoUrl
-        });
-      } catch (e) {
-        console.log("Peer data error")
-        console.log(id)
-      }
-
+    for (const idx in peerData) {
+      console.log(peerData[idx]);
       let tempDownloadURL;
-      if(photoUrl){
+      if(peerData[idx].photoUrl){
         try {
-          tempDownloadURL = await ProfilePicStorageRef.child(id).getDownloadURL();
+          tempDownloadURL = await ProfilePicStorageRef.child(peerData[idx].userID).getDownloadURL();
         } catch (err) {
           console.log("Uploaded img error")
         }
       }
       else {
         tempDownloadURL =
-              "https://avatars.dicebear.com/api/micah/" + id + ".svg";
+              "https://avatars.dicebear.com/api/micah/" + peerData[idx].userID + ".svg";
       }
-      profilePicsObj[id] = tempDownloadURL;
+      profilePicsObj[peerData[idx].userID] = tempDownloadURL;
     }
-    setPeerData(tempPeerArr);
-    console.log("PEEER DATA:", tempPeerArr)
+    // setPeerData(tempPeerArr);
+    // console.log("PEEER DATA:", tempPeerArr)
 
     let ownProfilePic;
     if(currentUser.photoUrl){
@@ -73,7 +59,6 @@ export default function Messenger() {
     <div className={styles.container}>
       <Conversations setChatID={setChatID} peerData={peerData} profilePics={profilePics} />
       {chatID && <ChatWindow
-        peerData={peerData}
         profilePics={profilePics}
         peerID={chatID}
         setChatID={setChatID}

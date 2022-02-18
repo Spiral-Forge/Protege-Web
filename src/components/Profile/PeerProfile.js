@@ -1,25 +1,24 @@
-import { useEffect, useState } from "react";
 import styles from "../../styles/Profile.module.css";
 import ProfileInfo from "./ProfileInfo";
-import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
-export default function PeerProfile({index}) {
-    index = 1;
-    const { currentUser, isMentor, userData, myPeers } = useAuth();
-    const [peerData, setMyPeers] = useState();
 
-    useEffect(() => {
-      console.log(myPeers);
-        db.collection("users")
-          .doc(myPeers[index])
-          .get()
-          .then((doc) => {
-            setMyPeers(doc.data());
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }, []);
+export default function PeerProfile({index}) {
+    index = 0;
+    const { currentUser, peerData } = useAuth();
+    // const [peerData, setMyPeers] = useState();
+
+    // useEffect(() => {
+    //   console.log(myPeers);
+    //     db.collection("users")
+    //       .doc(myPeers[index])
+    //       .get()
+    //       .then((doc) => {
+    //         setMyPeers(doc.data());
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   }, []);
 
   return (
     console.log(peerData),
@@ -39,12 +38,12 @@ export default function PeerProfile({index}) {
                       alt=""
                     />
                   </div>
-                  <h2>{peerData.name}</h2>
+                  <h2>{peerData[index].name}</h2>
                   <h3>
-                    <em>{peerData.post}</em>
+                    <em>{peerData[index].post}</em>
                   </h3>
                 </div>
-                { <ProfileInfo userData={peerData} /> }
+                { <ProfileInfo userData={peerData[index]} /> }
               </>
             }
           </div>

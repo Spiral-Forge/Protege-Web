@@ -3,11 +3,13 @@ import styles from "../../styles/ChatWindow.module.css";
 import { IoMdSend, IoMdArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
+import { Link } from "react-router-dom";
 
-export default function ChatWindow({ profilePics, peerID, peerData, setChatID }) {
+
+export default function ChatWindow({ profilePics, peerID, setChatID }) {
   const scroll = useRef();
   const [chatArr, setChatArr] = useState([]);
-  const { currentUser, isMentor, myPeers } = useAuth();
+  const { currentUser, isMentor, peerData, myPeers } = useAuth();
   useEffect(() => {
     scrollBottom();
   }, [chatArr]);
@@ -19,6 +21,8 @@ export default function ChatWindow({ profilePics, peerID, peerData, setChatID })
   const [chatRoomId, setChatRoomId] = useState("");
 
   useEffect(async() => {
+    console.log("Mypoeers:", myPeers)
+
     let room = "";
 
     try{
@@ -113,15 +117,17 @@ export default function ChatWindow({ profilePics, peerID, peerData, setChatID })
         <div onClick={handleBack} className={styles.back}>
           <IoMdArrowBack />
         </div>
-        <div className={styles.peer}>
-          {/* <div className={styles.dpmob}> */}
-            {/* <img
-              src={peer.photoUrl}
-              alt=""
-            /> */}
-          {/* </div> */}
-          <p>{peer && peer.name}</p>
-        </div>
+        <Link to="/peerprofile">
+          <div className={styles.peer}>
+            {/* <div className={styles.dpmob}> */}
+              {/* <img
+                src={peer.photoUrl}
+                alt=""
+              /> */}
+            {/* </div> */}
+            <p>{peer && peer.name}</p>
+          </div>
+        </Link>
       </div>
 
       <div className={styles.chat}>

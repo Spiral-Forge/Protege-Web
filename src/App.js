@@ -26,7 +26,6 @@ function App() {
   return (
     <div className="App">
       <Router history={history}>
-        <AuthProvider>
           <Navbar />
           <Switch>
             <Route path="/signin" component={SignIn} />
@@ -44,7 +43,6 @@ function App() {
               <ProtectedRoute path="/peerprofile" component={PeerProfile}/>
             </VerticalLayout>
           </Switch>
-        </AuthProvider>
       </Router>
     </div>
   );
