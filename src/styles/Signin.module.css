@@ -4,7 +4,7 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  /* gap: 1rem; */
 }
 
 .heading > h1 {
@@ -23,6 +23,7 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   width: 50%;
   margin: 0 auto;
+  margin-top: 1rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -31,7 +32,7 @@
 .inputs {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  /* gap: 2rem; */
 }
 
 .group,
@@ -39,20 +40,17 @@
   width: 100%;
 }
 
-.group > label,
-.check > label {
-  font-size: 1.3rem;
-  color: rgb(83, 83, 83);
-  font-weight: 500;
+.group, .check{
+  margin: 0.5rem auto;
+  width: 80%;
 }
 
-.group > input {
-  width: 100%;
-  border: none;
-  outline: none;
-  border-bottom: 1px solid rgb(201, 201, 201);
-  padding: 0.5rem 0.6rem;
-  font-size: 1.4rem;
+.group > label,
+.check > label {
+  font-size: 0.8rem;
+  padding-left: 4px;
+  color: rgb(123, 122, 122);
+  font-weight: 500;
 }
 
 .group > input::placeholder {
@@ -61,6 +59,8 @@
 
 .check {
   padding-left: 0.2rem;
+  display: flex;
+  align-items: center;
 }
 
 .check > input {
@@ -69,38 +69,20 @@
   margin-right: 0.5rem;
 }
 
-.cta {
-  margin-top: 4rem;
-}
-
-.cta > button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  margin: auto;
-  width: 300px;
-  border: none;
-  outline: none;
-  padding-block: 0.6rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  background-color: #80b9e8;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.678);
-  border-radius: 10px;
-  cursor: pointer;
+.cta{
+  margin-top: 2rem;
 }
 
 .route {
   width: max-content;
   margin: 0 auto;
   margin-top: 1.5rem;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
 }
 
 .route a {
   color: #80b9e8;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -124,10 +106,6 @@
   }
 
   .group {
-    width: 100%;
-  }
-
-  .cta > button {
     width: 100%;
   }
 }

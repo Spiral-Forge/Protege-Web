@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Spiral as Hamburger } from "hamburger-react";
 import LogoutDialog from "../LogoutDialog";
+import Button from '@mui/material/Button';
 
 const Navbar = () => {
   const { currentUser, userData, signOut } = useAuth();
@@ -81,61 +82,63 @@ const Navbar = () => {
         </div>
 
         {isOpen && (
-          <div className={styles.moblinks}>
-            <ul>
-              {currentUser && (
-                <Link to="/profile">
+          <div className={styles.moblinksContainer}>
+            <div className={styles.moblinks}>
+              <ul>
+                {currentUser && (
+                  <Link to="/profile">
+                    <li>
+                      <div onClick={handleToggle}>
+                        {userData.name}
+                        <AiOutlineRight />
+                      </div>
+                    </li>
+                  </Link>
+                )}
+                {!currentUser && (
+                  <Link to="/">
+                    <li>
+                      <div onClick={handleToggle}>
+                        Home
+                        <AiOutlineRight />
+                      </div>
+                    </li>
+                  </Link>
+                )}
+                <Link to="/faqs">
                   <li>
                     <div onClick={handleToggle}>
-                      {userData.name}
+                      FAQs
                       <AiOutlineRight />
                     </div>
                   </li>
                 </Link>
-              )}
-              {!currentUser && (
-                <Link to="/">
+
+                <Link to="/vision">
                   <li>
                     <div onClick={handleToggle}>
-                      Home
+                      Vision
                       <AiOutlineRight />
                     </div>
                   </li>
                 </Link>
-              )}
-              <Link to="/faqs">
-                <li>
-                  <div onClick={handleToggle}>
-                    FAQs
-                    <AiOutlineRight />
-                  </div>
-                </li>
-              </Link>
+              </ul>
+              <ul>
+                {!currentUser && (
+                  <Link to="/signin">
+                    <li className={styles.moblogin}>
+                      <Button className={styles.logoutButton} onClick={handleToggle}>Login</Button>
+                    </li>
+                  </Link>
+                )}
 
-              <Link to="/vision">
-                <li>
-                  <div onClick={handleToggle}>
-                    Vision
-                    <AiOutlineRight />
-                  </div>
-                </li>
-              </Link>
-            </ul>
-            <ul>
-              {!currentUser && (
-                <Link to="/signin">
-                  <li className={styles.moblogin}>
-                    <p onClick={handleToggle}>Login</p>
+                {currentUser && (
+                  <li className={styles.moblogin} onClick={() => setShowErrorMessage(true)}>
+                    <Button className={styles.logoutButton} onClick={handleToggle}>Log out</Button>
                   </li>
-                </Link>
-              )}
-
-              {currentUser && (
-                <li className={styles.moblogin} onClick={() => setShowErrorMessage(true)}>
-                  <p onClick={handleToggle}>Logout</p>
-                </li>
-              )}
-            </ul>
+                )}
+              </ul>
+            </div>
           </div>
         )}
       </nav>

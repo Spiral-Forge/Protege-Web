@@ -57,7 +57,7 @@ export default function ProfileInfo({ userData }) {
           <p>{userData.domains.join(", ")}</p>
         </div>
       </span>
-      <span className={styles.field}>
+      {userData.linkedInUrl != "" && <span className={styles.field}>
         <div className={styles.iconContainer}>
           <BsLinkedin className={styles.icon} />
         </div>
@@ -67,8 +67,8 @@ export default function ProfileInfo({ userData }) {
             <p>LinkedIn Profile</p>
           </a>
         </div>
-      </span>
-      <span className={styles.field}>
+      </span>}
+      {userData.githubUrl != "" && <span className={styles.field}>
         <div className={styles.iconContainer}>
           <BsGithub className={styles.icon} />
         </div>
@@ -78,7 +78,7 @@ export default function ProfileInfo({ userData }) {
           <p>Github Profile</p>
           </a>
         </div>
-      </span>
+      </span>}
     </div>
   );
 }

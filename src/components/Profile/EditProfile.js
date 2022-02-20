@@ -13,6 +13,7 @@ import {
 import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
 import ErrorDialog from "../ErrorDialog";
+import "../../App.css"
 
 export default function EditProfile({ setEdit, userData, setUserData }) {
   const { currentUser } = useAuth();
@@ -121,7 +122,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           <label> Name:</label>
           <input
             type="text"
-            placeholder="Name"
+            // placeholder="Name"
             defaultValue={newFormData.name}
             name="name"
             onChange={handleFormChange}
@@ -142,7 +143,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           <label> Phone Number:</label>
           <input
             type="text"
-            placeholder="Contact Info"
+            // placeholder="Contact Info"
             defaultValue={newFormData.phoneNo}
             name="phoneNo"
             onChange={handleFormChange}
@@ -192,29 +193,29 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
 
           <input
             type="text"
-            placeholder="Roll Number"
+            // placeholder="Roll Number"
             defaultValue={newFormData.roll}
             name="roll"
             onChange={handleFormChange}
           />
         </div>
         <div className={styles.flex}>
-          <label> LinkedIn Profile:</label>
+          <label> LinkedIn Profile Link:</label>
 
           <input
             type="text"
-            placeholder="LinkedIn Profile"
+            // placeholder="Profile Link"
             defaultValue={newFormData.linkedInUrl}
             name="linkedInUrl"
             onChange={handleFormChange}
           />
         </div>
         <div className={styles.flex}>
-          <label> Github Profile:</label>
+          <label> Github Profile Link:</label>
 
           <input
             type="text"
-            placeholder="Github Profile"
+            // placeholder="Profile Link"
             defaultValue={newFormData.githubUrl}
             name="githubUrl"
             onChange={handleFormChange}
@@ -222,8 +223,8 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
         </div>
       </div>
       <div className={styles.cta}>
-        <button onClick={() => setEdit(false)}>Cancel</button>
-        <button>Update Profile</button>
+        <button onClick={() => setEdit(false)} className="button-2">Cancel</button>
+        <button className="button-1">Update Profile</button>
       </div>
       <ErrorDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false)} errorMessage={errorMessage} />
     </form>

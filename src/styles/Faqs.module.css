@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 2rem;
-  gap: 2rem;
+  /* gap: 2rem; */
   border-radius: 15px;
 }
 
@@ -41,29 +41,31 @@
 .details summary {
   width: 100%;
   padding: 2rem;
-  padding-left:0;
-  height: max-content;
   list-style: none;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
+  outline:none;
 }
 
 .qno{
   width: 30px;
   height: 30px;
+  float: left;
   border-radius: 50%;
   text-align: center;
   margin: auto;
   background: linear-gradient(152.92deg, #4c4e4e 14.38%, #222222 87.83%);
   color: white;
+  display: flex;
+  align-items: center;
 }
 
 .qno p{
-  padding-top: 3px;
+  line-height: 30px;
+  margin:auto;
 }
 .question {
-  margin: auto 0;
+  margin: auto 2rem;
+  line-height: 30px;
   font-weight: 600;
   color:rgba(0, 0, 0, 0.671);
   padding: 0 2rem;
@@ -79,6 +81,9 @@
 details[open] {
   background-color: #80b9e8;
   max-height: 30rem;
+}
+details summary::-webkit-details-marker {
+  display:none;
 }
 
 

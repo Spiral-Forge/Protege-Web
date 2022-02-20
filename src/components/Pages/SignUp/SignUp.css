@@ -8,7 +8,7 @@
 .choose-sign-up-btn {
   background-color: #80b9e8;
   padding: 0.7rem 5rem;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 600;
   border-radius: 45px;
   margin: 0.6rem;
@@ -18,11 +18,13 @@
 }
 .choose-sign-up-already {
   margin-top: 1rem;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
 }
 .choose-sign-up-already a {
+  text-decoration: none;
   color: #80b9e8;
   font-weight: 700;
+
 }
 .sign-up-back-btn {
   border: none;

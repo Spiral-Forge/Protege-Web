@@ -1,26 +1,28 @@
 .container {
   position: sticky;
   top: 105px;
-  height: 75vh;
+  height: 50vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
-  background-color: #1d1d1d;
+  /* background-color: #1d1d1d; */
   padding-block: 1.5rem;
-  min-width: 100px;
-  border-radius: 15px;
+  /* min-width: 100px; */
+  width: 20vw;
+  /* border-radius: 15px; */
+  border-right: 1px solid #e0dfdf;
   z-index: 9;
 }
 
 .pic {
-  background-color: rgb(196, 196, 196);
-  width: 70px;
-  height: 70px;
+  /* background-color: rgb(196, 196, 196); */
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   overflow: hidden;
   transition: transform 0.3s;
   cursor: pointer;
+  box-shadow: 1px 8px 12px 1px rgb(206, 204, 204);
 }
 
 .pic:hover {
@@ -36,23 +38,38 @@
 .icons {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  /* gap: 0.6rem; */
 }
 
-.icon {
-  font-size: 2rem;
-  color: #b6b6b6;
-  cursor: pointer;
-}
-
-.icon:hover {
-  color: #e7e7e7;
-}
-
-.logout {
+.icon, .logout {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  cursor: pointer;
+  width: 90%;
+  padding: 5px;
+  border-radius: 8px;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.icon:hover, .logout:hover{
+  background-color: #e4e3e3b2;
+  font-weight: 700;
+}
+
+.iconlogo{
+  font-size: 1rem;
+  margin: 3px;
+}
+
+.iconlabel{
+  margin-left: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  width: 100%;
+}
+.iconlabel:hover, .logout:hover{
+  font-weight: 700;
 }
 
 @media only screen and (max-width: 800px) {
@@ -61,16 +78,27 @@
     flex-direction: row;
     position: fixed;
     top: initial;
-    bottom: 1%;
+    bottom: -0.5%;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    /* left: 50%;
-    transform: translateX(-50%); */
-    /* width: 90vw; */
-    padding: 1rem;
+    width: 100%;
+    padding: 0.45rem;
     justify-content: space-evenly;
+    border-right: none;
+    border-radius: 32px;
+    background-color: rgba(255, 255, 255, 0.918);
+    box-shadow: inset 1px 1px 2px -1px hsl(0, 0, 6.25),  inset 1px 1px 2px -1px rgb(80, 79, 79);
   }
+
+  .iconlogo{
+    font-size: 2rem;
+    margin: auto;
+  }
+
+  .iconlabel{
+    display:none;
+  }
+
 
   .pic {
     display: none;

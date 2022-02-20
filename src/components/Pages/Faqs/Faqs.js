@@ -13,8 +13,8 @@ function Faqs() {
           return (
             <details key={index} className={styles.details}>
               <summary>
-                <div className={styles.qno}><p>{index+1}</p></div>
-                <p className={styles.question}>{faq.question}</p>
+                <div className={styles.qno}><p align="center">{index+1}</p></div>
+                <div><p className={styles.question}>{faq.question}</p></div>
               </summary>
               <p className={styles.answer}>{faq.answer}</p>
             </details>

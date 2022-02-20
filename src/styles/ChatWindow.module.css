@@ -8,6 +8,8 @@
   justify-content: space-between;
   z-index: 0;
 }
+
+
 .name {
   width: 100%;
   background-color: white;
@@ -166,6 +168,7 @@
   gap: 20px;
 }
 
+
 .back {
   font-size: 1.5rem;
   color: #383838;
@@ -181,11 +184,6 @@
   display: flex !important;
 }
 
-/* @media only screen and (min-width: 800px) {
-  .header {
-    display: none;
-  }
-} */
 
 @media only screen and (max-width: 800px) {
   .container {

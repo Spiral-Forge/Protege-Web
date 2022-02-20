@@ -5,11 +5,11 @@ import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
 import PeerProfile from "../Profile/PeerProfile";
 
-
-export default function ChatWindow({ profilePics, peerID, setChatID }) {
+export default function ChatWindow({ peerID, setChatID }) {
   const scroll = useRef();
   const [chatArr, setChatArr] = useState([]);
-  const { currentUser, isMentor, peerData, myPeers } = useAuth();
+  const { currentUser, profilePics, peerData, myPeers } = useAuth();
+  
   useEffect(() => {
     scrollBottom();
   }, [chatArr]);
@@ -25,16 +25,18 @@ export default function ChatWindow({ profilePics, peerID, setChatID }) {
     console.log("Mypoeers:", myPeers)
 
     let room = "";
-
+    console.log(peerID);
     try{
-      if (isMentor) {
+      if (peerID < currentUser.uid) {
         room = peerID + "_" + currentUser.uid;
         console.log(room)
       } else {
         room = currentUser.uid + "_" + peerID;
         console.log(room)
       }
+
       // console.log("check rooom", room);
+      
       await db
         .collection("ChatRoom")
         .doc(room)
@@ -85,7 +87,7 @@ export default function ChatWindow({ profilePics, peerID, setChatID }) {
     setChatRoomId(room);
     // console.log("penul",room)
     // console.log("ul",chatRoomId)
-  }, [])
+  }, [peerID])
 
   
   
@@ -192,7 +194,7 @@ export const Comment = ({ profilePic, message, time }) => {
 
 export const Reply = ({ profilePic, message, time }) => {
   return (
-    <div className={styles.replyWrapper}>
+    <div style={{whiteSpace: 'pre-wrap'}} className={styles.replyWrapper}>
       <div className={styles.reply}>
         <div className={styles.dp}>
           <img src={profilePic} alt="" />

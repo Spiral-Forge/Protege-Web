@@ -1,12 +1,10 @@
 .flex {
   display: flex;
   padding: 1rem;
-  gap: 2rem;
-  /* padding-bottom: 5rem; */
 }
 
-@media screen and (max-height: 800px) {
+@media screen and (max-width: 430px) {
   .flex {
     padding-bottom: 80px;
-  }  
-}
+  } 
+} 

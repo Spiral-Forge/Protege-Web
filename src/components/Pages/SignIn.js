@@ -91,7 +91,6 @@ const SignIn = () => {
             <input
               type="email"
               name="email"
-              placeholder="Email Id"
               value={formData.email}
               onChange={handleChange}
             />
@@ -102,7 +101,6 @@ const SignIn = () => {
             <input
               type="password"
               name="password"
-              placeholder="Password"
               value={formData.password}
               onChange={handleChange}
             />
@@ -114,11 +112,11 @@ const SignIn = () => {
               onChange={() => setCheck(!check)}
               name="check"
             />
-            <label htmlFor="check">Keep me logged In</label>
+            <label htmlFor="check">Keep me logged in</label>
           </div>
         </div>
         <div className={styles.cta}>
-          <button>SUBMIT</button>
+          <button className="button-1">Login</button>
         </div>
 
         <p className={styles.route}>

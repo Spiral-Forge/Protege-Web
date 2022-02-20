@@ -18,6 +18,8 @@ import Resource from "./components/Resources/Resource";
 import Profile from "./components/Profile/Profile";
 import Deadlines from "./components/Pages/Deadlines";
 import ProtectedRoute from "./components/ProtectedRoute";
+import FeedbackList from "./components/Feedback/Feedback";
+
 
 function App() {
   const history = useHistory();
@@ -38,6 +40,7 @@ function App() {
               <ProtectedRoute exact path="/chat" component={Messenger} />
               <ProtectedRoute path="/profile" component={Profile} />
               <ProtectedRoute path="/deadlines" component={Deadlines} />
+              <ProtectedRoute path="/feedback" component={FeedbackList} />
             </VerticalLayout>
           </Switch>
       </Router>

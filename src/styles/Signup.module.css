@@ -4,7 +4,7 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  /* gap: 2rem; */
 }
 
 .heading > h1 {
@@ -23,76 +23,75 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   width: 80%;
   margin: 0 auto;
+  margin-top: 2rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
 }
 
-.back {
+/* .back {
   display: flex;
   align-items: center;
-  width: max-content;
+  justify-content: space-between;
+  width: 75px;
   padding: 0.6rem 0.8rem;
-  font-size: 1.2rem;
+  margin-left: 3rem;
+  font-size: 0.8rem;
   font-weight: 500;
   border: none;
   border-radius: 5px;
   background-color: #80b9e8;
   color: white;
-  margin-bottom: 2rem;
-}
+  cursor: pointer;
+} */
 
 .inputs {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  margin: 2rem 2rem 0 2rem;
+  /* gap: 2rem; */
 }
 
 .group {
   width: 45%;
+  margin: 1rem;
 }
 
 .group > label {
-  font-size: 1.3rem;
-  color: rgb(83, 83, 83);
+  font-size: 0.9rem;
+  margin-left: 0.3rem;
+  padding-bottom: 0.3rem;
+  color: rgb(123, 122, 122);
   font-weight: 500;
 }
 
+
 .group > input {
   width: 100%;
-  border: none;
+  /* border: none; */
   outline: none;
-  border-bottom: 1px solid rgb(201, 201, 201);
-  padding: 0.5rem 0.6rem;
-  font-size: 1.4rem;
+  border: 1px solid rgb(201, 201, 201);
+  border-radius: 10px;
+
+  /* border-bottom: 1px solid rgb(201, 201, 201); */
+  margin: 0.3rem 0;
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+}
+
+.group > input::placeholder {
+  font-size: 1em;
 }
 
 .group > input::placeholder {
   font-size: 1rem;
 }
 
-.cta {
-  margin-top: 4rem;
+.cta{
+  margin-top: 2rem;
 }
 
-.cta > button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  margin: auto;
-  width: 300px;
-  border: none;
-  outline: none;
-  padding-block: 0.6rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  background-color: #80b9e8;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.678);
-  border-radius: 10px;
-  cursor: pointer;
-}
 
 @media only screen and (max-width: 930px) {
   .container {
@@ -113,11 +112,19 @@
     width: 100%;
   }
 
+  .inputs{
+    margin-left: 0;
+    margin-right: 0;
+  }
+/* 
+  .backbutton{
+    margin-left:0;
+  } */
+
   .group {
     width: 100%;
+    margin: 0.5rem;
   }
 
-  .cta > button {
-    width: 100%;
-  }
+  
 }
