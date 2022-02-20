@@ -13,13 +13,11 @@ import Homepage from "./components/Pages/Home/Homepage";
 import VerticalLayout from "./components/VerticalLayout";
 import SignIn from "./components/Pages/SignIn";
 import SignUp from "./components/Pages/SignUp/SignUp";
-import { AuthProvider } from "./context/AuthContext";
 import ResourceLinks from "./components/Resources/ResourceLinks";
 import Resource from "./components/Resources/Resource";
 import Profile from "./components/Profile/Profile";
 import Deadlines from "./components/Pages/Deadlines";
-import ProtectedRoute from "./components/ProtectedRoute"
-import PeerProfile from "./components/Profile/PeerProfile"
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const history = useHistory();
@@ -40,7 +38,6 @@ function App() {
               <ProtectedRoute exact path="/chat" component={Messenger} />
               <ProtectedRoute path="/profile" component={Profile} />
               <ProtectedRoute path="/deadlines" component={Deadlines} />
-              <ProtectedRoute path="/peerprofile" component={PeerProfile}/>
             </VerticalLayout>
           </Switch>
       </Router>
