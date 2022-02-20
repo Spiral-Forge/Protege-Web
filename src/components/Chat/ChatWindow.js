@@ -4,10 +4,10 @@ import { IoMdSend, IoMdArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
 
-export default function ChatWindow({ profilePics, peerID, peerData, setChatID }) {
+export default function ChatWindow({ peerID, peerData, setChatID }) {
   const scroll = useRef();
   const [chatArr, setChatArr] = useState([]);
-  const { currentUser, isMentor, myPeers } = useAuth();
+  const { currentUser, profilePics, myPeers } = useAuth();
   useEffect(() => {
     scrollBottom();
   }, [chatArr]);

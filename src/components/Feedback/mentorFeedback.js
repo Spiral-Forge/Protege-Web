@@ -1,16 +1,16 @@
 import { useRef, useEffect, useState } from "react";
 import styles from "../../styles/FeedbackForm.module.css";
-import { IoMdSend, IoMdArrowBack } from "react-icons/io";
+import { IoMdArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
 import ErrorDialog from "../ErrorDialog";
-import { ToastContainer, toast} from 'react-toastify';
+import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure()
 
-export default function MentorForm({ profilePics, peerID, peerData, setChatID }) {
-  const { currentUser, isMentor, myPeers } = useAuth();
+export default function MentorForm({ peerID, setChatID }) {
+  const { currentUser, isMentor, peerData } = useAuth();
   const scroll = useRef();
 
   const [chatRoomId, setChatRoomId] = useState("");
@@ -35,36 +35,17 @@ export default function MentorForm({ profilePics, peerID, peerData, setChatID })
     let room = "";
     console.log(peerID);
     try{
-      if (isMentor) {
+      if (peerID < currentUser.uid) {
         room = peerID + "_" + currentUser.uid;
         console.log(room)
       } else {
         room = currentUser.uid + "_" + peerID;
         console.log(room)
       }
-      // console.log("check rooom", room);
-      await db
-        .collection("ChatRoom")
-        .doc(room)
-        .get()
-        .then((snap) => {
-          if (!snap.exists) {
-            db.collection("ChatRoom")
-              .doc(room)
-              .set({
-                ChatRoomID: room,
-                users: [currentUser.uid, peerID],
-              });
-          }
-        });
     } catch(e) {
       console.log("Chatrroom ID error")
     }
-
-
     setChatRoomId(room);
-    // console.log("penul",room)
-    // console.log("ul",chatRoomId)
   }, peerID)
 
 
@@ -243,11 +224,11 @@ export default function MentorForm({ profilePics, peerID, peerData, setChatID })
         <h4>Remarks for you mentee? Please include the mentee's strengths and improvement areas.</h4>
         <textarea placeholder="Please breifly mention your mentee's strengths and improvement areas" value={remark} onChange={handleRemarkChange}></textarea>
         <div className={styles.cta}>
-        <button onClick={handleSubmit}>Submit</button>
-      </div>
+          <button className="button-1" onClick={handleSubmit}>Submit</button>
         </div>
-        <ErrorDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false)} errorMessage={errorMessage} />
-       </div>
+      </div>
+      <ErrorDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false)} errorMessage={errorMessage} />
+    </div>
   );
 }
 

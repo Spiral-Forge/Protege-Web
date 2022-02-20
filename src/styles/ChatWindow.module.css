@@ -184,12 +184,6 @@
   display: flex !important;
 }
 
-@media only screen and (min-width: 800px) {
-  .header {
-    display: none;
-  }
-}
-
 @media only screen and (max-width: 800px) {
   .container {
     display: none;

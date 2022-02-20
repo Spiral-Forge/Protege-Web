@@ -1,11 +1,9 @@
 import styles from "../../styles/FeedbackList.module.css";
-import styles1 from "../../styles/Resource.module.css";
 import { useAuth } from "../../context/AuthContext";
-import {  useHistory} from "react-router-dom";
-export default function PeerTiles({ setChatID, peerData, profilePics }) {
-  const { userData, currentUser } = useAuth();
-  return (
 
+export default function PeerTiles({ setChatID }) {
+  const { peerData, profilePics } = useAuth();
+  return (
       <div className={styles.bottom}>
         {peerData.map((peer) => {
           return <Peer setChatID={setChatID} peer={peer} profilePic={profilePics[peer.userID]} />;
@@ -17,12 +15,10 @@ export default function PeerTiles({ setChatID, peerData, profilePics }) {
 }
 
 export const Peer = ({ peer, profilePic, setChatID }) => {
-  const history = useHistory();
 
   const handleClick = () => {
     console.log("opening this peer", peer)
     setChatID(peer.userID)
-    // history.push(`/chat/${peer.userID}`)
   }
   
   return (
