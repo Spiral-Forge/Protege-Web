@@ -1,8 +1,8 @@
 import styles from "../../styles/Conversations.module.css";
 import { useAuth } from "../../context/AuthContext";
 import {  useHistory} from "react-router-dom";
-export default function Conversations({ setChatID, peerData, profilePics }) {
-  const { userData, currentUser } = useAuth();
+export default function Conversations({ setChatID, profilePics }) {
+  const { userData, peerData, currentUser } = useAuth();
   return (
     <div className={styles.container}>
       <div className={styles.top}>

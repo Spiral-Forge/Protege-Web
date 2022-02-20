@@ -1,7 +1,6 @@
 .flex {
   display: flex;
   padding: 1rem;
-  gap: 2rem;
 }
 
 @media screen and (max-width: 430px) {

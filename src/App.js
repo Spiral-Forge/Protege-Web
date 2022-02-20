@@ -13,7 +13,6 @@ import Homepage from "./components/Pages/Home/Homepage";
 import VerticalLayout from "./components/VerticalLayout";
 import SignIn from "./components/Pages/SignIn";
 import SignUp from "./components/Pages/SignUp/SignUp";
-import { AuthProvider } from "./context/AuthContext";
 import ResourceLinks from "./components/Resources/ResourceLinks";
 import Resource from "./components/Resources/Resource";
 import Profile from "./components/Profile/Profile";
@@ -21,12 +20,12 @@ import Deadlines from "./components/Pages/Deadlines";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FeedbackList from "./components/Feedback/Feedback";
 
+
 function App() {
   const history = useHistory();
   return (
     <div className="App">
       <Router history={history}>
-        <AuthProvider>
           <Navbar />
           <Switch>
             <Route path="/signin" component={SignIn} />
@@ -44,7 +43,6 @@ function App() {
               <ProtectedRoute path="/feedback" component={FeedbackList} />
             </VerticalLayout>
           </Switch>
-        </AuthProvider>
       </Router>
     </div>
   );
