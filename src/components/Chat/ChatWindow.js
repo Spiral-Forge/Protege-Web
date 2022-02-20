@@ -3,7 +3,6 @@ import styles from "../../styles/ChatWindow.module.css";
 import { IoMdSend, IoMdArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
-import { Link } from "react-router-dom";
 import PeerProfile from "../Profile/PeerProfile";
 
 
