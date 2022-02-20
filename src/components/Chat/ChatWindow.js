@@ -4,6 +4,7 @@ import { IoMdSend, IoMdArrowBack } from "react-icons/io";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
 import { Link } from "react-router-dom";
+import PeerProfile from "../Profile/PeerProfile";
 
 
 export default function ChatWindow({ profilePics, peerID, setChatID }) {
@@ -19,6 +20,7 @@ export default function ChatWindow({ profilePics, peerID, setChatID }) {
   };
 
   const [chatRoomId, setChatRoomId] = useState("");
+  const [showPeer, setShowPeer] = useState(false);
 
   useEffect(async() => {
     console.log("Mypoeers:", myPeers)
@@ -112,59 +114,64 @@ export default function ChatWindow({ profilePics, peerID, setChatID }) {
   }
   
   return (
-    <div className={`${styles.container} ${chatArr && `${styles.block}`} `}>
-      <div className={styles.header}>
-        <div onClick={handleBack} className={styles.back}>
-          <IoMdArrowBack />
-        </div>
-        <Link to="/peerprofile">
-          <div className={styles.peer}>
-            {/* <div className={styles.dpmob}> */}
-              {/* <img
-                src={peer.photoUrl}
-                alt=""
-              /> */}
-            {/* </div> */}
-            <p>{peer && peer.name}</p>
+    <>
+      {showPeer && <PeerProfile setShowPeer={setShowPeer} index={myPeers.indexOf(peerID)} />}
+      {!showPeer && 
+        <div className={`${styles.container} ${chatArr && `${styles.block}`} `}>
+          <div className={styles.header}>
+            <div onClick={handleBack} className={styles.back}>
+              <IoMdArrowBack />
+            </div>
+            
+              <div onClick={() => setShowPeer(true)} className={styles.peer}>
+                <div className={styles.dpmob}>
+                  <img
+                    src={profilePics[peerID]}
+                    alt=""
+                  />
+                </div>
+                <p>{peer && peer.name}</p>
+              </div>
           </div>
-        </Link>
-      </div>
 
-      <div className={styles.chat}>
-        {chatArr.map((data) => {
-          return data.sentBy === currentUser.uid ? (
-            <Reply
-              profilePic={profilePics[data.sentBy]}
-              time={data.time.toDate()}
-              message={data.message}
-            />
-          ) : (
-            <Comment
-              profilePic={profilePics[data.sentBy]}
-              time={data.time.toDate()}
-              message={data.message}
-            />
-          );
-        })}
-        <div ref={scroll} style={{ backgroundColor: "black" }} />
-      </div>
-      {myPeers.indexOf(peerID) >= 0 && ( 
-        <div className={styles.input}>
-          <textarea
-            rows={1}
-            type="text"
-            placeholder="Enter your message here"
-            value={inputText}
-            onChange={(e) => {
-              setInputText(e.target.value);
-            }}
-          />
-          <button onClick={handleSendMessage}>
-            Send <IoMdSend />
-          </button>
+          <div className={styles.chat}>
+            {chatArr.map((data) => {
+              return data.sentBy === currentUser.uid ? (
+                <Reply
+                  profilePic={profilePics[data.sentBy]}
+                  time={data.time.toDate()}
+                  message={data.message}
+                />
+              ) : (
+                <Comment
+                  profilePic={profilePics[data.sentBy]}
+                  time={data.time.toDate()}
+                  message={data.message}
+                />
+              );
+            })}
+            <div ref={scroll} style={{ backgroundColor: "black" }} />
+          </div>
+          {myPeers.indexOf(peerID) >= 0 && ( 
+            <div className={styles.input}>
+              <textarea
+                rows={1}
+                type="text"
+                placeholder="Enter your message here"
+                value={inputText}
+                onChange={(e) => {
+                  setInputText(e.target.value);
+                }}
+              />
+              <button onClick={handleSendMessage}>
+                Send <IoMdSend />
+              </button>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      }
+    </>
+    
   );
 }
 
