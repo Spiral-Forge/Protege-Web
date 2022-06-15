@@ -17,16 +17,11 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 import {
-  branches,
-  collegesArr,
-  domainsArr,
-  genders,
-  languagesArr,
-  years,
   getArray,
 } from "./SignUpOptions";
 import ErrorDialog from "../../ErrorDialog";
 import { guidelinesMentors, guidelinesMentees } from "../staticPagesData";
+import { useEffect } from "react";
 
 function SignUpForm({ post, setPost }) {
   const history = useHistory();
@@ -52,6 +47,42 @@ function SignUpForm({ post, setPost }) {
   const [year, setYear] = useState([]);
   const [domain, setDomain] = useState([]);
   const [lang, setLang] = useState([]);
+
+  const [genders, setGenders] = useState([]);
+  const [collegesArr, setColleges] = useState([]);
+  const [branches, setBranches] = useState([]);
+  const [years, setYears] = useState([]);
+  const [domainsArr, setDomains] = useState([]);
+  const [languagesArr, setLanguages] = useState([]);
+
+  useEffect(() => {
+    db.collection("constants")
+      .get()
+      .then((querySnap) => {
+        querySnap.forEach((snap) => {
+          //console.log("snap", Object.keys(snap.data()), snap.data().domains, snap.data().languages)
+          if(Object.keys(snap.data()).length>0){
+            if(snap.data().languages){
+              console.log("hello",snap.data().languages )
+              setLanguages(snap.data().languages)
+            }else if(snap.data().domains){
+              console.log("hello",snap.data().domains )
+              setDomains(snap.data().domains)
+            }else if(snap.data().branches){
+              console.log("hello",snap.data().branches )
+              setBranches(snap.data().branches)
+            }else if(snap.data().genders){
+              setGenders(snap.data().genders)
+            }else if(snap.data().years){
+              setYears(snap.data().years)
+            }else if(snap.data().colleges){
+              setColleges(snap.data().colleges)
+            }
+          }
+        });
+      })
+
+  }, []);
 
   const handleAccept = async () => {
     try {
