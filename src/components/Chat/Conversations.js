@@ -1,8 +1,8 @@
 import styles from "../../styles/Conversations.module.css";
 import { useAuth } from "../../context/AuthContext";
 import {  useHistory} from "react-router-dom";
-export default function Conversations({ setChatID, profilePics }) {
-  const { userData, peerData, currentUser } = useAuth();
+export default function Conversations({ setChatID }) {
+  const { userData, peerData, currentUser, profilePics } = useAuth();
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -22,7 +22,7 @@ export default function Conversations({ setChatID, profilePics }) {
       </div>
       <div className={styles.bottom}>
         {peerData.map((peer) => {
-          return <Peer setChatID={setChatID} peer={peer} profilePic={profilePics[peer.userID]} />;
+          return <Peer setChatID={setChatID} peer={peer} profilePic={profilePics ? profilePics[peer.userID] : null} />;
         })}
         {peerData.length === 0 && <div className={styles.noPeers}>No peers yet</div>}
       </div>

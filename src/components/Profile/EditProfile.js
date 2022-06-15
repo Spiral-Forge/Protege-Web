@@ -4,16 +4,13 @@ import { MultiSelect } from "react-multi-select-component";
 import Dropdown from "react-dropdown";
 import { ProfilePicStorageRef } from "../../firebase";
 import {
-  branches,
-  domainsArr,
-  years,
-  getArray,
-  languagesArr,
+  getArray
 } from "../Pages/SignUp/SignUpOptions";
 import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
 import ErrorDialog from "../ErrorDialog";
 import "../../App.css"
+import { useEffect } from "react";
 
 export default function EditProfile({ setEdit, userData, setUserData }) {
   const { currentUser } = useAuth();
@@ -34,11 +31,41 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
       return { label: dom, value: dom };
     })
   );
-  const [languages, setLanguages] = useState(
+  const [languages, setLanguage] = useState(
     userData.languages.map((lang) => {
       return { label: lang, value: lang };
     })
   );
+
+  const [branches, setBranches] = useState([]);
+  const [years, setYears] = useState([]);
+  const [domainsArr, setDomains] = useState([]);
+  const [languagesArr, setLanguages] = useState([]);
+
+  useEffect(() => {
+    db.collection("constants")
+      .get()
+      .then((querySnap) => {
+        querySnap.forEach((snap) => {
+          //console.log("snap", Object.keys(snap.data()), snap.data().domains, snap.data().languages)
+          if(Object.keys(snap.data()).length>0){
+            if(snap.data().languages){
+              console.log("hello",snap.data().languages )
+              setLanguages(snap.data().languages)
+            }else if(snap.data().domains){
+              console.log("hello",snap.data().domains )
+              setDomains(snap.data().domains)
+            }else if(snap.data().branches){
+              console.log("hello",snap.data().branches )
+              setBranches(snap.data().branches)
+            }else if(snap.data().years){
+              setYears(snap.data().years)
+            }
+          }
+        });
+      })
+
+  }, []);
 
   let newFormData = { ...userData };
   const handleSubmit = async (e) => {
@@ -172,7 +199,7 @@ export default function EditProfile({ setEdit, userData, setUserData }) {
           <MultiSelect
             options={languagesArr}
             value={languages}
-            onChange={setLanguages}
+            onChange={setLanguage}
             labelledBy="Languages"
             className="multi-select"
           />
