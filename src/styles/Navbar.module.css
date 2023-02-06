@@ -24,10 +24,19 @@
   z-index: 10;
 }
 
+.logo_cb {
+  width: 130px;
+  z-index: 10;
+}
+
 .logo img {
   width: 100%;
 }
 
+.logos {
+  display: flex;
+  align-items: center;
+}
 
 .navlinks ul,
 .moblinks ul {
@@ -63,7 +72,8 @@
   color: #1a1a1a;
   font-weight: 500;
 }
-.navlinks ul li:hover{
+
+.navlinks ul li:hover {
   background-color: #e4e3e3b2;
   font-weight: 900;
 }
@@ -118,7 +128,7 @@
   } */
 
 .signup {
-  border: 2px solid #1a1a1a ;
+  border: 2px solid #1a1a1a;
   /* background-color: #1a1a1a; */
   /* color: #e4e4e4 !important; */
 }
@@ -156,7 +166,7 @@
   transform: translate(-50%, -50%); */
 }
 
-.moblinksContainer{
+.moblinksContainer {
   position: fixed;
   background-color: #1a1a1a8c;
   width: 100vw;
@@ -187,6 +197,7 @@
   color: white;
   padding: 0;
 }
+
 .logoutButton {
   color: #dadada !important;
 }

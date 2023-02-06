@@ -36,18 +36,28 @@
 }
 
 .heading {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   font-size: 3rem;
   font-weight: 700;
   line-height: 1.25;
   color: #f7f8fa;
 }
 
+.cb_logo img {
+  margin-bottom: 20px;
+  width: 150px;
+}
+
+.supported_by_cb {
+  color: #1c2237;
+  margin-bottom: 5px;
+}
+
 .dark {
   color: #1c2237;
 }
 
-  
+
 .home__hero-subtitle {
   max-width: 500px;
   font-size: 19px;
@@ -78,6 +88,7 @@ img {
     padding-right: 30px;
     padding-left: 30px;
   }
+
   .home__hero-section {
     padding-top: 0;
   }
