@@ -5,7 +5,8 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Spiral as Hamburger } from "hamburger-react";
 import LogoutDialog from "../LogoutDialog";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
+import codingBlockLogo from "./coding_blocks.png";
 
 const Navbar = () => {
   const { currentUser, userData, signOut } = useAuth();
@@ -23,13 +24,20 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       <nav className={styles.web}>
-        <div className={styles.logo}>
-          <Link to="/">
-            <img
-              src="https://raw.githubusercontent.com/Spiral-Forge/Protege-Web/master/src/components/Navbar/logo.jpg"
-              alt=""
-            />
-          </Link>
+        <div className={styles.logos}>
+          <div className={styles.logo}>
+            <Link to="/">
+              <img
+                src="https://raw.githubusercontent.com/Spiral-Forge/Protege-Web/master/src/components/Navbar/logo.jpg"
+                alt=""
+              />
+            </Link>
+          </div>
+          <div className={styles.logo_cb}>
+            <a href="https://codingblocks.com">
+              <img src={codingBlockLogo} alt="" />
+            </a>
+          </div>
         </div>
         <div className={styles.navlinks}>
           <ul>
@@ -63,13 +71,20 @@ const Navbar = () => {
       </nav>
 
       <nav className={styles.mob}>
-        <div className={styles.logo}>
-          <Link to="/">
-            <img
-              src="https://raw.githubusercontent.com/Spiral-Forge/Protege-Web/master/src/components/Navbar/logo.jpg"
-              alt=""
-            />
-          </Link>
+        <div className={styles.logos}>
+          <div className={styles.logo}>
+            <Link to="/">
+              <img
+                src="https://raw.githubusercontent.com/Spiral-Forge/Protege-Web/master/src/components/Navbar/logo.jpg"
+                alt=""
+              />
+            </Link>
+          </div>
+          <div className={styles.logo_cb}>
+            <a href="https://codingblocks.com">
+              <img src={codingBlockLogo} alt="" />
+            </a>
+          </div>
         </div>
         <div className={styles.menu}>
           <Hamburger
@@ -127,14 +142,27 @@ const Navbar = () => {
                 {!currentUser && (
                   <Link to="/signin">
                     <li className={styles.moblogin}>
-                      <Button className={styles.logoutButton} onClick={handleToggle}>Login</Button>
+                      <Button
+                        className={styles.logoutButton}
+                        onClick={handleToggle}
+                      >
+                        Login
+                      </Button>
                     </li>
                   </Link>
                 )}
 
                 {currentUser && (
-                  <li className={styles.moblogin} onClick={() => setShowErrorMessage(true)}>
-                    <Button className={styles.logoutButton} onClick={handleToggle}>Log out</Button>
+                  <li
+                    className={styles.moblogin}
+                    onClick={() => setShowErrorMessage(true)}
+                  >
+                    <Button
+                      className={styles.logoutButton}
+                      onClick={handleToggle}
+                    >
+                      Log out
+                    </Button>
                   </li>
                 )}
               </ul>
@@ -142,8 +170,10 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-      <LogoutDialog isOpen={showErrorMessage} closeModal={()=> setShowErrorMessage(false) }/>
-
+      <LogoutDialog
+        isOpen={showErrorMessage}
+        closeModal={() => setShowErrorMessage(false)}
+      />
     </div>
   );
 };
