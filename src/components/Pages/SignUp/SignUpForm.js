@@ -57,59 +57,62 @@ function SignUpForm({ post, setPost }) {
 
   useEffect(() => {
     db.collection("constants")
+      .doc("mIi9pu17P4u7TjWhqqrZ") // Fetch the correct document
       .get()
-      .then((querySnap) => {
-        querySnap.forEach((snap) => {
-          //console.log("snap", Object.keys(snap.data()), snap.data().domains, snap.data().languages)
-          if(Object.keys(snap.data()).length>0){
-            if(snap.data().languages){
-              console.log("hello",snap.data().languages )
-              setLanguages(snap.data().languages)
-            }else if(snap.data().domains){
-              console.log("hello",snap.data().domains )
-              setDomains(snap.data().domains)
-            }else if(snap.data().branches){
-              console.log("hello",snap.data().branches )
-              setBranches(snap.data().branches)
-            }else if(snap.data().genders){
-              setGenders(snap.data().genders)
-            }else if(snap.data().years){
-              setYears(snap.data().years)
-            }else if(snap.data().colleges){
-              setColleges(snap.data().colleges)
-            }
-          }
-        });
+      .then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          setGenders(data.genders || []);
+          setLanguages(data.languages || []);
+          setDomains(data.domains || []);
+          setBranches(data.branches || []);
+          setYears(data.years || []);
+          setColleges(data.colleges || []);
+        } else {
+          console.log("No such document!");
+        }
       })
-
+      .catch((error) => console.error("Error fetching Firestore data:", error));
   }, []);
+  
 
   const handleAccept = async () => {
     try {
-      await signUp(formData.email, formData.pwd);
-      const tempObject = userObj();
-      delete tempObject["pwd"];
-      delete tempObject["confirm_pwd"];
-      tempObject["token"] = auth.currentUser.uid;
-
-      await db.collection("users").doc(auth.currentUser.uid).set(tempObject);
-      await auth.currentUser.sendEmailVerification();
-      await auth.signOut();
-      setGuidelinesPopUp(false);
-      setErrorMessage("Please check your inbox and verify your email to sign in.")
-      setShowErrorMessage(true);
+      await signUp(formData.email, formData.pwd); // Sign up user
+  
+      await auth.currentUser?.reload(); // Reload user to ensure it's up-to-date
+      const user = auth.currentUser;
+  
+      if (user) {
+        const tempObject = userObj();
+        delete tempObject["pwd"];
+        delete tempObject["confirm_pwd"];
+        tempObject["token"] = user.uid;
+  
+        await db.collection("users").doc(user.uid).set(tempObject);
+        await user.sendEmailVerification(); // Send verification email
+        await auth.signOut(); // Log out the user
+        setGuidelinesPopUp(false);
+        setErrorMessage("Please check your inbox and verify your email to sign in.");
+        setShowErrorMessage(true);
+      } else {
+        console.error("User not found after signup.");
+      }
     } catch (e) {
-      if (e.code == "auth/email-already-in-use") {
+      console.error("Error during signup:", e);
+      if (e.code === "auth/email-already-in-use") {
         setGuidelinesPopUp(false);
         setErrorMessage("The email address is already in use by another account.");
         setShowErrorMessage(true);
       }
     }
+  
     history.push({
       pathname: "/signin",
       state: { verify: true },
     });
   };
+  
 
   const userObj = () => {
     const obj = {
@@ -119,7 +122,7 @@ function SignUpForm({ post, setPost }) {
       year: year.value,
       branch: branch.value,
       college: college.value,
-      gender: gender.value,
+      gender: gender,
       peerId: [],
       photoUrl: null,
       post,
@@ -216,7 +219,7 @@ function SignUpForm({ post, setPost }) {
             <input
               type="text"
               name="name"
-              // placeholder="Name"
+              placeholder="Name"
               value={formData.name}
               onChange={handleChange}
             />
@@ -226,18 +229,14 @@ function SignUpForm({ post, setPost }) {
             <input
               type="text"
               name="phoneNo"
-              // placeholder="Contact Info"
+              placeholder="Contact Info"
               value={formData.phoneNo}
               onChange={handleChange}
             />
           </div>
           <div className={styles.group}>
             <label htmlFor="gender">Gender</label>
-            <Dropdown
-              options={genders}
-              onChange={setGender}
-              // placeholder="Select your Gender"
-            />
+            <Dropdown options={genders} onChange={(selected) => setGender(selected.value)} placeholder="Select your Gender" />
           </div>
           <div className={styles.group}>
             <label htmlFor="email">Email Id</label>
